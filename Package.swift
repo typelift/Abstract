@@ -3,5 +3,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "Abstract"
+    name: "Abstract",
+    exclude: [
+		"Tests"
+	]
 )
