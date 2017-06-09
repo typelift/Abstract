@@ -1,12 +1,13 @@
-/// a Semigroup is a Magma where the composition operation is associative
+/*:
+# Semigroup
 
-public protocol Semigroup: Magma, Equatable {}
+A Semigroup is a Magma where the composition operation is associative.
+*/
 
-/// The Equatable conformance is required by the associativity (we need to be able to say that something "is equal" to something else
-/// The associativity requirement can be verified with a function the takes 3 random values of a type that is a Semigroup, and checks the operation
+public protocol Semigroup: Magma {}
 
-extension Law {
-	public static func associative<T>(_ a: T, _ b: T, _ c: T) -> Bool where T: Semigroup {
-		return a.composed(b).composed(c) == a.composed(b.composed(c))
+extension Law where Element: Semigroup {
+	public static func associativity(_ a: Element, _ b: Element, _ c: Element) -> Bool {
+		return (a <> b <> c) == (a <> (b <> c))
 	}
 }
