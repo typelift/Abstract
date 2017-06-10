@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38943A6C1EEC287000F587AD /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38943A6B1EEC287000F587AD /* SwiftCheck.framework */; };
+		38943A6E1EEC288200F587AD /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38943A6B1EEC287000F587AD /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38943A6F1EEC28A000F587AD /* AbstractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A681EEC25AE00F587AD /* AbstractTests.swift */; };
+		38943A751EEC2D0400F587AD /* ArbitraryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */; };
+		38943A771EEC31DA00F587AD /* Adapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A761EEC31DA00F587AD /* Adapters.swift */; };
+		38943A791EEC4EFF00F587AD /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A781EEC4EFF00F587AD /* Monoid.swift */; };
 		38D737D11EE9A729000BAF0C /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D737C71EE9A729000BAF0C /* Abstract.framework */; };
 		38D737E21EE9A7D8000BAF0C /* Magma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D737BD1EE9A711000BAF0C /* Magma.swift */; };
-		38D737E31EE9A7DB000BAF0C /* AbstractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D737C01EE9A711000BAF0C /* AbstractTests.swift */; };
 		38D737EA1EE9B86F000BAF0C /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D737E91EE9B86F000BAF0C /* Semigroup.swift */; };
 		38D737EC1EE9B95C000BAF0C /* Law.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D737EB1EE9B95C000BAF0C /* Law.swift */; };
 /* End PBXBuildFile section */
@@ -24,10 +29,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		38943A6D1EEC287300F587AD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				38943A6E1EEC288200F587AD /* SwiftCheck.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		38943A681EEC25AE00F587AD /* AbstractTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTests.swift; sourceTree = "<group>"; };
+		38943A6B1EEC287000F587AD /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/iOS/SwiftCheck.framework; sourceTree = "<group>"; };
+		38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArbitraryDefinitions.swift; sourceTree = "<group>"; };
+		38943A761EEC31DA00F587AD /* Adapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adapters.swift; sourceTree = "<group>"; };
+		38943A781EEC4EFF00F587AD /* Monoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
 		38D737BB1EE9A711000BAF0C /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		38D737BD1EE9A711000BAF0C /* Magma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magma.swift; sourceTree = "<group>"; };
-		38D737C01EE9A711000BAF0C /* AbstractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTests.swift; sourceTree = "<group>"; };
 		38D737C11EE9A711000BAF0C /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		38D737C71EE9A729000BAF0C /* Abstract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D737D01EE9A729000BAF0C /* AbstractTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AbstractTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,31 +73,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				38D737D11EE9A729000BAF0C /* Abstract.framework in Frameworks */,
+				38943A6C1EEC287000F587AD /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38943A6A1EEC287000F587AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38943A6B1EEC287000F587AD /* SwiftCheck.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		38D737B41EE9A6BA000BAF0C = {
 			isa = PBXGroup;
 			children = (
 				38D737DF1EE9A745000BAF0C /* Abstract.h */,
-				38D737E11EE9A761000BAF0C /* InfoTests.plist */,
 				38D737E01EE9A745000BAF0C /* Info.plist */,
+				38D737E11EE9A761000BAF0C /* InfoTests.plist */,
 				38D737BB1EE9A711000BAF0C /* Package.swift */,
+				38943A6A1EEC287000F587AD /* Frameworks */,
+				38D737C81EE9A729000BAF0C /* Products */,
 				38D737BC1EE9A711000BAF0C /* Sources */,
 				38D737BE1EE9A711000BAF0C /* Tests */,
-				38D737C81EE9A729000BAF0C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
 		38D737BC1EE9A711000BAF0C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				38D737BD1EE9A711000BAF0C /* Magma.swift */,
-				38D737E91EE9B86F000BAF0C /* Semigroup.swift */,
+				38943A761EEC31DA00F587AD /* Adapters.swift */,
 				38D737EB1EE9B95C000BAF0C /* Law.swift */,
+				38D737BD1EE9A711000BAF0C /* Magma.swift */,
+				38943A781EEC4EFF00F587AD /* Monoid.swift */,
+				38D737E91EE9B86F000BAF0C /* Semigroup.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -83,8 +117,8 @@
 		38D737BE1EE9A711000BAF0C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				38D737BF1EE9A711000BAF0C /* AbstractTests */,
 				38D737C11EE9A711000BAF0C /* LinuxMain.swift */,
+				38D737BF1EE9A711000BAF0C /* AbstractTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -92,7 +126,8 @@
 		38D737BF1EE9A711000BAF0C /* AbstractTests */ = {
 			isa = PBXGroup;
 			children = (
-				38D737C01EE9A711000BAF0C /* AbstractTests.swift */,
+				38943A681EEC25AE00F587AD /* AbstractTests.swift */,
+				38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */,
 			);
 			path = AbstractTests;
 			sourceTree = "<group>";
@@ -144,6 +179,7 @@
 				38D737CC1EE9A729000BAF0C /* Sources */,
 				38D737CD1EE9A729000BAF0C /* Frameworks */,
 				38D737CE1EE9A729000BAF0C /* Resources */,
+				38943A6D1EEC287300F587AD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -217,8 +253,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				38D737EC1EE9B95C000BAF0C /* Law.swift in Sources */,
+				38943A771EEC31DA00F587AD /* Adapters.swift in Sources */,
 				38D737E21EE9A7D8000BAF0C /* Magma.swift in Sources */,
 				38D737EA1EE9B86F000BAF0C /* Semigroup.swift in Sources */,
+				38943A791EEC4EFF00F587AD /* Monoid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D737E31EE9A7DB000BAF0C /* AbstractTests.swift in Sources */,
+				38943A6F1EEC28A000F587AD /* AbstractTests.swift in Sources */,
+				38943A751EEC2D0400F587AD /* ArbitraryDefinitions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +448,10 @@
 				DEVELOPMENT_TEAM = 5MTJLVM7R2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -466,6 +509,10 @@
 				DEVELOPMENT_TEAM = 5MTJLVM7R2;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -506,6 +553,7 @@
 				38D737DB1EE9A729000BAF0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38D737DC1EE9A729000BAF0C /* Build configuration list for PBXNativeTarget "AbstractTests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +562,7 @@
 				38D737DE1EE9A729000BAF0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

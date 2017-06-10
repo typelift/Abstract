@@ -9,3 +9,15 @@ Thus, for any law to be enforced for a particular type (the `Element` parameter)
 */
 
 public enum Law<Element: Equatable> {}
+
+/*:
+Some types will require a context to verify the laws (for example, functions).
+*/
+
+public protocol EquatableInContext {
+	associatedtype Context
+	
+	static func == (left: Self, right: Self) -> (Context) -> Bool
+}
+
+public enum LawInContext<Element: EquatableInContext> {}
