@@ -17,8 +17,8 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 		return TestStructure((left.get <> right.get).value)
 	}
 	
-	static var e: TestStructure {
-		return TestStructure(Max<Int>.e.value)
+	static var empty: TestStructure {
+		return TestStructure(Max<Int>.empty.value)
 	}
 	
 	static func == (left: TestStructure, right: TestStructure) -> Bool {

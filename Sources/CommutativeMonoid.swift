@@ -57,8 +57,8 @@ public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: CommutativeMonoid
 		return FunctionCM.init { left.call($0) <> right.call($0) }
 	}
 	
-	public static var e: FunctionCM<A, M> {
-		return FunctionCM { _ in M.e }
+	public static var empty: FunctionCM<A, M> {
+		return FunctionCM { _ in M.empty }
 	}
 	
 	public static func == (left: FunctionCM, right: FunctionCM) -> (Context) -> Bool {

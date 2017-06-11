@@ -49,8 +49,8 @@ public struct FunctionBS<A, M: BoundedSemilattice & Equatable>: BoundedSemilatti
 		return FunctionBS.init { left.call($0) <> right.call($0) }
 	}
 	
-	public static var e: FunctionBS<A, M> {
-		return FunctionBS { _ in M.e }
+	public static var empty: FunctionBS<A, M> {
+		return FunctionBS { _ in M.empty }
 	}
 	
 	public static func == (left: FunctionBS, right: FunctionBS) -> (Context) -> Bool {
