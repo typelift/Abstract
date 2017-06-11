@@ -9,19 +9,19 @@ To put it simply: (a <> b) <> c = a <> (b <> c)
 public protocol Semigroup: Magma {}
 
 extension Law where Element: Semigroup {
-	public static func associativity(_ a: Element, _ b: Element, _ c: Element) -> Bool {
+	public static func isAssociative(_ a: Element, _ b: Element, _ c: Element) -> Bool {
 		return (a <> b <> c) == (a <> (b <> c))
 	}
 }
 
 extension LawInContext where Element: Semigroup {
-	public static func associativity(_ a: Element, _ b: Element, _ c: Element) -> (Element.Context) -> Bool {
+	public static func isAssociative(_ a: Element, _ b: Element, _ c: Element) -> (Element.Context) -> Bool {
 		return (a <> b <> c) == (a <> (b <> c))
 	}
 }
 
 /*:
-# Types
+## Types
 
 Here are some types that form a relevant Semigroup along with a specific operation.
 
@@ -30,10 +30,10 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
-public struct Add<T: Summable>: Semigroup, Equatable {
-	public let value: T
+public struct Add<A: Summable>: Semigroup, Equatable {
+	public let value: A
 	
-	init(_ value: T) {
+	init(_ value: A) {
 		self.value = value
 	}
 	
@@ -48,10 +48,10 @@ public struct Add<T: Summable>: Semigroup, Equatable {
 
 //: ------
 
-public struct Multiply<T: Multipliable>: Semigroup, Equatable {
-	public let value: T
+public struct Multiply<A: Multipliable>: Semigroup, Equatable {
+	public let value: A
 	
-	public init(_ value: T) {
+	public init(_ value: A) {
 		self.value = value
 	}
 	
@@ -66,10 +66,10 @@ public struct Multiply<T: Multipliable>: Semigroup, Equatable {
 
 //: ------
 
-public struct Max<T: ComparableToBottom>: Semigroup, Equatable {
-	public let value: T
+public struct Max<A: ComparableToBottom>: Semigroup, Equatable {
+	public let value: A
 	
-	public init(_ value: T) {
+	public init(_ value: A) {
 		self.value = value
 	}
 	
@@ -84,10 +84,10 @@ public struct Max<T: ComparableToBottom>: Semigroup, Equatable {
 
 //: ------
 
-public struct Min<T: ComparableToTop>: Semigroup, Equatable {
-	public let value: T
+public struct Min<A: ComparableToTop>: Semigroup, Equatable {
+	public let value: A
 	
-	public init(_ value: T) {
+	public init(_ value: A) {
 		self.value = value
 	}
 	
@@ -102,12 +102,12 @@ public struct Min<T: ComparableToTop>: Semigroup, Equatable {
 
 //: ------
 
-public struct FunctionI<T: Equatable>: Semigroup, EquatableInContext {
-	public typealias Context = T
+public struct FunctionI<A: Equatable>: Semigroup, EquatableInContext {
+	public typealias Context = A
 	
-	public let call: (T) -> T
+	public let call: (A) -> A
 	
-	public init(_ call: @escaping (T) -> T) {
+	public init(_ call: @escaping (A) -> A) {
 		self.call = call
 	}
 	
@@ -122,12 +122,12 @@ public struct FunctionI<T: Equatable>: Semigroup, EquatableInContext {
 
 //: ------
 
-public struct FunctionS<T, S: Semigroup & Equatable>: Semigroup, EquatableInContext {
-	public typealias Context = T
+public struct FunctionS<A, S: Semigroup & Equatable>: Semigroup, EquatableInContext {
+	public typealias Context = A
 	
-	public let call: (T) -> S
+	public let call: (A) -> S
 	
-	public init(_ call: @escaping (T) -> S) {
+	public init(_ call: @escaping (A) -> S) {
 		self.call = call
 	}
 	
@@ -142,7 +142,7 @@ public struct FunctionS<T, S: Semigroup & Equatable>: Semigroup, EquatableInCont
 
 //: ------
 
-public enum Ordering: Semigroup, Equatable {
+public enum Ordering: Semigroup {
 	case lowerThan
 	case equalTo
 	case greaterThan
@@ -155,19 +155,6 @@ public enum Ordering: Semigroup, Equatable {
 			return right
 		case (.greaterThan,_):
 			return left
-		}
-	}
-	
-	public static func == (left: Ordering, right: Ordering) -> Bool {
-		switch (left,right) {
-		case (.lowerThan,.lowerThan):
-			return true
-		case (.equalTo,.equalTo):
-			return true
-		case (.greaterThan,.greaterThan):
-			return true
-		default:
-			return false
 		}
 	}
 }

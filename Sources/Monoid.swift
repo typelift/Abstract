@@ -13,19 +13,19 @@ public protocol Monoid: Semigroup {
 }
 
 extension Law where Element: Monoid {
-	public static func neutralityToEmpty(_ a: Element) -> Bool {
+	public static func isNeutralToEmpty(_ a: Element) -> Bool {
 		return (a <> Element.e) == a && (Element.e <> a) == a
 	}
 }
 
 extension LawInContext where Element: Monoid {
-	public static func neutralityToEmpty(_ a: Element) -> (Element.Context) -> Bool {
+	public static func isNeutralToEmpty(_ a: Element) -> (Element.Context) -> Bool {
 		return { context in ((a <> Element.e) == a)(context) && ((Element.e <> a) == a)(context) }
 	}
 }
 
 /*:
-# Types
+## Types
 
 The defined Monoids will be mostly extensions of the already defined Semigroups, by adding the empty element. `FunctionM` is the monoidal version of `FunctionS`.
 
@@ -35,51 +35,61 @@ Each type again is tested for the new laws in `AbstractTests.swift`.
 //: ------
 
 extension Add: Monoid {
-	public static var e: Add<T> {
-		return Add.init(T.zero)
+	public static var e: Add<A> {
+		return Add.init(A.zero)
 	}
 }
 
 //: ------
 
 extension Multiply: Monoid {
-	public static var e: Multiply<T> {
-		return Multiply.init(T.one)
+	public static var e: Multiply<A> {
+		return Multiply.init(A.one)
 	}
 }
 
 //: ------
 
 extension Max: Monoid {
-	public static var e: Max<T> {
-		return Max(T.min)
+	public static var e: Max<A> {
+		return Max(A.min)
 	}
 }
 
 //: ------
 
 extension Min: Monoid {
-	public static var e: Min<T> {
-		return Min(T.max)
+	public static var e: Min<A> {
+		return Min(A.max)
+	}
+}
+
+//: ------
+
+extension Bool: Monoid {
+	public static let e = true
+	
+	public static func <> (left: Bool, right: Bool) -> Bool {
+		return left && right
 	}
 }
 
 //: ------
 
 extension FunctionI: Monoid {
-	public static var e: FunctionI<T> {
-		return FunctionI<T> { $0 }
+	public static var e: FunctionI<A> {
+		return FunctionI<A> { $0 }
 	}
 }
 
 //: ------
 
-public struct FunctionM<T, M: Monoid & Equatable>: Monoid, EquatableInContext {
-	public typealias Context = T
+public struct FunctionM<A, M: Monoid & Equatable>: Monoid, EquatableInContext {
+	public typealias Context = A
 	
-	public let call: (T) -> M
+	public let call: (A) -> M
 	
-	public init(_ call: @escaping (T) -> M) {
+	public init(_ call: @escaping (A) -> M) {
 		self.call = call
 	}
 	
@@ -87,7 +97,7 @@ public struct FunctionM<T, M: Monoid & Equatable>: Monoid, EquatableInContext {
 		return FunctionM.init { left.call($0) <> right.call($0) }
 	}
 	
-	public static var e: FunctionM<T, M> {
+	public static var e: FunctionM<A, M> {
 		return FunctionM { _ in M.e }
 	}
 	

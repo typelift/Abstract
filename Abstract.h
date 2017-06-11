@@ -6,8 +6,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-
 //! Project version number for Abstract.
 FOUNDATION_EXPORT double AbstractVersionNumber;
 

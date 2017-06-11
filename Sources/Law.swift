@@ -1,4 +1,4 @@
-/* 
+/*:
 # Law
 	
 The "Law" namespace. 
