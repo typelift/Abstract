@@ -31,7 +31,7 @@ I don't have a background in maths. I learned these things in the last few years
 
 Mistakes are bad, and should be removed. But I think it's extremely important to understand that concepts often change face when moving from a language to another: Swift is not Agda, Haskell or Scala... Swift is its own thing, and I find very important to try and define things in a "Swifty" way.
 
-A plain translation into Swift from a language with a more sofisticated type system will almost certainly result in something ugly and non-practically usable. So I think it's ok to do stuff a little less rigorous (without losing laws conformance or writing unsound code, of course) but much more practically usable.
+A plain translation into Swift from a language with a more sophisticated type system will almost certainly result in something ugly and non-practically usable. So I think it's ok to do stuff a little less rigorous (without losing laws conformance or writing unsound code, of course) but much more practically usable.
 
 ------
 

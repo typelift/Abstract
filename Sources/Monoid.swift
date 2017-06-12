@@ -9,18 +9,18 @@ a <> e = e <> a = a
 */
 
 public protocol Monoid: Semigroup {
-	static var e: Self { get }
+	static var empty: Self { get }
 }
 
 extension Law where Element: Monoid {
 	public static func isNeutralToEmpty(_ a: Element) -> Bool {
-		return (a <> Element.e) == a && (Element.e <> a) == a
+		return (a <> Element.empty) == a && (Element.empty <> a) == a
 	}
 }
 
 extension LawInContext where Element: Monoid {
 	public static func isNeutralToEmpty(_ a: Element) -> (Element.Context) -> Bool {
-		return { context in ((a <> Element.e) == a)(context) && ((Element.e <> a) == a)(context) }
+		return { context in ((a <> Element.empty) == a)(context) && ((Element.empty <> a) == a)(context) }
 	}
 }
 
@@ -35,7 +35,7 @@ Each type again is tested for the new laws in `AbstractTests.swift`.
 //: ------
 
 extension Add: Monoid {
-	public static var e: Add<A> {
+	public static var empty: Add<A> {
 		return Add.init(A.zero)
 	}
 }
@@ -43,7 +43,7 @@ extension Add: Monoid {
 //: ------
 
 extension Multiply: Monoid {
-	public static var e: Multiply<A> {
+	public static var empty: Multiply<A> {
 		return Multiply.init(A.one)
 	}
 }
@@ -51,7 +51,7 @@ extension Multiply: Monoid {
 //: ------
 
 extension Max: Monoid {
-	public static var e: Max<A> {
+	public static var empty: Max<A> {
 		return Max(A.min)
 	}
 }
@@ -59,7 +59,7 @@ extension Max: Monoid {
 //: ------
 
 extension Min: Monoid {
-	public static var e: Min<A> {
+	public static var empty: Min<A> {
 		return Min(A.max)
 	}
 }
@@ -67,7 +67,7 @@ extension Min: Monoid {
 //: ------
 
 extension Bool: Monoid {
-	public static let e = true
+	public static let empty = true
 	
 	public static func <> (left: Bool, right: Bool) -> Bool {
 		return left && right
@@ -77,7 +77,7 @@ extension Bool: Monoid {
 //: ------
 
 extension FunctionI: Monoid {
-	public static var e: FunctionI<A> {
+	public static var empty: FunctionI<A> {
 		return FunctionI<A> { $0 }
 	}
 }
@@ -97,8 +97,8 @@ public struct FunctionM<A, M: Monoid & Equatable>: Monoid, EquatableInContext {
 		return FunctionM.init { left.call($0) <> right.call($0) }
 	}
 	
-	public static var e: FunctionM<A, M> {
-		return FunctionM { _ in M.e }
+	public static var empty: FunctionM<A, M> {
+		return FunctionM { _ in M.empty }
 	}
 	
 	public static func == (left: FunctionM, right: FunctionM) -> (Context) -> Bool {
@@ -109,7 +109,7 @@ public struct FunctionM<A, M: Monoid & Equatable>: Monoid, EquatableInContext {
 //: ------
 
 extension Ordering: Monoid {
-	public static var e: Ordering {
+	public static var empty: Ordering {
 		return .equalTo
 	}
 }
