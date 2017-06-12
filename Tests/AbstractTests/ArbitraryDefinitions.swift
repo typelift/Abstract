@@ -98,6 +98,18 @@ struct MinOf<A: Arbitrary & ComparableToTop>: Arbitrary {
 	}
 }
 
+extension And: Arbitrary {
+	public static var arbitrary: Gen<And> {
+		return Bool.arbitrary.map(And.init(_:))
+	}
+}
+
+extension Or: Arbitrary {
+	public static var arbitrary: Gen<Or> {
+		return Bool.arbitrary.map(Or.init(_:))
+	}
+}
+
 struct FunctionIOf<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
 	let get: FunctionI<A>
 	

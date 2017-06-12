@@ -66,11 +66,17 @@ extension Min: Monoid {
 
 //: ------
 
-extension Bool: Monoid {
-	public static let empty = true
-	
-	public static func <> (left: Bool, right: Bool) -> Bool {
-		return left && right
+extension And: Monoid {
+	public static var empty: And {
+		return true
+	}
+}
+
+//: ------
+
+extension Or: Monoid {
+	public static var empty: Or {
+		return false
 	}
 }
 
