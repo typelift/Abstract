@@ -3,4 +3,5 @@
 /Packages
 Abstract.xcodeproj/project.xcworkspace/xcuserdata
 Abstract.xcodeproj/xcuserdata
-Carthage/Checkouts
+Carthage/
+

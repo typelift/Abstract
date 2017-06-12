@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09F9FD0F1EEE5CEC002342E5 /* Morphisms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */; };
 		38943A6C1EEC287000F587AD /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38943A6B1EEC287000F587AD /* SwiftCheck.framework */; };
 		38943A6E1EEC288200F587AD /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38943A6B1EEC287000F587AD /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38943A6F1EEC28A000F587AD /* AbstractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A681EEC25AE00F587AD /* AbstractTests.swift */; };
@@ -15,7 +16,6 @@
 		38943A791EEC4EFF00F587AD /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A781EEC4EFF00F587AD /* Monoid.swift */; };
 		38B83C921EED6E33007AB12A /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C911EED6E33007AB12A /* Predicate.swift */; };
 		38B83C941EED72F3007AB12A /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C931EED72F3007AB12A /* Comparison.swift */; };
-		38B83C961EED772D007AB12A /* Morphisms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C951EED772D007AB12A /* Morphisms.swift */; };
 		38B83C981EED83EF007AB12A /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C971EED83EF007AB12A /* Collections.swift */; };
 		38B83C9A1EED85C6007AB12A /* CommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C991EED85C6007AB12A /* CommutativeMonoid.swift */; };
 		38B83C9C1EED8A15007AB12A /* BoundedSemilattice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C9B1EED8A15007AB12A /* BoundedSemilattice.swift */; };
@@ -49,6 +49,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		09F9FD0C1EEE0FC2002342E5 /* Operadics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Operadics.framework; path = Carthage/Build/iOS/Operadics.framework; sourceTree = "<group>"; };
+		09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphisms.swift; sourceTree = "<group>"; };
 		38943A681EEC25AE00F587AD /* AbstractTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTests.swift; sourceTree = "<group>"; };
 		38943A6B1EEC287000F587AD /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/iOS/SwiftCheck.framework; sourceTree = "<group>"; };
 		38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArbitraryDefinitions.swift; sourceTree = "<group>"; };
@@ -56,7 +58,6 @@
 		38943A781EEC4EFF00F587AD /* Monoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
 		38B83C911EED6E33007AB12A /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		38B83C931EED72F3007AB12A /* Comparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
-		38B83C951EED772D007AB12A /* Morphisms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Morphisms.swift; path = Utilities/Morphisms.swift; sourceTree = "<group>"; };
 		38B83C971EED83EF007AB12A /* Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
 		38B83C991EED85C6007AB12A /* CommutativeMonoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommutativeMonoid.swift; sourceTree = "<group>"; };
 		38B83C9B1EED8A15007AB12A /* BoundedSemilattice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundedSemilattice.swift; sourceTree = "<group>"; };
@@ -93,9 +94,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09F9FD0D1EEE5C5D002342E5 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				38943A761EEC31DA00F587AD /* Adapters.swift */,
+				38B83C9B1EED8A15007AB12A /* BoundedSemilattice.swift */,
+				38B83C991EED85C6007AB12A /* CommutativeMonoid.swift */,
+				38D737EB1EE9B95C000BAF0C /* Law.swift */,
+				38D737BD1EE9A711000BAF0C /* Magma.swift */,
+				38943A781EEC4EFF00F587AD /* Monoid.swift */,
+				38D737E91EE9B86F000BAF0C /* Semigroup.swift */,
+				38B83C901EED6E29007AB12A /* Utilities */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
 		38943A6A1EEC287000F587AD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09F9FD0C1EEE0FC2002342E5 /* Operadics.framework */,
 				38943A6B1EEC287000F587AD /* SwiftCheck.framework */,
 			);
 			name = Frameworks;
@@ -104,6 +121,7 @@
 		38B83C901EED6E29007AB12A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */,
 				38B83C971EED83EF007AB12A /* Collections.swift */,
 				38B83C931EED72F3007AB12A /* Comparison.swift */,
 				38B83C911EED6E33007AB12A /* Predicate.swift */,
@@ -129,15 +147,7 @@
 		38D737BC1EE9A711000BAF0C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				38943A761EEC31DA00F587AD /* Adapters.swift */,
-				38B83C9B1EED8A15007AB12A /* BoundedSemilattice.swift */,
-				38B83C991EED85C6007AB12A /* CommutativeMonoid.swift */,
-				38D737EB1EE9B95C000BAF0C /* Law.swift */,
-				38D737BD1EE9A711000BAF0C /* Magma.swift */,
-				38943A781EEC4EFF00F587AD /* Monoid.swift */,
-				38B83C951EED772D007AB12A /* Morphisms.swift */,
-				38D737E91EE9B86F000BAF0C /* Semigroup.swift */,
-				38B83C901EED6E29007AB12A /* Utilities */,
+				09F9FD0D1EEE5C5D002342E5 /* Abstract */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -230,7 +240,7 @@
 				TargetAttributes = {
 					38D737C61EE9A729000BAF0C = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5MTJLVM7R2;
+						DevelopmentTeam = Y4U5GF9JQQ;
 						ProvisioningStyle = Automatic;
 					};
 					38D737CF1EE9A729000BAF0C = {
@@ -280,13 +290,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38B83C961EED772D007AB12A /* Morphisms.swift in Sources */,
 				38D737EC1EE9B95C000BAF0C /* Law.swift in Sources */,
 				38B83C921EED6E33007AB12A /* Predicate.swift in Sources */,
 				38B83C941EED72F3007AB12A /* Comparison.swift in Sources */,
 				38943A771EEC31DA00F587AD /* Adapters.swift in Sources */,
 				38D737E21EE9A7D8000BAF0C /* Magma.swift in Sources */,
 				38B83C9C1EED8A15007AB12A /* BoundedSemilattice.swift in Sources */,
+				09F9FD0F1EEE5CEC002342E5 /* Morphisms.swift in Sources */,
 				38B83C981EED83EF007AB12A /* Collections.swift in Sources */,
 				38D737EA1EE9B86F000BAF0C /* Semigroup.swift in Sources */,
 				38B83C9A1EED85C6007AB12A /* CommutativeMonoid.swift in Sources */,
@@ -354,12 +364,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 5MTJLVM7R2;
+				DEVELOPMENT_TEAM = Y4U5GF9JQQ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -376,7 +390,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -421,12 +435,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 5MTJLVM7R2;
+				DEVELOPMENT_TEAM = Y4U5GF9JQQ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -437,7 +455,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = it.broomburgo.Abstract;
