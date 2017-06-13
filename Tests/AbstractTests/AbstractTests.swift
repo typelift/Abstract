@@ -20,8 +20,12 @@ final class AbstractTests: XCTestCase {
 			Law<Min<Int>>.isAssociative(a.get,b.get,c.get)
 		}
 
-		property("Bool is a Semigroup") <- forAll { (a: Bool, b: Bool, c: Bool) in
-			Law<Bool>.isAssociative(a,b,c)
+		property("And is a Semigroup") <- forAll { (a: And, b: And, c: And) in
+			Law<And>.isAssociative(a,b,c)
+		}
+
+		property("Or is a Semigroup") <- forAll { (a: Or, b: Or, c: Or) in
+			Law<Or>.isAssociative(a,b,c)
 		}
 
 		property("FunctionI is a Semigroup") <- forAll { (a: FunctionIOf<Int>, b: FunctionIOf<Int>, c: FunctionIOf<Int>, context: Int) in
@@ -54,10 +58,14 @@ final class AbstractTests: XCTestCase {
 			Law<Min<Int>>.isNeutralToEmpty(a.get)
 		}
 		
-		property("Bool is a Monoid") <- forAll { (a: Bool) in
-			Law<Bool>.isNeutralToEmpty(a)
+		property("And is a Monoid") <- forAll { (a: And) in
+			Law<And>.isNeutralToEmpty(a)
 		}
-		
+
+		property("Or is a Monoid") <- forAll { (a: Or) in
+			Law<Or>.isNeutralToEmpty(a)
+		}
+
 		property("FunctionI is a Monoid") <- forAll { (a: FunctionIOf<Int>, context: Int) in
 			LawInContext<FunctionI<Int>>.isNeutralToEmpty(a.get)(context)
 		}
@@ -88,10 +96,14 @@ final class AbstractTests: XCTestCase {
 			Law<Min<Int>>.isCommutative(a.get,b.get)
 		}
 
-		property("Bool is a Commutative Monoid") <- forAll { (a: Bool, b: Bool) in
-			Law<Bool>.isCommutative(a,b)
+		property("And is a Commutative Monoid") <- forAll { (a: And, b: And) in
+			Law<And>.isCommutative(a,b)
 		}
-		
+
+		property("Or is a Commutative Monoid") <- forAll { (a: Or, b: Or) in
+			Law<Or>.isCommutative(a,b)
+		}
+
 		property("FunctionCM is a Commutative Monoid") <- forAll { (a: FunctionCMOf<Int,TestStructure>, b: FunctionCMOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionCM<Int,TestStructure>>.isCommutative(a.get,b.get)(context)
 		}
@@ -106,10 +118,14 @@ final class AbstractTests: XCTestCase {
 			Law<Min<Int>>.isIdempotent(a.get,b.get)
 		}
 		
-		property("Bool is a Bounded Semilattice") <- forAll { (a: Bool, b: Bool) in
-			Law<Bool>.isIdempotent(a,b)
+		property("And is a Bounded Semilattice") <- forAll { (a: And, b: And) in
+			Law<And>.isIdempotent(a,b)
 		}
-		
+
+		property("Or is a Bounded Semilattice") <- forAll { (a: Or, b: Or) in
+			Law<Or>.isIdempotent(a,b)
+		}
+
 		property("FunctionBS is a Bounded Semilattice") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isIdempotent(a.get,b.get)(context)
 		}

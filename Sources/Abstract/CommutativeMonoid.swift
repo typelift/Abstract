@@ -42,7 +42,11 @@ extension Min: CommutativeMonoid {}
 
 //: ------
 
-extension Bool: CommutativeMonoid {}
+extension And: CommutativeMonoid {}
+
+//: ------
+
+extension Or: CommutativeMonoid {}
 
 //: ------
 

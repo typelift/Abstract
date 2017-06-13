@@ -34,7 +34,11 @@ extension Min: BoundedSemilattice {}
 
 //: ------
 
-extension Bool: BoundedSemilattice {}
+extension And: BoundedSemilattice {}
+
+//: ------
+
+extension Or: BoundedSemilattice {}
 
 //: ------
 

@@ -104,6 +104,54 @@ public struct Min<A: ComparableToTop>: Semigroup, Equatable {
 
 //: ------
 
+public struct And: Semigroup, Equatable, ExpressibleByBooleanLiteral {
+	public typealias BooleanLiteralType = Bool
+
+	public let value: Bool
+
+	public init(_ value: Bool) {
+		self.value = value
+	}
+
+	public init(booleanLiteral value: BooleanLiteralType) {
+		self.init(value)
+	}
+
+	public static func <> (left: And, right: And) -> And {
+		return And(left.value && right.value)
+	}
+
+	public static func == (left: And, right: And) -> Bool {
+		return left.value == right.value
+	}
+}
+
+//: ------
+
+public struct Or: Semigroup, Equatable, ExpressibleByBooleanLiteral {
+	public typealias BooleanLiteralType = Bool
+
+	public let value: Bool
+
+	public init(_ value: Bool) {
+		self.value = value
+	}
+
+	public init(booleanLiteral value: BooleanLiteralType) {
+		self.init(value)
+	}
+
+	public static func <> (left: Or, right: Or) -> Or {
+		return Or(left.value || right.value)
+	}
+
+	public static func == (left: Or, right: Or) -> Bool {
+		return left.value == right.value
+	}
+}
+
+//: ------
+
 public struct FunctionI<A: Equatable>: Semigroup, EquatableInContext {
 	public typealias Context = A
 	
