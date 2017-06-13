@@ -111,15 +111,15 @@ extension Or: Arbitrary {
 	}
 }
 
-struct FunctionIOf<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
-	let get: FunctionI<A>
+struct EndofunctionOf<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
+	let get: Endofunction<A>
 	
 	init(_ value: @escaping (A) -> A) {
-		self.get = FunctionI.init(value)
+		self.get = Endofunction.init(value)
 	}
 	
-	static var arbitrary: Gen<FunctionIOf<A>> {
-		return ArrowOf<A,A>.arbitrary.map { $0.getArrow }.map(FunctionIOf<A>.init)
+	static var arbitrary: Gen<EndofunctionOf<A>> {
+		return ArrowOf<A,A>.arbitrary.map { $0.getArrow }.map(EndofunctionOf<A>.init)
 	}
 }
 

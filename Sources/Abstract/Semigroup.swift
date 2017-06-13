@@ -152,7 +152,7 @@ public struct Or: Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 //: ------
 
-public struct FunctionI<A: Equatable>: Semigroup, EquatableInContext {
+public struct Endofunction<A: Equatable>: Semigroup, EquatableInContext {
 	public typealias Context = A
 	
 	public let call: (A) -> A
@@ -161,11 +161,11 @@ public struct FunctionI<A: Equatable>: Semigroup, EquatableInContext {
 		self.call = call
 	}
 	
-	public static func <> (left: FunctionI, right: FunctionI) -> FunctionI {
-		return FunctionI.init { right.call(left.call($0)) }
+	public static func <> (left: Endofunction, right: Endofunction) -> Endofunction {
+		return Endofunction.init { right.call(left.call($0)) }
 	}
 	
-	public static func == (left: FunctionI, right: FunctionI) -> (Context) -> Bool {
+	public static func == (left: Endofunction, right: Endofunction) -> (Context) -> Bool {
 		return { context in left.call(context) == right.call(context) }
 	}
 }

@@ -28,8 +28,8 @@ final class AbstractTests: XCTestCase {
 			Law<Or>.isAssociative(a,b,c)
 		}
 
-		property("FunctionI is a Semigroup") <- forAll { (a: FunctionIOf<Int>, b: FunctionIOf<Int>, c: FunctionIOf<Int>, context: Int) in
-			LawInContext<FunctionI<Int>>.isAssociative(a.get, b.get, c.get)(context)
+		property("Endofunction is a Semigroup") <- forAll { (a: EndofunctionOf<Int>, b: EndofunctionOf<Int>, c: EndofunctionOf<Int>, context: Int) in
+			LawInContext<Endofunction<Int>>.isAssociative(a.get, b.get, c.get)(context)
 		}
 		
 		property("FunctionS is a Semigroup") <- forAll { (a: FunctionSOf<Int,TestStructure>, b: FunctionSOf<Int,TestStructure>, c: FunctionSOf<Int,TestStructure>, context: Int) in
@@ -66,8 +66,8 @@ final class AbstractTests: XCTestCase {
 			Law<Or>.isNeutralToEmpty(a)
 		}
 
-		property("FunctionI is a Monoid") <- forAll { (a: FunctionIOf<Int>, context: Int) in
-			LawInContext<FunctionI<Int>>.isNeutralToEmpty(a.get)(context)
+		property("Endofunction is a Monoid") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
+			LawInContext<Endofunction<Int>>.isNeutralToEmpty(a.get)(context)
 		}
 
 		property("FunctionM is a Monoid") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
