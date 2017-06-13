@@ -84,9 +84,9 @@ extension Or: Monoid {
 
 //: ------
 
-extension FunctionI: Monoid {
-	public static var empty: FunctionI<A> {
-		return FunctionI<A> { $0 }
+extension Endofunction: Monoid {
+	public static var empty: Endofunction<A> {
+		return Endofunction<A> { $0 }
 	}
 }
 
