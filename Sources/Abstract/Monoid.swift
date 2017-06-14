@@ -16,13 +16,13 @@ public protocol Monoid: Semigroup {
 
 extension Law where Element: Monoid {
 	public static func isNeutralToEmpty(_ a: Element) -> Bool {
-		return (a <> Element.empty) == a && (Element.empty <> a) == a
+		return (a <> .empty) == a && (.empty <> a) == a
 	}
 }
 
 extension LawInContext where Element: Monoid {
 	public static func isNeutralToEmpty(_ a: Element) -> (Element.Context) -> Bool {
-		return { context in ((a <> Element.empty) == a)(context) && ((Element.empty <> a) == a)(context) }
+		return { ((a <> .empty) == a)($0) && ((.empty <> a) == a)($0) }
 	}
 }
 

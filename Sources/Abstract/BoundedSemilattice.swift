@@ -18,7 +18,7 @@ extension Law where Element: BoundedSemilattice {
 
 extension LawInContext where Element: BoundedSemilattice {
 	public static func isIdempotent(_ a: Element, _ b: Element) -> (Element.Context) -> Bool {
-		return { context in ((a <> b <> b) == (a <> b))(context) }
+		return (a <> b <> b) == (a <> b)
 	}
 }
 

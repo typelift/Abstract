@@ -18,7 +18,7 @@ extension Law where Element: CommutativeMonoid {
 
 extension LawInContext where Element: CommutativeMonoid {
 	public static func isCommutative(_ a: Element, _ b: Element) -> (Element.Context) -> Bool {
-		return { context in ((a <> b) == (b <> a))(context) }
+		return (a <> b) == (b <> a)
 	}
 }
 

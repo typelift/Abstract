@@ -176,7 +176,25 @@ final class AbstractTests: XCTestCase {
 			LawInContext<FunctionBS<Int,TestStructure>>.isIdempotent(a.get,b.get)(context)
 		}
 	}
-	
+
+	func testSemiring() {
+		property("Bool is a Semiring: Distributive") <- forAll { (a: Bool, b: Bool, c: Bool) in
+			Law<Bool>.multiplicationIsDistributiveOverAddition(a, b, c)
+		}
+
+		property("Bool is a Semiring: Annihilation") <- forAll { (a: Bool) in
+			Law<Bool>.zeroAnnihiliatesTheMultiplicative(a)
+		}
+
+		property("FunctionSR is a Semiring: Distributive") <- forAll { (a: FunctionSROf<Int,TestSemiring>, b: FunctionSROf<Int,TestSemiring>, c: FunctionSROf<Int,TestSemiring>, context: Int) in
+			LawInContext<FunctionSR<Int,TestSemiring>>.multiplicationIsDistributiveOverAddition(a.get, b.get, c.get)(context)
+		}
+
+		property("FunctionSR is a Semiring: Annihilation") <- forAll { (a: FunctionSROf<Int,TestSemiring>, context: Int) in
+			LawInContext<FunctionSR<Int,TestSemiring>>.zeroAnnihiliatesTheMultiplicative(a.get)(context)
+		}
+	}
+
 	func testHomomorphism() {
 		property("Ordering.reversed is a Homomorphism") <- forAll { (a: Ordering, b: Ordering) in
 			Law<Ordering>.isHomomorphism({ $0.reversed }, a, b)
@@ -193,6 +211,7 @@ final class AbstractTests: XCTestCase {
 		("testMonoid", testMonoid),
 		("testCommutativeMonoid",testCommutativeMonoid),
 		("testBoundedSemilattice",testBoundedSemilattice),
+		("testSemiring",testSemiring),
 		("testHomomorphism",testHomomorphism)
 	]
 }

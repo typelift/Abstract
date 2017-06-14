@@ -27,6 +27,41 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	}
 }
 
+struct TestSemiring: Arbitrary, Semiring, Equatable {
+	typealias Additive = Bool.Additive
+	typealias Multiplicative = Bool.Multiplicative
+
+	let get: Bool
+
+	init(_ value: Bool) {
+		self.get = value
+	}
+
+	static var arbitrary: Gen<TestSemiring> {
+		return Bool.arbitrary.map(TestSemiring.init)
+	}
+
+	static func <>+(left: TestSemiring, right: TestSemiring) -> TestSemiring {
+		return TestSemiring(left.get <>+ right.get)
+	}
+
+	static func <>*(left: TestSemiring, right: TestSemiring) -> TestSemiring {
+		return TestSemiring(left.get <>* right.get)
+	}
+
+	static var zero: TestSemiring {
+		return TestSemiring(Bool.zero)
+	}
+
+	static var one: TestSemiring {
+		return TestSemiring(Bool.one)
+	}
+
+	static func == (left: TestSemiring, right: TestSemiring) -> Bool {
+		return left.get == right.get
+	}
+}
+
 struct TestProduct: CoArbitrary, Hashable, Arbitrary {
 	let value: (Int,Int)
 	
@@ -188,3 +223,14 @@ struct FunctionBSOf<A: CoArbitrary & Hashable, M: Arbitrary & BoundedSemilattice
 	}
 }
 
+struct FunctionSROf<A: CoArbitrary & Hashable, SR: Arbitrary & Semiring & Equatable>: Arbitrary where SR.Additive: Equatable, SR.Multiplicative: Equatable {
+	let get: FunctionSR<A,SR>
+
+	init(_ value: @escaping (A) -> SR) {
+		self.get = FunctionSR.init(value)
+	}
+
+	static var arbitrary: Gen<FunctionSROf<A,SR>> {
+		return ArrowOf<A,SR>.arbitrary.map { $0.getArrow }.map(FunctionSROf<A,SR>.init)
+	}
+}
