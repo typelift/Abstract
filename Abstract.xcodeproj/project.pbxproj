@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09F9FD0F1EEE5CEC002342E5 /* Morphisms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */; };
+		3853BF9E1EF11D7400791099 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3853BF9D1EF11D7400791099 /* Wrapper.swift */; };
 		38943A6C1EEC287000F587AD /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38943A6B1EEC287000F587AD /* SwiftCheck.framework */; };
 		38943A6E1EEC288200F587AD /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38943A6B1EEC287000F587AD /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38943A6F1EEC28A000F587AD /* AbstractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A681EEC25AE00F587AD /* AbstractTests.swift */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		09F9FD0C1EEE0FC2002342E5 /* Operadics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Operadics.framework; path = Carthage/Build/iOS/Operadics.framework; sourceTree = "<group>"; };
 		09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphisms.swift; sourceTree = "<group>"; };
+		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		38943A681EEC25AE00F587AD /* AbstractTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTests.swift; sourceTree = "<group>"; };
 		38943A6B1EEC287000F587AD /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/iOS/SwiftCheck.framework; sourceTree = "<group>"; };
 		38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArbitraryDefinitions.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				38D737BD1EE9A711000BAF0C /* Magma.swift */,
 				38943A781EEC4EFF00F587AD /* Monoid.swift */,
 				38D737E91EE9B86F000BAF0C /* Semigroup.swift */,
+				3853BF9D1EF11D7400791099 /* Wrapper.swift */,
 				38B83C901EED6E29007AB12A /* Utilities */,
 			);
 			path = Abstract;
@@ -295,6 +298,7 @@
 				38B83C941EED72F3007AB12A /* Comparison.swift in Sources */,
 				38943A771EEC31DA00F587AD /* Adapters.swift in Sources */,
 				38D737E21EE9A7D8000BAF0C /* Magma.swift in Sources */,
+				3853BF9E1EF11D7400791099 /* Wrapper.swift in Sources */,
 				38B83C9C1EED8A15007AB12A /* BoundedSemilattice.swift in Sources */,
 				09F9FD0F1EEE5CEC002342E5 /* Morphisms.swift in Sources */,
 				38B83C981EED83EF007AB12A /* Collections.swift in Sources */,

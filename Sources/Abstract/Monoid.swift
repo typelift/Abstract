@@ -92,9 +92,14 @@ extension Endofunction: Monoid {
 
 //: ------
 
-public struct FunctionM<A, M: Monoid & Equatable>: Monoid, EquatableInContext {
+public struct FunctionM<A, M: Monoid & Equatable>: Wrapper,  Monoid, EquatableInContext {
+	public typealias Wrapped = (A) -> M
 	public typealias Context = A
-	
+
+	public var value: (A) -> M {
+		return call
+	}
+
 	public let call: (A) -> M
 	
 	public init(_ call: @escaping (A) -> M) {

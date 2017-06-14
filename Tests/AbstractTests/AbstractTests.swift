@@ -3,6 +3,52 @@ import XCTest
 import SwiftCheck
 
 final class AbstractTests: XCTestCase {
+	func testWrapper() {
+		property("Add is a Wrapper") <- forAll { (a: Int) in
+			Law<Add<Int>>.isIsomorphic(a)
+		}
+
+		property("Multiply is a Wrapper") <- forAll { (a: Int) in
+			Law<Multiply<Int>>.isIsomorphic(a)
+		}
+
+		property("Max is a Wrapper") <- forAll { (a: Int) in
+			Law<Max<Int>>.isIsomorphic(a)
+		}
+
+		property("Min is a Wrapper") <- forAll { (a: Int) in
+			Law<Min<Int>>.isIsomorphic(a)
+		}
+
+		property("And is a Wrapper") <- forAll { (a: Bool) in
+			Law<And>.isIsomorphic(a)
+		}
+
+		property("Or is a Wrapper") <- forAll { (a: Bool) in
+			Law<Or>.isIsomorphic(a)
+		}
+
+		property("Endofunction is a Wrapper") <- forAll { (a: ArrowOf<Int,Int>, context: Int) in
+			LawInContext<Endofunction<Int>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionS is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionS<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionM is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionM<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionCM is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionCM<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionBS is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionBS<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+	}
+
 	func testSemigroup() {
 		property("Add is a Semigroup") <- forAll { (a: AddOf<Int>, b: AddOf<Int>, c: AddOf<Int>) in
 			Law<Add<Int>>.isAssociative(a.get,b.get,c.get)
@@ -142,6 +188,7 @@ final class AbstractTests: XCTestCase {
 	}
 	
 	static var allTests = [
+		("testWrapper", testWrapper),
 		("testSemigroup", testSemigroup),
 		("testMonoid", testMonoid),
 		("testCommutativeMonoid",testCommutativeMonoid),

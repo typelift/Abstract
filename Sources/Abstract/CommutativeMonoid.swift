@@ -50,9 +50,14 @@ extension Or: CommutativeMonoid {}
 
 //: ------
 
-public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: CommutativeMonoid, EquatableInContext {
+public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: Wrapper, CommutativeMonoid, EquatableInContext {
+	public typealias Wrapped = (A) -> M
 	public typealias Context = A
-	
+
+	public var value: (A) -> M {
+		return call
+	}
+
 	public let call: (A) -> M
 	
 	public init(_ call: @escaping (A) -> M) {

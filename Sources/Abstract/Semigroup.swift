@@ -32,10 +32,12 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
-public struct Add<A: Summable>: Semigroup, Equatable {
+public struct Add<A: Summable>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
 	public let value: A
 	
-	init(_ value: A) {
+	public init(_ value: A) {
 		self.value = value
 	}
 	
@@ -50,7 +52,9 @@ public struct Add<A: Summable>: Semigroup, Equatable {
 
 //: ------
 
-public struct Multiply<A: Multipliable>: Semigroup, Equatable {
+public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
 	public let value: A
 	
 	public init(_ value: A) {
@@ -68,7 +72,9 @@ public struct Multiply<A: Multipliable>: Semigroup, Equatable {
 
 //: ------
 
-public struct Max<A: ComparableToBottom>: Semigroup, Equatable {
+public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
 	public let value: A
 	
 	public init(_ value: A) {
@@ -86,7 +92,9 @@ public struct Max<A: ComparableToBottom>: Semigroup, Equatable {
 
 //: ------
 
-public struct Min<A: ComparableToTop>: Semigroup, Equatable {
+public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
 	public let value: A
 	
 	public init(_ value: A) {
@@ -104,7 +112,8 @@ public struct Min<A: ComparableToTop>: Semigroup, Equatable {
 
 //: ------
 
-public struct And: Semigroup, Equatable, ExpressibleByBooleanLiteral {
+public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
+	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
 
 	public let value: Bool
@@ -128,7 +137,8 @@ public struct And: Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 //: ------
 
-public struct Or: Semigroup, Equatable, ExpressibleByBooleanLiteral {
+public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
+	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
 
 	public let value: Bool
@@ -152,9 +162,14 @@ public struct Or: Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 //: ------
 
-public struct Endofunction<A: Equatable>: Semigroup, EquatableInContext {
+public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext {
+	public typealias Wrapped = (A) -> A
 	public typealias Context = A
-	
+
+	public var value: (A) -> A {
+		return call
+	}
+
 	public let call: (A) -> A
 	
 	public init(_ call: @escaping (A) -> A) {
@@ -172,11 +187,16 @@ public struct Endofunction<A: Equatable>: Semigroup, EquatableInContext {
 
 //: ------
 
-public struct FunctionS<A, S: Semigroup & Equatable>: Semigroup, EquatableInContext {
+public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, EquatableInContext {
+	public typealias Wrapped = (A) -> S
 	public typealias Context = A
-	
+
+	public var value: (A) -> S {
+		return call
+	}
+
 	public let call: (A) -> S
-	
+
 	public init(_ call: @escaping (A) -> S) {
 		self.call = call
 	}
