@@ -3,6 +3,52 @@ import XCTest
 import SwiftCheck
 
 final class AbstractTests: XCTestCase {
+	func testWrapper() {
+		property("Add is a Wrapper") <- forAll { (a: Int) in
+			Law<Add<Int>>.isIsomorphic(a)
+		}
+
+		property("Multiply is a Wrapper") <- forAll { (a: Int) in
+			Law<Multiply<Int>>.isIsomorphic(a)
+		}
+
+		property("Max is a Wrapper") <- forAll { (a: Int) in
+			Law<Max<Int>>.isIsomorphic(a)
+		}
+
+		property("Min is a Wrapper") <- forAll { (a: Int) in
+			Law<Min<Int>>.isIsomorphic(a)
+		}
+
+		property("And is a Wrapper") <- forAll { (a: Bool) in
+			Law<And>.isIsomorphic(a)
+		}
+
+		property("Or is a Wrapper") <- forAll { (a: Bool) in
+			Law<Or>.isIsomorphic(a)
+		}
+
+		property("Endofunction is a Wrapper") <- forAll { (a: ArrowOf<Int,Int>, context: Int) in
+			LawInContext<Endofunction<Int>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionS is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionS<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionM is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionM<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionCM is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionCM<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+
+		property("FunctionBS is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionBS<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		}
+	}
+
 	func testSemigroup() {
 		property("Add is a Semigroup") <- forAll { (a: AddOf<Int>, b: AddOf<Int>, c: AddOf<Int>) in
 			Law<Add<Int>>.isAssociative(a.get,b.get,c.get)
@@ -130,22 +176,42 @@ final class AbstractTests: XCTestCase {
 			LawInContext<FunctionBS<Int,TestStructure>>.isIdempotent(a.get,b.get)(context)
 		}
 	}
-	
+
+	func testSemiring() {
+		property("Bool is a Semiring: Distributive") <- forAll { (a: Bool, b: Bool, c: Bool) in
+			Law<Bool>.multiplicationIsDistributiveOverAddition(a, b, c)
+		}
+
+		property("Bool is a Semiring: Annihilation") <- forAll { (a: Bool) in
+			Law<Bool>.zeroAnnihiliatesTheMultiplicative(a)
+		}
+
+		property("FunctionSR is a Semiring: Distributive") <- forAll { (a: FunctionSROf<Int,TestSemiring>, b: FunctionSROf<Int,TestSemiring>, c: FunctionSROf<Int,TestSemiring>, context: Int) in
+			LawInContext<FunctionSR<Int,TestSemiring>>.multiplicationIsDistributiveOverAddition(a.get, b.get, c.get)(context)
+		}
+
+		property("FunctionSR is a Semiring: Annihilation") <- forAll { (a: FunctionSROf<Int,TestSemiring>, context: Int) in
+			LawInContext<FunctionSR<Int,TestSemiring>>.zeroAnnihiliatesTheMultiplicative(a.get)(context)
+		}
+	}
+
 	func testHomomorphism() {
 		property("Ordering.reversed is a Homomorphism") <- forAll { (a: Ordering, b: Ordering) in
 			Law<Ordering>.isHomomorphism({ $0.reversed }, a, b)
 		}
 		
 		property("Comparison.reversed is a Homomorphism") <- forAll { (a: FunctionMOf<TestProduct,Ordering>, b: FunctionMOf<TestProduct,Ordering>, context: TestProduct) in
-			LawInContext<Comparison<Int>>.isHomomorphism({ $0.reversed }, Comparison<Int> { a.get.call(TestProduct.init($0)) }, Comparison<Int> { b.get.call(TestProduct.init($0)) })(context.value)
+			LawInContext<Comparison<Int>>.isHomomorphism({ $0.reversed }, Comparison<Int> { a.get.call(TestProduct.init($0)) }, Comparison<Int> { b.get.call(TestProduct.init($0)) })(context.unwrap)
 		}
 	}
 	
 	static var allTests = [
+		("testWrapper", testWrapper),
 		("testSemigroup", testSemigroup),
 		("testMonoid", testMonoid),
 		("testCommutativeMonoid",testCommutativeMonoid),
 		("testBoundedSemilattice",testBoundedSemilattice),
+		("testSemiring",testSemiring),
 		("testHomomorphism",testHomomorphism)
 	]
 }

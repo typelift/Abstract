@@ -32,85 +32,94 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
-public struct Add<A: Summable>: Semigroup, Equatable {
-	public let value: A
+public struct Add<A: Summable>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
+	public let unwrap: A
 	
-	init(_ value: A) {
-		self.value = value
+	public init(_ value: A) {
+		self.unwrap = value
 	}
 	
 	public static func <> (left: Add, right: Add) -> Add {
-		return Add(left.value + right.value)
+		return Add(left.unwrap + right.unwrap)
 	}
 	
 	public static func == (left: Add, right: Add) -> Bool {
-		return left.value == right.value
+		return left.unwrap == right.unwrap
 	}
 }
 
 //: ------
 
-public struct Multiply<A: Multipliable>: Semigroup, Equatable {
-	public let value: A
+public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
+	public let unwrap: A
 	
 	public init(_ value: A) {
-		self.value = value
+		self.unwrap = value
 	}
 	
 	public static func <> (left: Multiply, right: Multiply) -> Multiply {
-		return Multiply(left.value * right.value)
+		return Multiply(left.unwrap * right.unwrap)
 	}
 	
 	public static func == (left: Multiply, right: Multiply) -> Bool {
-		return left.value == right.value
+		return left.unwrap == right.unwrap
 	}
 }
 
 //: ------
 
-public struct Max<A: ComparableToBottom>: Semigroup, Equatable {
-	public let value: A
+public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
+	public let unwrap: A
 	
 	public init(_ value: A) {
-		self.value = value
+		self.unwrap = value
 	}
 	
 	public static func <> (left: Max, right: Max) -> Max {
-		return Max(max(left.value, right.value))
+		return Max(max(left.unwrap, right.unwrap))
 	}
 	
 	public static func == (left: Max, right: Max) -> Bool {
-		return left.value == right.value
+		return left.unwrap == right.unwrap
 	}
 }
 
 //: ------
 
-public struct Min<A: ComparableToTop>: Semigroup, Equatable {
-	public let value: A
+public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
+	public typealias Wrapped = A
+
+	public let unwrap: A
 	
 	public init(_ value: A) {
-		self.value = value
+		self.unwrap = value
 	}
 	
 	public static func <> (left: Min, right: Min) -> Min {
-		return Min(min(left.value, right.value))
+		return Min(min(left.unwrap, right.unwrap))
 	}
 	
 	public static func == (left: Min, right: Min) -> Bool {
-		return left.value == right.value
+		return left.unwrap == right.unwrap
 	}
 }
 
 //: ------
 
-public struct And: Semigroup, Equatable, ExpressibleByBooleanLiteral {
+public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
+	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
 
-	public let value: Bool
+	public let unwrap: Bool
 
 	public init(_ value: Bool) {
-		self.value = value
+		self.unwrap = value
 	}
 
 	public init(booleanLiteral value: BooleanLiteralType) {
@@ -118,23 +127,24 @@ public struct And: Semigroup, Equatable, ExpressibleByBooleanLiteral {
 	}
 
 	public static func <> (left: And, right: And) -> And {
-		return And(left.value && right.value)
+		return And(left.unwrap && right.unwrap)
 	}
 
 	public static func == (left: And, right: And) -> Bool {
-		return left.value == right.value
+		return left.unwrap == right.unwrap
 	}
 }
 
 //: ------
 
-public struct Or: Semigroup, Equatable, ExpressibleByBooleanLiteral {
+public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
+	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
 
-	public let value: Bool
+	public let unwrap: Bool
 
 	public init(_ value: Bool) {
-		self.value = value
+		self.unwrap = value
 	}
 
 	public init(booleanLiteral value: BooleanLiteralType) {
@@ -142,25 +152,30 @@ public struct Or: Semigroup, Equatable, ExpressibleByBooleanLiteral {
 	}
 
 	public static func <> (left: Or, right: Or) -> Or {
-		return Or(left.value || right.value)
+		return Or(left.unwrap || right.unwrap)
 	}
 
 	public static func == (left: Or, right: Or) -> Bool {
-		return left.value == right.value
+		return left.unwrap == right.unwrap
 	}
 }
 
 //: ------
 
-public struct Endofunction<A: Equatable>: Semigroup, EquatableInContext {
+public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext {
+	public typealias Wrapped = (A) -> A
 	public typealias Context = A
+
+	public let unwrap: (A) -> A
 	
-	public let call: (A) -> A
-	
-	public init(_ call: @escaping (A) -> A) {
-		self.call = call
+	public init(_ value: @escaping (A) -> A) {
+		self.unwrap = value
 	}
-	
+
+	public var call: (A) -> A {
+		return unwrap
+	}
+
 	public static func <> (left: Endofunction, right: Endofunction) -> Endofunction {
 		return Endofunction.init { right.call(left.call($0)) }
 	}
@@ -172,15 +187,20 @@ public struct Endofunction<A: Equatable>: Semigroup, EquatableInContext {
 
 //: ------
 
-public struct FunctionS<A, S: Semigroup & Equatable>: Semigroup, EquatableInContext {
+public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, EquatableInContext {
+	public typealias Wrapped = (A) -> S
 	public typealias Context = A
-	
-	public let call: (A) -> S
-	
-	public init(_ call: @escaping (A) -> S) {
-		self.call = call
+
+	public let unwrap: (A) -> S
+
+	public init(_ value: @escaping (A) -> S) {
+		self.unwrap = value
 	}
-	
+
+	public var call: (A) -> S {
+		return unwrap
+	}
+
 	public static func <> (left: FunctionS, right: FunctionS) -> FunctionS {
 		return FunctionS.init { left.call($0) <> right.call($0) }
 	}

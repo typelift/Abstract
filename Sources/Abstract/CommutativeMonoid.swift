@@ -18,7 +18,7 @@ extension Law where Element: CommutativeMonoid {
 
 extension LawInContext where Element: CommutativeMonoid {
 	public static func isCommutative(_ a: Element, _ b: Element) -> (Element.Context) -> Bool {
-		return { context in ((a <> b) == (b <> a))(context) }
+		return (a <> b) == (b <> a)
 	}
 }
 
@@ -50,15 +50,20 @@ extension Or: CommutativeMonoid {}
 
 //: ------
 
-public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: CommutativeMonoid, EquatableInContext {
+public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: Wrapper, CommutativeMonoid, EquatableInContext {
+	public typealias Wrapped = (A) -> M
 	public typealias Context = A
+
+	public let unwrap: (A) -> M
 	
-	public let call: (A) -> M
-	
-	public init(_ call: @escaping (A) -> M) {
-		self.call = call
+	public init(_ value: @escaping (A) -> M) {
+		self.unwrap = value
 	}
-	
+
+	public var call: (A) -> M {
+		return unwrap
+	}
+
 	public static func <> (left: FunctionCM, right: FunctionCM) -> FunctionCM {
 		return FunctionCM.init { left.call($0) <> right.call($0) }
 	}

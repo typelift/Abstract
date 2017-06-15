@@ -18,7 +18,7 @@ extension Law where Element: BoundedSemilattice {
 
 extension LawInContext where Element: BoundedSemilattice {
 	public static func isIdempotent(_ a: Element, _ b: Element) -> (Element.Context) -> Bool {
-		return { context in ((a <> b <> b) == (a <> b))(context) }
+		return (a <> b <> b) == (a <> b)
 	}
 }
 
@@ -42,15 +42,20 @@ extension Or: BoundedSemilattice {}
 
 //: ------
 
-public struct FunctionBS<A, M: BoundedSemilattice & Equatable>: BoundedSemilattice, EquatableInContext {
+public struct FunctionBS<A, M: BoundedSemilattice & Equatable>: Wrapper, BoundedSemilattice, EquatableInContext {
+	public typealias Wrapped = (A) -> M
 	public typealias Context = A
+
+	public let unwrap: (A) -> M
 	
-	public let call: (A) -> M
-	
-	public init(_ call: @escaping (A) -> M) {
-		self.call = call
+	public init(_ value: @escaping (A) -> M) {
+		self.unwrap = value
 	}
-	
+
+	public var call: (A) -> M {
+		return unwrap
+	}
+
 	public static func <> (left: FunctionBS, right: FunctionBS) -> FunctionBS {
 		return FunctionBS.init { left.call($0) <> right.call($0) }
 	}

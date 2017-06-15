@@ -16,13 +16,13 @@ public protocol Monoid: Semigroup {
 
 extension Law where Element: Monoid {
 	public static func isNeutralToEmpty(_ a: Element) -> Bool {
-		return (a <> Element.empty) == a && (Element.empty <> a) == a
+		return (a <> .empty) == a && (.empty <> a) == a
 	}
 }
 
 extension LawInContext where Element: Monoid {
 	public static func isNeutralToEmpty(_ a: Element) -> (Element.Context) -> Bool {
-		return { context in ((a <> Element.empty) == a)(context) && ((Element.empty <> a) == a)(context) }
+		return { ((a <> .empty) == a)($0) && ((.empty <> a) == a)($0) }
 	}
 }
 
@@ -92,15 +92,20 @@ extension Endofunction: Monoid {
 
 //: ------
 
-public struct FunctionM<A, M: Monoid & Equatable>: Monoid, EquatableInContext {
+public struct FunctionM<A, M: Monoid & Equatable>: Wrapper,  Monoid, EquatableInContext {
+	public typealias Wrapped = (A) -> M
 	public typealias Context = A
+
+	public let unwrap: (A) -> M
 	
-	public let call: (A) -> M
-	
-	public init(_ call: @escaping (A) -> M) {
-		self.call = call
+	public init(_ value: @escaping (A) -> M) {
+		self.unwrap = value
 	}
-	
+
+	public var call: (A) -> M {
+		return unwrap
+	}
+
 	public static func <> (left: FunctionM, right: FunctionM) -> FunctionM {
 		return FunctionM.init { left.call($0) <> right.call($0) }
 	}

@@ -15,11 +15,11 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	}
 	
 	static func <> (left: TestStructure, right: TestStructure) -> TestStructure {
-		return TestStructure((left.get <> right.get).value)
+		return TestStructure((left.get <> right.get).unwrap)
 	}
 	
 	static var empty: TestStructure {
-		return TestStructure(Max<Int>.empty.value)
+		return TestStructure(Max<Int>.empty.unwrap)
 	}
 	
 	static func == (left: TestStructure, right: TestStructure) -> Bool {
@@ -27,23 +27,60 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	}
 }
 
-struct TestProduct: CoArbitrary, Hashable, Arbitrary {
-	let value: (Int,Int)
+struct TestSemiring: Arbitrary, Semiring, Equatable {
+	typealias Additive = Bool.Additive
+	typealias Multiplicative = Bool.Multiplicative
+
+	let get: Bool
+
+	init(_ value: Bool) {
+		self.get = value
+	}
+
+	static var arbitrary: Gen<TestSemiring> {
+		return Bool.arbitrary.map(TestSemiring.init)
+	}
+
+	static func <>+(left: TestSemiring, right: TestSemiring) -> TestSemiring {
+		return TestSemiring(left.get <>+ right.get)
+	}
+
+	static func <>*(left: TestSemiring, right: TestSemiring) -> TestSemiring {
+		return TestSemiring(left.get <>* right.get)
+	}
+
+	static var zero: TestSemiring {
+		return TestSemiring(Bool.zero)
+	}
+
+	static var one: TestSemiring {
+		return TestSemiring(Bool.one)
+	}
+
+	static func == (left: TestSemiring, right: TestSemiring) -> Bool {
+		return left.get == right.get
+	}
+}
+
+struct TestProduct: CoArbitrary, Hashable, Arbitrary, Wrapper {
+	typealias Wrapped = (Int,Int)
+
+	let unwrap: (Int,Int)
 	
 	init(_ value: (Int,Int)) {
-		self.value = value
+		self.unwrap = value
 	}
 	
 	static func coarbitrary<C>(_ x: TestProduct) -> ((Gen<C>) -> Gen<C>) {
-		return { Int.coarbitrary(x.value.1)(Int.coarbitrary(x.value.0)($0)) }
+		return { Int.coarbitrary(x.unwrap.1)(Int.coarbitrary(x.unwrap.0)($0)) }
 	}
 	
 	static func == (left: TestProduct, right: TestProduct) -> Bool {
-		return left.value == right.value
+		return left.unwrap == right.unwrap
 	}
 	
 	var hashValue: Int {
-		return "\(value.0),\(value.1)".hashValue
+		return "\(unwrap.0),\(unwrap.1)".hashValue
 	}
 	
 	static var arbitrary: Gen<TestProduct> {
@@ -188,3 +225,14 @@ struct FunctionBSOf<A: CoArbitrary & Hashable, M: Arbitrary & BoundedSemilattice
 	}
 }
 
+struct FunctionSROf<A: CoArbitrary & Hashable, SR: Arbitrary & Semiring & Equatable>: Arbitrary where SR.Additive: Equatable, SR.Multiplicative: Equatable {
+	let get: FunctionSR<A,SR>
+
+	init(_ value: @escaping (A) -> SR) {
+		self.get = FunctionSR.init(value)
+	}
+
+	static var arbitrary: Gen<FunctionSROf<A,SR>> {
+		return ArrowOf<A,SR>.arbitrary.map { $0.getArrow }.map(FunctionSROf<A,SR>.init)
+	}
+}
