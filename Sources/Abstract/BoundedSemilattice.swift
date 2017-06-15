@@ -46,16 +46,16 @@ public struct FunctionBS<A, M: BoundedSemilattice & Equatable>: Wrapper, Bounded
 	public typealias Wrapped = (A) -> M
 	public typealias Context = A
 
-	public var unwrap: (A) -> M {
-		return call
+	public let unwrap: (A) -> M
+	
+	public init(_ value: @escaping (A) -> M) {
+		self.unwrap = value
 	}
 
-	public let call: (A) -> M
-	
-	public init(_ call: @escaping (A) -> M) {
-		self.call = call
+	public var call: (A) -> M {
+		return unwrap
 	}
-	
+
 	public static func <> (left: FunctionBS, right: FunctionBS) -> FunctionBS {
 		return FunctionBS.init { left.call($0) <> right.call($0) }
 	}

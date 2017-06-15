@@ -166,16 +166,16 @@ public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext
 	public typealias Wrapped = (A) -> A
 	public typealias Context = A
 
-	public var unwrap: (A) -> A {
-		return call
+	public let unwrap: (A) -> A
+	
+	public init(_ value: @escaping (A) -> A) {
+		self.unwrap = value
 	}
 
-	public let call: (A) -> A
-	
-	public init(_ call: @escaping (A) -> A) {
-		self.call = call
+	public var call: (A) -> A {
+		return unwrap
 	}
-	
+
 	public static func <> (left: Endofunction, right: Endofunction) -> Endofunction {
 		return Endofunction.init { right.call(left.call($0)) }
 	}
@@ -191,16 +191,16 @@ public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, Equata
 	public typealias Wrapped = (A) -> S
 	public typealias Context = A
 
-	public var unwrap: (A) -> S {
-		return call
+	public let unwrap: (A) -> S
+
+	public init(_ value: @escaping (A) -> S) {
+		self.unwrap = value
 	}
 
-	public let call: (A) -> S
-
-	public init(_ call: @escaping (A) -> S) {
-		self.call = call
+	public var call: (A) -> S {
+		return unwrap
 	}
-	
+
 	public static func <> (left: FunctionS, right: FunctionS) -> FunctionS {
 		return FunctionS.init { left.call($0) <> right.call($0) }
 	}

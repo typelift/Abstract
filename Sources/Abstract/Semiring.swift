@@ -89,15 +89,20 @@ extension Bool: Semiring {
 
 //: ------
 
-public struct FunctionSR<A,SR: Semiring & Equatable>: Semiring, EquatableInContext where SR.Additive: Equatable, SR.Multiplicative: Equatable {
+public struct FunctionSR<A,SR: Semiring & Equatable>: Wrapper, Semiring, EquatableInContext where SR.Additive: Equatable, SR.Multiplicative: Equatable {
+	public typealias Wrapped = (A) -> SR
 	public typealias Additive = FunctionCM<A,SR.Additive>
 	public typealias Multiplicative = FunctionM<A,SR.Multiplicative>
 	public typealias Context = A
 
-	public let call: (A) -> SR
+	public let unwrap: (A) -> SR
 
-	public init(_ call: @escaping (A) -> SR) {
-		self.call = call
+	public init(_ value: @escaping (A) -> SR) {
+		self.unwrap = value
+	}
+
+	public var call: (A) -> SR {
+		return unwrap
 	}
 
 	public static func <>+ (left: FunctionSR, right: FunctionSR) -> FunctionSR {
