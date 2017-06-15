@@ -12,7 +12,7 @@ public typealias PredicateAnd<A> = FunctionBS<A,And>
 
 extension Sequence {
 	public func filtered(by predicate: PredicateAnd<Iterator.Element>) -> [Iterator.Element] {
-		return filter { predicate.call($0).value }
+		return filter { predicate.call($0).unwrap }
 	}
 }
 
@@ -20,7 +20,7 @@ public typealias PredicateOr<A> = FunctionBS<A,Or>
 
 extension Sequence {
 	public func filtered(by predicate: PredicateOr<Iterator.Element>) -> [Iterator.Element] {
-		return filter { predicate.call($0).value }
+		return filter { predicate.call($0).unwrap }
 	}
 }
 

@@ -54,7 +54,7 @@ public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: Wrapper, Commutat
 	public typealias Wrapped = (A) -> M
 	public typealias Context = A
 
-	public var value: (A) -> M {
+	public var unwrap: (A) -> M {
 		return call
 	}
 

@@ -96,7 +96,7 @@ public struct FunctionM<A, M: Monoid & Equatable>: Wrapper,  Monoid, EquatableIn
 	public typealias Wrapped = (A) -> M
 	public typealias Context = A
 
-	public var value: (A) -> M {
+	public var unwrap: (A) -> M {
 		return call
 	}
 

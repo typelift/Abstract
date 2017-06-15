@@ -60,21 +60,21 @@ Interestingly, if for type `A` both `Additive` and `Multiplicative` are `Wrapper
 
 extension Semiring where Additive: Wrapper, Additive.Wrapped == Self {
 	public static func <>+(left: Self, right: Self) -> Self {
-		return (Additive(left) <> Additive(right)).value
+		return (Additive(left) <> Additive(right)).unwrap
 	}
 
 	public static var zero: Self {
-		return Additive.empty.value
+		return Additive.empty.unwrap
 	}
 }
 
 extension Semiring where Multiplicative: Wrapper, Multiplicative.Wrapped == Self {
 	public static func <>*(left: Self, right: Self) -> Self {
-		return (Multiplicative(left) <> Multiplicative(right)).value
+		return (Multiplicative(left) <> Multiplicative(right)).unwrap
 	}
 
 	public static var one: Self {
-		return Multiplicative.empty.value
+		return Multiplicative.empty.unwrap
 	}
 }
 

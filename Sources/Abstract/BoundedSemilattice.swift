@@ -46,7 +46,7 @@ public struct FunctionBS<A, M: BoundedSemilattice & Equatable>: Wrapper, Bounded
 	public typealias Wrapped = (A) -> M
 	public typealias Context = A
 
-	public var value: (A) -> M {
+	public var unwrap: (A) -> M {
 		return call
 	}
 
