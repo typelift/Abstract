@@ -7,7 +7,7 @@ The requirement is that, by constructing a `Wrapper` with a certain `Wrapped`, w
 
 Wrapped(object).unwrap == object
 
-In a sense it means that the function `Wrapper.init(_:)` is isomorphic: from an instance of `Wrapper` I can always get a `Wrapped` and viceversa.
+In a sense it means that the values `Wrapper` and `Wrapped` are *isomorphic*: from an instance of `Wrapper` I can always get a `Wrapped`, then go back to the exact same `Wrapper`, and viceversa. This also means that the functions `Wrapper.init(_:)` and `Wrapper.unwrap` are the inverse of each other, thus forming an *isomorphism*.
 */
 
 public protocol Wrapper {
