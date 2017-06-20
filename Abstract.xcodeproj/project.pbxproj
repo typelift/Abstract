@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09F9FD0F1EEE5CEC002342E5 /* Morphisms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */; };
+		09F9FD0F1EEE5CEC002342E5 /* Homomorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F9FD0E1EEE5CE8002342E5 /* Homomorphism.swift */; };
 		3853BF9E1EF11D7400791099 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3853BF9D1EF11D7400791099 /* Wrapper.swift */; };
 		3853BFA01EF1294400791099 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3853BF9F1EF1294400791099 /* Semiring.swift */; };
 		38943A6C1EEC287000F587AD /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38943A6B1EEC287000F587AD /* SwiftCheck.framework */; };
@@ -16,6 +16,7 @@
 		38943A751EEC2D0400F587AD /* ArbitraryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */; };
 		38943A771EEC31DA00F587AD /* Adapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A761EEC31DA00F587AD /* Adapters.swift */; };
 		38943A791EEC4EFF00F587AD /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A781EEC4EFF00F587AD /* Monoid.swift */; };
+		38ABEB0C1EF8F71A0080DEF3 /* Isomorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38ABEB0B1EF8F71A0080DEF3 /* Isomorphism.swift */; };
 		38B83C921EED6E33007AB12A /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C911EED6E33007AB12A /* Predicate.swift */; };
 		38B83C941EED72F3007AB12A /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C931EED72F3007AB12A /* Comparison.swift */; };
 		38B83C981EED83EF007AB12A /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C971EED83EF007AB12A /* Collections.swift */; };
@@ -52,7 +53,7 @@
 
 /* Begin PBXFileReference section */
 		09F9FD0C1EEE0FC2002342E5 /* Operadics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Operadics.framework; path = Carthage/Build/iOS/Operadics.framework; sourceTree = "<group>"; };
-		09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morphisms.swift; sourceTree = "<group>"; };
+		09F9FD0E1EEE5CE8002342E5 /* Homomorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homomorphism.swift; sourceTree = "<group>"; };
 		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		3853BF9F1EF1294400791099 /* Semiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		38943A681EEC25AE00F587AD /* AbstractTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTests.swift; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArbitraryDefinitions.swift; sourceTree = "<group>"; };
 		38943A761EEC31DA00F587AD /* Adapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adapters.swift; sourceTree = "<group>"; };
 		38943A781EEC4EFF00F587AD /* Monoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
+		38ABEB0B1EF8F71A0080DEF3 /* Isomorphism.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Isomorphism.swift; sourceTree = "<group>"; };
 		38B83C911EED6E33007AB12A /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		38B83C931EED72F3007AB12A /* Comparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparison.swift; sourceTree = "<group>"; };
 		38B83C971EED83EF007AB12A /* Collections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
@@ -104,6 +106,8 @@
 				38943A761EEC31DA00F587AD /* Adapters.swift */,
 				38B83C9B1EED8A15007AB12A /* BoundedSemilattice.swift */,
 				38B83C991EED85C6007AB12A /* CommutativeMonoid.swift */,
+				09F9FD0E1EEE5CE8002342E5 /* Homomorphism.swift */,
+				38ABEB0B1EF8F71A0080DEF3 /* Isomorphism.swift */,
 				38D737EB1EE9B95C000BAF0C /* Law.swift */,
 				38D737BD1EE9A711000BAF0C /* Magma.swift */,
 				38943A781EEC4EFF00F587AD /* Monoid.swift */,
@@ -129,7 +133,6 @@
 			children = (
 				38B83C971EED83EF007AB12A /* Collections.swift */,
 				38B83C931EED72F3007AB12A /* Comparison.swift */,
-				09F9FD0E1EEE5CE8002342E5 /* Morphisms.swift */,
 				38B83C911EED6E33007AB12A /* Predicate.swift */,
 			);
 			path = Utilities;
@@ -300,10 +303,11 @@
 				38B83C921EED6E33007AB12A /* Predicate.swift in Sources */,
 				38B83C941EED72F3007AB12A /* Comparison.swift in Sources */,
 				38943A771EEC31DA00F587AD /* Adapters.swift in Sources */,
+				38ABEB0C1EF8F71A0080DEF3 /* Isomorphism.swift in Sources */,
 				38D737E21EE9A7D8000BAF0C /* Magma.swift in Sources */,
 				3853BF9E1EF11D7400791099 /* Wrapper.swift in Sources */,
 				38B83C9C1EED8A15007AB12A /* BoundedSemilattice.swift in Sources */,
-				09F9FD0F1EEE5CEC002342E5 /* Morphisms.swift in Sources */,
+				09F9FD0F1EEE5CEC002342E5 /* Homomorphism.swift in Sources */,
 				38B83C981EED83EF007AB12A /* Collections.swift in Sources */,
 				38D737EA1EE9B86F000BAF0C /* Semigroup.swift in Sources */,
 				38B83C9A1EED85C6007AB12A /* CommutativeMonoid.swift in Sources */,

@@ -1,15 +1,7 @@
-/*:
-# Morphisms
-
-Here we have some functions that are considered "special", in the sense that other than the simple function definition and implementation, we give additional laws (still verified in `AbstractTests.swift`.
-*/
-
 import Operadics
 
-//: ------
-
 /*:
-# Homomorphisms
+# Homomorphism
 
 Homomorphisms are structure-preserving maps between two algebraic structures of the same type: the word comes from ancient greek and means that it "preserves shape".
 
@@ -36,7 +28,7 @@ extension Law where Element: Magma {
 
 extension LawInContext where Element: Magma {
 	public static func isHomomorphism(_ transform: @escaping (Element) -> Element, _ a: Element, _ b: Element) -> (Element.Context) -> Bool {
-		return { context in (transform(a <> b) == (transform(a) <> transform(b)))(context) }
+		return transform(a <> b) == (transform(a) <> transform(b))
 	}
 }
 

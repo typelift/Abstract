@@ -4,48 +4,48 @@ import SwiftCheck
 
 final class AbstractTests: XCTestCase {
 	func testWrapper() {
-		property("Add is a Wrapper") <- forAll { (a: Int) in
-			Law<Add<Int>>.isIsomorphic(a)
+		property("Add is a well-behaved Wrapper") <- forAll { (a: AddOf<Int>) in
+			Law<Add<Int>>.isWellBehavedWrapper(a.get)
 		}
 
-		property("Multiply is a Wrapper") <- forAll { (a: Int) in
-			Law<Multiply<Int>>.isIsomorphic(a)
+		property("Multiply is a well-behaved Wrapper") <- forAll { (a: MultiplyOf<Int>) in
+			Law<Multiply<Int>>.isWellBehavedWrapper(a.get)
 		}
 
-		property("Max is a Wrapper") <- forAll { (a: Int) in
-			Law<Max<Int>>.isIsomorphic(a)
+		property("Max is a well-behaved Wrapper") <- forAll { (a: MaxOf<Int>) in
+			Law<Max<Int>>.isWellBehavedWrapper(a.get)
 		}
 
-		property("Min is a Wrapper") <- forAll { (a: Int) in
-			Law<Min<Int>>.isIsomorphic(a)
+		property("Min is a well-behaved Wrapper") <- forAll { (a: MinOf<Int>) in
+			Law<Min<Int>>.isWellBehavedWrapper(a.get)
 		}
 
-		property("And is a Wrapper") <- forAll { (a: Bool) in
-			Law<And>.isIsomorphic(a)
+		property("And is a well-behaved Wrapper") <- forAll { (a: And) in
+			Law<And>.isWellBehavedWrapper(a)
 		}
 
-		property("Or is a Wrapper") <- forAll { (a: Bool) in
-			Law<Or>.isIsomorphic(a)
+		property("Or is a well-behaved Wrapper") <- forAll { (a: Or) in
+			Law<Or>.isWellBehavedWrapper(a)
 		}
 
-		property("Endofunction is a Wrapper") <- forAll { (a: ArrowOf<Int,Int>, context: Int) in
-			LawInContext<Endofunction<Int>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
+			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a.get)(context)
 		}
 
-		property("FunctionS is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionS<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		property("FunctionS is a well-behaved Wrapper") <- forAll { (a: FunctionSOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
 		}
 
-		property("FunctionM is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionM<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		property("FunctionM is a well-behaved Wrapper") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
 		}
 
-		property("FunctionCM is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionCM<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		property("FunctionCM is a well-behaved Wrapper") <- forAll { (a: FunctionCMOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionCM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
 		}
 
-		property("FunctionBS is a Wrapper") <- forAll { (a: ArrowOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionBS<Int,TestStructure>>.isIsomorphic(a.getArrow, isEqual: { v1, v2 in { v1($0) == v2($0) }})(context)
+		property("FunctionBS is a well-behaved Wrapper") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionBS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 

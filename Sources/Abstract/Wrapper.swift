@@ -3,11 +3,11 @@
 
 And abstract definition for a type that wraps another, and guarantees both initialization with and access to the wrapped value.
 
-The requirement is that, by constructing a `Wrapper` with a certain `Wrapped`, we can retrieve exactly the same value, thus:
+For a wrapper to be *well-behaved* the requirement is that, by retrieving the `Wrapped` from a `Wrapper`, then constructing the `Wrapper` again with the retrieved value, we end up building the same `Wrapper` as before:
 
-Wrapped(object).unwrap == object
+A.init(a.unwrap) == a
 
-In a sense it means that the values `Wrapper` and `Wrapped` are *isomorphic*: from an instance of `Wrapper` I can always get a `Wrapped`, then go back to the exact same `Wrapper`, and viceversa. This also means that the functions `Wrapper.init(_:)` and `Wrapper.unwrap` are the inverse of each other, thus forming an *isomorphism*.
+This means that `Wrapper.init` and `Wrapper.unwrap` must be inverse to each other, thus forming an *isomorphism*. This property is verified in `AbstractTests.swift` for all defined wrappers.
 */
 
 public protocol Wrapper {
@@ -18,14 +18,14 @@ public protocol Wrapper {
 	var unwrap: Wrapped { get }
 }
 
-extension Law where Element: Wrapper, Element.Wrapped: Equatable {
-	public static func isIsomorphic(_ a: Element.Wrapped) -> Bool {
-		return Element.init(a).unwrap == a
+extension Law where Element: Wrapper {
+	public static func isWellBehavedWrapper(_ a: Element) -> Bool {
+		return Law.isIsomorphism({ $0.unwrap }, Element.init, a)
 	}
 }
 
 extension LawInContext where Element: Wrapper {
-	public static func isIsomorphic(_ a: Element.Wrapped, isEqual: (Element.Wrapped,Element.Wrapped) -> (Element.Context) -> Bool) -> (Element.Context) -> Bool {
-		return isEqual(Element.init(a).unwrap,a)
+	public static func isWellBehavedWrapper(_ a: Element) -> (Element.Context) -> Bool {
+		return LawInContext.isIsomorphism({ $0.unwrap }, Element.init, a)
 	}
 }
