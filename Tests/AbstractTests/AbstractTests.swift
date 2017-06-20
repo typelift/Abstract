@@ -193,6 +193,14 @@ final class AbstractTests: XCTestCase {
 		property("FunctionSR is a Semiring: Annihilation") <- forAll { (a: FunctionSROf<Int,TestSemiring>, context: Int) in
 			LawInContext<FunctionSR<Int,TestSemiring>>.zeroAnnihiliatesTheMultiplicative(a.get)(context)
 		}
+        
+        property("Tropical is a Semiring: Distributive") <- forAll { (a: TropicalOf<Int>, b: TropicalOf<Int>, c: TropicalOf<Int>) in
+            Law<Tropical<Int>>.multiplicationIsDistributiveOverAddition(a.get, b.get, c.get)
+        }
+        
+        property("Tropical is a Semiring: Annihilation") <- forAll { (a: TropicalOf<Int>) in
+            Law<Tropical<Int>>.zeroAnnihiliatesTheMultiplicative(a.get)
+        }
 	}
 
 	func testHomomorphism() {

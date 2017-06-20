@@ -125,3 +125,45 @@ public struct FunctionSR<A,SR: Semiring & Equatable>: Wrapper, Semiring, Equatab
 		return { left.call($0) == right.call($0) }
 	}
 }
+
+//:------
+
+/*:
+A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring is called tropical to honor the Brazillian mathematician, Imre Simon, who founded tropical mathematics.
+ */
+
+public struct Tropical<A: ComparableToTop & Summable & Equatable>: Wrapper, Semiring, Equatable {
+    public typealias Wrapped = A
+    public typealias Additive = Min<A>
+    public typealias Multiplicative = Add<A>
+    
+    public let unwrap: A
+    
+    public init(_ value: A) {
+        self.unwrap = value
+    }
+    
+    public static func <>+(left: Tropical, right: Tropical) -> Tropical {
+        return Tropical(
+            (Additive(left.unwrap) <> Additive(right.unwrap)).unwrap
+        )
+    }
+    
+    public static func <>*(left: Tropical, right: Tropical) -> Tropical {
+        return Tropical(
+            (Multiplicative(left.unwrap) <> Multiplicative(right.unwrap)).unwrap
+        )
+    }
+
+    public static var zero: Tropical {
+        return Tropical(Additive.empty.unwrap)
+    }
+    
+    public static var one: Tropical {
+        return Tropical(Multiplicative.empty.unwrap)
+    }
+    
+    public static func == (left: Tropical, right: Tropical) -> Bool {
+        return left.unwrap == right.unwrap
+    }
+}

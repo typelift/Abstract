@@ -236,3 +236,15 @@ struct FunctionSROf<A: CoArbitrary & Hashable, SR: Arbitrary & Semiring & Equata
 		return ArrowOf<A,SR>.arbitrary.map { $0.getArrow }.map(FunctionSROf<A,SR>.init)
 	}
 }
+
+struct TropicalOf<A: Arbitrary & ComparableToTop & Summable>: Arbitrary {
+    let get: Tropical<A>
+    
+    init(_ value: A) {
+        self.get = Tropical(value)
+    }
+    
+    public static var arbitrary: Gen<TropicalOf<A>> {
+        return A.arbitrary.map(TropicalOf.init)
+    }
+}
