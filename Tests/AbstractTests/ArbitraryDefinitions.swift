@@ -88,7 +88,7 @@ struct TestProduct: CoArbitrary, Hashable, Arbitrary, Wrapper {
 	}
 }
 
-struct AddOf<A: Arbitrary & Summable>: Arbitrary {
+struct AddOf<A: Arbitrary & Addable>: Arbitrary {
 	let get: Add<A>
 	
 	init(_ value: A) {
@@ -237,7 +237,7 @@ struct FunctionSROf<A: CoArbitrary & Hashable, SR: Arbitrary & Semiring & Equata
 	}
 }
 
-struct TropicalOf<A: Arbitrary & ComparableToTop & Summable>: Arbitrary {
+struct TropicalOf<A: Arbitrary & ComparableToTop & Addable>: Arbitrary {
     let get: Tropical<A>
     
     init(_ value: A) {
