@@ -158,7 +158,7 @@ public struct FunctionSR<A,SR: Semiring & Equatable>: Wrapper, Semiring, Equatab
 A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring is called tropical to honor the Brazillian mathematician, Imre Simon, who founded tropical mathematics.
  */
 
-public struct Tropical<A: ComparableToTop & Summable & Equatable>: Wrapper, Semiring, Equatable {
+public struct Tropical<A: ComparableToTop & Addable & Equatable>: Wrapper, Semiring, Equatable {
     public typealias Wrapped = A
     public typealias Additive = Min<A>
     public typealias Multiplicative = Add<A>

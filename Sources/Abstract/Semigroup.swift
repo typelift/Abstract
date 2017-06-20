@@ -32,7 +32,7 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
-public struct Add<A: Summable>: Wrapper, Semigroup, Equatable {
+public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
 	public let unwrap: A
@@ -42,11 +42,7 @@ public struct Add<A: Summable>: Wrapper, Semigroup, Equatable {
 	}
 	
 	public static func <> (left: Add, right: Add) -> Add {
-		return Add(left.unwrap + right.unwrap)
-	}
-	
-	public static func == (left: Add, right: Add) -> Bool {
-		return left.unwrap == right.unwrap
+		return Add.init(A.add(left.unwrap,right.unwrap))
 	}
 }
 
@@ -62,11 +58,7 @@ public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 	}
 	
 	public static func <> (left: Multiply, right: Multiply) -> Multiply {
-		return Multiply(left.unwrap * right.unwrap)
-	}
-	
-	public static func == (left: Multiply, right: Multiply) -> Bool {
-		return left.unwrap == right.unwrap
+		return Multiply(A.multiply(left.unwrap,right.unwrap))
 	}
 }
 
@@ -84,10 +76,6 @@ public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 	public static func <> (left: Max, right: Max) -> Max {
 		return Max(max(left.unwrap, right.unwrap))
 	}
-	
-	public static func == (left: Max, right: Max) -> Bool {
-		return left.unwrap == right.unwrap
-	}
 }
 
 //: ------
@@ -103,10 +91,6 @@ public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
 	
 	public static func <> (left: Min, right: Min) -> Min {
 		return Min(min(left.unwrap, right.unwrap))
-	}
-	
-	public static func == (left: Min, right: Min) -> Bool {
-		return left.unwrap == right.unwrap
 	}
 }
 
@@ -129,10 +113,6 @@ public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 	public static func <> (left: And, right: And) -> And {
 		return And(left.unwrap && right.unwrap)
 	}
-
-	public static func == (left: And, right: And) -> Bool {
-		return left.unwrap == right.unwrap
-	}
 }
 
 //: ------
@@ -153,10 +133,6 @@ public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 	public static func <> (left: Or, right: Or) -> Or {
 		return Or(left.unwrap || right.unwrap)
-	}
-
-	public static func == (left: Or, right: Or) -> Bool {
-		return left.unwrap == right.unwrap
 	}
 }
 
@@ -181,7 +157,7 @@ public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext
 	}
 	
 	public static func == (left: Endofunction, right: Endofunction) -> (Context) -> Bool {
-		return { context in left.call(context) == right.call(context) }
+		return { left.call($0) == right.call($0) }
 	}
 }
 
@@ -206,7 +182,7 @@ public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, Equata
 	}
 	
 	public static func == (left: FunctionS, right: FunctionS) -> (Context) -> Bool {
-		return { context in left.call(context) == right.call(context) }
+		return { left.call($0) == right.call($0) }
 	}
 }
 
