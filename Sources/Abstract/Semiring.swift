@@ -60,7 +60,7 @@ Interestingly, if for type `A` both `Additive` and `Multiplicative` are `Wrapper
 
 extension Semiring where Additive: Wrapper, Additive.Wrapped == Self {
 	public static func <>+(left: Self, right: Self) -> Self {
-		return (Additive(left) <> Additive(right)).unwrap
+		return (Additive.init(left) <> Additive.init(right)).unwrap
 	}
 
 	public static var zero: Self {
@@ -70,7 +70,7 @@ extension Semiring where Additive: Wrapper, Additive.Wrapped == Self {
 
 extension Semiring where Multiplicative: Wrapper, Multiplicative.Wrapped == Self {
 	public static func <>*(left: Self, right: Self) -> Self {
-		return (Multiplicative(left) <> Multiplicative(right)).unwrap
+		return (Multiplicative.init(left) <> Multiplicative.init(right)).unwrap
 	}
 
 	public static var one: Self {
@@ -79,8 +79,34 @@ extension Semiring where Multiplicative: Wrapper, Multiplicative.Wrapped == Self
 }
 
 /*:
-Now we can define some semirings just by defining the associated types:
+If instead the semiring is a wrapper of `A`, and both its additive and multiplicative are wrappers of `A`, we can still derive an abstract implementation for the functions:
 */
+
+extension Semiring where Self: Wrapper, Additive: Wrapper, Self.Wrapped == Additive.Wrapped {
+	public static func <>+(left: Self, right: Self) -> Self {
+		return Self.init((Additive.init(left.unwrap) <> Additive.init(right.unwrap)).unwrap)
+	}
+
+	public static var zero: Self {
+		return Self.init(Additive.empty.unwrap)
+	}
+}
+
+extension Semiring where Self: Wrapper, Multiplicative: Wrapper, Self.Wrapped == Multiplicative.Wrapped {
+	public static func <>*(left: Self, right: Self) -> Self {
+		return Self.init((Multiplicative.init(left.unwrap) <> Multiplicative.init(right.unwrap)).unwrap)
+	}
+
+	public static var one: Self {
+		return Self.init(Multiplicative.empty.unwrap)
+	}
+}
+
+/*:
+Now we can define some semirings just by defining the associated types.
+*/
+
+//: ------
 
 extension Bool: Semiring {
 	public typealias Additive = And
@@ -141,29 +167,5 @@ public struct Tropical<A: ComparableToTop & Summable & Equatable>: Wrapper, Semi
     
     public init(_ value: A) {
         self.unwrap = value
-    }
-    
-    public static func <>+(left: Tropical, right: Tropical) -> Tropical {
-        return Tropical(
-            (Additive(left.unwrap) <> Additive(right.unwrap)).unwrap
-        )
-    }
-    
-    public static func <>*(left: Tropical, right: Tropical) -> Tropical {
-        return Tropical(
-            (Multiplicative(left.unwrap) <> Multiplicative(right.unwrap)).unwrap
-        )
-    }
-
-    public static var zero: Tropical {
-        return Tropical(Additive.empty.unwrap)
-    }
-    
-    public static var one: Tropical {
-        return Tropical(Multiplicative.empty.unwrap)
-    }
-    
-    public static func == (left: Tropical, right: Tropical) -> Bool {
-        return left.unwrap == right.unwrap
     }
 }

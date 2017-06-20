@@ -29,3 +29,13 @@ extension LawInContext where Element: Wrapper {
 		return LawInContext.isIsomorphism({ $0.unwrap }, Element.init, a)
 	}
 }
+
+/*:
+If the `Wrapped` element is `Equatable`, we can define the static `==` function for a `Wrapper` (unfortunately, the `Equatable` conformance must be declared explicitly for every wrapper).
+*/
+
+extension Wrapper where Wrapped: Equatable {
+	public static func == (left: Self, right: Self) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+}
