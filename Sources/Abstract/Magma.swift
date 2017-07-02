@@ -12,7 +12,9 @@ Technically, to prove this, we could test the operation with a large number of r
 So let's keep it on word (for now).
 */
 
-import Operadics
+#if !XCODE_BUILD
+    import Operadics
+#endif
 
 public protocol Magma {
 	static func <> (left: Self, right: Self) -> Self

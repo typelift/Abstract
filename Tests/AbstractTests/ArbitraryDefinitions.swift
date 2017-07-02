@@ -1,6 +1,8 @@
 import XCTest
 @testable import Abstract
-import Operadics
+#if !XCODE_BUILD
+    import Operadics
+#endif
 import SwiftCheck
 
 struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {

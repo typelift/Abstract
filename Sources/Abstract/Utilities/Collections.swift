@@ -4,7 +4,9 @@
 Becuase we have a way to generically "compose" things, we can derive a bunch of interesting operations on collections of such things.
 */
 
-import Operadics
+#if !XCODE_BUILD
+    import Operadics
+#endif
 
 extension Sequence where Iterator.Element: Magma {
 	public func concatenatedWith(initial: Iterator.Element) -> Iterator.Element {
