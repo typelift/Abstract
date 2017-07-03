@@ -6,7 +6,9 @@ A Semigroup is a Magma where the composition operation is associative, which mea
 To put it simply: (a <> b) <> c = a <> (b <> c)
 */
 
-import Operadics
+#if !XCODE_BUILD
+    import Operadics
+#endif
 
 public protocol Semigroup: Magma {}
 

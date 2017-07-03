@@ -6,8 +6,10 @@ A Bounded Semilattice is a Commutative Monoid in which the operation is idempote
 a <> b <> b = a <> b
 */
 
-import Operadics
-
+#if !XCODE_BUILD
+    import Operadics
+#endif
+    
 public protocol BoundedSemilattice: CommutativeMonoid {}
 
 extension Law where Element: BoundedSemilattice {

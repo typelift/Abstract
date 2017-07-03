@@ -13,8 +13,9 @@ In addition to the basic requirements for the underlying types (Commutative Mono
 - the `zero` element must "annihilate" an instance if applied with the multiplication operation, both left and right:
 	- zero <>* a = a <>* zero = zero
 */
-
-import Operadics
+#if !XCODE_BUILD
+    import Operadics
+#endif
 
 infix operator <>+ : AdditionPrecedence
 infix operator <>* : MultiplicationPrecedence

@@ -6,8 +6,10 @@ A Commutative Monoid is a Monoid in which the operation is commutative, thus:
 a <> b = b <> a
 */
 
-import Operadics
-
+#if !XCODE_BUILD
+    import Operadics
+#endif
+    
 public protocol CommutativeMonoid: Monoid {}
 
 extension Law where Element: CommutativeMonoid {

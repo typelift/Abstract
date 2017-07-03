@@ -1,4 +1,6 @@
-import Operadics
+#if !XCODE_BUILD
+    import Operadics
+#endif
 
 /*:
 # Homomorphism
