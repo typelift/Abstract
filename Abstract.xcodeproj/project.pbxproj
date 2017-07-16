@@ -320,10 +320,10 @@
 		38D737BF1EE9A711000BAF0C /* AbstractTests */ = {
 			isa = PBXGroup;
 			children = (
-				380A4B191F1B775F002D70E0 /* WrapperTests.generated.swift */,
-				380A4B141F1B7336002D70E0 /* SemigroupTests.generated.swift */,
 				38943A681EEC25AE00F587AD /* AbstractTests.swift */,
 				38943A731EEC2CF700F587AD /* ArbitraryDefinitions.swift */,
+				380A4B141F1B7336002D70E0 /* SemigroupTests.generated.swift */,
+				380A4B191F1B775F002D70E0 /* WrapperTests.generated.swift */,
 			);
 			path = AbstractTests;
 			sourceTree = "<group>";
@@ -616,7 +616,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bash Sourcery/sourceryTests.sh";
+			shellScript = "bash sourceryTests.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
