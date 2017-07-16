@@ -5,6 +5,7 @@ import XCTest
 @testable import Abstract
 import SwiftCheck
 
+
 final class SemigroupTests: XCTestCase {
 
 	func testAdd() {
@@ -22,6 +23,24 @@ final class SemigroupTests: XCTestCase {
 	func testEndofunction() {
 		property("Endofunction is a Semigroup") <- forAll { (a: EndofunctionOf<Int>, b: EndofunctionOf<Int>, c: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
+	func testFunctionBS() {
+		property("FunctionBS is a Semigroup") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, c: FunctionBSOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionBS<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
+	func testFunctionCM() {
+		property("FunctionCM is a Semigroup") <- forAll { (a: FunctionCMOf<Int,TestStructure>, b: FunctionCMOf<Int,TestStructure>, c: FunctionCMOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionCM<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
+	func testFunctionM() {
+		property("FunctionM is a Semigroup") <- forAll { (a: FunctionMOf<Int,TestStructure>, b: FunctionMOf<Int,TestStructure>, c: FunctionMOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionM<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
@@ -65,6 +84,9 @@ final class SemigroupTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
+		("testFunctionBS",testFunctionBS),
+		("testFunctionCM",testFunctionCM),
+		("testFunctionM",testFunctionM),
 		("testFunctionS",testFunctionS),
 		("testMax",testMax),
 		("testMin",testMin),

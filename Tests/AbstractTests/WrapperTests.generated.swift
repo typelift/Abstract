@@ -5,6 +5,7 @@ import XCTest
 @testable import Abstract
 import SwiftCheck
 
+
 final class WrapperTests: XCTestCase {
 
 	func testAdd() {
@@ -25,9 +26,33 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testFunctionBS() {
+		property("FunctionBS is a well-behaved Wrapper") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionBS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
+	func testFunctionCM() {
+		property("FunctionCM is a well-behaved Wrapper") <- forAll { (a: FunctionCMOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionCM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
+	func testFunctionM() {
+		property("FunctionM is a well-behaved Wrapper") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
+			LawInContext<FunctionM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testFunctionS() {
 		property("FunctionS is a well-behaved Wrapper") <- forAll { (a: FunctionSOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
+	func testFunctionSR() {
+		property("FunctionSR is a well-behaved Wrapper") <- forAll { (a: FunctionSROf<Int,TestSemiring>, context: Int) in
+			LawInContext<FunctionSR<Int,TestSemiring>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 
@@ -55,14 +80,25 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testTropical() {
+		property("Tropical is a well-behaved Wrapper") <- forAll { (a: TropicalOf<Int>) in
+			Law<Tropical<Int>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
+		("testFunctionBS",testFunctionBS),
+		("testFunctionCM",testFunctionCM),
+		("testFunctionM",testFunctionM),
 		("testFunctionS",testFunctionS),
+		("testFunctionSR",testFunctionSR),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
 		("testOr",testOr),
+		("testTropical",testTropical),
 	]
 }

@@ -47,10 +47,11 @@ Test code is automatically generated for all types using [Sourcery](https://gith
 
 The script in `sourceryTests.sh` requires Sourcery to scan source files in `Sources/Abstract` and generate code with the templates defined in `Templates/Tests`; generated files are put in `Tests/AbstractTests` and are recognizable by the `.generated` in the name: these files must not be edited manually.
 
-To tell Sourcery what to do some annotations are written before each type definition, as follows:
+Sourcery is just a tool for code generation: at compile time the actual check for a type to conform to a certain protocol is guaranteed by the functions defined in the `Law` namespace, thus the generated tests are associated to specific algebraic structures rather than particular properties (like "associative" or "idempotent").
 
-- wrapper: identifies the type as requiring test generation for Wrapper laws conformance;
-- semigroup: identifies the type as requiring test generation for Semigroup laws conformance (associativity);
+Sourcery will automatically generate tests for all types conforming to the protocols representing the algebraic data structures considered, and some annotations associated with a type (in the form `// sourcery: annotation`) will allow some fine tuning:
+
+- ignore = "value": Sourcery will not generate tests related to that protocol for that type; "value" is the protocol's name (like "Semigroup" or "CommuntativeMonoid");
 - genericArbitraryTypes = "value": for generic types it defines the concrete type to be used in tests; if more than one generic type is present, all types must be separated by a comma;
 - requiredContext = "value": use `LawInContext` instead of `Law`; "value" is the context type; this is required if the type wraps a function.
 

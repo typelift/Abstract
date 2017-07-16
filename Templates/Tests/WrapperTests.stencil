@@ -2,8 +2,10 @@ import XCTest
 @testable import Abstract
 import SwiftCheck
 
+{% set protocolName %}Wrapper{% endset %}
+
 final class WrapperTests: XCTestCase {
-{% for type in types.all|annotated:"wrapper" %}
+{% for type in types.implementing.Wrapper where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
 
 	func test{{ type.name }}() {
 {% if type.isGeneric %}
@@ -19,7 +21,7 @@ final class WrapperTests: XCTestCase {
 {% endfor %}
 
 	static var allTests = [
-{% for type in types.all|annotated:"wrapper" %}
+{% for type in types.implementing.Wrapper where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
 		("test{{ type.name }}",test{{ type.name }}),
 {% endfor %}
 	]
