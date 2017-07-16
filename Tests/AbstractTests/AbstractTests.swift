@@ -3,90 +3,6 @@ import XCTest
 import SwiftCheck
 
 final class AbstractTests: XCTestCase {
-	func testWrapper() {
-		property("Add is a well-behaved Wrapper") <- forAll { (a: AddOf<Int>) in
-			Law<Add<Int>>.isWellBehavedWrapper(a.get)
-		}
-
-		property("Multiply is a well-behaved Wrapper") <- forAll { (a: MultiplyOf<Int>) in
-			Law<Multiply<Int>>.isWellBehavedWrapper(a.get)
-		}
-
-		property("Max is a well-behaved Wrapper") <- forAll { (a: MaxOf<Int>) in
-			Law<Max<Int>>.isWellBehavedWrapper(a.get)
-		}
-
-		property("Min is a well-behaved Wrapper") <- forAll { (a: MinOf<Int>) in
-			Law<Min<Int>>.isWellBehavedWrapper(a.get)
-		}
-
-		property("And is a well-behaved Wrapper") <- forAll { (a: And) in
-			Law<And>.isWellBehavedWrapper(a)
-		}
-
-		property("Or is a well-behaved Wrapper") <- forAll { (a: Or) in
-			Law<Or>.isWellBehavedWrapper(a)
-		}
-
-		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
-			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a.get)(context)
-		}
-
-		property("FunctionS is a well-behaved Wrapper") <- forAll { (a: FunctionSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-
-		property("FunctionM is a well-behaved Wrapper") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-
-		property("FunctionCM is a well-behaved Wrapper") <- forAll { (a: FunctionCMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionCM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-
-		property("FunctionBS is a well-behaved Wrapper") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionBS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-	}
-
-	func testSemigroup() {
-		property("Add is a Semigroup") <- forAll { (a: AddOf<Int>, b: AddOf<Int>, c: AddOf<Int>) in
-			Law<Add<Int>>.isAssociative(a.get,b.get,c.get)
-		}
-		
-		property("Multiply is a Semigroup") <- forAll { (a: MultiplyOf<Int>, b: MultiplyOf<Int>, c: MultiplyOf<Int>) in
-			Law<Multiply<Int>>.isAssociative(a.get,b.get,c.get)
-		}
-		
-		property("Max is a Semigroup") <- forAll { (a: MaxOf<Int>, b: MaxOf<Int>, c: MaxOf<Int>) in
-			Law<Max<Int>>.isAssociative(a.get,b.get,c.get)
-		}
-
-		property("Min is a Semigroup") <- forAll { (a: MinOf<Int>, b: MinOf<Int>, c: MinOf<Int>) in
-			Law<Min<Int>>.isAssociative(a.get,b.get,c.get)
-		}
-
-		property("And is a Semigroup") <- forAll { (a: And, b: And, c: And) in
-			Law<And>.isAssociative(a,b,c)
-		}
-
-		property("Or is a Semigroup") <- forAll { (a: Or, b: Or, c: Or) in
-			Law<Or>.isAssociative(a,b,c)
-		}
-
-		property("Endofunction is a Semigroup") <- forAll { (a: EndofunctionOf<Int>, b: EndofunctionOf<Int>, c: EndofunctionOf<Int>, context: Int) in
-			LawInContext<Endofunction<Int>>.isAssociative(a.get, b.get, c.get)(context)
-		}
-		
-		property("FunctionS is a Semigroup") <- forAll { (a: FunctionSOf<Int,TestStructure>, b: FunctionSOf<Int,TestStructure>, c: FunctionSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionS<Int,TestStructure>>.isAssociative(a.get, b.get, c.get)(context)
-		}
-		
-		property("Ordering is a Semigroup") <- forAll { (a: Ordering, b: Ordering, c: Ordering) in
-			Law<Ordering>.isAssociative(a, b, c)
-		}
-	}
-	
 	func testMonoid() {
 		property("Add is a Monoid") <- forAll { (a: AddOf<Int>) in
 			Law<Add<Int>>.isNeutralToEmpty(a.get)
@@ -214,8 +130,6 @@ final class AbstractTests: XCTestCase {
 	}
 	
 	static var allTests = [
-		("testWrapper", testWrapper),
-		("testSemigroup", testSemigroup),
 		("testMonoid", testMonoid),
 		("testCommutativeMonoid",testCommutativeMonoid),
 		("testBoundedSemilattice",testBoundedSemilattice),

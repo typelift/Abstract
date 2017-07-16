@@ -34,6 +34,9 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
+// sourcery: genericArbitraryTypes = "Int"
 public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -50,6 +53,9 @@ public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
+// sourcery: genericArbitraryTypes = "Int"
 public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -66,6 +72,9 @@ public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
+// sourcery: genericArbitraryTypes = "Int"
 public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -82,6 +91,9 @@ public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
+// sourcery: genericArbitraryTypes = "Int"
 public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -98,6 +110,8 @@ public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
 public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
@@ -119,6 +133,8 @@ public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
 public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
@@ -140,6 +156,10 @@ public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
+// sourcery: genericArbitraryTypes = "Int"
+// sourcery: requiredContext = "Int"
 public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext {
 	public typealias Wrapped = (A) -> A
 	public typealias Context = A
@@ -165,6 +185,10 @@ public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext
 
 //: ------
 
+// sourcery: semigroup
+// sourcery: wrapper
+// sourcery: genericArbitraryTypes = "Int,TestStructure"
+// sourcery: requiredContext = "Int"
 public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, EquatableInContext {
 	public typealias Wrapped = (A) -> S
 	public typealias Context = A
@@ -190,6 +214,7 @@ public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, Equata
 
 //: ------
 
+// sourcery: semigroup
 public enum Ordering: Semigroup {
 	case lowerThan
 	case equalTo

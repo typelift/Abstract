@@ -1,0 +1,26 @@
+import XCTest
+@testable import Abstract
+import SwiftCheck
+
+final class WrapperTests: XCTestCase {
+{% for type in types.all|annotated:"wrapper" %}
+
+	func test{{ type.name }}() {
+{% if type.isGeneric %}
+		property("{{ type.name }} is a well-behaved Wrapper") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.isWellBehavedWrapper(a.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		}
+{% else %}
+		property("{{ type.name }} is a well-behaved Wrapper") <- forAll { (a: {{ type.name }}) in
+			Law<{{ type.name }}>.isWellBehavedWrapper(a)
+		}
+{% endif %}
+	}
+{% endfor %}
+
+	static var allTests = [
+{% for type in types.all|annotated:"wrapper" %}
+		("test{{ type.name }}",test{{ type.name }}),
+{% endfor %}
+	]
+}

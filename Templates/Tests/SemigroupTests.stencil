@@ -1,0 +1,26 @@
+import XCTest
+@testable import Abstract
+import SwiftCheck
+
+final class SemigroupTests: XCTestCase {
+{% for type in types.all|annotated:"semigroup" %}
+
+	func test{{ type.name }}() {
+{% if type.isGeneric %}
+		property("{{ type.name }} is a Semigroup") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>, b: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>, c: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.isAssociative(a.get,b.get,c.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		}
+{% else %}
+		property("{{ type.name }} is a Semigroup") <- forAll { (a: {{ type.name }}, b: {{ type.name }}, c: {{ type.name }}) in
+			Law<{{ type.name }}>.isAssociative(a,b,c)
+		}
+{% endif %}
+	}
+{% endfor %}
+
+	static var allTests = [
+{% for type in types.all|annotated:"semigroup" %}
+		("test{{ type.name }}",test{{ type.name }}),
+{% endfor %}
+	]
+}

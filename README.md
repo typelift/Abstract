@@ -38,3 +38,19 @@ A plain translation into Swift from a language with a more sophisticated type sy
 One final note: the closest thing to this that I could find on GitHub is the [Algebra](https://github.com/typelift/Algebra) library from typelift (the same organization behind the glorious SwiftCheck library). There are differences between this library and `Algebra`, mainly there is a plain definition of `Monoid` instead of `Additive` and `Multiplicative`. But a huge difference is probably the fact that `Algebra` is supposed to be an "exploration", like many other explorations out there of functional concepts applyied to Swift, that I also did and keep doing, trying to push the boudaries of Swift's expressivity. In general I wanted to take a different path in defining what are basically the same things, but the exploration I'm interested in is about practical applications rather than finding ways to express the theoretical concepts of abstract algebra in Swift's type system.
 
 So, this repo is my contribution and proposal to the cause.
+
+------
+
+## Sourcery usage
+
+Test code is automatically generated for all types using [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
+
+The script in `sourceryTests.sh` requires Sourcery to scan source files in `Sources/Abstract` and generate code with the templates defined in `Templates/Tests`; generated files are put in `Tests/AbstractTests` and are recognizable by the `.generated` in the name: these files must not be edited manually.
+
+To tell Sourcery what to do some annotations are written before each type definition, as follows:
+
+- wrapper: identifies the type as requiring test generation for Wrapper laws conformance;
+- semigroup: identifies the type as requiring test generation for Semigroup laws conformance (associativity);
+- genericArbitraryTypes = "value": for generic types it defines the concrete type to be used in tests; if more than one generic type is present, all types must be separated by a comma;
+- requiredContext = "value": use `LawInContext` instead of `Law`; "value" is the context type; this is required if the type wraps a function.
+
