@@ -1,12 +1,10 @@
-// Generated using Sourcery 0.7.2 — https://github.com/krzysztofzablocki/Sourcery
-// DO NOT EDIT
-
-
 import XCTest
 @testable import AbstractTests
 
 XCTMain([
-	testCase(HomomorphismTests.allTests),
+{% for type in types.based.XCTestCase %}
+	testCase({{ type.name }}.allTests),
+{% endfor %}
 	testCase(BoundedSemilatticeTests.allTests),
 	testCase(CommutativeMonoidTests.allTests),
 	testCase(MonoidTests.allTests),
