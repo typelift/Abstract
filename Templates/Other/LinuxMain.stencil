@@ -5,10 +5,4 @@ XCTMain([
 {% for type in types.based.XCTestCase %}
 	testCase({{ type.name }}.allTests),
 {% endfor %}
-	testCase(BoundedSemilatticeTests.allTests),
-	testCase(CommutativeMonoidTests.allTests),
-	testCase(MonoidTests.allTests),
-	testCase(SemigroupTests.allTests),
-	testCase(SemiringTests.allTests),
-	testCase(WrapperTests.allTests)
 ])

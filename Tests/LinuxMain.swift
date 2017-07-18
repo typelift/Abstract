@@ -6,11 +6,11 @@ import XCTest
 @testable import AbstractTests
 
 XCTMain([
-	testCase(HomomorphismTests.allTests),
 	testCase(BoundedSemilatticeTests.allTests),
 	testCase(CommutativeMonoidTests.allTests),
+	testCase(HomomorphismTests.allTests),
 	testCase(MonoidTests.allTests),
 	testCase(SemigroupTests.allTests),
 	testCase(SemiringTests.allTests),
-	testCase(WrapperTests.allTests)
+	testCase(WrapperTests.allTests),
 ])

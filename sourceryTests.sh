@@ -3,13 +3,23 @@
 echo "Checking for Sourcery..."
 
 if [ -f "Sourcery/sourcery" ]; then
-	echo "Sourcery: Sources/Abstract + Templates/Tests -> Tests/AbstractTests"
+	echo "Generating test files: Sources/Abstract + Templates/Tests -> Tests/AbstractTests"
 
 	./Sourcery/sourcery --sources Sources/Abstract --templates Templates/Tests --output Tests/AbstractTests
 
-	echo "Sourcery: Tests/AbstractTests + Templates/Other/LinuxMain.stencil -> Tests/LinuxMain.swift"
+	echo "Removing first line from generated test files..."
+
+	for filename in Tests/AbstractTests/*.generated.swift; do
+		sed -i '' 1d $filename
+	done
+
+	echo "Generating LinuxMain file: Tests/AbstractTests + Templates/Other/LinuxMain.stencil -> Tests/LinuxMain.swift"
 
 	./Sourcery/sourcery --sources Tests/AbstractTests --templates Templates/Other/LinuxMain.stencil --output Tests/LinuxMain.swift
+
+	echo "Regenerating test files..."
+
+	./Sourcery/sourcery --sources Sources/Abstract --templates Templates/Tests --output Tests/AbstractTests
 
 else
 	echo "Sourcery is not installed, ignoring."
