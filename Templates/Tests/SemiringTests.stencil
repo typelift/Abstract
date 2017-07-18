@@ -1,0 +1,38 @@
+import XCTest
+@testable import Abstract
+import SwiftCheck
+
+{% set protocolName %}Semiring{% endset %}
+
+final class {{ protocolName }}Tests: XCTestCase {
+{% for type in types.implementing.Semiring where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
+
+	func test{{ type.name }}() {
+{% if type.isGeneric %}
+		property("{{ type.name }} is a {{ protocolName }}: Distributive") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>, b: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>, c: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.multiplicationIsDistributiveOverAddition(a.get,b.get,c.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		}
+{% else %}
+		property("{{ type.name }} is a {{ protocolName }}: Distributive") <- forAll { (a: {{ type.name }}, b: {{ type.name }}, c: {{ type.name }}) in
+			Law<{{ type.name }}>.multiplicationIsDistributiveOverAddition(a,b,c)
+		}
+{% endif %}
+
+{% if type.isGeneric %}
+		property("{{ type.name }} is a {{ protocolName }}: Annihilation") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.zeroAnnihiliatesTheMultiplicative(a.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		}
+{% else %}
+		property("{{ type.name }} is a {{ protocolName }}: Annihilation") <- forAll { (a: {{ type.name }}) in
+			Law<{{ type.name }}>.zeroAnnihiliatesTheMultiplicative(a)
+		}
+{% endif %}
+	}
+{% endfor %}
+
+	static var allTests = [
+{% for type in types.implementing.Semiring where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
+		("test{{ type.name }}",test{{ type.name }}),
+{% endfor %}
+	]
+}

@@ -1,0 +1,28 @@
+import XCTest
+@testable import Abstract
+import SwiftCheck
+
+{% set protocolName %}Monoid{% endset %}
+
+final class {{ protocolName }}Tests: XCTestCase {
+{% for type in types.implementing.Monoid where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
+
+	func test{{ type.name }}() {
+{% if type.isGeneric %}
+	property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.isNeutralToEmpty(a.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		}
+{% else %}
+		property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}) in
+			Law<{{ type.name }}>.isNeutralToEmpty(a)
+		}
+{% endif %}
+	}
+{% endfor %}
+
+	static var allTests = [
+{% for type in types.implementing.Monoid where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
+		("test{{ type.name }}",test{{ type.name }}),
+{% endfor %}
+	]
+}

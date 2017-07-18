@@ -38,3 +38,20 @@ A plain translation into Swift from a language with a more sophisticated type sy
 One final note: the closest thing to this that I could find on GitHub is the [Algebra](https://github.com/typelift/Algebra) library from typelift (the same organization behind the glorious SwiftCheck library). There are differences between this library and `Algebra`, mainly there is a plain definition of `Monoid` instead of `Additive` and `Multiplicative`. But a huge difference is probably the fact that `Algebra` is supposed to be an "exploration", like many other explorations out there of functional concepts applyied to Swift, that I also did and keep doing, trying to push the boudaries of Swift's expressivity. In general I wanted to take a different path in defining what are basically the same things, but the exploration I'm interested in is about practical applications rather than finding ways to express the theoretical concepts of abstract algebra in Swift's type system.
 
 So, this repo is my contribution and proposal to the cause.
+
+------
+
+## Sourcery usage
+
+Test code is automatically generated for all types using [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
+
+The script in `sourceryTests.sh` requires Sourcery to scan source files in `Sources/Abstract` and generate code with the templates defined in `Templates/Tests`; generated files are put in `Tests/AbstractTests` and are recognizable by the `.generated` in the name: these files must not be edited manually.
+
+Sourcery is just a tool for code generation: at compile time the actual check for a type to conform to a certain protocol is guaranteed by the functions defined in the `Law` namespace, thus the generated tests are associated to specific algebraic structures rather than particular properties (like "associative" or "idempotent").
+
+Sourcery will automatically generate tests for all types conforming to the protocols representing the algebraic data structures considered, and some annotations associated with a type (in the form `// sourcery: annotation`) will allow some fine tuning:
+
+- ignore = "value": Sourcery will not generate tests related to that protocol for that type; "value" is the protocol's name (like "Semigroup" or "CommuntativeMonoid");
+- genericArbitraryTypes = "value": for generic types it defines the concrete type to be used in tests; if more than one generic type is present, all types must be separated by a comma;
+- requiredContext = "value": use `LawInContext` instead of `Law`; "value" is the context type; this is required if the type wraps a function.
+

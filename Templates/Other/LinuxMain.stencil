@@ -1,0 +1,8 @@
+import XCTest
+@testable import AbstractTests
+
+XCTMain([
+{% for type in types.based.XCTestCase %}
+	testCase({{ type.name }}.allTests),
+{% endfor %}
+])
