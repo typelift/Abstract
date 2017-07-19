@@ -145,6 +145,38 @@ public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 //: ------
 
 // sourcery: genericArbitraryTypes = "Int"
+public struct First<A: Equatable>: Wrapper, Semigroup, Equatable {
+    public typealias Wrapped = A
+    
+    public let unwrap: A
+    
+    public init(_ value: A) {
+        self.unwrap = value
+    }
+    
+    public static func <> (left: First, right: First) -> First {
+        return left
+    }
+}
+
+//: ------
+
+// sourcery: genericArbitraryTypes = "Int"
+public struct Last<A: Equatable>: Wrapper, Semigroup, Equatable {
+    public typealias Wrapped = A
+    
+    public let unwrap: A
+    
+    public init(_ value: A) {
+        self.unwrap = value
+    }
+    
+    public static func <> (left: Last, right: Last) -> Last {
+        return right
+    }
+}
+
+// sourcery: genericArbitraryTypes = "Int"
 // sourcery: requiredContext = "Int"
 public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext {
 	public typealias Wrapped = (A) -> A
