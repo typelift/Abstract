@@ -155,6 +155,42 @@ public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 //: ------
 
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Equatable"
+public struct First<A: Equatable>: Wrapper, Semigroup, Equatable {
+    public typealias Wrapped = A
+    
+    public let unwrap: A
+    
+    public init(_ value: A) {
+        self.unwrap = value
+    }
+    
+    public static func <> (left: First, right: First) -> First {
+        return left
+    }
+}
+
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Equatable"
+public struct Last<A: Equatable>: Wrapper, Semigroup, Equatable {
+    public typealias Wrapped = A
+    
+    public let unwrap: A
+    
+    public init(_ value: A) {
+        self.unwrap = value
+    }
+    
+    public static func <> (left: Last, right: Last) -> Last {
+        return right
+    }
+}
+
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: requiredContextForPropertyBasedTests = "Int"
 public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext {
 	public typealias Wrapped = (A) -> A

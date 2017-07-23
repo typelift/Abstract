@@ -35,6 +35,40 @@ extension And: Arbitrary {
     }
 }
 
+struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
+    let get: First<T>
+    init(_ get: First<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<FirstOf<T>> {
+        return Gen<First<T>>
+            .compose {
+                First<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(FirstOf<T>.init)
+    }
+}
+
+struct LastOf<T>: Arbitrary where T: Arbitrary & Equatable {
+    let get: Last<T>
+    init(_ get: Last<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<LastOf<T>> {
+        return Gen<Last<T>>
+            .compose {
+                Last<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(LastOf<T>.init)
+    }
+}
+
 struct MaxOf<T>: Arbitrary where T: Arbitrary & ComparableToBottom {
     let get: Max<T>
     init(_ get: Max<T>) {
