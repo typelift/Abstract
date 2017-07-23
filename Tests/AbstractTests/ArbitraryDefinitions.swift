@@ -138,6 +138,30 @@ struct MinOf<A: Arbitrary & ComparableToTop>: Arbitrary {
 	}
 }
 
+struct FirstOf<A: Arbitrary & Equatable>: Arbitrary {
+	let get: First<A>
+	
+	init(_ value: A) {
+		self.get = First(value)
+	}
+	
+	static var arbitrary: Gen<FirstOf<A>> {
+		return A.arbitrary.map(FirstOf.init)
+	}
+}
+
+struct LastOf<A: Arbitrary & Equatable>: Arbitrary {
+	let get: Last<A>
+	
+	init(_ value: A) {
+		self.get = Last(value)
+	}
+	
+	static var arbitrary: Gen<LastOf<A>> {
+		return A.arbitrary.map(LastOf.init)
+	}
+}
+
 extension And: Arbitrary {
 	public static var arbitrary: Gen<And> {
 		return Bool.arbitrary.map(And.init(_:))
