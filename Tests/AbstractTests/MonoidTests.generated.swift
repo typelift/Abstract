@@ -9,7 +9,7 @@ import SwiftCheck
 final class MonoidTests: XCTestCase {
 
 	func testAdd() {
-	property("Add is a Monoid") <- forAll { (a: ArbitraryAdd<Int>) in
+	property("Add is a Monoid") <- forAll { (a: AddOf<Int>) in
 			Law<Add<Int>>.isNeutralToEmpty(a.get)
 		}
 	}
@@ -21,43 +21,43 @@ final class MonoidTests: XCTestCase {
 	}
 
 	func testEndofunction() {
-	property("Endofunction is a Monoid") <- forAll { (a: ArbitraryEndofunction<Int>, context: Int) in
+	property("Endofunction is a Monoid") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isNeutralToEmpty(a.get)(context)
 		}
 	}
 
 	func testFunctionBS() {
-	property("FunctionBS is a Monoid") <- forAll { (a: ArbitraryFunctionBS<Int,TestStructure>, context: Int) in
+	property("FunctionBS is a Monoid") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
 		}
 	}
 
 	func testFunctionCM() {
-	property("FunctionCM is a Monoid") <- forAll { (a: ArbitraryFunctionCM<Int,TestStructure>, context: Int) in
+	property("FunctionCM is a Monoid") <- forAll { (a: FunctionCMOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionCM<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
 		}
 	}
 
 	func testFunctionM() {
-	property("FunctionM is a Monoid") <- forAll { (a: ArbitraryFunctionM<Int,TestStructure>, context: Int) in
+	property("FunctionM is a Monoid") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionM<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
 		}
 	}
 
 	func testMax() {
-	property("Max is a Monoid") <- forAll { (a: ArbitraryMax<Int>) in
+	property("Max is a Monoid") <- forAll { (a: MaxOf<Int>) in
 			Law<Max<Int>>.isNeutralToEmpty(a.get)
 		}
 	}
 
 	func testMin() {
-	property("Min is a Monoid") <- forAll { (a: ArbitraryMin<Int>) in
+	property("Min is a Monoid") <- forAll { (a: MinOf<Int>) in
 			Law<Min<Int>>.isNeutralToEmpty(a.get)
 		}
 	}
 
 	func testMultiply() {
-	property("Multiply is a Monoid") <- forAll { (a: ArbitraryMultiply<Int>) in
+	property("Multiply is a Monoid") <- forAll { (a: MultiplyOf<Int>) in
 			Law<Multiply<Int>>.isNeutralToEmpty(a.get)
 		}
 	}

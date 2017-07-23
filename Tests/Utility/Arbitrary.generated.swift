@@ -7,20 +7,20 @@ import SwiftCheck
 
 // MARK: - Arbitrary for structs and classes
 
-struct ArbitraryAdd<T>: Arbitrary where T: Arbitrary & Addable {
+struct AddOf<T>: Arbitrary where T: Arbitrary & Addable {
     let get: Add<T>
     init(_ get: Add<T>) {
         self.get = get
     }
 
-    public static var arbitrary: Gen<ArbitraryAdd<T>> {
+    public static var arbitrary: Gen<AddOf<T>> {
         return Gen<Add<T>>
             .compose {
                 Add<T>.init(
                     unwrap: $0.generate()
                 )
             }
-            .map(ArbitraryAdd<T>.init)
+            .map(AddOf<T>.init)
     }
 }
 
@@ -35,54 +35,54 @@ extension And: Arbitrary {
     }
 }
 
-struct ArbitraryMax<T>: Arbitrary where T: Arbitrary & ComparableToBottom {
+struct MaxOf<T>: Arbitrary where T: Arbitrary & ComparableToBottom {
     let get: Max<T>
     init(_ get: Max<T>) {
         self.get = get
     }
 
-    public static var arbitrary: Gen<ArbitraryMax<T>> {
+    public static var arbitrary: Gen<MaxOf<T>> {
         return Gen<Max<T>>
             .compose {
                 Max<T>.init(
                     unwrap: $0.generate()
                 )
             }
-            .map(ArbitraryMax<T>.init)
+            .map(MaxOf<T>.init)
     }
 }
 
-struct ArbitraryMin<T>: Arbitrary where T: Arbitrary & ComparableToTop {
+struct MinOf<T>: Arbitrary where T: Arbitrary & ComparableToTop {
     let get: Min<T>
     init(_ get: Min<T>) {
         self.get = get
     }
 
-    public static var arbitrary: Gen<ArbitraryMin<T>> {
+    public static var arbitrary: Gen<MinOf<T>> {
         return Gen<Min<T>>
             .compose {
                 Min<T>.init(
                     unwrap: $0.generate()
                 )
             }
-            .map(ArbitraryMin<T>.init)
+            .map(MinOf<T>.init)
     }
 }
 
-struct ArbitraryMultiply<T>: Arbitrary where T: Arbitrary & Multipliable {
+struct MultiplyOf<T>: Arbitrary where T: Arbitrary & Multipliable {
     let get: Multiply<T>
     init(_ get: Multiply<T>) {
         self.get = get
     }
 
-    public static var arbitrary: Gen<ArbitraryMultiply<T>> {
+    public static var arbitrary: Gen<MultiplyOf<T>> {
         return Gen<Multiply<T>>
             .compose {
                 Multiply<T>.init(
                     unwrap: $0.generate()
                 )
             }
-            .map(ArbitraryMultiply<T>.init)
+            .map(MultiplyOf<T>.init)
     }
 }
 
@@ -97,20 +97,20 @@ extension Or: Arbitrary {
     }
 }
 
-struct ArbitraryTropical<T>: Arbitrary where T: Arbitrary & ComparableToTop & Addable {
+struct TropicalOf<T>: Arbitrary where T: Arbitrary & ComparableToTop & Addable {
     let get: Tropical<T>
     init(_ get: Tropical<T>) {
         self.get = get
     }
 
-    public static var arbitrary: Gen<ArbitraryTropical<T>> {
+    public static var arbitrary: Gen<TropicalOf<T>> {
         return Gen<Tropical<T>>
             .compose {
                 Tropical<T>.init(
                     unwrap: $0.generate()
                 )
             }
-            .map(ArbitraryTropical<T>.init)
+            .map(TropicalOf<T>.init)
     }
 }
 
@@ -128,57 +128,57 @@ extension Ordering: Arbitrary {
 
 // MARK: - Arbitrary for function wrappers
 
-struct ArbitraryFunctionBS<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & BoundedSemilattice & Equatable {
+struct FunctionBSOf<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & BoundedSemilattice & Equatable {
 	let get: FunctionBS<S,T>
 	init(_ value: @escaping (S) -> T) {
 		self.get = FunctionBS.init(value)
 	}
 
-	public static var arbitrary: Gen<ArbitraryFunctionBS<S,T>> {
-		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionBS<S,T>.init)
+	public static var arbitrary: Gen<FunctionBSOf<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(FunctionBSOf<S,T>.init)
 	}
 }
 
-struct ArbitraryFunctionCM<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & CommutativeMonoid & Equatable {
+struct FunctionCMOf<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & CommutativeMonoid & Equatable {
 	let get: FunctionCM<S,T>
 	init(_ value: @escaping (S) -> T) {
 		self.get = FunctionCM.init(value)
 	}
 
-	public static var arbitrary: Gen<ArbitraryFunctionCM<S,T>> {
-		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionCM<S,T>.init)
+	public static var arbitrary: Gen<FunctionCMOf<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(FunctionCMOf<S,T>.init)
 	}
 }
 
-struct ArbitraryFunctionM<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Monoid & Equatable {
+struct FunctionMOf<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Monoid & Equatable {
 	let get: FunctionM<S,T>
 	init(_ value: @escaping (S) -> T) {
 		self.get = FunctionM.init(value)
 	}
 
-	public static var arbitrary: Gen<ArbitraryFunctionM<S,T>> {
-		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionM<S,T>.init)
+	public static var arbitrary: Gen<FunctionMOf<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(FunctionMOf<S,T>.init)
 	}
 }
 
-struct ArbitraryFunctionS<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Semigroup & Equatable {
+struct FunctionSOf<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Semigroup & Equatable {
 	let get: FunctionS<S,T>
 	init(_ value: @escaping (S) -> T) {
 		self.get = FunctionS.init(value)
 	}
 
-	public static var arbitrary: Gen<ArbitraryFunctionS<S,T>> {
-		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionS<S,T>.init)
+	public static var arbitrary: Gen<FunctionSOf<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(FunctionSOf<S,T>.init)
 	}
 }
 
-struct ArbitraryFunctionSR<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Semiring & Equatable,  T.Multiplicative: Equatable,  T.Additive: Equatable {
+struct FunctionSROf<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Semiring & Equatable,  T.Multiplicative: Equatable,  T.Additive: Equatable {
 	let get: FunctionSR<S,T>
 	init(_ value: @escaping (S) -> T) {
 		self.get = FunctionSR.init(value)
 	}
 
-	public static var arbitrary: Gen<ArbitraryFunctionSR<S,T>> {
-		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionSR<S,T>.init)
+	public static var arbitrary: Gen<FunctionSROf<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(FunctionSROf<S,T>.init)
 	}
 }

@@ -9,7 +9,7 @@ import SwiftCheck
 final class CommutativeMonoidTests: XCTestCase {
 
 	func testAdd() {
-		property("Add is a CommutativeMonoid") <- forAll { (a: ArbitraryAdd<Int>, b: ArbitraryAdd<Int>) in
+		property("Add is a CommutativeMonoid") <- forAll { (a: AddOf<Int>, b: AddOf<Int>) in
 			Law<Add<Int>>.isCommutative(a.get,b.get)
 		}
 	}
@@ -21,31 +21,31 @@ final class CommutativeMonoidTests: XCTestCase {
 	}
 
 	func testFunctionBS() {
-		property("FunctionBS is a CommutativeMonoid") <- forAll { (a: ArbitraryFunctionBS<Int,TestStructure>, b: ArbitraryFunctionBS<Int,TestStructure>, context: Int) in
+		property("FunctionBS is a CommutativeMonoid") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isCommutative(a.get,b.get)(context)
 		}
 	}
 
 	func testFunctionCM() {
-		property("FunctionCM is a CommutativeMonoid") <- forAll { (a: ArbitraryFunctionCM<Int,TestStructure>, b: ArbitraryFunctionCM<Int,TestStructure>, context: Int) in
+		property("FunctionCM is a CommutativeMonoid") <- forAll { (a: FunctionCMOf<Int,TestStructure>, b: FunctionCMOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionCM<Int,TestStructure>>.isCommutative(a.get,b.get)(context)
 		}
 	}
 
 	func testMax() {
-		property("Max is a CommutativeMonoid") <- forAll { (a: ArbitraryMax<Int>, b: ArbitraryMax<Int>) in
+		property("Max is a CommutativeMonoid") <- forAll { (a: MaxOf<Int>, b: MaxOf<Int>) in
 			Law<Max<Int>>.isCommutative(a.get,b.get)
 		}
 	}
 
 	func testMin() {
-		property("Min is a CommutativeMonoid") <- forAll { (a: ArbitraryMin<Int>, b: ArbitraryMin<Int>) in
+		property("Min is a CommutativeMonoid") <- forAll { (a: MinOf<Int>, b: MinOf<Int>) in
 			Law<Min<Int>>.isCommutative(a.get,b.get)
 		}
 	}
 
 	func testMultiply() {
-		property("Multiply is a CommutativeMonoid") <- forAll { (a: ArbitraryMultiply<Int>, b: ArbitraryMultiply<Int>) in
+		property("Multiply is a CommutativeMonoid") <- forAll { (a: MultiplyOf<Int>, b: MultiplyOf<Int>) in
 			Law<Multiply<Int>>.isCommutative(a.get,b.get)
 		}
 	}

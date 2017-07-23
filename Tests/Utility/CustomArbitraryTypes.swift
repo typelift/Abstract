@@ -90,14 +90,14 @@ struct TestProduct: CoArbitrary, Hashable, Arbitrary, Wrapper {
 	}
 }
 
-struct ArbitraryEndofunction<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
+struct EndofunctionOf<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
 	let get: Endofunction<A>
 	
 	init(_ value: @escaping (A) -> A) {
 		self.get = Endofunction.init(value)
 	}
 	
-	static var arbitrary: Gen<ArbitraryEndofunction<A>> {
-		return ArrowOf<A,A>.arbitrary.map { $0.getArrow }.map(ArbitraryEndofunction<A>.init)
+	static var arbitrary: Gen<EndofunctionOf<A>> {
+		return ArrowOf<A,A>.arbitrary.map { $0.getArrow }.map(EndofunctionOf<A>.init)
 	}
 }

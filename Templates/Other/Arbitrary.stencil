@@ -60,20 +60,20 @@ import SwiftCheck
 {% for type in types.all|!enum|annotated:"arbitrary" %}
 
 {% if type.isGeneric %}
-struct Arbitrary{{ type.name }}<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
+struct {{ type.name }}Of<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
     let get: {{ type.name }}<T>
     init(_ get: {{ type.name }}<T>) {
         self.get = get
     }
 
-    public static var arbitrary: Gen<Arbitrary{{ type.name }}<T>> {
+    public static var arbitrary: Gen<{{ type.name }}Of<T>> {
         return Gen<{{ type.name }}<T>>
             .compose {
                 {{ type.name }}<T>.init(
                 {% call iterateVariables type.storedVariables %}
                 )
             }
-            .map(Arbitrary{{ type.name }}<T>.init)
+            .map({{ type.name }}Of<T>.init)
     }
 }
 {% else %}
@@ -94,16 +94,16 @@ extension {{ type.name }}: Arbitrary {
 {% for type in types.enums|annotated:"arbitrary" %}
 
 {% if type.isGeneric %}
-struct Arbitrary{{ type.name }}<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
+struct {{ type.name }}Of<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
     let get: {{ type.name }}<T>
     init(_ get: {{ type.name }}<T>) {
         self.get = get
     }
 
-    public static var arbitrary: Gen<Arbitrary{{ type.name }}<T>> {
+    public static var arbitrary: Gen<{{ type.name }}Of<T>> {
         return Gen<{{ type.name }}<T>>.one(of: [
         {% call iterateCases type.cases type.name "<T>" %}
-        ]).map(Arbitrary{{ type.name }}<T>.init)
+        ]).map({{ type.name }}Of<T>.init)
     }
 }
 {% else %}
@@ -120,14 +120,14 @@ extension {{ type.name }}: Arbitrary {
 // MARK: - Arbitrary for function wrappers
 {% for type in types.all|annotated:"arbitraryFunction" %}
 
-struct Arbitrary{{ type.name }}<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
+struct {{ type.name }}Of<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
 	let get: {{ type.name }}<S,T>
 	init(_ value: @escaping (S) -> T) {
 		self.get = {{ type.name }}.init(value)
 	}
 
-	public static var arbitrary: Gen<Arbitrary{{ type.name }}<S,T>> {
-		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(Arbitrary{{ type.name }}<S,T>.init)
+	public static var arbitrary: Gen<{{ type.name }}Of<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map({{ type.name }}Of<S,T>.init)
 	}
 }
 {% endfor %}
