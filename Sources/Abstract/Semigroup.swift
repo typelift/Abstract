@@ -34,9 +34,9 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Addable"
-// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -53,9 +53,9 @@ public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Multipliable"
-// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -72,9 +72,9 @@ public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToBottom"
-// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -91,9 +91,9 @@ public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToTop"
-// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -181,10 +181,10 @@ public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext
 
 //: ------
 
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
 // sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
 // sourcery: requiredContextForPropertyBasedTests = "Int"
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
 public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, EquatableInContext {
 	public typealias Wrapped = (A) -> S
 	public typealias Context = A

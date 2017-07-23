@@ -171,3 +171,14 @@ struct ArbitraryFunctionS<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Ar
 		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionS<S,T>.init)
 	}
 }
+
+struct ArbitraryFunctionSR<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Semiring & Equatable,  T.Multiplicative: Equatable,  T.Additive: Equatable {
+	let get: FunctionSR<S,T>
+	init(_ value: @escaping (S) -> T) {
+		self.get = FunctionSR.init(value)
+	}
+
+	public static var arbitrary: Gen<ArbitraryFunctionSR<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionSR<S,T>.init)
+	}
+}

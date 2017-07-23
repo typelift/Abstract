@@ -101,15 +101,3 @@ struct ArbitraryEndofunction<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
 		return ArrowOf<A,A>.arbitrary.map { $0.getArrow }.map(ArbitraryEndofunction<A>.init)
 	}
 }
-
-struct ArbitraryFunctionSR<A: CoArbitrary & Hashable, SR: Arbitrary & Semiring & Equatable>: Arbitrary where SR.Additive: Equatable, SR.Multiplicative: Equatable {
-	let get: FunctionSR<A,SR>
-
-	init(_ value: @escaping (A) -> SR) {
-		self.get = FunctionSR.init(value)
-	}
-
-	static var arbitrary: Gen<ArbitraryFunctionSR<A,SR>> {
-		return ArrowOf<A,SR>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionSR<A,SR>.init)
-	}
-}

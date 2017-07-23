@@ -44,10 +44,10 @@ extension Or: BoundedSemilattice {}
 
 //: ------
 
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "BoundedSemilattice & Equatable"
 // sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
 // sourcery: requiredContextForPropertyBasedTests = "Int"
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "BoundedSemilattice & Equatable"
 public struct FunctionBS<A, M: BoundedSemilattice & Equatable>: Wrapper, BoundedSemilattice, EquatableInContext {
 	public typealias Wrapped = (A) -> M
 	public typealias Context = A
