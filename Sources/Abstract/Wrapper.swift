@@ -18,6 +18,12 @@ public protocol Wrapper {
 	var unwrap: Wrapped { get }
 }
 
+extension Wrapper {
+	public init(unwrap: Wrapped) {
+		self.init(unwrap)
+	}
+}
+
 extension Law where Element: Wrapper {
 	public static func isWellBehavedWrapper(_ a: Element) -> Bool {
 		return Law.isIsomorphism({ $0.unwrap }, Element.init, a)

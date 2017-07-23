@@ -116,8 +116,12 @@ extension Bool: Semiring {
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int,TestSemiring"
-// sourcery: requiredContext = "Int"
+// sourcery: fixedTypesForPropertyBasedTests = "Int,TestSemiring"
+// sourcery: requiredContextForPropertyBasedTests = "Int"
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "Semiring & Equatable"
+// sourcery: additionalGenericParameterSubtypeRequirements = "Additive: Equatable"
+// sourcery: additionalGenericParameterSubtypeRequirements = "Multiplicative: Equatable"
 public struct FunctionSR<A,SR: Semiring & Equatable>: Wrapper, Semiring, EquatableInContext where SR.Additive: Equatable, SR.Multiplicative: Equatable {
 	public typealias Wrapped = (A) -> SR
 	public typealias Additive = FunctionCM<A,SR.Additive>
@@ -161,7 +165,9 @@ public struct FunctionSR<A,SR: Semiring & Equatable>: Wrapper, Semiring, Equatab
 A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring is called tropical to honor the Brazillian mathematician, Imre Simon, who founded tropical mathematics.
  */
 
-// sourcery: genericArbitraryTypes = "Int"
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "ComparableToTop & Addable"
 public struct Tropical<A: ComparableToTop & Addable & Equatable>: Wrapper, Semiring, Equatable {
     public typealias Wrapped = A
     public typealias Additive = Min<A>

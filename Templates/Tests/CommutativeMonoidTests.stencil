@@ -9,8 +9,8 @@ final class {{ protocolName }}Tests: XCTestCase {
 
 	func test{{ type.name }}() {
 {% if type.isGeneric %}
-		property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>, b: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
-			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.isCommutative(a.get,b.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>, b: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContextForPropertyBasedTests %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>>.isCommutative(a.get,b.get){% if type.annotations.requiredContextForPropertyBasedTests %}(context){% else %}{% endif %}
 		}
 {% else %}
 		property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}, b: {{ type.name }}) in

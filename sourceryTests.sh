@@ -13,13 +13,17 @@ if [ -f "Sourcery/sourcery" ]; then
 		sed -i '' 1d $filename
 	done
 
-	echo "Generating LinuxMain file: Tests/AbstractTests + Templates/Other/LinuxMain.stencil -> Tests/LinuxMain.swift"
+	echo "Generating LinuxMain file: Tests/AbstractTests + Templates/LinuxMain/LinuxMain.stencil -> Tests/LinuxMain.swift"
 
-	./Sourcery/sourcery --sources Tests/AbstractTests --templates Templates/Other/LinuxMain.stencil --output Tests/LinuxMain.swift
+	./Sourcery/sourcery --sources Tests/AbstractTests --templates Templates/LinuxMain/LinuxMain.stencil --output Tests/LinuxMain.swift
 
 	echo "Regenerating test files..."
 
 	./Sourcery/sourcery --sources Sources/Abstract --templates Templates/Tests --output Tests/AbstractTests
+
+	echo "Generating utility files for tests: Sources/Abstract + Templates/Other -> Tests/Utility"
+
+	./Sourcery/sourcery --sources Sources/Abstract --templates Templates/Other --output Tests/Utility
 
 else
 	echo "Sourcery is not installed, ignoring."

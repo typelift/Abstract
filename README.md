@@ -43,15 +43,19 @@ So, this repo is my contribution and proposal to the cause.
 
 ## Sourcery usage
 
-Test code is automatically generated for all types using [Sourcery](https://github.com/krzysztofzablocki/Sourcery).
+Test code and `Arbitrary` type definitions are automatically generated for (almost) all types using [Sourcery](https://github.com/krzysztofzablocki/Sourcery)
 
-The script in `sourceryTests.sh` requires Sourcery to scan source files in `Sources/Abstract` and generate code with the templates defined in `Templates/Tests`; generated files are put in `Tests/AbstractTests` and are recognizable by the `.generated` in the name: these files must not be edited manually.
+The script in `sourceryTests.sh` requires Sourcery to scan source files in `Sources/Abstract` and generate code with the templates defined in `Templates/Tests`; generated files are put in `Tests/AbstractTests` and are recognizable by the `.generated` in the name: these files must not be edited manually. Also an `Arbitrary.generate.swift` file is automatically generated, along with `Linux.main.swift`.
 
 Sourcery is just a tool for code generation: at compile time the actual check for a type to conform to a certain protocol is guaranteed by the functions defined in the `Law` namespace, thus the generated tests are associated to specific algebraic structures rather than particular properties (like "associative" or "idempotent").
 
-Sourcery will automatically generate tests for all types conforming to the protocols representing the algebraic data structures considered, and some annotations associated with a type (in the form `// sourcery: annotation`) will allow some fine tuning:
+Sourcery will automatically generate tests for all types conforming to the protocols representing the algebraic data structures considered, and some annotations associated with a type (in the form `// sourcery: annotation`) will allow some fine tuning or `Arbitrary` generation:
 
-- ignore = "value": Sourcery will not generate tests related to that protocol for that type; "value" is the protocol's name (like "Semigroup" or "CommuntativeMonoid");
-- genericArbitraryTypes = "value": for generic types it defines the concrete type to be used in tests; if more than one generic type is present, all types must be separated by a comma;
-- requiredContext = "value": use `LawInContext` instead of `Law`; "value" is the context type; this is required if the type wraps a function.
-
+- `ignore = "value"`: Sourcery will not generate tests related to that protocol for that type; "value" is the protocol's name (like "Semigroup" or "CommuntativeMonoid");
+- `fixedTypesForPropertyBasedTests = "value"`: for generic types it defines the concrete type to be used in tests; if more than one generic type is present, all types must be separated by a comma;
+- `requiredContextForPropertyBasedTests = "value"`: use `LawInContext` instead of `Law`; "value" is the context type; this is required if the type wraps a function;
+- `arbitrary`: Sourcery will generate the `Arbitrary` definitions for that type; if it's a non-generic type Sourcery will add a `extension Type: Arbitrary`; if the type is generic, Sourcery will define a new `struct ArbitraryType<T: Arbitrary>: Arbitrary`;
+- `arbitraryFunction`: same as `arbitrary` but for function wrappers (like `FunctionS`);
+- `arbitraryGenericParameterProtocols = "value"`: if the type is generic, Sourcery will add these constraints for the generic parameter `T` in `ArbitraryType<T>` in the form of `T: value`
+- `additionalGenericParameterSubtypeRequirement = "value"`: if the type is generic, and a subtype of the generic paramter has some additional constraints, Sourcery will add them to `ArbitraryType<T>` in the form of `T.value` (example: `T.Additive: Equatable` if "value" is `Additive: Equatable`);
+- `additionalGenericParameterSubtypeRequirements = "value"`: same as before, but there's more than one requirement; in this case, more than one `additionalGenericParameterSubtypeRequirements` annotation should be added; if there's only one requirement, `additionalGenericParameterSubtypeRequirement` should be used.

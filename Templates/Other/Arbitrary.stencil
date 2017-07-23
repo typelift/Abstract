@@ -1,0 +1,133 @@
+import SwiftCheck
+@testable import Abstract
+
+{% macro checkError typeNameString %}{% if typeNameString == "Error" %}String{% else %}{{ typeNameString }}{% endif %}{% endmacro %}
+{% macro iterateVariables variables %}
+                {% for var in variables %}
+                  {% if var.actualTypeName.name|hasPrefix:"UI" %}
+                    {{ var.name }}: {{ var.actualTypeName.name }}.init(){% if not forloop.last %},{% endif %} 
+                  {% elif var.isOptional %}
+                    {{ var.name }}: $0.generate(using: OptionalOf<{{ var.actualTypeName.unwrappedTypeName }}>.arbitrary.map { $0.getOptional }){% if not forloop.last %}, {% endif %}
+                  {% elif var.isArray %}
+                    {{ var.name }}: $0.generate(using: ArrayOf<{{ var.typeName.array.elementTypeName.name }}>.arbitrary.map { $0.getArray }){% if not forloop.last %}, {% endif %}
+                  {% elif var.isDictionary %}
+                    {{ var.name }}: $0.generate(using: DictionaryOf<{{ var.typeName.dictionary.keyTypeName.name }}, {{ var.typeName.dictionary.valueTypeName.name }}>.arbitrary.map { $0.getDictionary }){% if not forloop.last %}, {% endif %}
+                  {% elif var.actualTypeName.name|contains:"<"|contains:">" %}
+                    {{ var.name }}: $0.generate(using: Arbitrary{{ var.actualTypeName.name }}.arbitrary.map { $0.get }){% if not forloop.last %}, {% endif %}
+                  {% else %}
+                    {{ var.name }}: $0.generate(){% if not forloop.last %}, {% endif %}
+                  {% endif %}
+                {% endfor %}
+{% endmacro %}
+{% macro caseOptional type case associatedValue %}OptionalOf<{{ associatedValue.actualTypeName.unwrappedTypeName }}>.arbitrary.map { $0.getOptional }.map({{ type.name}}.{{ case.name }}){% if not forloop.last %},{% endif %}{% endmacro %}
+{% macro caseArray type case associatedValue %}ArrayOf<{{ associatedValue.typeName.array.elementTypeName.name }}>.arbitrary.map { $0.getArray }.map({{ type.name}}.{{ case.name }}){% if not forloop.last %},{% endif %}{% endmacro %}
+{% macro caseDictionary type case associatedValue %}DictionaryOf<{{ associatedValue.typeName.dictionary.keyTypeName.name }}, {{ associatedValue.typeName.dictionary.valueTypeName.name }}>.arbitrary.map { $0.getDictionary }.map({{ type.name}}.{{ case.name }}){% if not forloop.last %},{% endif %}{% endmacro %}
+{% macro iterateCases cases pureTypeName optionalGenericParameter %}
+        {% for case in cases %}
+            {% if not case.hasAssociatedValue %}
+            Gen.pure({{ pureTypeName }}{{ optionalGenericParameter }}.{{ case.name }}){% if not forloop.last %},{% endif %}
+            {% elif case.associatedValues.count == 1 %}
+              {% if case.associatedValues.first.actualTypeName.name|hasPrefix:"UI" %}
+            Gen<{{ case.associatedValues.first.actualTypeName.name }}>.pure({{ case.associatedValues.first.actualTypeName.name }}.init()).map({{ type.name }}.{{ case.name }}){% if not forloop.last %},{% endif %}
+              {% elif case.associatedValues.first.isOptional %}
+            {% call caseOptional type case case.associatedValues.first %}
+              {% elif case.associatedValues.first.isArray %}
+            {% call caseArray type case case.associatedValues.first %}
+              {% elif case.associatedValues.first.isDictionary %}
+            {% call caseDictionary type case case.associatedValues.first %}
+              {% else %}
+            {% call checkError case.associatedValues.first.actualTypeName.name %}.arbitrary.map({{ type.name }}.{{ case.name }}){% if not forloop.last %},{% endif %}
+              {% endif %}
+            {% else %}
+            GenZip.with(
+              {% for assoVal in case.associatedValues %}
+                {% if assoVal.actualTypeName.name|hasPrefix:"UI" %}
+              Gen<{{ assoVal.actualTypeName.name }}>.pure({{ assoVal.actualTypeName.name }}.init()){% if not forloop.last %},{% endif %}
+                {% elif case.associatedValues.first.isOptional %}
+              {% call caseOptional type case assoVal %}
+                {% elif case.associatedValues.first.isArray %}
+              {% call caseArray type case assoVal %}
+                {% elif case.associatedValues.first.isDictionary %}
+              {% call caseDictionary type case assoVal %}
+                {% else %}
+              {% call checkError assoVal.actualTypeName.name %}.arbitrary{% if not forloop.last %},{% endif %}{% endif %}{% endfor %})
+              .map({{ type.name}}.{{ case.name }}){% if not forloop.last %},{% endif %}
+            {% endif %}
+        {% endfor %}
+{% endmacro %}
+
+// MARK: - Arbitrary for structs and classes
+{% for type in types.all|!enum|annotated:"arbitrary" %}
+
+{% if type.isGeneric %}
+struct {{ type.name }}Of<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
+    let get: {{ type.name }}<T>
+    init(_ get: {{ type.name }}<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<{{ type.name }}Of<T>> {
+        return Gen<{{ type.name }}<T>>
+            .compose {
+                {{ type.name }}<T>.init(
+                {% call iterateVariables type.storedVariables %}
+                )
+            }
+            .map({{ type.name }}Of<T>.init)
+    }
+}
+{% else %}
+extension {{ type.name }}: Arbitrary {
+    public static var arbitrary: Gen<{{ type.name }}> {
+        return Gen<{{ type.name }}>
+            .compose {
+                {{ type.name }}.init(
+                {% call iterateVariables type.storedVariables %}
+                )
+        }
+    }
+}
+{% endif %}
+{% endfor %}
+
+// MARK: - Arbitrary for enums
+{% for type in types.enums|annotated:"arbitrary" %}
+
+{% if type.isGeneric %}
+struct {{ type.name }}Of<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
+    let get: {{ type.name }}<T>
+    init(_ get: {{ type.name }}<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<{{ type.name }}Of<T>> {
+        return Gen<{{ type.name }}<T>>.one(of: [
+        {% call iterateCases type.cases type.name "<T>" %}
+        ]).map({{ type.name }}Of<T>.init)
+    }
+}
+{% else %}
+extension {{ type.name }}: Arbitrary {
+    public static var arbitrary: Gen<{{ type.name}}> {
+        return Gen<{{ type.name}}>.one(of: [
+        {% call iterateCases type.cases type.name "" %}
+        ])
+    }
+}
+{% endif %}
+{% endfor %}
+
+// MARK: - Arbitrary for function wrappers
+{% for type in types.all|annotated:"arbitraryFunction" %}
+
+struct {{ type.name }}Of<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
+	let get: {{ type.name }}<S,T>
+	init(_ value: @escaping (S) -> T) {
+		self.get = {{ type.name }}.init(value)
+	}
+
+	public static var arbitrary: Gen<{{ type.name }}Of<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map({{ type.name }}Of<S,T>.init)
+	}
+}
+{% endfor %}

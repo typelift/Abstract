@@ -52,8 +52,10 @@ extension Or: CommutativeMonoid {}
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int,TestStructure"
-// sourcery: requiredContext = "Int"
+// sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
+// sourcery: requiredContextForPropertyBasedTests = "Int"
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "CommutativeMonoid & Equatable"
 public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: Wrapper, CommutativeMonoid, EquatableInContext {
 	public typealias Wrapped = (A) -> M
 	public typealias Context = A

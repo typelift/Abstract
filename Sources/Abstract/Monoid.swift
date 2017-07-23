@@ -94,8 +94,10 @@ extension Endofunction: Monoid {
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int,TestStructure"
-// sourcery: requiredContext = "Int"
+// sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
+// sourcery: requiredContextForPropertyBasedTests = "Int"
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
 public struct FunctionM<A, M: Monoid & Equatable>: Wrapper,  Monoid, EquatableInContext {
 	public typealias Wrapped = (A) -> M
 	public typealias Context = A
