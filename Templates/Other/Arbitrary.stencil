@@ -57,7 +57,7 @@ import SwiftCheck
 {% endmacro %}
 
 // MARK: - Arbitrary for structs and classes
-{% for type in types.structs|annotated:"arbitrary" %}
+{% for type in types.all|!enum|annotated:"arbitrary" %}
 
 {% if type.isGeneric %}
 struct Arbitrary{{ type.name }}<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %} {
@@ -115,4 +115,19 @@ extension {{ type.name }}: Arbitrary {
     }
 }
 {% endif %}
+{% endfor %}
+
+// MARK: - Arbitrary for function wrappers
+{% for type in types.all|annotated:"arbitraryFunction" %}
+
+struct Arbitrary{{ type.name }}<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %} {
+	let get: {{ type.name }}<S,T>
+	init(_ value: @escaping (S) -> T) {
+		self.get = {{ type.name }}.init(value)
+	}
+
+	public static var arbitrary: Gen<Arbitrary{{ type.name }}<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(Arbitrary{{ type.name }}<S,T>.init)
+	}
+}
 {% endfor %}

@@ -181,6 +181,8 @@ public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext
 
 //: ------
 
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
 // sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
 // sourcery: requiredContextForPropertyBasedTests = "Int"
 public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, EquatableInContext {

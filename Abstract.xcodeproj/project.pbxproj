@@ -97,9 +97,9 @@
 		380A4B311F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */; };
 		380A4B321F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */; };
 		380A4B331F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */; };
-		38273AD51F248569000AB0C8 /* ArbitraryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD41F248569000AB0C8 /* ArbitraryDefinitions.swift */; };
-		38273AD61F248569000AB0C8 /* ArbitraryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD41F248569000AB0C8 /* ArbitraryDefinitions.swift */; };
-		38273AD71F248569000AB0C8 /* ArbitraryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD41F248569000AB0C8 /* ArbitraryDefinitions.swift */; };
+		38273AD51F248569000AB0C8 /* CustomArbitraryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD41F248569000AB0C8 /* CustomArbitraryTypes.swift */; };
+		38273AD61F248569000AB0C8 /* CustomArbitraryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD41F248569000AB0C8 /* CustomArbitraryTypes.swift */; };
+		38273AD71F248569000AB0C8 /* CustomArbitraryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD41F248569000AB0C8 /* CustomArbitraryTypes.swift */; };
 		38273AD91F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */; };
 		38273ADA1F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */; };
 		38273ADB1F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */; };
@@ -171,7 +171,7 @@
 		380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemiringTests.generated.swift; sourceTree = "<group>"; };
 		380A4B351F1BFA9F002D70E0 /* LinuxMain.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = LinuxMain.stencil; sourceTree = "<group>"; };
 		38273AD21F2484DD000AB0C8 /* Arbitrary.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Arbitrary.stencil; sourceTree = "<group>"; };
-		38273AD41F248569000AB0C8 /* ArbitraryDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArbitraryDefinitions.swift; sourceTree = "<group>"; };
+		38273AD41F248569000AB0C8 /* CustomArbitraryTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomArbitraryTypes.swift; sourceTree = "<group>"; };
 		38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arbitrary.generated.swift; sourceTree = "<group>"; };
 		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		3853BF9F1EF1294400791099 /* Semiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */,
-				38273AD41F248569000AB0C8 /* ArbitraryDefinitions.swift */,
+				38273AD41F248569000AB0C8 /* CustomArbitraryTypes.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -708,7 +708,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38273AD61F248569000AB0C8 /* ArbitraryDefinitions.swift in Sources */,
+				38273AD61F248569000AB0C8 /* CustomArbitraryTypes.swift in Sources */,
 				38273ADA1F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */,
 				380A4B321F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */,
 				380A4B211F1BE383002D70E0 /* MonoidTests.generated.swift in Sources */,
@@ -747,7 +747,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38273AD71F248569000AB0C8 /* ArbitraryDefinitions.swift in Sources */,
+				38273AD71F248569000AB0C8 /* CustomArbitraryTypes.swift in Sources */,
 				38273ADB1F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */,
 				380A4B331F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */,
 				380A4B221F1BE383002D70E0 /* MonoidTests.generated.swift in Sources */,
@@ -808,7 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38273AD51F248569000AB0C8 /* ArbitraryDefinitions.swift in Sources */,
+				38273AD51F248569000AB0C8 /* CustomArbitraryTypes.swift in Sources */,
 				38273AD91F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */,
 				380A4B311F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */,
 				380A4B201F1BE383002D70E0 /* MonoidTests.generated.swift in Sources */,

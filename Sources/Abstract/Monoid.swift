@@ -94,6 +94,8 @@ extension Endofunction: Monoid {
 
 //: ------
 
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
 // sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
 // sourcery: requiredContextForPropertyBasedTests = "Int"
 public struct FunctionM<A, M: Monoid & Equatable>: Wrapper,  Monoid, EquatableInContext {

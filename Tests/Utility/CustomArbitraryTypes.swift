@@ -102,54 +102,6 @@ struct ArbitraryEndofunction<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
 	}
 }
 
-struct ArbitraryFunctionS<A: CoArbitrary & Hashable, S: Arbitrary & Semigroup & Equatable>: Arbitrary {
-	let get: FunctionS<A,S>
-	
-	init(_ value: @escaping (A) -> S) {
-		self.get = FunctionS.init(value)
-	}
-	
-	static var arbitrary: Gen<ArbitraryFunctionS<A,S>> {
-		return ArrowOf<A,S>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionS<A,S>.init)
-	}
-}
-
-struct ArbitraryFunctionM<A: CoArbitrary & Hashable, M: Arbitrary & Monoid & Equatable>: Arbitrary {
-	let get: FunctionM<A,M>
-	
-	init(_ value: @escaping (A) -> M) {
-		self.get = FunctionM.init(value)
-	}
-	
-	static var arbitrary: Gen<ArbitraryFunctionM<A,M>> {
-		return ArrowOf<A,M>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionM<A,M>.init)
-	}
-}
-
-struct ArbitraryFunctionCM<A: CoArbitrary & Hashable, M: Arbitrary & CommutativeMonoid & Equatable>: Arbitrary {
-	let get: FunctionCM<A,M>
-	
-	init(_ value: @escaping (A) -> M) {
-		self.get = FunctionCM.init(value)
-	}
-	
-	static var arbitrary: Gen<ArbitraryFunctionCM<A,M>> {
-		return ArrowOf<A,M>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionCM<A,M>.init)
-	}
-}
-
-struct ArbitraryFunctionBS<A: CoArbitrary & Hashable, M: Arbitrary & BoundedSemilattice & Equatable>: Arbitrary {
-	let get: FunctionBS<A,M>
-	
-	init(_ value: @escaping (A) -> M) {
-		self.get = FunctionBS.init(value)
-	}
-	
-	static var arbitrary: Gen<ArbitraryFunctionBS<A,M>> {
-		return ArrowOf<A,M>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionBS<A,M>.init)
-	}
-}
-
 struct ArbitraryFunctionSR<A: CoArbitrary & Hashable, SR: Arbitrary & Semiring & Equatable>: Arbitrary where SR.Additive: Equatable, SR.Multiplicative: Equatable {
 	let get: FunctionSR<A,SR>
 

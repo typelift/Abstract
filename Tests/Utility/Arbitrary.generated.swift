@@ -125,3 +125,49 @@ extension Ordering: Arbitrary {
         ])
     }
 }
+
+// MARK: - Arbitrary for function wrappers
+
+struct ArbitraryFunctionBS<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & BoundedSemilattice & Equatable {
+	let get: FunctionBS<S,T>
+	init(_ value: @escaping (S) -> T) {
+		self.get = FunctionBS.init(value)
+	}
+
+	public static var arbitrary: Gen<ArbitraryFunctionBS<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionBS<S,T>.init)
+	}
+}
+
+struct ArbitraryFunctionCM<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & CommutativeMonoid & Equatable {
+	let get: FunctionCM<S,T>
+	init(_ value: @escaping (S) -> T) {
+		self.get = FunctionCM.init(value)
+	}
+
+	public static var arbitrary: Gen<ArbitraryFunctionCM<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionCM<S,T>.init)
+	}
+}
+
+struct ArbitraryFunctionM<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Monoid & Equatable {
+	let get: FunctionM<S,T>
+	init(_ value: @escaping (S) -> T) {
+		self.get = FunctionM.init(value)
+	}
+
+	public static var arbitrary: Gen<ArbitraryFunctionM<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionM<S,T>.init)
+	}
+}
+
+struct ArbitraryFunctionS<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Semigroup & Equatable {
+	let get: FunctionS<S,T>
+	init(_ value: @escaping (S) -> T) {
+		self.get = FunctionS.init(value)
+	}
+
+	public static var arbitrary: Gen<ArbitraryFunctionS<S,T>> {
+		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(ArbitraryFunctionS<S,T>.init)
+	}
+}

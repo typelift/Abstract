@@ -52,6 +52,8 @@ extension Or: CommutativeMonoid {}
 
 //: ------
 
+// sourcery: arbitraryFunction
+// sourcery: arbitraryGenericParameterProtocols = "CommutativeMonoid & Equatable"
 // sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
 // sourcery: requiredContextForPropertyBasedTests = "Int"
 public struct FunctionCM<A, M: CommutativeMonoid & Equatable>: Wrapper, CommutativeMonoid, EquatableInContext {
