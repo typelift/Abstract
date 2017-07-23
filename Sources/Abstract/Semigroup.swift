@@ -38,7 +38,7 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Addable"
 public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
-	public typealias Wrapped = A
+	public typealias WrappedType = A
 
 	public let unwrap: A
 	
@@ -57,7 +57,7 @@ public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Multipliable"
 public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
-	public typealias Wrapped = A
+	public typealias WrappedType = A
 
 	public let unwrap: A
 	
@@ -76,7 +76,7 @@ public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToBottom"
 public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
-	public typealias Wrapped = A
+	public typealias WrappedType = A
 
 	public let unwrap: A
 	
@@ -95,7 +95,7 @@ public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToTop"
 public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
-	public typealias Wrapped = A
+	public typealias WrappedType = A
 
 	public let unwrap: A
 	
@@ -112,7 +112,7 @@ public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
 
 // sourcery: arbitrary
 public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
-	public typealias Wrapped = Bool
+	public typealias WrappedType = Bool
 	public typealias BooleanLiteralType = Bool
 
 	public let unwrap: Bool
@@ -134,7 +134,7 @@ public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 // sourcery: arbitrary
 public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
-	public typealias Wrapped = Bool
+	public typealias WrappedType = Bool
 	public typealias BooleanLiteralType = Bool
 
 	public let unwrap: Bool
@@ -158,7 +158,7 @@ public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Equatable"
 public struct First<A: Equatable>: Wrapper, Semigroup, Equatable {
-    public typealias Wrapped = A
+    public typealias WrappedType = A
     
     public let unwrap: A
     
@@ -177,7 +177,7 @@ public struct First<A: Equatable>: Wrapper, Semigroup, Equatable {
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Equatable"
 public struct Last<A: Equatable>: Wrapper, Semigroup, Equatable {
-    public typealias Wrapped = A
+    public typealias WrappedType = A
     
     public let unwrap: A
     
@@ -190,10 +190,12 @@ public struct Last<A: Equatable>: Wrapper, Semigroup, Equatable {
     }
 }
 
+//: ------
+
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: requiredContextForPropertyBasedTests = "Int"
 public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext {
-	public typealias Wrapped = (A) -> A
+	public typealias WrappedType = (A) -> A
 	public typealias Context = A
 
 	public let unwrap: (A) -> A
@@ -222,7 +224,7 @@ public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext
 // sourcery: arbitraryFunction
 // sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
 public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, EquatableInContext {
-	public typealias Wrapped = (A) -> S
+	public typealias WrappedType = (A) -> S
 	public typealias Context = A
 
 	public let unwrap: (A) -> S

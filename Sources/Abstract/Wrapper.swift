@@ -3,7 +3,7 @@
 
 And abstract definition for a type that wraps another, and guarantees both initialization with and access to the wrapped value.
 
-For a wrapper to be *well-behaved* the requirement is that, by retrieving the `Wrapped` from a `Wrapper`, then constructing the `Wrapper` again with the retrieved value, we end up building the same `Wrapper` as before:
+For a wrapper to be *well-behaved* the requirement is that, by retrieving the `WrappedType` from a `Wrapper`, then constructing the `Wrapper` again with the retrieved value, we end up building the same `Wrapper` as before:
 
 A.init(a.unwrap) == a
 
@@ -11,15 +11,15 @@ This means that `Wrapper.init` and `Wrapper.unwrap` must be inverse to each othe
 */
 
 public protocol Wrapper {
-	associatedtype Wrapped
+	associatedtype WrappedType
 
-	init(_ value: Wrapped)
+	init(_ value: WrappedType)
 
-	var unwrap: Wrapped { get }
+	var unwrap: WrappedType { get }
 }
 
 extension Wrapper {
-	public init(unwrap: Wrapped) {
+	public init(unwrap: WrappedType) {
 		self.init(unwrap)
 	}
 }
@@ -37,10 +37,10 @@ extension LawInContext where Element: Wrapper {
 }
 
 /*:
-If the `Wrapped` element is `Equatable`, we can define the static `==` function for a `Wrapper` (unfortunately, the `Equatable` conformance must be declared explicitly for every wrapper).
+If the `WrappedType` element is `Equatable`, we can define the static `==` function for a `Wrapper` (unfortunately, the `Equatable` conformance must be declared explicitly for every wrapper).
 */
 
-extension Wrapper where Wrapped: Equatable {
+extension Wrapper where WrappedType: Equatable {
 	public static func == (left: Self, right: Self) -> Bool {
 		return left.unwrap == right.unwrap
 	}

@@ -56,10 +56,10 @@ extension LawInContext where Element: Semiring {
 }
 
 /*:
-Interestingly, if for type `A` both `Additive` and `Multiplicative` are `Wrapper` and the `Wrapped` type is `A` itself, we can derive the implementation of all the functions:
+Interestingly, if for type `A` both `Additive` and `Multiplicative` are `Wrapper` and the `WrappedType` type is `A` itself, we can derive the implementation of all the functions:
 */
 
-extension Semiring where Additive: Wrapper, Additive.Wrapped == Self {
+extension Semiring where Additive: Wrapper, Additive.WrappedType == Self {
 	public static func <>+(left: Self, right: Self) -> Self {
 		return (Additive.init(left) <> Additive.init(right)).unwrap
 	}
@@ -69,7 +69,7 @@ extension Semiring where Additive: Wrapper, Additive.Wrapped == Self {
 	}
 }
 
-extension Semiring where Multiplicative: Wrapper, Multiplicative.Wrapped == Self {
+extension Semiring where Multiplicative: Wrapper, Multiplicative.WrappedType == Self {
 	public static func <>*(left: Self, right: Self) -> Self {
 		return (Multiplicative.init(left) <> Multiplicative.init(right)).unwrap
 	}
@@ -83,7 +83,7 @@ extension Semiring where Multiplicative: Wrapper, Multiplicative.Wrapped == Self
 If instead the semiring is a wrapper of `A`, and both its additive and multiplicative are wrappers of `A`, we can still derive an abstract implementation for the functions:
 */
 
-extension Semiring where Self: Wrapper, Additive: Wrapper, Self.Wrapped == Additive.Wrapped {
+extension Semiring where Self: Wrapper, Additive: Wrapper, Self.WrappedType == Additive.WrappedType {
 	public static func <>+(left: Self, right: Self) -> Self {
 		return Self.init((Additive.init(left.unwrap) <> Additive.init(right.unwrap)).unwrap)
 	}
@@ -93,7 +93,7 @@ extension Semiring where Self: Wrapper, Additive: Wrapper, Self.Wrapped == Addit
 	}
 }
 
-extension Semiring where Self: Wrapper, Multiplicative: Wrapper, Self.Wrapped == Multiplicative.Wrapped {
+extension Semiring where Self: Wrapper, Multiplicative: Wrapper, Self.WrappedType == Multiplicative.WrappedType {
 	public static func <>*(left: Self, right: Self) -> Self {
 		return Self.init((Multiplicative.init(left.unwrap) <> Multiplicative.init(right.unwrap)).unwrap)
 	}
@@ -123,7 +123,7 @@ extension Bool: Semiring {
 // sourcery: additionalGenericParameterSubtypeRequirements = "Additive: Equatable"
 // sourcery: additionalGenericParameterSubtypeRequirements = "Multiplicative: Equatable"
 public struct FunctionSR<A,SR: Semiring & Equatable>: Wrapper, Semiring, EquatableInContext where SR.Additive: Equatable, SR.Multiplicative: Equatable {
-	public typealias Wrapped = (A) -> SR
+	public typealias WrappedType = (A) -> SR
 	public typealias Additive = FunctionCM<A,SR.Additive>
 	public typealias Multiplicative = FunctionM<A,SR.Multiplicative>
 	public typealias Context = A
@@ -169,7 +169,7 @@ A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring 
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToTop & Addable"
 public struct Tropical<A: ComparableToTop & Addable & Equatable>: Wrapper, Semiring, Equatable {
-    public typealias Wrapped = A
+    public typealias WrappedType = A
     public typealias Additive = Min<A>
     public typealias Multiplicative = Add<A>
     
