@@ -9,8 +9,8 @@ final class {{ protocolName }}Tests: XCTestCase {
 
 	func test{{ type.name }}() {
 {% if type.isGeneric %}
-		property("{{ type.name }} is a {{ protocolName }}: Distributive") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>, b: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>, c: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
-			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.multiplicationIsDistributiveOverAddition(a.get,b.get,c.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		property("{{ type.name }} is a {{ protocolName }}: Distributive") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>, b: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>, c: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContextForPropertyBasedTests %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>>.multiplicationIsDistributiveOverAddition(a.get,b.get,c.get){% if type.annotations.requiredContextForPropertyBasedTests %}(context){% else %}{% endif %}
 		}
 {% else %}
 		property("{{ type.name }} is a {{ protocolName }}: Distributive") <- forAll { (a: {{ type.name }}, b: {{ type.name }}, c: {{ type.name }}) in
@@ -19,8 +19,8 @@ final class {{ protocolName }}Tests: XCTestCase {
 {% endif %}
 
 {% if type.isGeneric %}
-		property("{{ type.name }} is a {{ protocolName }}: Annihilation") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.genericArbitraryTypes }}>{% if type.annotations.requiredContext %}, context: {{ type.annotations.requiredContext }}{% else %}{% endif %}) in
-			Law{% if type.annotations.requiredContext %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.genericArbitraryTypes }}>>.zeroAnnihiliatesTheMultiplicative(a.get){% if type.annotations.requiredContext %}(context){% else %}{% endif %}
+		property("{{ type.name }} is a {{ protocolName }}: Annihilation") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContextForPropertyBasedTests %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>>.zeroAnnihiliatesTheMultiplicative(a.get){% if type.annotations.requiredContextForPropertyBasedTests %}(context){% else %}{% endif %}
 		}
 {% else %}
 		property("{{ type.name }} is a {{ protocolName }}: Annihilation") <- forAll { (a: {{ type.name }}) in

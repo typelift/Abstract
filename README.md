@@ -52,6 +52,6 @@ Sourcery is just a tool for code generation: at compile time the actual check fo
 Sourcery will automatically generate tests for all types conforming to the protocols representing the algebraic data structures considered, and some annotations associated with a type (in the form `// sourcery: annotation`) will allow some fine tuning:
 
 - ignore = "value": Sourcery will not generate tests related to that protocol for that type; "value" is the protocol's name (like "Semigroup" or "CommuntativeMonoid");
-- genericArbitraryTypes = "value": for generic types it defines the concrete type to be used in tests; if more than one generic type is present, all types must be separated by a comma;
-- requiredContext = "value": use `LawInContext` instead of `Law`; "value" is the context type; this is required if the type wraps a function.
+- fixedTypesForPropertyBasedTests = "value": for generic types it defines the concrete type to be used in tests; if more than one generic type is present, all types must be separated by a comma;
+- requiredContextForPropertyBasedTests = "value": use `LawInContext` instead of `Law`; "value" is the context type; this is required if the type wraps a function.
 

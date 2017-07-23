@@ -34,7 +34,9 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Addable"
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -51,7 +53,9 @@ public struct Add<A: Addable>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Multipliable"
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -68,7 +72,9 @@ public struct Multiply<A: Multipliable>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "ComparableToBottom"
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -85,7 +91,9 @@ public struct Max<A: ComparableToBottom>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "ComparableToTop"
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
 	public typealias Wrapped = A
 
@@ -102,6 +110,7 @@ public struct Min<A: ComparableToTop>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: arbitrary
 public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
@@ -123,6 +132,7 @@ public struct And: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 //: ------
 
+// sourcery: arbitrary
 public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 	public typealias Wrapped = Bool
 	public typealias BooleanLiteralType = Bool
@@ -144,8 +154,8 @@ public struct Or: Wrapper, Semigroup, Equatable, ExpressibleByBooleanLiteral {
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int"
-// sourcery: requiredContext = "Int"
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
+// sourcery: requiredContextForPropertyBasedTests = "Int"
 public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext {
 	public typealias Wrapped = (A) -> A
 	public typealias Context = A
@@ -171,8 +181,8 @@ public struct Endofunction<A: Equatable>: Wrapper, Semigroup, EquatableInContext
 
 //: ------
 
-// sourcery: genericArbitraryTypes = "Int,TestStructure"
-// sourcery: requiredContext = "Int"
+// sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
+// sourcery: requiredContextForPropertyBasedTests = "Int"
 public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, EquatableInContext {
 	public typealias Wrapped = (A) -> S
 	public typealias Context = A
@@ -198,6 +208,7 @@ public struct FunctionS<A, S: Semigroup & Equatable>: Wrapper, Semigroup, Equata
 
 //: ------
 
+// sourcery: arbitrary
 public enum Ordering: Semigroup {
 	case lowerThan
 	case equalTo

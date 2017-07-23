@@ -138,17 +138,17 @@ struct MinOf<A: Arbitrary & ComparableToTop>: Arbitrary {
 	}
 }
 
-extension And: Arbitrary {
-	public static var arbitrary: Gen<And> {
-		return Bool.arbitrary.map(And.init(_:))
-	}
-}
-
-extension Or: Arbitrary {
-	public static var arbitrary: Gen<Or> {
-		return Bool.arbitrary.map(Or.init(_:))
-	}
-}
+//extension And: Arbitrary {
+//	public static var arbitrary: Gen<And> {
+//		return Bool.arbitrary.map(And.init(_:))
+//	}
+//}
+//
+//extension Or: Arbitrary {
+//	public static var arbitrary: Gen<Or> {
+//		return Bool.arbitrary.map(Or.init(_:))
+//	}
+//}
 
 struct EndofunctionOf<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
 	let get: Endofunction<A>
@@ -174,22 +174,22 @@ struct FunctionSOf<A: CoArbitrary & Hashable, S: Arbitrary & Semigroup & Equatab
 	}
 }
 
-extension Ordering: Arbitrary {
-	public static var arbitrary: Gen<Ordering> {
-		return Gen<Int>.fromElements(of: [0,1,2]).map {
-			switch $0 {
-			case 0:
-				return .lowerThan
-			case 1:
-				return .equalTo
-			case 2:
-				return .greaterThan
-			default:
-				fatalError()
-			}
-		}
-	}
-}
+//extension Ordering: Arbitrary {
+//	public static var arbitrary: Gen<Ordering> {
+//		return Gen<Int>.fromElements(of: [0,1,2]).map {
+//			switch $0 {
+//			case 0:
+//				return .lowerThan
+//			case 1:
+//				return .equalTo
+//			case 2:
+//				return .greaterThan
+//			default:
+//				fatalError()
+//			}
+//		}
+//	}
+//}
 
 struct FunctionMOf<A: CoArbitrary & Hashable, M: Arbitrary & Monoid & Equatable>: Arbitrary {
 	let get: FunctionM<A,M>
