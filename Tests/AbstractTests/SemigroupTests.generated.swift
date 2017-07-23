@@ -9,7 +9,7 @@ import SwiftCheck
 final class SemigroupTests: XCTestCase {
 
 	func testAdd() {
-		property("Add is a Semigroup") <- forAll { (a: AddOf<Int>, b: AddOf<Int>, c: AddOf<Int>) in
+		property("Add is a Semigroup") <- forAll { (a: ArbitraryAdd<Int>, b: ArbitraryAdd<Int>, c: ArbitraryAdd<Int>) in
 			Law<Add<Int>>.isAssociative(a.get,b.get,c.get)
 		}
 	}
@@ -21,49 +21,49 @@ final class SemigroupTests: XCTestCase {
 	}
 
 	func testEndofunction() {
-		property("Endofunction is a Semigroup") <- forAll { (a: EndofunctionOf<Int>, b: EndofunctionOf<Int>, c: EndofunctionOf<Int>, context: Int) in
+		property("Endofunction is a Semigroup") <- forAll { (a: ArbitraryEndofunction<Int>, b: ArbitraryEndofunction<Int>, c: ArbitraryEndofunction<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
 	func testFunctionBS() {
-		property("FunctionBS is a Semigroup") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, c: FunctionBSOf<Int,TestStructure>, context: Int) in
+		property("FunctionBS is a Semigroup") <- forAll { (a: ArbitraryFunctionBS<Int,TestStructure>, b: ArbitraryFunctionBS<Int,TestStructure>, c: ArbitraryFunctionBS<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
 	func testFunctionCM() {
-		property("FunctionCM is a Semigroup") <- forAll { (a: FunctionCMOf<Int,TestStructure>, b: FunctionCMOf<Int,TestStructure>, c: FunctionCMOf<Int,TestStructure>, context: Int) in
+		property("FunctionCM is a Semigroup") <- forAll { (a: ArbitraryFunctionCM<Int,TestStructure>, b: ArbitraryFunctionCM<Int,TestStructure>, c: ArbitraryFunctionCM<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionCM<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
 	func testFunctionM() {
-		property("FunctionM is a Semigroup") <- forAll { (a: FunctionMOf<Int,TestStructure>, b: FunctionMOf<Int,TestStructure>, c: FunctionMOf<Int,TestStructure>, context: Int) in
+		property("FunctionM is a Semigroup") <- forAll { (a: ArbitraryFunctionM<Int,TestStructure>, b: ArbitraryFunctionM<Int,TestStructure>, c: ArbitraryFunctionM<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionM<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
 	func testFunctionS() {
-		property("FunctionS is a Semigroup") <- forAll { (a: FunctionSOf<Int,TestStructure>, b: FunctionSOf<Int,TestStructure>, c: FunctionSOf<Int,TestStructure>, context: Int) in
+		property("FunctionS is a Semigroup") <- forAll { (a: ArbitraryFunctionS<Int,TestStructure>, b: ArbitraryFunctionS<Int,TestStructure>, c: ArbitraryFunctionS<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionS<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
 	func testMax() {
-		property("Max is a Semigroup") <- forAll { (a: MaxOf<Int>, b: MaxOf<Int>, c: MaxOf<Int>) in
+		property("Max is a Semigroup") <- forAll { (a: ArbitraryMax<Int>, b: ArbitraryMax<Int>, c: ArbitraryMax<Int>) in
 			Law<Max<Int>>.isAssociative(a.get,b.get,c.get)
 		}
 	}
 
 	func testMin() {
-		property("Min is a Semigroup") <- forAll { (a: MinOf<Int>, b: MinOf<Int>, c: MinOf<Int>) in
+		property("Min is a Semigroup") <- forAll { (a: ArbitraryMin<Int>, b: ArbitraryMin<Int>, c: ArbitraryMin<Int>) in
 			Law<Min<Int>>.isAssociative(a.get,b.get,c.get)
 		}
 	}
 
 	func testMultiply() {
-		property("Multiply is a Semigroup") <- forAll { (a: MultiplyOf<Int>, b: MultiplyOf<Int>, c: MultiplyOf<Int>) in
+		property("Multiply is a Semigroup") <- forAll { (a: ArbitraryMultiply<Int>, b: ArbitraryMultiply<Int>, c: ArbitraryMultiply<Int>) in
 			Law<Multiply<Int>>.isAssociative(a.get,b.get,c.get)
 		}
 	}

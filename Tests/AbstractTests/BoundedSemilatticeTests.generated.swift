@@ -15,19 +15,19 @@ final class BoundedSemilatticeTests: XCTestCase {
 	}
 
 	func testFunctionBS() {
-		property("FunctionBS is a BoundedSemilattice") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, context: Int) in
+		property("FunctionBS is a BoundedSemilattice") <- forAll { (a: ArbitraryFunctionBS<Int,TestStructure>, b: ArbitraryFunctionBS<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isIdempotent(a.get,b.get)(context)
 		}
 	}
 
 	func testMax() {
-		property("Max is a BoundedSemilattice") <- forAll { (a: MaxOf<Int>, b: MaxOf<Int>) in
+		property("Max is a BoundedSemilattice") <- forAll { (a: ArbitraryMax<Int>, b: ArbitraryMax<Int>) in
 			Law<Max<Int>>.isIdempotent(a.get,b.get)
 		}
 	}
 
 	func testMin() {
-		property("Min is a BoundedSemilattice") <- forAll { (a: MinOf<Int>, b: MinOf<Int>) in
+		property("Min is a BoundedSemilattice") <- forAll { (a: ArbitraryMin<Int>, b: ArbitraryMin<Int>) in
 			Law<Min<Int>>.isIdempotent(a.get,b.get)
 		}
 	}

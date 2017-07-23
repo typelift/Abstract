@@ -9,7 +9,7 @@ final class WrapperTests: XCTestCase {
 
 	func test{{ type.name }}() {
 {% if type.isGeneric %}
-		property("{{ type.name }} is a well-behaved Wrapper") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
+		property("{{ type.name }} is a well-behaved Wrapper") <- forAll { (a: Arbitrary{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
 			Law{% if type.annotations.requiredContextForPropertyBasedTests %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>>.isWellBehavedWrapper(a.get){% if type.annotations.requiredContextForPropertyBasedTests %}(context){% else %}{% endif %}
 		}
 {% else %}

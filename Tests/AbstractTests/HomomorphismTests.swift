@@ -11,7 +11,7 @@ final class HomomorphismTests: XCTestCase {
 	}
 
 	func testComparisonReversed() {
-		property("Comparison.reversed is a Homomorphism") <- forAll { (a: FunctionMOf<TestProduct,Ordering>, b: FunctionMOf<TestProduct,Ordering>, context: TestProduct) in
+		property("Comparison.reversed is a Homomorphism") <- forAll { (a: ArbitraryFunctionM<TestProduct,Ordering>, b: ArbitraryFunctionM<TestProduct,Ordering>, context: TestProduct) in
 			LawInContext<Comparison<Int>>.isHomomorphism({ $0.reversed }, Comparison<Int> { a.get.call(TestProduct.init($0)) }, Comparison<Int> { b.get.call(TestProduct.init($0)) })(context.unwrap)
 		}
 	}
