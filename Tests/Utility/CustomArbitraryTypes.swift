@@ -65,7 +65,7 @@ struct TestSemiring: Arbitrary, Semiring, Equatable {
 }
 
 struct TestProduct: CoArbitrary, Hashable, Arbitrary, Wrapper {
-	typealias Wrapped = (Int,Int)
+	typealias WrappedType = (Int,Int)
 
 	let unwrap: (Int,Int)
 	
