@@ -22,7 +22,7 @@
 		0950FEF91EFC5C7900513DF7 /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A781EEC4EFF00F587AD /* Monoid.swift */; };
 		0950FEFA1EFC5C7900513DF7 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3853BF9F1EF1294400791099 /* Semiring.swift */; };
 		0950FF071EFC5C8100513DF7 /* HomomorphismTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A681EEC25AE00F587AD /* HomomorphismTests.swift */; };
-		0950FF231F09480A00513DF7 /* Abstract_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0950FF1A1F09480A00513DF7 /* Abstract_tvOS.framework */; };
+		0950FF231F09480A00513DF7 /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0950FF1A1F09480A00513DF7 /* Abstract.framework */; };
 		0950FF311F09488B00513DF7 /* Adapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A761EEC31DA00F587AD /* Adapters.swift */; };
 		0950FF321F09488B00513DF7 /* BoundedSemilattice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C9B1EED8A15007AB12A /* BoundedSemilattice.swift */; };
 		0950FF331F09488B00513DF7 /* CommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C991EED85C6007AB12A /* CommutativeMonoid.swift */; };
@@ -76,7 +76,6 @@
 		0951F2401F095AD500EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
 		0951F2411F095AD600EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
 		0951F2481F09690C00EA362C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2421F09690200EA362C /* SwiftCheck.framework */; };
-		0951F24C1F096B7F00EA362C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; };
 		0951F24E1F096C3A00EA362C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2431F09690200EA362C /* SwiftCheck.framework */; };
 		380A4B131F1B726E002D70E0 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2431F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		380A4B151F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A4B141F1B7336002D70E0 /* SemigroupTests.generated.swift */; };
@@ -103,6 +102,10 @@
 		38273AD91F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */; };
 		38273ADA1F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */; };
 		38273ADB1F2485FB000AB0C8 /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */; };
+		38A14E4F1F2A2D9C00A2900C /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0950FF011EFC5C7900513DF7 /* Abstract.framework */; };
+		38A14E501F2A2DAB00A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2421F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38A14E521F2A2DC300A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38A14E531F2A2DCB00A2900C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +132,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				38A14E501F2A2DAB00A2900C /* SwiftCheck.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,14 +146,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38A14E511F2A2DBB00A2900C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				38A14E521F2A2DC300A2900C /* SwiftCheck.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0950FF011EFC5C7900513DF7 /* Abstract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0950FF121EFC5C8100513DF7 /* Abstract-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Abstract-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0950FF1A1F09480A00513DF7 /* Abstract_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0950FF1A1F09480A00513DF7 /* Abstract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0950FF221F09480A00513DF7 /* Abstract-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Abstract-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0950FF461F094A0100513DF7 /* Abstract_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0950FF461F094A0100513DF7 /* Abstract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0950FF611F094A6600513DF7 /* Abstract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0950FF691F094A6600513DF7 /* AbstractTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AbstractTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0951F23A1F095ACF00EA362C /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = Carthage/Checkouts/Operadics/Sources/Operators.swift; sourceTree = SOURCE_ROOT; };
@@ -207,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38A14E4F1F2A2D9C00A2900C /* Abstract.framework in Frameworks */,
 				0951F2481F09690C00EA362C /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,8 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0950FF231F09480A00513DF7 /* Abstract_tvOS.framework in Frameworks */,
-				0951F24C1F096B7F00EA362C /* SwiftCheck.framework in Frameworks */,
+				0950FF231F09480A00513DF7 /* Abstract.framework in Frameworks */,
+				38A14E531F2A2DCB00A2900C /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,9 +409,9 @@
 			children = (
 				0950FF011EFC5C7900513DF7 /* Abstract.framework */,
 				0950FF121EFC5C8100513DF7 /* Abstract-iOSTests.xctest */,
-				0950FF1A1F09480A00513DF7 /* Abstract_tvOS.framework */,
+				0950FF1A1F09480A00513DF7 /* Abstract.framework */,
 				0950FF221F09480A00513DF7 /* Abstract-tvOSTests.xctest */,
-				0950FF461F094A0100513DF7 /* Abstract_watchOS.framework */,
+				0950FF461F094A0100513DF7 /* Abstract.framework */,
 				0950FF611F094A6600513DF7 /* Abstract.framework */,
 				0950FF691F094A6600513DF7 /* AbstractTests.xctest */,
 			);
@@ -488,7 +503,7 @@
 			);
 			name = "Abstract-tvOS";
 			productName = "Abstract-tvOS";
-			productReference = 0950FF1A1F09480A00513DF7 /* Abstract_tvOS.framework */;
+			productReference = 0950FF1A1F09480A00513DF7 /* Abstract.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		0950FF211F09480A00513DF7 /* Abstract-tvOSTests */ = {
@@ -497,7 +512,7 @@
 			buildPhases = (
 				0950FF1E1F09480A00513DF7 /* Sources */,
 				0950FF1F1F09480A00513DF7 /* Frameworks */,
-				0950FF201F09480A00513DF7 /* Resources */,
+				38A14E511F2A2DBB00A2900C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -524,7 +539,7 @@
 			);
 			name = "Abstract-watchOS";
 			productName = "Abstract-watchOS";
-			productReference = 0950FF461F094A0100513DF7 /* Abstract_watchOS.framework */;
+			productReference = 0950FF461F094A0100513DF7 /* Abstract.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		0950FF601F094A6600513DF7 /* Abstract */ = {
@@ -636,13 +651,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0950FF181F09480A00513DF7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0950FF201F09480A00513DF7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -891,8 +899,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
@@ -904,8 +913,10 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -957,8 +968,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
@@ -968,9 +980,11 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1022,8 +1036,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = InfoTests.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.AbstractTests;
@@ -1032,6 +1047,8 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1077,15 +1094,18 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = InfoTests.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.AbstractTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1148,20 +1168,23 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Abstract;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1218,19 +1241,22 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Abstract;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1287,6 +1313,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = InfoTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.typelift.Abstract-tvOSTests";
@@ -1296,7 +1323,8 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1347,6 +1375,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = InfoTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.typelift.Abstract-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1354,8 +1383,9 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1418,20 +1448,23 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Abstract;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1488,19 +1521,22 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = Abstract;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.1;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1576,8 +1612,10 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1645,8 +1683,10 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1713,6 +1753,8 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1771,18 +1813,24 @@
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
 		38D737B91EE9A6BA000BAF0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Debug;
 		};
 		38D737BA1EE9A6BA000BAF0C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 			};
 			name = Release;
 		};
