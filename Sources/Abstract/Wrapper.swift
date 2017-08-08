@@ -45,3 +45,13 @@ extension Wrapper where WrappedType: Equatable {
 		return left.unwrap == right.unwrap
 	}
 }
+
+/*:
+If the `WrappedType` element is `Monoid`, we can define the static `empty` function for a `Wrapper` (unfortunately, the `Monoid` conformance must be declared explicitly for every wrapper).
+*/
+
+extension Wrapper where WrappedType: Monoid {
+	public static var empty: Self {
+		return Self.init(WrappedType.empty)
+	}
+}

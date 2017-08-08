@@ -32,6 +32,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testFirstM() {
+		property("FirstM is a well-behaved Wrapper") <- forAll { (a: FirstMOf<TestStructure>) in
+			Law<FirstM<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
 	func testFunctionBS() {
 		property("FunctionBS is a well-behaved Wrapper") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
@@ -65,6 +71,12 @@ final class WrapperTests: XCTestCase {
 	func testLast() {
 		property("Last is a well-behaved Wrapper") <- forAll { (a: LastOf<Int>) in
 			Law<Last<Int>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testLastM() {
+		property("LastM is a well-behaved Wrapper") <- forAll { (a: LastMOf<TestStructure>) in
+			Law<LastM<TestStructure>>.isWellBehavedWrapper(a.get)
 		}
 	}
 
@@ -103,12 +115,14 @@ final class WrapperTests: XCTestCase {
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
+		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
 		("testFunctionCM",testFunctionCM),
 		("testFunctionM",testFunctionM),
 		("testFunctionS",testFunctionS),
 		("testFunctionSR",testFunctionSR),
 		("testLast",testLast),
+		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
