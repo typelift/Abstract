@@ -26,6 +26,12 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testFirstM() {
+	property("FirstM is a Monoid") <- forAll { (a: FirstMOf<TestStructure>) in
+			Law<FirstM<TestStructure>>.isNeutralToEmpty(a.get)
+		}
+	}
+
 	func testFunctionBS() {
 	property("FunctionBS is a Monoid") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
@@ -41,6 +47,12 @@ final class MonoidTests: XCTestCase {
 	func testFunctionM() {
 	property("FunctionM is a Monoid") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionM<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
+		}
+	}
+
+	func testLastM() {
+	property("LastM is a Monoid") <- forAll { (a: LastMOf<TestStructure>) in
+			Law<LastM<TestStructure>>.isNeutralToEmpty(a.get)
 		}
 	}
 
@@ -78,9 +90,11 @@ final class MonoidTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
+		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
 		("testFunctionCM",testFunctionCM),
 		("testFunctionM",testFunctionM),
+		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),

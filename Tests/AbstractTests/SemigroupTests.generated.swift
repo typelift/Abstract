@@ -32,6 +32,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testFirstM() {
+		property("FirstM is a Semigroup") <- forAll { (a: FirstMOf<TestStructure>, b: FirstMOf<TestStructure>, c: FirstMOf<TestStructure>) in
+			Law<FirstM<TestStructure>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
 	func testFunctionBS() {
 		property("FunctionBS is a Semigroup") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, c: FunctionBSOf<Int,TestStructure>, context: Int) in
 			LawInContext<FunctionBS<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
@@ -59,6 +65,12 @@ final class SemigroupTests: XCTestCase {
 	func testLast() {
 		property("Last is a Semigroup") <- forAll { (a: LastOf<Int>, b: LastOf<Int>, c: LastOf<Int>) in
 			Law<Last<Int>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
+	func testLastM() {
+		property("LastM is a Semigroup") <- forAll { (a: LastMOf<TestStructure>, b: LastMOf<TestStructure>, c: LastMOf<TestStructure>) in
+			Law<LastM<TestStructure>>.isAssociative(a.get,b.get,c.get)
 		}
 	}
 
@@ -97,11 +109,13 @@ final class SemigroupTests: XCTestCase {
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
+		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
 		("testFunctionCM",testFunctionCM),
 		("testFunctionM",testFunctionM),
 		("testFunctionS",testFunctionS),
 		("testLast",testLast),
+		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),

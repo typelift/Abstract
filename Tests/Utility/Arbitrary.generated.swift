@@ -52,6 +52,23 @@ struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
     }
 }
 
+struct FirstMOf<T>: Arbitrary where T: Arbitrary & Monoid & Equatable {
+    let get: FirstM<T>
+    init(_ get: FirstM<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<FirstMOf<T>> {
+        return Gen<FirstM<T>>
+            .compose {
+                FirstM<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(FirstMOf<T>.init)
+    }
+}
+
 struct LastOf<T>: Arbitrary where T: Arbitrary & Equatable {
     let get: Last<T>
     init(_ get: Last<T>) {
@@ -66,6 +83,23 @@ struct LastOf<T>: Arbitrary where T: Arbitrary & Equatable {
                 )
             }
             .map(LastOf<T>.init)
+    }
+}
+
+struct LastMOf<T>: Arbitrary where T: Arbitrary & Monoid & Equatable {
+    let get: LastM<T>
+    init(_ get: LastM<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<LastMOf<T>> {
+        return Gen<LastM<T>>
+            .compose {
+                LastM<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(LastMOf<T>.init)
     }
 }
 

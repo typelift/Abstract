@@ -86,6 +86,62 @@ extension Or: Monoid {
 
 //: ------
 
+/*:
+`FirstM` and `LastM` work like the pretty self-explanatory `First` and `Last` except that the `.empty` value is always discarded: `FirstM.empty <> _` will return the second value, and `_ <> LastM.empty` will return the first value.
+*/
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
+public struct FirstM<A: Monoid & Equatable>: Wrapper, Monoid, Equatable {
+	public typealias WrappedType = A
+
+	public let unwrap: A
+
+	public init(_ value: A) {
+		self.unwrap = value
+	}
+
+	public static func <> (left: FirstM, right: FirstM) -> FirstM {
+		switch (left,right) {
+		case (FirstM.empty,FirstM.empty):
+			return left
+		case (FirstM.empty,_):
+			return right
+		default:
+			return left
+		}
+	}
+}
+
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
+public struct LastM<A: Monoid & Equatable>: Wrapper, Monoid, Equatable {
+	public typealias WrappedType = A
+
+	public let unwrap: A
+
+	public init(_ value: A) {
+		self.unwrap = value
+	}
+
+	public static func <> (left: LastM, right: LastM) -> LastM {
+		switch (left,right) {
+		case (LastM.empty,LastM.empty):
+			return right
+		case (_,LastM.empty):
+			return left
+		default:
+			return right
+		}
+	}
+}
+
+//: ------
+
 extension Endofunction: Monoid {
 	public static var empty: Endofunction<A> {
 		return Endofunction<A> { $0 }
