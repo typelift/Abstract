@@ -104,6 +104,12 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testString() {
+		property("String is a Monoid") <- forAll { (a: String) in
+			Law<String>.isNeutralToEmpty(a)
+		}
+	}
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
@@ -121,5 +127,6 @@ final class MonoidTests: XCTestCase {
 		("testOptionalM",testOptionalM),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testString",testString),
 	]
 }

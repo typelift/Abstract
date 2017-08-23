@@ -38,6 +38,16 @@ Each type again is tested for the new laws in `AbstractTests.swift`.
 
 //: ------
 
+extension String: Monoid {
+	public static let empty: String = ""
+
+	public static func <> (left: String, right: String) -> String {
+		return left + right
+	}
+}
+
+//: ------
+
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"

@@ -128,6 +128,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testString() {
+		property("String is a Semigroup") <- forAll { (a: String, b: String, c: String) in
+			Law<String>.isAssociative(a,b,c)
+		}
+	}
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
@@ -149,5 +155,6 @@ final class SemigroupTests: XCTestCase {
 		("testOptionalS",testOptionalS),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testString",testString),
 	]
 }
