@@ -32,6 +32,12 @@ final class BoundedSemilatticeTests: XCTestCase {
 		}
 	}
 
+	func testOptionalBS() {
+		property("OptionalBS is a BoundedSemilattice") <- forAll { (a: OptionalBSOf<TestStructure>, b: OptionalBSOf<TestStructure>) in
+			Law<OptionalBS<TestStructure>>.isIdempotent(a.get,b.get)
+		}
+	}
+
 	func testOr() {
 		property("Or is a BoundedSemilattice") <- forAll { (a: Or, b: Or) in
 			Law<Or>.isIdempotent(a,b)
@@ -43,6 +49,7 @@ final class BoundedSemilatticeTests: XCTestCase {
 		("testFunctionBS",testFunctionBS),
 		("testMax",testMax),
 		("testMin",testMin),
+		("testOptionalBS",testOptionalBS),
 		("testOr",testOr),
 	]
 }

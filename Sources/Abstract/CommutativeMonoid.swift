@@ -28,6 +28,41 @@ extension LawInContext where Element: CommutativeMonoid {
 ## Types
 */
 
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "CommutativeMonoid & Equatable"
+public struct OptionalCM<T>: CommutativeMonoid, Wrapper, Equatable where T: CommutativeMonoid & Equatable {
+	public typealias WrappedType = T?
+
+	public let unwrap: T?
+	public init(_ value: T?) {
+		self.unwrap = value
+	}
+
+	public static var empty: OptionalCM<T> {
+		return .init(nil)
+	}
+
+	public static func <> (_ left: OptionalCM, _ right: OptionalCM) -> OptionalCM {
+		switch (left.unwrap,right.unwrap) {
+		case (.some(let leftValue),.some(let rightValue)):
+			return .init(leftValue <> rightValue)
+		case (.some,_):
+			return left
+		case (_,.some):
+			return right
+		default:
+			return .init(nil)
+		}
+	}
+
+	public static func == (_ left: OptionalCM, _ right: OptionalCM) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+}
+
+//: ------
+
 extension Add: CommutativeMonoid {}
 
 //: ------

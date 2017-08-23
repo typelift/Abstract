@@ -154,6 +154,74 @@ struct MultiplyOf<T>: Arbitrary where T: Arbitrary & Multipliable {
     }
 }
 
+struct OptionalBSOf<T>: Arbitrary where T: Arbitrary & BoundedSemilattice & Equatable {
+    let get: OptionalBS<T>
+    init(_ get: OptionalBS<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalBSOf<T>> {
+        return Gen<OptionalBS<T>>
+            .compose {
+                OptionalBS<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalBSOf<T>.init)
+    }
+}
+
+struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equatable {
+    let get: OptionalCM<T>
+    init(_ get: OptionalCM<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalCMOf<T>> {
+        return Gen<OptionalCM<T>>
+            .compose {
+                OptionalCM<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalCMOf<T>.init)
+    }
+}
+
+struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Monoid & Equatable {
+    let get: OptionalM<T>
+    init(_ get: OptionalM<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalMOf<T>> {
+        return Gen<OptionalM<T>>
+            .compose {
+                OptionalM<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalMOf<T>.init)
+    }
+}
+
+struct OptionalSOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
+    let get: OptionalS<T>
+    init(_ get: OptionalS<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalSOf<T>> {
+        return Gen<OptionalS<T>>
+            .compose {
+                OptionalS<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalSOf<T>.init)
+    }
+}
+
 extension Or: Arbitrary {
     public static var arbitrary: Gen<Or> {
         return Gen<Or>

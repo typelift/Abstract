@@ -74,6 +74,24 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testOptionalBS() {
+	property("OptionalBS is a Monoid") <- forAll { (a: OptionalBSOf<TestStructure>) in
+			Law<OptionalBS<TestStructure>>.isNeutralToEmpty(a.get)
+		}
+	}
+
+	func testOptionalCM() {
+	property("OptionalCM is a Monoid") <- forAll { (a: OptionalCMOf<TestStructure>) in
+			Law<OptionalCM<TestStructure>>.isNeutralToEmpty(a.get)
+		}
+	}
+
+	func testOptionalM() {
+	property("OptionalM is a Monoid") <- forAll { (a: OptionalMOf<TestStructure>) in
+			Law<OptionalM<TestStructure>>.isNeutralToEmpty(a.get)
+		}
+	}
+
 	func testOr() {
 		property("Or is a Monoid") <- forAll { (a: Or) in
 			Law<Or>.isNeutralToEmpty(a)
@@ -98,6 +116,9 @@ final class MonoidTests: XCTestCase {
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testOptionalBS",testOptionalBS),
+		("testOptionalCM",testOptionalCM),
+		("testOptionalM",testOptionalM),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
 	]

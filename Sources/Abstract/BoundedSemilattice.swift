@@ -28,6 +28,41 @@ extension LawInContext where Element: BoundedSemilattice {
 ## Types
 */
 
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "BoundedSemilattice & Equatable"
+public struct OptionalBS<T>: BoundedSemilattice, Wrapper, Equatable where T: BoundedSemilattice & Equatable {
+	public typealias WrappedType = T?
+
+	public let unwrap: T?
+	public init(_ value: T?) {
+		self.unwrap = value
+	}
+
+	public static var empty: OptionalBS<T> {
+		return .init(nil)
+	}
+
+	public static func <> (_ left: OptionalBS, _ right: OptionalBS) -> OptionalBS {
+		switch (left.unwrap,right.unwrap) {
+		case (.some(let leftValue),.some(let rightValue)):
+			return .init(leftValue <> rightValue)
+		case (.some,_):
+			return left
+		case (_,.some):
+			return right
+		default:
+			return .init(nil)
+		}
+	}
+
+	public static func == (_ left: OptionalBS, _ right: OptionalBS) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+}
+
+//: ------
+
 extension Max: BoundedSemilattice {}
 
 //: ------
