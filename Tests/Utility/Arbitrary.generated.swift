@@ -35,6 +35,23 @@ extension And: Arbitrary {
     }
 }
 
+struct ArrayEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
+    let get: ArrayEq<T>
+    init(_ get: ArrayEq<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<ArrayEqOf<T>> {
+        return Gen<ArrayEq<T>>
+            .compose {
+                ArrayEq<T>.init(
+                    unwrap: $0.generate(using: ArrayOf<T>.arbitrary.map { $0.getArray })
+                )
+            }
+            .map(ArrayEqOf<T>.init)
+    }
+}
+
 struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
     let get: First<T>
     init(_ get: First<T>) {

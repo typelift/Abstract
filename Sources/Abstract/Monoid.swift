@@ -50,6 +50,32 @@ extension String: Monoid {
 
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Equatable"
+public struct ArrayEq<T>: Wrapper, Monoid, Equatable where T: Equatable {
+	public typealias WrappedType = [T]
+
+	public let unwrap: [T]
+	public init(_ value: [T]) {
+		self.unwrap = value
+	}
+
+	public static func == (left: ArrayEq, right: ArrayEq) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+
+	public static var empty: ArrayEq<T> {
+		return .init([])
+	}
+
+	public static func <> (left: ArrayEq, right: ArrayEq) -> ArrayEq {
+		return ArrayEq.init(left.unwrap + right.unwrap)
+	}
+}
+
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
 public struct OptionalM<T>: Monoid, Wrapper, Equatable where T: Monoid & Equatable {
 	public typealias WrappedType = T?

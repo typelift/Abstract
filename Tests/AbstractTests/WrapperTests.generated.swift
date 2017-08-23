@@ -20,6 +20,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testArrayEq() {
+		property("ArrayEq is a well-behaved Wrapper") <- forAll { (a: ArrayEqOf<TestStructure>) in
+			Law<ArrayEq<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a.get)(context)
@@ -137,6 +143,7 @@ final class WrapperTests: XCTestCase {
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
+		("testArrayEq",testArrayEq),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
 		("testFirstM",testFirstM),

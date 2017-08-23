@@ -20,6 +20,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testArrayEq() {
+		property("ArrayEq is a Semigroup") <- forAll { (a: ArrayEqOf<TestStructure>, b: ArrayEqOf<TestStructure>, c: ArrayEqOf<TestStructure>) in
+			Law<ArrayEq<TestStructure>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a Semigroup") <- forAll { (a: EndofunctionOf<Int>, b: EndofunctionOf<Int>, c: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isAssociative(a.get,b.get,c.get)(context)
@@ -137,6 +143,7 @@ final class SemigroupTests: XCTestCase {
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
+		("testArrayEq",testArrayEq),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
 		("testFirstM",testFirstM),
