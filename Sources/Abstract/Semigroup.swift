@@ -34,6 +34,39 @@ Each type is tested for associativity in `AbstractTests.swift`, and for testing 
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
+public struct OptionalS<T>: Semigroup, Wrapper, Equatable where T: Semigroup & Equatable {
+	public typealias WrappedType = T?
+
+	public let unwrap: T?
+
+	public init(_ value: T?) {
+		self.unwrap = value
+	}
+
+	public static func <> (_ left: OptionalS, _ right: OptionalS) -> OptionalS {
+		switch (left.unwrap,right.unwrap) {
+		case (.some(let leftValue),.some(let rightValue)):
+			return .init(leftValue <> rightValue)
+		case (.some,_):
+			return left
+		case (_,.some):
+			return right
+		default:
+			return .init(nil)
+		}
+	}
+
+	public static func == (_ left: OptionalS, _ right: OptionalS) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+}
+
+
+//: ------
+
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Addable"

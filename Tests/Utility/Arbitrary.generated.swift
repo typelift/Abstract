@@ -35,6 +35,23 @@ extension And: Arbitrary {
     }
 }
 
+struct ArrayEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
+    let get: ArrayEq<T>
+    init(_ get: ArrayEq<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<ArrayEqOf<T>> {
+        return Gen<ArrayEq<T>>
+            .compose {
+                ArrayEq<T>.init(
+                    unwrap: $0.generate(using: ArrayOf<T>.arbitrary.map { $0.getArray })
+                )
+            }
+            .map(ArrayEqOf<T>.init)
+    }
+}
+
 struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
     let get: First<T>
     init(_ get: First<T>) {
@@ -151,6 +168,74 @@ struct MultiplyOf<T>: Arbitrary where T: Arbitrary & Multipliable {
                 )
             }
             .map(MultiplyOf<T>.init)
+    }
+}
+
+struct OptionalBSOf<T>: Arbitrary where T: Arbitrary & BoundedSemilattice & Equatable {
+    let get: OptionalBS<T>
+    init(_ get: OptionalBS<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalBSOf<T>> {
+        return Gen<OptionalBS<T>>
+            .compose {
+                OptionalBS<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalBSOf<T>.init)
+    }
+}
+
+struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equatable {
+    let get: OptionalCM<T>
+    init(_ get: OptionalCM<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalCMOf<T>> {
+        return Gen<OptionalCM<T>>
+            .compose {
+                OptionalCM<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalCMOf<T>.init)
+    }
+}
+
+struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Monoid & Equatable {
+    let get: OptionalM<T>
+    init(_ get: OptionalM<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalMOf<T>> {
+        return Gen<OptionalM<T>>
+            .compose {
+                OptionalM<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalMOf<T>.init)
+    }
+}
+
+struct OptionalSOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
+    let get: OptionalS<T>
+    init(_ get: OptionalS<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalSOf<T>> {
+        return Gen<OptionalS<T>>
+            .compose {
+                OptionalS<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalSOf<T>.init)
     }
 }
 

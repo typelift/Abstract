@@ -38,6 +38,77 @@ Each type again is tested for the new laws in `AbstractTests.swift`.
 
 //: ------
 
+extension String: Monoid {
+	public static let empty: String = ""
+
+	public static func <> (left: String, right: String) -> String {
+		return left + right
+	}
+}
+
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Equatable"
+public struct ArrayEq<T>: Wrapper, Monoid, Equatable where T: Equatable {
+	public typealias WrappedType = [T]
+
+	public let unwrap: [T]
+	public init(_ value: [T]) {
+		self.unwrap = value
+	}
+
+	public static func == (left: ArrayEq, right: ArrayEq) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+
+	public static var empty: ArrayEq<T> {
+		return .init([])
+	}
+
+	public static func <> (left: ArrayEq, right: ArrayEq) -> ArrayEq {
+		return ArrayEq.init(left.unwrap + right.unwrap)
+	}
+}
+
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
+public struct OptionalM<T>: Monoid, Wrapper, Equatable where T: Monoid & Equatable {
+	public typealias WrappedType = T?
+
+	public let unwrap: T?
+	public init(_ value: T?) {
+		self.unwrap = value
+	}
+
+	public static var empty: OptionalM<T> {
+		return .init(nil)
+	}
+
+	public static func <> (_ left: OptionalM, _ right: OptionalM) -> OptionalM {
+		switch (left.unwrap,right.unwrap) {
+		case (.some(let leftValue),.some(let rightValue)):
+			return .init(leftValue <> rightValue)
+		case (.some,_):
+			return left
+		case (_,.some):
+			return right
+		default:
+			return .init(nil)
+		}
+	}
+
+	public static func == (_ left: OptionalM, _ right: OptionalM) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+}
+
+//: ------
+
 extension Add: Monoid {
 	public static var empty: Add<A> {
 		return Add.init(A.zero)

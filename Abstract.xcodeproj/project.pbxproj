@@ -171,24 +171,17 @@
 		0951F2431F09690200EA362C /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/Mac/SwiftCheck.framework; sourceTree = "<group>"; };
 		0951F2441F09690200EA362C /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/tvOS/SwiftCheck.framework; sourceTree = "<group>"; };
 		09F9FD0E1EEE5CE8002342E5 /* Homomorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homomorphism.swift; sourceTree = "<group>"; };
-		380A4B0D1F1B71AA002D70E0 /* SemigroupTests.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = SemigroupTests.stencil; sourceTree = "<group>"; };
 		380A4B141F1B7336002D70E0 /* SemigroupTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemigroupTests.generated.swift; sourceTree = "<group>"; };
-		380A4B181F1B7624002D70E0 /* WrapperTests.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = WrapperTests.stencil; sourceTree = "<group>"; };
 		380A4B191F1B775F002D70E0 /* WrapperTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperTests.generated.swift; sourceTree = "<group>"; };
-		380A4B1E1F1BD550002D70E0 /* MonoidTests.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = MonoidTests.stencil; sourceTree = "<group>"; };
 		380A4B1F1F1BE383002D70E0 /* MonoidTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidTests.generated.swift; sourceTree = "<group>"; };
-		380A4B231F1BE3F9002D70E0 /* CommutativeMonoidTests.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = CommutativeMonoidTests.stencil; sourceTree = "<group>"; };
 		380A4B241F1BF5AC002D70E0 /* CommutativeMonoidTests.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommutativeMonoidTests.generated.swift; sourceTree = "<group>"; };
-		380A4B281F1BF605002D70E0 /* BoundedSemilatticeTests.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = BoundedSemilatticeTests.stencil; sourceTree = "<group>"; };
 		380A4B291F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundedSemilatticeTests.generated.swift; sourceTree = "<group>"; };
-		380A4B2D1F1BF743002D70E0 /* SemiringTests.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SemiringTests.stencil; sourceTree = "<group>"; };
 		380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemiringTests.generated.swift; sourceTree = "<group>"; };
-		380A4B351F1BFA9F002D70E0 /* LinuxMain.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = LinuxMain.stencil; sourceTree = "<group>"; };
-		38273AD21F2484DD000AB0C8 /* Arbitrary.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Arbitrary.stencil; sourceTree = "<group>"; };
 		38273AD41F248569000AB0C8 /* CustomArbitraryTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomArbitraryTypes.swift; sourceTree = "<group>"; };
 		38273AD81F2485FB000AB0C8 /* Arbitrary.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arbitrary.generated.swift; sourceTree = "<group>"; };
 		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		3853BF9F1EF1294400791099 /* Semiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
+		38757E101F4D85AB0059AD71 /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
 		38943A681EEC25AE00F587AD /* HomomorphismTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomomorphismTests.swift; sourceTree = "<group>"; };
 		38943A761EEC31DA00F587AD /* Adapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Adapters.swift; sourceTree = "<group>"; };
 		38943A781EEC4EFF00F587AD /* Monoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
@@ -287,45 +280,6 @@
 			path = Abstract;
 			sourceTree = "<group>";
 		};
-		380A4B0B1F1B71AA002D70E0 /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				380A4B341F1BFA9F002D70E0 /* LinuxMain */,
-				38273AD11F2484DD000AB0C8 /* Other */,
-				380A4B0C1F1B71AA002D70E0 /* Tests */,
-			);
-			path = Templates;
-			sourceTree = "<group>";
-		};
-		380A4B0C1F1B71AA002D70E0 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				380A4B281F1BF605002D70E0 /* BoundedSemilatticeTests.stencil */,
-				380A4B231F1BE3F9002D70E0 /* CommutativeMonoidTests.stencil */,
-				380A4B1E1F1BD550002D70E0 /* MonoidTests.stencil */,
-				380A4B0D1F1B71AA002D70E0 /* SemigroupTests.stencil */,
-				380A4B2D1F1BF743002D70E0 /* SemiringTests.stencil */,
-				380A4B181F1B7624002D70E0 /* WrapperTests.stencil */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		380A4B341F1BFA9F002D70E0 /* LinuxMain */ = {
-			isa = PBXGroup;
-			children = (
-				380A4B351F1BFA9F002D70E0 /* LinuxMain.stencil */,
-			);
-			path = LinuxMain;
-			sourceTree = "<group>";
-		};
-		38273AD11F2484DD000AB0C8 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				38273AD21F2484DD000AB0C8 /* Arbitrary.stencil */,
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
 		38273AD31F248569000AB0C8 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +312,7 @@
 		38D737B41EE9A6BA000BAF0C = {
 			isa = PBXGroup;
 			children = (
+				38757E101F4D85AB0059AD71 /* Templates */,
 				38D737DF1EE9A745000BAF0C /* Abstract.h */,
 				38B83C9D1EED8D11007AB12A /* README.md */,
 				38D737E01EE9A745000BAF0C /* Info.plist */,
@@ -366,7 +321,6 @@
 				38943A6A1EEC287000F587AD /* Frameworks */,
 				38D737C81EE9A729000BAF0C /* Products */,
 				38D737BC1EE9A711000BAF0C /* Sources */,
-				380A4B0B1F1B71AA002D70E0 /* Templates */,
 				38D737BE1EE9A711000BAF0C /* Tests */,
 			);
 			sourceTree = "<group>";

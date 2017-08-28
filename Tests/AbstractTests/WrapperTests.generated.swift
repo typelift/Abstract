@@ -20,6 +20,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testArrayEq() {
+		property("ArrayEq is a well-behaved Wrapper") <- forAll { (a: ArrayEqOf<TestStructure>) in
+			Law<ArrayEq<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a.get)(context)
@@ -98,6 +104,30 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testOptionalBS() {
+		property("OptionalBS is a well-behaved Wrapper") <- forAll { (a: OptionalBSOf<TestStructure>) in
+			Law<OptionalBS<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testOptionalCM() {
+		property("OptionalCM is a well-behaved Wrapper") <- forAll { (a: OptionalCMOf<TestStructure>) in
+			Law<OptionalCM<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testOptionalM() {
+		property("OptionalM is a well-behaved Wrapper") <- forAll { (a: OptionalMOf<TestStructure>) in
+			Law<OptionalM<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testOptionalS() {
+		property("OptionalS is a well-behaved Wrapper") <- forAll { (a: OptionalSOf<TestStructure>) in
+			Law<OptionalS<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
 	func testOr() {
 		property("Or is a well-behaved Wrapper") <- forAll { (a: Or) in
 			Law<Or>.isWellBehavedWrapper(a)
@@ -113,6 +143,7 @@ final class WrapperTests: XCTestCase {
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
+		("testArrayEq",testArrayEq),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
 		("testFirstM",testFirstM),
@@ -126,6 +157,10 @@ final class WrapperTests: XCTestCase {
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testOptionalBS",testOptionalBS),
+		("testOptionalCM",testOptionalCM),
+		("testOptionalM",testOptionalM),
+		("testOptionalS",testOptionalS),
 		("testOr",testOr),
 		("testTropical",testTropical),
 	]
