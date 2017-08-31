@@ -110,6 +110,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testOptionalEq() {
+		property("OptionalEq is a Semigroup") <- forAll { (a: OptionalEqOf<TestStructure>, b: OptionalEqOf<TestStructure>, c: OptionalEqOf<TestStructure>) in
+			Law<OptionalEq<TestStructure>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
 	func testOptionalM() {
 		property("OptionalM is a Semigroup") <- forAll { (a: OptionalMOf<TestStructure>, b: OptionalMOf<TestStructure>, c: OptionalMOf<TestStructure>) in
 			Law<OptionalM<TestStructure>>.isAssociative(a.get,b.get,c.get)
@@ -158,6 +164,7 @@ final class SemigroupTests: XCTestCase {
 		("testMultiply",testMultiply),
 		("testOptionalBS",testOptionalBS),
 		("testOptionalCM",testOptionalCM),
+		("testOptionalEq",testOptionalEq),
 		("testOptionalM",testOptionalM),
 		("testOptionalS",testOptionalS),
 		("testOr",testOr),
