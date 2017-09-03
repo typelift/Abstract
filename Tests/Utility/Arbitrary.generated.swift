@@ -205,6 +205,23 @@ struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equat
     }
 }
 
+struct OptionalEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
+    let get: OptionalEq<T>
+    init(_ get: OptionalEq<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalEqOf<T>> {
+        return Gen<OptionalEq<T>>
+            .compose {
+                OptionalEq<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalEqOf<T>.init)
+    }
+}
+
 struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
     let get: OptionalM<T>
     init(_ get: OptionalM<T>) {
