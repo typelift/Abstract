@@ -92,6 +92,12 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testOptionalEq() {
+		property("OptionalEq is a Monoid") <- forAll { (a: OptionalEqOf<TestStructure>) in
+			Law<OptionalEq<TestStructure>>.isNeutralToEmpty(a.get)
+		}
+	}
+
 	func testOptionalM() {
 		property("OptionalM is a Monoid") <- forAll { (a: OptionalMOf<TestStructure>) in
 			Law<OptionalM<TestStructure>>.isNeutralToEmpty(a.get)
@@ -131,6 +137,7 @@ final class MonoidTests: XCTestCase {
 		("testMultiply",testMultiply),
 		("testOptionalBS",testOptionalBS),
 		("testOptionalCM",testOptionalCM),
+		("testOptionalEq",testOptionalEq),
 		("testOptionalM",testOptionalM),
 		("testOr",testOr),
 		("testOrdering",testOrdering),

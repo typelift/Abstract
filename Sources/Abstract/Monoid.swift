@@ -76,6 +76,32 @@ public struct ArrayEq<T>: Wrapper, Monoid, Equatable where T: Equatable {
 
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Equatable"
+public struct OptionalEq<T>: Wrapper, Monoid, Equatable where T: Equatable {
+	public typealias WrappedType = Optional<T>
+
+	public let unwrap: Optional<T>
+	public init(_ value: Optional<T>) {
+		self.unwrap = value
+	}
+
+	public static func == (left: OptionalEq, right: OptionalEq) -> Bool {
+		return left.unwrap == right.unwrap
+	}
+
+	public static var empty: OptionalEq {
+		return .init(.none)
+	}
+
+	public static func <> (left: OptionalEq, right: OptionalEq) -> OptionalEq {
+		return .init(left.unwrap ?? right.unwrap)
+	}
+}
+
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
+// sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
 public struct OptionalM<T>: Monoid, Wrapper, Equatable where T: Monoid & Equatable {
 	public typealias WrappedType = T?
