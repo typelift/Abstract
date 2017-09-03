@@ -205,7 +205,7 @@ struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equat
     }
 }
 
-struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Monoid & Equatable {
+struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
     let get: OptionalM<T>
     init(_ get: OptionalM<T>) {
         self.get = get
