@@ -102,8 +102,8 @@ public struct OptionalEq<T>: Wrapper, Monoid, Equatable where T: Equatable {
 
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
-public struct OptionalM<T>: Monoid, Wrapper, Equatable where T: Monoid & Equatable {
+// sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
+public struct OptionalM<T>: Monoid, Wrapper, Equatable where T: Semigroup & Equatable {
 	public typealias WrappedType = T?
 
 	public let unwrap: T?
