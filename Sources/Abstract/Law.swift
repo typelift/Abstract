@@ -21,3 +21,4 @@ public protocol EquatableInContext {
 }
 
 public enum LawInContext<Element: EquatableInContext> {}
+

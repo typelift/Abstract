@@ -58,15 +58,9 @@ public struct OptionalS<T>: Semigroup, Wrapper, Equatable where T: Semigroup & E
 			return .init(nil)
 		}
 	}
-
-	public static func == (_ left: OptionalS, _ right: OptionalS) -> Bool {
-		return left.unwrap == right.unwrap
-	}
 }
 
 //: ------
-
-//: `OptionalSF` is like `OptionalS` but wraps a `Function` type with `Semigroup` conformance
 
 // sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
 // sourcery: requiredContextForPropertyBasedTests = "String"
@@ -92,17 +86,6 @@ public struct OptionalSF<T>: Semigroup, Wrapper, EquatableInContext where T: Sem
 			return right
 		default:
 			return .init(nil)
-		}
-	}
-
-	public static func == (_ left: OptionalSF, _ right: OptionalSF) -> (Context) -> Bool {
-		switch (left.unwrap,right.unwrap) {
-		case (.some(let leftUnwrap),.some(let rightUnwrap)):
-			return leftUnwrap == rightUnwrap
-		case (.none,.none):
-			return { _ in true }
-		default:
-			return { _ in false }
 		}
 	}
 }

@@ -52,6 +52,35 @@ extension Wrapper where WrappedType: EquatableInContext {
 	}
 }
 
+public func == <T,A> (left: T, right: T) -> Bool where T: Wrapper, T.WrappedType == A?, A: Equatable {
+	return left.unwrap == right.unwrap
+}
+
+public func == <T,A> (left: T, right: T) -> Bool where T: Wrapper, T.WrappedType == [A], A: Equatable {
+	return left.unwrap == right.unwrap
+}
+
+public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper, T.WrappedType == A?, A: EquatableInContext {
+	switch (left.unwrap,right.unwrap) {
+	case (.some(let leftUnwrap),.some(let rightUnwrap)):
+		return leftUnwrap == rightUnwrap
+	case (.none,.none):
+		return { _ in true }
+	default:
+		return { _ in false }
+	}
+}
+
+public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper, T.WrappedType == [A], A: EquatableInContext {
+	return { context in
+		guard left.unwrap.count == right.unwrap.count else { return false }
+		return zip(left.unwrap, right.unwrap)
+			.map(==)
+			.map { $0(context) }
+			.reduce(true) { $0 && $1 }
+	}
+}
+
 /*:
 If the `WrappedType` element is `Monoid`, we can define the static `empty` function for a `Wrapper` (unfortunately, the `Monoid` conformance must be declared explicitly for every wrapper).
 */
@@ -61,3 +90,8 @@ extension Wrapper where WrappedType: Monoid {
 		return Self.init(WrappedType.empty)
 	}
 }
+
+/*:
+Some types in the library exist also in the `F` mode (like `OptionalSF`): these types will wrap a function type, thus they'll be considered `EquatableInContext`.
+*/
+

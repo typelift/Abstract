@@ -26,6 +26,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testArrayEqF() {
+		property("ArrayEqF is a Semigroup") <- forAll { (a: ArrayEqFOf<TestFunction>, b: ArrayEqFOf<TestFunction>, c: ArrayEqFOf<TestFunction>, context: String) in
+			LawInContext<ArrayEqF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a Semigroup") <- forAll { (a: EndofunctionOf<Int>, b: EndofunctionOf<Int>, c: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isAssociative(a.get,b.get,c.get)(context)
@@ -128,9 +134,21 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testOptionalEqF() {
+		property("OptionalEqF is a Semigroup") <- forAll { (a: OptionalEqFOf<TestFunction>, b: OptionalEqFOf<TestFunction>, c: OptionalEqFOf<TestFunction>, context: String) in
+			LawInContext<OptionalEqF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testOptionalM() {
 		property("OptionalM is a Semigroup") <- forAll { (a: OptionalMOf<TestStructure>, b: OptionalMOf<TestStructure>, c: OptionalMOf<TestStructure>) in
 			Law<OptionalM<TestStructure>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
+	func testOptionalMF() {
+		property("OptionalMF is a Semigroup") <- forAll { (a: OptionalMFOf<TestFunction>, b: OptionalMFOf<TestFunction>, c: OptionalMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalMF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
@@ -168,6 +186,7 @@ final class SemigroupTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testArrayEq",testArrayEq),
+		("testArrayEqF",testArrayEqF),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
 		("testFirstF",testFirstF),
@@ -185,7 +204,9 @@ final class SemigroupTests: XCTestCase {
 		("testOptionalBS",testOptionalBS),
 		("testOptionalCM",testOptionalCM),
 		("testOptionalEq",testOptionalEq),
+		("testOptionalEqF",testOptionalEqF),
 		("testOptionalM",testOptionalM),
+		("testOptionalMF",testOptionalMF),
 		("testOptionalS",testOptionalS),
 		("testOptionalSF",testOptionalSF),
 		("testOr",testOr),

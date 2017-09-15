@@ -52,6 +52,23 @@ struct ArrayEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
     }
 }
 
+struct ArrayEqFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: ArrayEqF<T>
+    init(_ get: ArrayEqF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<ArrayEqFOf<T>> {
+        return Gen<ArrayEqF<T>>
+            .compose {
+                ArrayEqF<T>.init(
+                    unwrap: $0.generate(using: ArrayOf<T>.arbitrary.map { $0.getArray })
+                )
+            }
+            .map(ArrayEqFOf<T>.init)
+    }
+}
+
 struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
     let get: First<T>
     init(_ get: First<T>) {
@@ -256,6 +273,23 @@ struct OptionalEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
     }
 }
 
+struct OptionalEqFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: OptionalEqF<T>
+    init(_ get: OptionalEqF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalEqFOf<T>> {
+        return Gen<OptionalEqF<T>>
+            .compose {
+                OptionalEqF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalEqFOf<T>.init)
+    }
+}
+
 struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
     let get: OptionalM<T>
     init(_ get: OptionalM<T>) {
@@ -270,6 +304,23 @@ struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
                 )
             }
             .map(OptionalMOf<T>.init)
+    }
+}
+
+struct OptionalMFOf<T>: Arbitrary where T: Arbitrary & Semigroup & EquatableInContext {
+    let get: OptionalMF<T>
+    init(_ get: OptionalMF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalMFOf<T>> {
+        return Gen<OptionalMF<T>>
+            .compose {
+                OptionalMF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalMFOf<T>.init)
     }
 }
 

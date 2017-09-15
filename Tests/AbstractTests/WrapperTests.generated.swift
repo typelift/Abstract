@@ -26,6 +26,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testArrayEqF() {
+		property("ArrayEqF is a well-behaved Wrapper") <- forAll { (a: ArrayEqFOf<TestFunction>, context: String) in
+			LawInContext<ArrayEqF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a.get)(context)
@@ -134,9 +140,21 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testOptionalEqF() {
+		property("OptionalEqF is a well-behaved Wrapper") <- forAll { (a: OptionalEqFOf<TestFunction>, context: String) in
+			LawInContext<OptionalEqF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testOptionalM() {
 		property("OptionalM is a well-behaved Wrapper") <- forAll { (a: OptionalMOf<TestStructure>) in
 			Law<OptionalM<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testOptionalMF() {
+		property("OptionalMF is a well-behaved Wrapper") <- forAll { (a: OptionalMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalMF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 
@@ -168,6 +186,7 @@ final class WrapperTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testArrayEq",testArrayEq),
+		("testArrayEqF",testArrayEqF),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
 		("testFirstF",testFirstF),
@@ -186,7 +205,9 @@ final class WrapperTests: XCTestCase {
 		("testOptionalBS",testOptionalBS),
 		("testOptionalCM",testOptionalCM),
 		("testOptionalEq",testOptionalEq),
+		("testOptionalEqF",testOptionalEqF),
 		("testOptionalM",testOptionalM),
+		("testOptionalMF",testOptionalMF),
 		("testOptionalS",testOptionalS),
 		("testOptionalSF",testOptionalSF),
 		("testOr",testOr),
