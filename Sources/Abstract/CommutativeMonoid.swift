@@ -63,6 +63,39 @@ public struct OptionalCM<T>: CommutativeMonoid, Wrapper, Equatable where T: Comm
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
+// sourcery: requiredContextForPropertyBasedTests = "String"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "CommutativeMonoid & EquatableInContext"
+public struct OptionalCMF<T>: CommutativeMonoid, Wrapper, EquatableInContext where T: CommutativeMonoid & EquatableInContext {
+	public typealias WrappedType = T?
+	public typealias Context = T.Context
+
+	public let unwrap: T?
+	public init(_ value: T?) {
+		self.unwrap = value
+	}
+
+	public static var empty: OptionalCMF<T> {
+		return .init(nil)
+	}
+
+	public static func <> (_ left: OptionalCMF, _ right: OptionalCMF) -> OptionalCMF {
+		switch (left.unwrap,right.unwrap) {
+		case (.some(let leftValue),.some(let rightValue)):
+			return .init(leftValue <> rightValue)
+		case (.some,_):
+			return left
+		case (_,.some):
+			return right
+		default:
+			return .init(nil)
+		}
+	}
+}
+
+//: ------
+
 extension Add: CommutativeMonoid {}
 
 //: ------

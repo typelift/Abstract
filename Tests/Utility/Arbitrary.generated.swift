@@ -52,6 +52,23 @@ struct ArrayEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
     }
 }
 
+struct ArrayEqFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: ArrayEqF<T>
+    init(_ get: ArrayEqF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<ArrayEqFOf<T>> {
+        return Gen<ArrayEqF<T>>
+            .compose {
+                ArrayEqF<T>.init(
+                    unwrap: $0.generate(using: ArrayOf<T>.arbitrary.map { $0.getArray })
+                )
+            }
+            .map(ArrayEqFOf<T>.init)
+    }
+}
+
 struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
     let get: First<T>
     init(_ get: First<T>) {
@@ -66,6 +83,23 @@ struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
                 )
             }
             .map(FirstOf<T>.init)
+    }
+}
+
+struct FirstFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: FirstF<T>
+    init(_ get: FirstF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<FirstFOf<T>> {
+        return Gen<FirstF<T>>
+            .compose {
+                FirstF<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(FirstFOf<T>.init)
     }
 }
 
@@ -100,6 +134,23 @@ struct LastOf<T>: Arbitrary where T: Arbitrary & Equatable {
                 )
             }
             .map(LastOf<T>.init)
+    }
+}
+
+struct LastFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: LastF<T>
+    init(_ get: LastF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<LastFOf<T>> {
+        return Gen<LastF<T>>
+            .compose {
+                LastF<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(LastFOf<T>.init)
     }
 }
 
@@ -188,6 +239,23 @@ struct OptionalBSOf<T>: Arbitrary where T: Arbitrary & BoundedSemilattice & Equa
     }
 }
 
+struct OptionalBSFOf<T>: Arbitrary where T: Arbitrary & BoundedSemilattice & EquatableInContext {
+    let get: OptionalBSF<T>
+    init(_ get: OptionalBSF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalBSFOf<T>> {
+        return Gen<OptionalBSF<T>>
+            .compose {
+                OptionalBSF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalBSFOf<T>.init)
+    }
+}
+
 struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equatable {
     let get: OptionalCM<T>
     init(_ get: OptionalCM<T>) {
@@ -202,6 +270,23 @@ struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equat
                 )
             }
             .map(OptionalCMOf<T>.init)
+    }
+}
+
+struct OptionalCMFOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & EquatableInContext {
+    let get: OptionalCMF<T>
+    init(_ get: OptionalCMF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalCMFOf<T>> {
+        return Gen<OptionalCMF<T>>
+            .compose {
+                OptionalCMF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalCMFOf<T>.init)
     }
 }
 
@@ -222,6 +307,23 @@ struct OptionalEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
     }
 }
 
+struct OptionalEqFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: OptionalEqF<T>
+    init(_ get: OptionalEqF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalEqFOf<T>> {
+        return Gen<OptionalEqF<T>>
+            .compose {
+                OptionalEqF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalEqFOf<T>.init)
+    }
+}
+
 struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
     let get: OptionalM<T>
     init(_ get: OptionalM<T>) {
@@ -239,6 +341,23 @@ struct OptionalMOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
     }
 }
 
+struct OptionalMFOf<T>: Arbitrary where T: Arbitrary & Semigroup & EquatableInContext {
+    let get: OptionalMF<T>
+    init(_ get: OptionalMF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalMFOf<T>> {
+        return Gen<OptionalMF<T>>
+            .compose {
+                OptionalMF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalMFOf<T>.init)
+    }
+}
+
 struct OptionalSOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
     let get: OptionalS<T>
     init(_ get: OptionalS<T>) {
@@ -253,6 +372,23 @@ struct OptionalSOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
                 )
             }
             .map(OptionalSOf<T>.init)
+    }
+}
+
+struct OptionalSFOf<T>: Arbitrary where T: Arbitrary & Semigroup & EquatableInContext {
+    let get: OptionalSF<T>
+    init(_ get: OptionalSF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalSFOf<T>> {
+        return Gen<OptionalSF<T>>
+            .compose {
+                OptionalSF<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(OptionalSFOf<T>.init)
     }
 }
 

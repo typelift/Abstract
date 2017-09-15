@@ -58,12 +58,37 @@ public struct OptionalS<T>: Semigroup, Wrapper, Equatable where T: Semigroup & E
 			return .init(nil)
 		}
 	}
-
-	public static func == (_ left: OptionalS, _ right: OptionalS) -> Bool {
-		return left.unwrap == right.unwrap
-	}
 }
 
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
+// sourcery: requiredContextForPropertyBasedTests = "String"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "Semigroup & EquatableInContext"
+public struct OptionalSF<T>: Semigroup, Wrapper, EquatableInContext where T: Semigroup & EquatableInContext {
+	public typealias WrappedType = T?
+	public typealias Context = T.Context
+
+	public let unwrap: WrappedType
+
+	public init(_ value: WrappedType) {
+		self.unwrap = value
+	}
+
+	public static func <> (_ left: OptionalSF, _ right: OptionalSF) -> OptionalSF {
+		switch (left.unwrap,right.unwrap) {
+		case (.some(let leftValue),.some(let rightValue)):
+			return .init(leftValue <> rightValue)
+		case (.some,_):
+			return left
+		case (_,.some):
+			return right
+		default:
+			return .init(nil)
+		}
+	}
+}
 
 //: ------
 
@@ -206,10 +231,31 @@ public struct First<A: Equatable>: Wrapper, Semigroup, Equatable {
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
+// sourcery: requiredContextForPropertyBasedTests = "String"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "EquatableInContext"
+public struct FirstF<A>: Wrapper, Semigroup, EquatableInContext where A: EquatableInContext {
+	public typealias WrappedType = A
+	public typealias Context = A.Context
+
+	public let unwrap: WrappedType
+
+	public init(_ value: WrappedType) {
+		self.unwrap = value
+	}
+
+	public static func <> (left: FirstF, right: FirstF) -> FirstF {
+		return left
+	}
+}
+
+//: ------
+
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Equatable"
-public struct Last<A: Equatable>: Wrapper, Semigroup, Equatable {
+public struct Last<A>: Wrapper, Semigroup, Equatable where A: Equatable {
     public typealias WrappedType = A
     
     public let unwrap: A
@@ -221,6 +267,27 @@ public struct Last<A: Equatable>: Wrapper, Semigroup, Equatable {
     public static func <> (left: Last, right: Last) -> Last {
         return right
     }
+}
+
+//: ------
+
+// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
+// sourcery: requiredContextForPropertyBasedTests = "String"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "EquatableInContext"
+public struct LastF<A>: Wrapper, Semigroup, EquatableInContext where A: EquatableInContext {
+	public typealias WrappedType = A
+	public typealias Context = A.Context
+
+	public let unwrap: A
+
+	public init(_ value: A) {
+		self.unwrap = value
+	}
+
+	public static func <> (left: LastF, right: LastF) -> LastF {
+		return right
+	}
 }
 
 //: ------

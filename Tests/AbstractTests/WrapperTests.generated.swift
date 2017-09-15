@@ -26,6 +26,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testArrayEqF() {
+		property("ArrayEqF is a well-behaved Wrapper") <- forAll { (a: ArrayEqFOf<TestFunction>, context: String) in
+			LawInContext<ArrayEqF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a.get)(context)
@@ -35,6 +41,12 @@ final class WrapperTests: XCTestCase {
 	func testFirst() {
 		property("First is a well-behaved Wrapper") <- forAll { (a: FirstOf<Int>) in
 			Law<First<Int>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testFirstF() {
+		property("FirstF is a well-behaved Wrapper") <- forAll { (a: FirstFOf<TestFunction>, context: String) in
+			LawInContext<FirstF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 
@@ -80,6 +92,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testLastF() {
+		property("LastF is a well-behaved Wrapper") <- forAll { (a: LastFOf<TestFunction>, context: String) in
+			LawInContext<LastF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testLastM() {
 		property("LastM is a well-behaved Wrapper") <- forAll { (a: LastMOf<TestStructure>) in
 			Law<LastM<TestStructure>>.isWellBehavedWrapper(a.get)
@@ -110,9 +128,21 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testOptionalBSF() {
+		property("OptionalBSF is a well-behaved Wrapper") <- forAll { (a: OptionalBSFOf<TestFunction>, context: String) in
+			LawInContext<OptionalBSF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testOptionalCM() {
 		property("OptionalCM is a well-behaved Wrapper") <- forAll { (a: OptionalCMOf<TestStructure>) in
 			Law<OptionalCM<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testOptionalCMF() {
+		property("OptionalCMF is a well-behaved Wrapper") <- forAll { (a: OptionalCMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalCMF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 
@@ -122,15 +152,33 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testOptionalEqF() {
+		property("OptionalEqF is a well-behaved Wrapper") <- forAll { (a: OptionalEqFOf<TestFunction>, context: String) in
+			LawInContext<OptionalEqF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testOptionalM() {
 		property("OptionalM is a well-behaved Wrapper") <- forAll { (a: OptionalMOf<TestStructure>) in
 			Law<OptionalM<TestStructure>>.isWellBehavedWrapper(a.get)
 		}
 	}
 
+	func testOptionalMF() {
+		property("OptionalMF is a well-behaved Wrapper") <- forAll { (a: OptionalMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalMF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testOptionalS() {
 		property("OptionalS is a well-behaved Wrapper") <- forAll { (a: OptionalSOf<TestStructure>) in
 			Law<OptionalS<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testOptionalSF() {
+		property("OptionalSF is a well-behaved Wrapper") <- forAll { (a: OptionalSFOf<TestFunction>, context: String) in
+			LawInContext<OptionalSF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 
@@ -150,8 +198,10 @@ final class WrapperTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testArrayEq",testArrayEq),
+		("testArrayEqF",testArrayEqF),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
+		("testFirstF",testFirstF),
 		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
 		("testFunctionCM",testFunctionCM),
@@ -159,15 +209,21 @@ final class WrapperTests: XCTestCase {
 		("testFunctionS",testFunctionS),
 		("testFunctionSR",testFunctionSR),
 		("testLast",testLast),
+		("testLastF",testLastF),
 		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
 		("testOptionalBS",testOptionalBS),
+		("testOptionalBSF",testOptionalBSF),
 		("testOptionalCM",testOptionalCM),
+		("testOptionalCMF",testOptionalCMF),
 		("testOptionalEq",testOptionalEq),
+		("testOptionalEqF",testOptionalEqF),
 		("testOptionalM",testOptionalM),
+		("testOptionalMF",testOptionalMF),
 		("testOptionalS",testOptionalS),
+		("testOptionalSF",testOptionalSF),
 		("testOr",testOr),
 		("testTropical",testTropical),
 	]

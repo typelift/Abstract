@@ -26,6 +26,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testArrayEqF() {
+		property("ArrayEqF is a Semigroup") <- forAll { (a: ArrayEqFOf<TestFunction>, b: ArrayEqFOf<TestFunction>, c: ArrayEqFOf<TestFunction>, context: String) in
+			LawInContext<ArrayEqF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a Semigroup") <- forAll { (a: EndofunctionOf<Int>, b: EndofunctionOf<Int>, c: EndofunctionOf<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isAssociative(a.get,b.get,c.get)(context)
@@ -35,6 +41,12 @@ final class SemigroupTests: XCTestCase {
 	func testFirst() {
 		property("First is a Semigroup") <- forAll { (a: FirstOf<Int>, b: FirstOf<Int>, c: FirstOf<Int>) in
 			Law<First<Int>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
+	func testFirstF() {
+		property("FirstF is a Semigroup") <- forAll { (a: FirstFOf<TestFunction>, b: FirstFOf<TestFunction>, c: FirstFOf<TestFunction>, context: String) in
+			LawInContext<FirstF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
@@ -74,6 +86,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testLastF() {
+		property("LastF is a Semigroup") <- forAll { (a: LastFOf<TestFunction>, b: LastFOf<TestFunction>, c: LastFOf<TestFunction>, context: String) in
+			LawInContext<LastF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testLastM() {
 		property("LastM is a Semigroup") <- forAll { (a: LastMOf<TestStructure>, b: LastMOf<TestStructure>, c: LastMOf<TestStructure>) in
 			Law<LastM<TestStructure>>.isAssociative(a.get,b.get,c.get)
@@ -104,9 +122,21 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testOptionalBSF() {
+		property("OptionalBSF is a Semigroup") <- forAll { (a: OptionalBSFOf<TestFunction>, b: OptionalBSFOf<TestFunction>, c: OptionalBSFOf<TestFunction>, context: String) in
+			LawInContext<OptionalBSF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testOptionalCM() {
 		property("OptionalCM is a Semigroup") <- forAll { (a: OptionalCMOf<TestStructure>, b: OptionalCMOf<TestStructure>, c: OptionalCMOf<TestStructure>) in
 			Law<OptionalCM<TestStructure>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
+	func testOptionalCMF() {
+		property("OptionalCMF is a Semigroup") <- forAll { (a: OptionalCMFOf<TestFunction>, b: OptionalCMFOf<TestFunction>, c: OptionalCMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalCMF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
@@ -116,15 +146,33 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testOptionalEqF() {
+		property("OptionalEqF is a Semigroup") <- forAll { (a: OptionalEqFOf<TestFunction>, b: OptionalEqFOf<TestFunction>, c: OptionalEqFOf<TestFunction>, context: String) in
+			LawInContext<OptionalEqF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testOptionalM() {
 		property("OptionalM is a Semigroup") <- forAll { (a: OptionalMOf<TestStructure>, b: OptionalMOf<TestStructure>, c: OptionalMOf<TestStructure>) in
 			Law<OptionalM<TestStructure>>.isAssociative(a.get,b.get,c.get)
 		}
 	}
 
+	func testOptionalMF() {
+		property("OptionalMF is a Semigroup") <- forAll { (a: OptionalMFOf<TestFunction>, b: OptionalMFOf<TestFunction>, c: OptionalMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalMF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testOptionalS() {
 		property("OptionalS is a Semigroup") <- forAll { (a: OptionalSOf<TestStructure>, b: OptionalSOf<TestStructure>, c: OptionalSOf<TestStructure>) in
 			Law<OptionalS<TestStructure>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
+	func testOptionalSF() {
+		property("OptionalSF is a Semigroup") <- forAll { (a: OptionalSFOf<TestFunction>, b: OptionalSFOf<TestFunction>, c: OptionalSFOf<TestFunction>, context: String) in
+			LawInContext<OptionalSF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
@@ -150,23 +198,31 @@ final class SemigroupTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testArrayEq",testArrayEq),
+		("testArrayEqF",testArrayEqF),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
+		("testFirstF",testFirstF),
 		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
 		("testFunctionCM",testFunctionCM),
 		("testFunctionM",testFunctionM),
 		("testFunctionS",testFunctionS),
 		("testLast",testLast),
+		("testLastF",testLastF),
 		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
 		("testOptionalBS",testOptionalBS),
+		("testOptionalBSF",testOptionalBSF),
 		("testOptionalCM",testOptionalCM),
+		("testOptionalCMF",testOptionalCMF),
 		("testOptionalEq",testOptionalEq),
+		("testOptionalEqF",testOptionalEqF),
 		("testOptionalM",testOptionalM),
+		("testOptionalMF",testOptionalMF),
 		("testOptionalS",testOptionalS),
+		("testOptionalSF",testOptionalSF),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
 		("testString",testString),
