@@ -38,6 +38,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testFirstF() {
+		property("FirstF is a Semigroup") <- forAll { (a: FirstFOf<TestFunction>, b: FirstFOf<TestFunction>, c: FirstFOf<TestFunction>, context: String) in
+			LawInContext<FirstF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testFirstM() {
 		property("FirstM is a Semigroup") <- forAll { (a: FirstMOf<TestStructure>, b: FirstMOf<TestStructure>, c: FirstMOf<TestStructure>) in
 			Law<FirstM<TestStructure>>.isAssociative(a.get,b.get,c.get)
@@ -71,6 +77,12 @@ final class SemigroupTests: XCTestCase {
 	func testLast() {
 		property("Last is a Semigroup") <- forAll { (a: LastOf<Int>, b: LastOf<Int>, c: LastOf<Int>) in
 			Law<Last<Int>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
+	func testLastF() {
+		property("LastF is a Semigroup") <- forAll { (a: LastFOf<TestFunction>, b: LastFOf<TestFunction>, c: LastFOf<TestFunction>, context: String) in
+			LawInContext<LastF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
@@ -128,6 +140,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testOptionalSF() {
+		property("OptionalSF is a Semigroup") <- forAll { (a: OptionalSFOf<TestFunction>, b: OptionalSFOf<TestFunction>, c: OptionalSFOf<TestFunction>, context: String) in
+			LawInContext<OptionalSF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testOr() {
 		property("Or is a Semigroup") <- forAll { (a: Or, b: Or, c: Or) in
 			Law<Or>.isAssociative(a,b,c)
@@ -152,12 +170,14 @@ final class SemigroupTests: XCTestCase {
 		("testArrayEq",testArrayEq),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
+		("testFirstF",testFirstF),
 		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
 		("testFunctionCM",testFunctionCM),
 		("testFunctionM",testFunctionM),
 		("testFunctionS",testFunctionS),
 		("testLast",testLast),
+		("testLastF",testLastF),
 		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
@@ -167,6 +187,7 @@ final class SemigroupTests: XCTestCase {
 		("testOptionalEq",testOptionalEq),
 		("testOptionalM",testOptionalM),
 		("testOptionalS",testOptionalS),
+		("testOptionalSF",testOptionalSF),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
 		("testString",testString),

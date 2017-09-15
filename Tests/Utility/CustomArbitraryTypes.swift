@@ -29,6 +29,33 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	}
 }
 
+struct TestFunction: Arbitrary, BoundedSemilattice, EquatableInContext {
+	typealias Context = String
+	let get: FunctionBS<String,Max<Int>>
+
+	init(_ value: @escaping (String) -> Max<Int>) {
+		self.get = FunctionBS.init(value)
+	}
+
+	static var arbitrary: Gen<TestFunction> {
+		return ArrowOf<String,MaxOf<Int>>.arbitrary
+			.map { f in { f.getArrow($0).get } }
+			.map(TestFunction.init)
+	}
+
+	static func <> (left: TestFunction, right: TestFunction) -> TestFunction {
+		return TestFunction((left.get <> right.get).unwrap)
+	}
+
+	static var empty: TestFunction {
+		return TestFunction.init { _ in Max<Int>.empty }
+	}
+
+	static func == (left: TestFunction, right: TestFunction) -> (Context) -> Bool {
+		return left.get == right.get
+	}
+}
+
 struct TestSemiring: Arbitrary, Semiring, Equatable {
 	typealias Additive = Bool.Additive
 	typealias Multiplicative = Bool.Multiplicative

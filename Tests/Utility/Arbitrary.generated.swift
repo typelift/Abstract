@@ -69,6 +69,23 @@ struct FirstOf<T>: Arbitrary where T: Arbitrary & Equatable {
     }
 }
 
+struct FirstFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: FirstF<T>
+    init(_ get: FirstF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<FirstFOf<T>> {
+        return Gen<FirstF<T>>
+            .compose {
+                FirstF<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(FirstFOf<T>.init)
+    }
+}
+
 struct FirstMOf<T>: Arbitrary where T: Arbitrary & Monoid & Equatable {
     let get: FirstM<T>
     init(_ get: FirstM<T>) {
@@ -100,6 +117,23 @@ struct LastOf<T>: Arbitrary where T: Arbitrary & Equatable {
                 )
             }
             .map(LastOf<T>.init)
+    }
+}
+
+struct LastFOf<T>: Arbitrary where T: Arbitrary & EquatableInContext {
+    let get: LastF<T>
+    init(_ get: LastF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<LastFOf<T>> {
+        return Gen<LastF<T>>
+            .compose {
+                LastF<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(LastFOf<T>.init)
     }
 }
 
@@ -253,6 +287,23 @@ struct OptionalSOf<T>: Arbitrary where T: Arbitrary & Semigroup & Equatable {
                 )
             }
             .map(OptionalSOf<T>.init)
+    }
+}
+
+struct OptionalSFOf<T>: Arbitrary where T: Arbitrary & Semigroup & EquatableInContext {
+    let get: OptionalSF<T>
+    init(_ get: OptionalSF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalSFOf<T>> {
+        return Gen<OptionalSF<T>>
+            .compose {
+                OptionalSF<T>.init(
+                    unwrap: $0.generate()
+                )
+            }
+            .map(OptionalSFOf<T>.init)
     }
 }
 

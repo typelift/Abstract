@@ -38,6 +38,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testFirstF() {
+		property("FirstF is a well-behaved Wrapper") <- forAll { (a: FirstFOf<TestFunction>, context: String) in
+			LawInContext<FirstF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testFirstM() {
 		property("FirstM is a well-behaved Wrapper") <- forAll { (a: FirstMOf<TestStructure>) in
 			Law<FirstM<TestStructure>>.isWellBehavedWrapper(a.get)
@@ -77,6 +83,12 @@ final class WrapperTests: XCTestCase {
 	func testLast() {
 		property("Last is a well-behaved Wrapper") <- forAll { (a: LastOf<Int>) in
 			Law<Last<Int>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testLastF() {
+		property("LastF is a well-behaved Wrapper") <- forAll { (a: LastFOf<TestFunction>, context: String) in
+			LawInContext<LastF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 
@@ -134,6 +146,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testOptionalSF() {
+		property("OptionalSF is a well-behaved Wrapper") <- forAll { (a: OptionalSFOf<TestFunction>, context: String) in
+			LawInContext<OptionalSF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testOr() {
 		property("Or is a well-behaved Wrapper") <- forAll { (a: Or) in
 			Law<Or>.isWellBehavedWrapper(a)
@@ -152,6 +170,7 @@ final class WrapperTests: XCTestCase {
 		("testArrayEq",testArrayEq),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
+		("testFirstF",testFirstF),
 		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
 		("testFunctionCM",testFunctionCM),
@@ -159,6 +178,7 @@ final class WrapperTests: XCTestCase {
 		("testFunctionS",testFunctionS),
 		("testFunctionSR",testFunctionSR),
 		("testLast",testLast),
+		("testLastF",testLastF),
 		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
@@ -168,6 +188,7 @@ final class WrapperTests: XCTestCase {
 		("testOptionalEq",testOptionalEq),
 		("testOptionalM",testOptionalM),
 		("testOptionalS",testOptionalS),
+		("testOptionalSF",testOptionalSF),
 		("testOr",testOr),
 		("testTropical",testTropical),
 	]
