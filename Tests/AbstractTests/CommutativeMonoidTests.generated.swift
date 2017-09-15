@@ -62,6 +62,12 @@ final class CommutativeMonoidTests: XCTestCase {
 		}
 	}
 
+	func testOptionalCMF() {
+		property("OptionalCMF is a CommutativeMonoid") <- forAll { (a: OptionalCMFOf<TestFunction>, b: OptionalCMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalCMF<TestFunction>>.isCommutative(a.get,b.get)(context)
+		}
+	}
+
 	func testOr() {
 		property("Or is a CommutativeMonoid") <- forAll { (a: Or, b: Or) in
 			Law<Or>.isCommutative(a,b)
@@ -78,6 +84,7 @@ final class CommutativeMonoidTests: XCTestCase {
 		("testMultiply",testMultiply),
 		("testOptionalBS",testOptionalBS),
 		("testOptionalCM",testOptionalCM),
+		("testOptionalCMF",testOptionalCMF),
 		("testOr",testOr),
 	]
 }

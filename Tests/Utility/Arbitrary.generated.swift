@@ -256,6 +256,23 @@ struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equat
     }
 }
 
+struct OptionalCMFOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & EquatableInContext {
+    let get: OptionalCMF<T>
+    init(_ get: OptionalCMF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalCMFOf<T>> {
+        return Gen<OptionalCMF<T>>
+            .compose {
+                OptionalCMF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalCMFOf<T>.init)
+    }
+}
+
 struct OptionalEqOf<T>: Arbitrary where T: Arbitrary & Equatable {
     let get: OptionalEq<T>
     init(_ get: OptionalEq<T>) {

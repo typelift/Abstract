@@ -134,6 +134,12 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testOptionalCMF() {
+		property("OptionalCMF is a well-behaved Wrapper") <- forAll { (a: OptionalCMFOf<TestFunction>, context: String) in
+			LawInContext<OptionalCMF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
+		}
+	}
+
 	func testOptionalEq() {
 		property("OptionalEq is a well-behaved Wrapper") <- forAll { (a: OptionalEqOf<TestStructure>) in
 			Law<OptionalEq<TestStructure>>.isWellBehavedWrapper(a.get)
@@ -204,6 +210,7 @@ final class WrapperTests: XCTestCase {
 		("testMultiply",testMultiply),
 		("testOptionalBS",testOptionalBS),
 		("testOptionalCM",testOptionalCM),
+		("testOptionalCMF",testOptionalCMF),
 		("testOptionalEq",testOptionalEq),
 		("testOptionalEqF",testOptionalEqF),
 		("testOptionalM",testOptionalM),
