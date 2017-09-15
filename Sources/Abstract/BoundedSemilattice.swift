@@ -63,6 +63,39 @@ public struct OptionalBS<T>: BoundedSemilattice, Wrapper, Equatable where T: Bou
 
 //: ------
 
+// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
+// sourcery: requiredContextForPropertyBasedTests = "String"
+// sourcery: arbitrary
+// sourcery: arbitraryGenericParameterProtocols = "BoundedSemilattice & EquatableInContext"
+public struct OptionalBSF<T>: BoundedSemilattice, Wrapper, EquatableInContext where T: BoundedSemilattice & EquatableInContext {
+	public typealias WrappedType = T?
+	public typealias Context = T.Context
+
+	public let unwrap: T?
+	public init(_ value: T?) {
+		self.unwrap = value
+	}
+
+	public static var empty: OptionalBSF<T> {
+		return .init(nil)
+	}
+
+	public static func <> (_ left: OptionalBSF, _ right: OptionalBSF) -> OptionalBSF {
+		switch (left.unwrap,right.unwrap) {
+		case (.some(let leftValue),.some(let rightValue)):
+			return .init(leftValue <> rightValue)
+		case (.some,_):
+			return left
+		case (_,.some):
+			return right
+		default:
+			return .init(nil)
+		}
+	}
+}
+
+//: ------
+
 extension Max: BoundedSemilattice {}
 
 //: ------

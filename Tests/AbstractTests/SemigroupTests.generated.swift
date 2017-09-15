@@ -122,6 +122,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testOptionalBSF() {
+		property("OptionalBSF is a Semigroup") <- forAll { (a: OptionalBSFOf<TestFunction>, b: OptionalBSFOf<TestFunction>, c: OptionalBSFOf<TestFunction>, context: String) in
+			LawInContext<OptionalBSF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
+		}
+	}
+
 	func testOptionalCM() {
 		property("OptionalCM is a Semigroup") <- forAll { (a: OptionalCMOf<TestStructure>, b: OptionalCMOf<TestStructure>, c: OptionalCMOf<TestStructure>) in
 			Law<OptionalCM<TestStructure>>.isAssociative(a.get,b.get,c.get)
@@ -208,6 +214,7 @@ final class SemigroupTests: XCTestCase {
 		("testMin",testMin),
 		("testMultiply",testMultiply),
 		("testOptionalBS",testOptionalBS),
+		("testOptionalBSF",testOptionalBSF),
 		("testOptionalCM",testOptionalCM),
 		("testOptionalCMF",testOptionalCMF),
 		("testOptionalEq",testOptionalEq),

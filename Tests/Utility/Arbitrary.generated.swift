@@ -239,6 +239,23 @@ struct OptionalBSOf<T>: Arbitrary where T: Arbitrary & BoundedSemilattice & Equa
     }
 }
 
+struct OptionalBSFOf<T>: Arbitrary where T: Arbitrary & BoundedSemilattice & EquatableInContext {
+    let get: OptionalBSF<T>
+    init(_ get: OptionalBSF<T>) {
+        self.get = get
+    }
+
+    public static var arbitrary: Gen<OptionalBSFOf<T>> {
+        return Gen<OptionalBSF<T>>
+            .compose {
+                OptionalBSF<T>.init(
+                    unwrap: $0.generate(using: OptionalOf<T>.arbitrary.map { $0.getOptional })
+                )
+            }
+            .map(OptionalBSFOf<T>.init)
+    }
+}
+
 struct OptionalCMOf<T>: Arbitrary where T: Arbitrary & CommutativeMonoid & Equatable {
     let get: OptionalCM<T>
     init(_ get: OptionalCM<T>) {
