@@ -45,8 +45,11 @@ extension Law where Element: Semiring {
 
 extension LawInContext where Element: Semiring {
 	public static func multiplicationIsDistributiveOverAddition(_ a: Element, _ b: Element, _ c: Element) -> (Element.Context) -> Bool {
-		return  { (a <>* (b <>+ c) == (a <>* b) <>+ (a <>* c))($0)
-			   && ((b <>+ c) <>* a == (b <>* a) <>+ (c <>* a))($0) }
+		return {
+			let x1 = (a <>* (b <>+ c) == (a <>* b) <>+ (a <>* c))($0)
+			let x2 = ((b <>+ c) <>* a == (b <>* a) <>+ (c <>* a))($0)
+			return x1 && x2
+		}
 	}
 
 	public static func zeroAnnihiliatesTheMultiplicative(_ a: Element) -> (Element.Context) -> Bool {

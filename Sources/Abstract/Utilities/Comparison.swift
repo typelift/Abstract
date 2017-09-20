@@ -24,6 +24,6 @@ extension Comparable {
 
 extension Sequence {
 	public func ordered(by comparison: Comparison<Iterator.Element>) -> [Iterator.Element] {
-		return sorted { comparison.call($0,$1) == .lowerThan }
+		return sorted { comparison.call(($0,$1)) == .lowerThan }
 	}
 }
