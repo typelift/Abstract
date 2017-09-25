@@ -1,2 +1,2 @@
 github "typelift/Operadics" "0.2.3"
-github "typelift/SwiftCheck" "c71e609d17144132db225bfa39cb2a89bd4f2548"
+github "typelift/SwiftCheck" "0.8.1"
