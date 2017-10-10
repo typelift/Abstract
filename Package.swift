@@ -1,20 +1,27 @@
-// swift-tools-version:3.1
+// swift-tools-version:4.0
 
 import Foundation
 import PackageDescription
 
-// HACK from https://github.com/ReactiveCocoa/ReactiveSwift/blob/master/Package.swift
-var isSwiftPMTest: Bool {
-    return ProcessInfo.processInfo.environment["SWIFTPM_TEST_Abstract"] == "YES"
-}
-
 let package = Package(
-    name: "Abstract",
-    dependencies: [
-        .Package(url: "https://github.com/typelift/Operadics.git",
-                 majorVersion: 0)
-    ] + (isSwiftPMTest ?
-      [.Package(url: "https://github.com/typelift/SwiftCheck.git", versions: Version(0,6,0)..<Version(1,0,0))] :
-      [])
+	name: "Abstract",
+	products: [
+		.library(
+			name: "Abstract",
+			targets: ["Abstract"])
+	],
+	dependencies: [
+		.package(url: "https://github.com/typelift/Operadics.git",
+		         from: Version(0,0,0)),
+		.package(url: "https://github.com/typelift/SwiftCheck.git",
+		         from: Version(0,6,0))
+	],
+	targets: [
+		.target(
+			name: "Abstract",
+			dependencies: ["Operadics"]),
+		.testTarget(
+			name: "AbstractTests",
+			dependencies: ["Abstract","SwiftCheck"])
+	]
 )
-
