@@ -34,7 +34,7 @@ To use the structures in this library, add `"Abstract"` to your target's depende
 
 ## How to use this
 
-Let's see some examples to better understand what `Abstract` is about. To get an overview of the theory behind all this you can read the [rationale](RATIONALE.md)
+Let's see some examples to better understand what `Abstract` is about. To get an overview of the theory behind all this you can read the [rationale](RATIONALE.md).
 
 ### Cookies appreciation
 
@@ -50,7 +50,7 @@ struct UserSession {
 }
 ```
 
-At each interaction, with should update the session object. 
+At each interaction, we should update the session object. 
 
 There are 2 possible interactions:
 
