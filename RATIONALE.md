@@ -4,26 +4,26 @@
 
 Every source file contains an initial section that briefly explains what the content is about, so to get a grasp on the underlying theory you can scan the following files in order:
 
-- `Law.swift`
-- `Magma.swift`
-- `Semigroup.swift`
-- `Monoid.swift`
-- `CommutativeMonoid.swift`
-- `BoundedSemilattice.swift`
-- `Semiring.swift`
-- `Homomorphism.swift`
-- `Isomorphism.swift`
+- [`Law.swift`](Sources/Abstract/Law.swift)
+- [`Magma.swift`](Sources/Abstract/Magma.swift)
+- [`Semigroup.swift`](Sources/Abstract/Semigroup.swift)
+- [`Monoid.swift`](Sources/Abstract/Monoid.swift)
+- [`CommutativeMonoid.swift`](Sources/Abstract/CommutativeMonoid.swift)
+- [`BoundedSemilattice.swift`](Sources/Abstract/BoundedSemilattice.swift)
+- [`Semiring.swift`](Sources/Abstract/Semiring.swift)
+- [`Homomorphism.swift`](Sources/Abstract/Homomorphism.swift)
+- [`Isomorphism.swift`](Sources/Abstract/Isomorphism.swift)
 
 There are also a few abstractions that, while not present in the underlying theory, allow to express useful concepts given the Swift's type system.
 
-- `Wrapper.swift`
-- `Adapters.swift`
+- [`Wrapper.swift`](Sources/Abstract/Wrapper.swift)
+- [`Adapters.swift`](Sources/Abstract/Adapters.swift)
 
 Finally, some "utility" files contain useful functions to practically use some concepts of abstract algebra in concrete contexts.
 
-- `Collections.swift`
-- `Comparison.swift`
-- `Predicate.swift`
+- [`Collections.swift`](Sources/Abstract/Utilities/Collections.swift)
+- [`Comparison.swift`](Sources/Abstract/Utilities/Comparison.swift)
+- [`Predicate.swift`](Sources/Abstract/Utilities/Predicate.swift)
 
 ------
 

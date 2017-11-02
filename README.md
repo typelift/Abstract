@@ -4,7 +4,7 @@ A take on abstract algebraic structures, in Swift.
 
 ------
 
-`Abstract` is a Swift library that defines protocols for the main [abstract algebraic structures](https://en.wikipedia.org/wiki/Abstract_algebra), along with some concrete implementations for them that declare specific semantics.
+`Abstract` is a Swift library that defines protocols for the main [abstract algebraic structures](https://en.wikipedia.org/wiki/Abstract_algebra), along with some concrete implementations for Swift datatypes.
 
 The library also provides tools to test the concrete types for the axioms required by each algebraic structure: tests can then be performed by property-based testing libraries like [SwiftCheck](https://github.com/typelift/SwiftCheck).
 
@@ -28,7 +28,7 @@ Please add this line to your `Package.swift` file's dependencies section:
          from: Version(0,0,0))
 ```
 
-Also add `"Abstract"` to your target's dependencies, an also to your testTarget dependencies if you want to test your types with the `Law` functions.
+To use the structures in this library, add `"Abstract"` to your target's dependencies. To additionally test algebraic laws with the framework, add `"Abstract"` as a dependency to the relevant `testTarget`s.
 
 ------
 
