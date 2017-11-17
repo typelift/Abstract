@@ -323,7 +323,7 @@ struct Process<T> {
 }
 ```
 
-Let's also assume that we have a bunch of processes that we want to run, and then combine all the values into a single one. Running all the processes in sequence and then collecting all the values could be tedious and inefficient, but running them in parallel, maybe in a distributed way, could be dangerous, unpredictable and hard to coordinate.
+Let's also assume we have a bunch of processes that we want to run, and then combine all the values into a single one. Running all the processes in sequence and then collecting all the values could be tedious and inefficient, but running them in parallel, maybe in a distributed way, could be dangerous, unpredictable and hard to coordinate.
 
 We would like to take advantage of the abstract algebraic structures defined in `Abstract` to simplify the problem. Everything depends on the `T` value: it turns out that, if `T` has certain properties, we can actually run our processes in a distributed and efficient way without any risk.
 
