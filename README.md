@@ -4,7 +4,7 @@ A take on abstract algebraic structures, in Swift.
 
 ------
 
-`Abstract` is a Swift library that defines protocols for the main [abstract algebraic structures](https://en.wikipedia.org/wiki/Abstract_algebra), along with some concrete implementations for Swift datatypes.
+`Abstract` is a Swift library that defines protocols for common [abstract algebraic structures](https://en.wikipedia.org/wiki/Abstract_algebra), along with some concrete implementations for Swift datatypes.
 
 The library also provides tools to test the concrete types for the axioms required by each algebraic structure: tests can then be performed by property-based testing libraries like [SwiftCheck](https://github.com/typelift/SwiftCheck).
 
@@ -93,9 +93,9 @@ var maxCookiesPerRequest: Max<Int>
 var alwaysSatisfied: And
 ```
 
-Each property is of a type that specifies how we're supposed to *compose* two instances: `Max<Date>` will always keep the highest of two dates, and it's going to be the same for `Max<Int>` but for numbers; `Add<Int>` will compose the number by adding them, and `And` will apply the `&&` operation to two `Bool`. We can then get the *wrapped* value inside the type with an `unwrap` function.
+Each property is of a type that specifies how we're supposed to *compose* two instances: `Max<Date>` will always keep the highest of two dates, and it's going to be the same for `Max<Int>` but for numbers; `Add<Int>` will compose the numbers by adding them, and `And` will apply the `&&` operation to two `Bool`. We can then get the *wrapped* value inside the type with an `unwrap` function.
 
-Following this strategy we can actually define an `Average` type the declares a composition function that works as intended:
+Following this strategy we can actually define an `Average` type that declares a composition function that works as intended:
 
 ```swift
 struct Average {
@@ -211,7 +211,7 @@ let averageCookiesPerRequest = finalSession.averageCookiesPerRequest.unwrap // 4
 let alwaysSatisfied = finalSession.alwaysSatisfied.unwrap // false
 ```
 
-If we provide an `.empty` value also for `UserSession` we can actually collect all the interactions in an `Array`, and then `reduce` the collection. This is definitely more convenient and readable, and allows us to separate the *collection* of the data from their *processing*. `UserSession.empty` will naturally be an instance were every property is `.empty`:
+If we provide an `.empty` value also for `UserSession` we can actually collect all the interactions in an `Array`, and then `reduce` the collection. This is definitely more convenient and readable, and allows us to separate the *collection* of the data from their *processing*. `UserSession.empty` will naturally be an instance where every property is `.empty`:
 
 ```swift
 let sessions: [UserSession] = [
@@ -240,7 +240,7 @@ Thus, if we were able to represent these two properties in an abstract way, we c
 let finalSession = sessions.concatenated
 ```
 
-A type (actually a set, but in programming we really just care about types) *equipped* with a composition operation that is *closed* (i.e. non-crashing) and *associative*, and an `.empty` valued that is neutral to the composition, is usually called a `Monoid`: all the types defined in this example are monoids, and the Swift type system is strong enough to generically define  the interface of a monoid with a `protocol`. Most of the types and methods used in this example are already defined in `Abstract`, and to read more about monoids you can refer to the [Monoid.swift](Sources/Abstract/Monoid.swift) source file.
+A type (actually a set, but in programming we really just care about types) *equipped* with a composition operation that is *closed* (i.e. non-crashing) and *associative*, and an `.empty` value that is neutral to the composition, is usually called a `Monoid`: all the types defined in this example are monoids, and the Swift type system is strong enough to generically define  the interface of a monoid with a `protocol`. Most of the types and methods used in this example are already defined in `Abstract`, and to read more about monoids you can refer to the [Monoid.swift](Sources/Abstract/Monoid.swift) source file.
 
 ### FizzBuzzNess
 
@@ -257,7 +257,7 @@ Let's call "special divisors" the numbers associated to each word (initially, 3 
 
 The first composition style is simple concatenation; the second one is a little harder to see as some kind of composition, but it actually is the composition where we get only the first value if it exists (even if both exist), otherwise we get the second, and if none exist we get an "empty" value.
 
-The type representing the string concatenation is simply `String`, which naturally forms a `Monoid` over concatenation, where the `.empty` value is just the empty string. For the second type of composition we need a special type, that in `Abstract` is called `FirstM`: in composition, it will give priority to the first value.
+The type representing the string concatenation is simply `String`, which naturally forms a monoid over concatenation, where the `.empty` value is just the empty string. For the second type of composition we need a special type, that in `Abstract` is called `FirstM`: in composition, it will give priority to the first value.
 
 About the simple string concatenation, we'd like to define a function that *associates* a *word* to a special divisor: the function will take an `Int` and return a `String`, which is going to be "Fizz" or "Buzz". But instead of concatenating words we would actually like to concatenate *functions* that return words: if we're able to compose the return value, we can actually define a *composable function*:
 
@@ -269,7 +269,7 @@ func associate(divisor: Int, to text: String) -> FunctionM<Int,String> {
 }
 ```
 
-The `FunctionM` type is a *function type* (we get the function back with the `.call` method) that's **also** a `Monoid`, so we can compose and concatenate instances of this function like we'd do for `String` values.
+The `FunctionM` type is a *function type* (we get the function back with the `.call` method) that's **also** a monoid, so we can compose and concatenate instances of this function like we'd do for `String` values.
 
 We can easily define our `fizz` and `buzz` associations:
 
@@ -323,7 +323,7 @@ struct Process<T> {
 }
 ```
 
-Let's also assume we have a bunch of processes that we want to run, and then combine all the values into a single one. Running all the processes in sequence and then collecting all the values could be tedious and inefficient, but running them in parallel, maybe in a distributed way, could be dangerous, unpredictable and hard to coordinate.
+Let's also assume that we have a bunch of processes that we want to run, and then combine all the values into a single one. Running all the processes in sequence and then collecting all the values could be tedious and inefficient, but running them in parallel, maybe in a distributed way, could be dangerous, unpredictable and hard to coordinate.
 
 We would like to take advantage of the abstract algebraic structures defined in `Abstract` to simplify the problem. Everything depends on the `T` value: it turns out that, if `T` has certain properties, we can actually run our processes in a distributed and efficient way without any risk.
 
@@ -361,7 +361,7 @@ extension DispatchQueue: Context {
 }
 ```
 
-A `Collector` class will receive all the `T` values and combine them together: the requirement on `T`, in this case, is for it to be a `Monoid`, so it has an `.empty` value and a `<>` composition operation.
+A `Collector` class will receive all the `T` values and combine them together: the requirement on `T`, in this case, is for it to be a monoid, so it has an `.empty` value and a `<>` associative composition operation.
 
 ```swift
 class Collector<T: Monoid> {
@@ -386,7 +386,7 @@ class Distributor {
 
 Notice that, if the only constraint that we impose on `T` is `Monoid` (in the code above the requirement is implicit) we cannot do much more than distributing the work on a serial queue, because we need the processes to run and complete in the same order as they're passed to the distributor.
 
-An improvement over this would be if `T` was a `CommutativeMonoid`: in this case the `<>` operation is declared to be commutative, which means that the order of composition doesn't matter. This way we can distribute work over a concurrent queue: even if a process add before another completes after it, the commutativity will insure that the composition will still make sense.
+An improvement over this would be if `T` was a `CommutativeMonoid`: in this case the `<>` operation is declared to be commutative, which means that the order of composition doesn't matter. This way we can distribute work over a concurrent queue: even if a process ends before one that started earlier, the commutativity will insure that the composition still makes sense.
 
 ```swift
 class Distributor {
