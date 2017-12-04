@@ -20,6 +20,12 @@ The library also provides tools to test the concrete types for the axioms requir
 
 `Abstract` is compatible with [Carthage](https://github.com/Carthage/Carthage): please refer to Carthage documentation for how to add `Abstract` as a dependency of your project.
 
+Because [`Operadics`](https://github.com/typelift/Operadics) is not currently compatible with Carthage, a manual generation of the `Operadics` Xcode project is needed in all projects that depend on `Abstract` via Carthage. Please proceed as follows:
+
+- run `carthage update` from your project folder, and let it fail;
+- copy `deployments.xcconfig` and `buildOperadics.sh` to your project folder, then run `bash buildOperadics.sh`;
+- run `carthage update` again.
+
 ### SwiftPM
 Please add this line to your `Package.swift` file's dependencies section:
 
