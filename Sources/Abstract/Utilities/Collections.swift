@@ -4,7 +4,7 @@
 Becuase we have a way to generically "compose" things, we can derive a bunch of interesting operations on collections of such things.
 */
 
-#if !XCODE_BUILD
+#if SWIFT_PACKAGE
     import Operadics
 #endif
 

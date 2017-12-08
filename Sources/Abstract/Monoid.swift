@@ -8,7 +8,7 @@ The empty element (let's called it `e`) has to be neutral to the operation both 
 a <> e = e <> a = a
 */
 
-#if !XCODE_BUILD
+#if SWIFT_PACKAGE
     import Operadics
 #endif
 

@@ -6,7 +6,7 @@ A Commutative Monoid is a Monoid in which the operation is commutative, thus:
 a <> b = b <> a
 */
 
-#if !XCODE_BUILD
+#if SWIFT_PACKAGE
     import Operadics
 #endif
     
