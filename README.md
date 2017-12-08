@@ -18,7 +18,7 @@ The library also provides tools to test the concrete types for the axioms requir
 
 ## Setup
 
-`Abstract` is compatible with [Carthage](https://github.com/Carthage/Carthage): please refer to Carthage documentation for how to add `Abstract` as a dependency of your project.
+To clone `Abstract` please run `git clone REPOSITORY_URL --recursive` to properly clone submodules.
 
 ### SwiftPM
 Please add this line to your `Package.swift` file's dependencies section:
@@ -29,6 +29,9 @@ Please add this line to your `Package.swift` file's dependencies section:
 ```
 
 To use the structures in this library, add `"Abstract"` to your target's dependencies. To additionally test algebraic laws with the framework, add `"Abstract"` as a dependency to the relevant `testTarget`s.
+
+### Carthage
+`Abstract` is compatible with [Carthage](https://github.com/Carthage/Carthage): please refer to Carthage documentation for how to add `Abstract` as a dependency of your project.
 
 ------
 
@@ -323,7 +326,7 @@ struct Process<T> {
 }
 ```
 
-Let's also assume that we have a bunch of processes that we want to run, and then combine all the values into a single one. Running all the processes in sequence and then collecting all the values could be tedious and inefficient, but running them in parallel, maybe in a distributed way, could be dangerous, unpredictable and hard to coordinate.
+Let's also assume we have a bunch of processes that we want to run, and then combine all the values into a single one. Running all the processes in sequence and then collecting all the values could be tedious and inefficient, but running them in parallel, maybe in a distributed way, could be dangerous, unpredictable and hard to coordinate.
 
 We would like to take advantage of the abstract algebraic structures defined in `Abstract` to simplify the problem. Everything depends on the `T` value: it turns out that, if `T` has certain properties, we can actually run our processes in a distributed and efficient way without any risk.
 

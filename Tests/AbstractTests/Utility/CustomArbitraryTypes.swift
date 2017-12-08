@@ -1,9 +1,9 @@
 import XCTest
 @testable import Abstract
-#if !XCODE_BUILD
-    import Operadics
-#endif
 import SwiftCheck
+#if SWIFT_PACKAGE
+	import Operadics
+#endif
 
 struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	let get: Max<Int>

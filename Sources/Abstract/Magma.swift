@@ -12,7 +12,7 @@ Technically, to prove this, we could test the operation with a large number of r
 So let's keep it on word (for now).
 */
 
-#if !XCODE_BUILD
+#if SWIFT_PACKAGE
     import Operadics
 #endif
 

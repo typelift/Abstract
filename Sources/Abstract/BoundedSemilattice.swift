@@ -6,7 +6,7 @@ A Bounded Semilattice is a Commutative Monoid in which the operation is idempote
 a <> b <> b = a <> b
 */
 
-#if !XCODE_BUILD
+#if SWIFT_PACKAGE
     import Operadics
 #endif
     

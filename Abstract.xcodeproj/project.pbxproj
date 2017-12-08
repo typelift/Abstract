@@ -100,6 +100,12 @@
 		38A14E501F2A2DAB00A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2421F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38A14E521F2A2DC300A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38A14E531F2A2DCB00A2900C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; };
+		38E185801FD7E50700208B0A /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387A1DBF1F7909A000928A8C /* Arbitrary.generated.swift */; };
+		38E185811FD7E50700208B0A /* CustomArbitraryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387A1DC01F7909A000928A8C /* CustomArbitraryTypes.swift */; };
+		38E185821FD7E50800208B0A /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387A1DBF1F7909A000928A8C /* Arbitrary.generated.swift */; };
+		38E185831FD7E50800208B0A /* CustomArbitraryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387A1DC01F7909A000928A8C /* CustomArbitraryTypes.swift */; };
+		38E185841FD7E50900208B0A /* Arbitrary.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387A1DBF1F7909A000928A8C /* Arbitrary.generated.swift */; };
+		38E185851FD7E50900208B0A /* CustomArbitraryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387A1DC01F7909A000928A8C /* CustomArbitraryTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -672,7 +678,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				380A4B321F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */,
+				38E185831FD7E50800208B0A /* CustomArbitraryTypes.swift in Sources */,
 				380A4B211F1BE383002D70E0 /* MonoidTests.generated.swift in Sources */,
+				38E185821FD7E50800208B0A /* Arbitrary.generated.swift in Sources */,
 				380A4B1B1F1B775F002D70E0 /* WrapperTests.generated.swift in Sources */,
 				380A4B161F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				380A4B261F1BF5BE002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
@@ -709,7 +717,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				380A4B331F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */,
+				38E185851FD7E50900208B0A /* CustomArbitraryTypes.swift in Sources */,
 				380A4B221F1BE383002D70E0 /* MonoidTests.generated.swift in Sources */,
+				38E185841FD7E50900208B0A /* Arbitrary.generated.swift in Sources */,
 				380A4B1C1F1B775F002D70E0 /* WrapperTests.generated.swift in Sources */,
 				380A4B171F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				380A4B271F1BF5BF002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
@@ -768,7 +778,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				380A4B311F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */,
+				38E185811FD7E50700208B0A /* CustomArbitraryTypes.swift in Sources */,
 				380A4B201F1BE383002D70E0 /* MonoidTests.generated.swift in Sources */,
+				38E185801FD7E50700208B0A /* Arbitrary.generated.swift in Sources */,
 				380A4B1A1F1B775F002D70E0 /* WrapperTests.generated.swift in Sources */,
 				380A4B151F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				380A4B251F1BF5BD002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
@@ -848,7 +860,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_NAME = Abstract;
 				SDKROOT = iphoneos;
@@ -909,7 +920,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_NAME = Abstract;
 				SDKROOT = iphoneos;
@@ -1097,7 +1107,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = Abstract;
@@ -1166,7 +1175,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = Abstract;
@@ -1363,7 +1371,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = Abstract;
@@ -1432,7 +1439,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = Abstract;
@@ -1510,7 +1516,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -1579,7 +1584,6 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "-DXCODE_BUILD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.typelift.Abstract;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;

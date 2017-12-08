@@ -6,7 +6,7 @@ A Semigroup is a Magma where the composition operation is associative, which mea
 To put it simply: (a <> b) <> c = a <> (b <> c)
 */
 
-#if !XCODE_BUILD
+#if SWIFT_PACKAGE
     import Operadics
 #endif
 
