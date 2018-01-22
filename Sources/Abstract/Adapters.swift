@@ -6,7 +6,7 @@ Some extensions to the standard library, to make for easier implementations of a
 
 //: ------
 
-public protocol Addable: Equatable {
+public protocol Addable {
 	static func add (_ left: Self, _ right: Self) -> Self
 	static var zero: Self { get }
 }
@@ -64,7 +64,7 @@ extension Double: Addable {
 
 //: ------
 
-public protocol Multipliable: Equatable {
+public protocol Multipliable {
 	static func multiply (_ left: Self, _ right: Self) -> Self
 	static var one: Self { get }
 }

@@ -51,44 +51,13 @@ extension String: Monoid {
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Equatable"
-public struct ArrayEq<T>: Wrapper, Monoid, Equatable where T: Equatable {
-	public typealias WrappedType = [T]
-
-	public let unwrap: [T]
-	public init(_ value: [T]) {
-		self.unwrap = value
+extension Array: Monoid {
+	public static var empty: Array {
+		return []
 	}
 
-	public static var empty: ArrayEq<T> {
-		return .init([])
-	}
-
-	public static func <> (left: ArrayEq, right: ArrayEq) -> ArrayEq {
-		return ArrayEq.init(left.unwrap + right.unwrap)
-	}
-}
-
-//: ------
-
-// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
-// sourcery: requiredContextForPropertyBasedTests = "String"
-// sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "EquatableInContext"
-public struct ArrayEqF<T>: Wrapper, Monoid, EquatableInContext where T: EquatableInContext {
-	public typealias WrappedType = [T]
-	public typealias Context = T.Context
-
-	public let unwrap: [T]
-	public init(_ value: [T]) {
-		self.unwrap = value
-	}
-
-	public static var empty: ArrayEqF<T> {
-		return .init([])
-	}
-
-	public static func <> (left: ArrayEqF, right: ArrayEqF) -> ArrayEqF {
-		return ArrayEqF.init(left.unwrap + right.unwrap)
+	public static func <> (left: Array, right: Array) -> Array {
+		return left + right
 	}
 }
 
@@ -96,109 +65,10 @@ public struct ArrayEqF<T>: Wrapper, Monoid, EquatableInContext where T: Equatabl
 
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "Equatable"
-public struct OptionalEq<T>: Wrapper, Monoid, Equatable where T: Equatable {
-	public typealias WrappedType = Optional<T>
-
-	public let unwrap: Optional<T>
-	public init(_ value: Optional<T>) {
-		self.unwrap = value
-	}
-
-	public static var empty: OptionalEq {
-		return .init(.none)
-	}
-
-	public static func <> (left: OptionalEq, right: OptionalEq) -> OptionalEq {
-		return .init(left.unwrap ?? right.unwrap)
-	}
-}
-
-//: ------
-
-// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
-// sourcery: requiredContextForPropertyBasedTests = "String"
-// sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "EquatableInContext"
-public struct OptionalEqF<T>: Wrapper, Monoid, EquatableInContext where T: EquatableInContext {
-	public typealias WrappedType = Optional<T>
-	public typealias Context = T.Context
-
-	public let unwrap: Optional<T>
-	public init(_ value: Optional<T>) {
-		self.unwrap = value
-	}
-
-	public static var empty: OptionalEqF {
-		return .init(.none)
-	}
-
-	public static func <> (left: OptionalEqF, right: OptionalEqF) -> OptionalEqF {
-		return .init(left.unwrap ?? right.unwrap)
-	}
-}
-
-//: ------
-
-// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
-// sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
-public struct OptionalM<T>: Monoid, Wrapper, Equatable where T: Semigroup & Equatable {
-	public typealias WrappedType = T?
-
-	public let unwrap: T?
-	public init(_ value: T?) {
-		self.unwrap = value
-	}
-
-	public static var empty: OptionalM<T> {
-		return .init(nil)
-	}
-
-	public static func <> (_ left: OptionalM, _ right: OptionalM) -> OptionalM {
-		switch (left.unwrap,right.unwrap) {
-		case (.some(let leftValue),.some(let rightValue)):
-			return .init(leftValue <> rightValue)
-		case (.some,_):
-			return left
-		case (_,.some):
-			return right
-		default:
-			return .init(nil)
-		}
-	}
-}
-
-//: ------
-
-// sourcery: fixedTypesForPropertyBasedTests = "TestFunction"
-// sourcery: requiredContextForPropertyBasedTests = "String"
-// sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "Semigroup & EquatableInContext"
-public struct OptionalMF<T>: Monoid, Wrapper, EquatableInContext where T: Semigroup & EquatableInContext {
-	public typealias WrappedType = T?
-	public typealias Context = T.Context
-
-	public let unwrap: T?
-	public init(_ value: T?) {
-		self.unwrap = value
-	}
-
-	public static var empty: OptionalMF<T> {
-		return .init(nil)
-	}
-
-	public static func <> (_ left: OptionalMF, _ right: OptionalMF) -> OptionalMF {
-		switch (left.unwrap,right.unwrap) {
-		case (.some(let leftValue),.some(let rightValue)):
-			return .init(leftValue <> rightValue)
-		case (.some,_):
-			return left
-		case (_,.some):
-			return right
-		default:
-			return .init(nil)
-		}
+// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
+extension Optional: Monoid where Wrapped: Monoid {
+	public static var empty: Optional {
+		return .some(.empty)
 	}
 }
 
@@ -259,7 +129,7 @@ extension Or: Monoid {
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
 // sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
-public struct FirstM<A>: Wrapper, Monoid, Equatable where A: Monoid & Equatable {
+public struct FirstM<A>: Wrapper, Monoid where A: Monoid & Equatable {
 	public typealias WrappedType = A
 
 	public let unwrap: A

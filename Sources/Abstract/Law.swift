@@ -22,3 +22,36 @@ public protocol EquatableInContext {
 
 public enum LawInContext<Element: EquatableInContext> {}
 
+//: ------
+
+extension Optional: EquatableInContext where Wrapped: EquatableInContext {
+	public typealias Context = Wrapped.Context
+
+	public static func == (lhs: Optional, rhs: Optional) -> (Context) -> Bool {
+		switch (lhs,rhs) {
+		case (.some(let left), .some(let right)):
+			return left == right
+		case (.none,.none):
+			return { _ in true }
+		default:
+			return { _ in false }
+		}
+	}
+}
+
+//: ------
+
+extension Array: EquatableInContext where Element: EquatableInContext {
+	public typealias Context = Element.Context
+
+	public static func == (lhs: Array, rhs: Array) -> (Context) -> Bool {
+		return { context in
+			zip(lhs, rhs).lazy
+				.map(==)
+				.map { $0(context) }
+				.first(where: { $0 == false })
+				== nil
+		}
+	}
+}
+

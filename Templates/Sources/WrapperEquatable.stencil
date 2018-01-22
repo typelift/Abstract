@@ -1,0 +1,9 @@
+
+{% for type in types.all|annotated:"wrapperEquatable" %}
+extension {{ type.name }}: Equatable where WrappedType: Equatable {}
+
+extension {{ type.name }}: EquatableInContext where WrappedType: EquatableInContext {
+	public typealias Context = WrappedType.Context
+}
+
+{% endfor %}

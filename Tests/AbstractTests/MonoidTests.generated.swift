@@ -20,15 +20,9 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
-	func testArrayEq() {
-		property("ArrayEq is a Monoid") <- forAll { (a: ArrayEqOf<TestStructure>) in
-			Law<ArrayEq<TestStructure>>.isNeutralToEmpty(a.get)
-		}
-	}
-
-	func testArrayEqF() {
-		property("ArrayEqF is a Monoid") <- forAll { (a: ArrayEqFOf<TestFunction>, context: String) in
-			LawInContext<ArrayEqF<TestFunction>>.isNeutralToEmpty(a.get)(context)
+	func testArray() {
+		property("Array is a Monoid") <- forAll { (a: Array) in
+			Law<Array>.isNeutralToEmpty(a)
 		}
 	}
 
@@ -86,6 +80,12 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testOptional() {
+		property("Optional is a Monoid") <- forAll { (a: Optional) in
+			Law<Optional>.isNeutralToEmpty(a)
+		}
+	}
+
 	func testOptionalBS() {
 		property("OptionalBS is a Monoid") <- forAll { (a: OptionalBSOf<TestStructure>) in
 			Law<OptionalBS<TestStructure>>.isNeutralToEmpty(a.get)
@@ -110,30 +110,6 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
-	func testOptionalEq() {
-		property("OptionalEq is a Monoid") <- forAll { (a: OptionalEqOf<TestStructure>) in
-			Law<OptionalEq<TestStructure>>.isNeutralToEmpty(a.get)
-		}
-	}
-
-	func testOptionalEqF() {
-		property("OptionalEqF is a Monoid") <- forAll { (a: OptionalEqFOf<TestFunction>, context: String) in
-			LawInContext<OptionalEqF<TestFunction>>.isNeutralToEmpty(a.get)(context)
-		}
-	}
-
-	func testOptionalM() {
-		property("OptionalM is a Monoid") <- forAll { (a: OptionalMOf<TestStructure>) in
-			Law<OptionalM<TestStructure>>.isNeutralToEmpty(a.get)
-		}
-	}
-
-	func testOptionalMF() {
-		property("OptionalMF is a Monoid") <- forAll { (a: OptionalMFOf<TestFunction>, context: String) in
-			LawInContext<OptionalMF<TestFunction>>.isNeutralToEmpty(a.get)(context)
-		}
-	}
-
 	func testOr() {
 		property("Or is a Monoid") <- forAll { (a: Or) in
 			Law<Or>.isNeutralToEmpty(a)
@@ -155,8 +131,7 @@ final class MonoidTests: XCTestCase {
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
-		("testArrayEq",testArrayEq),
-		("testArrayEqF",testArrayEqF),
+		("testArray",testArray),
 		("testEndofunction",testEndofunction),
 		("testFirstM",testFirstM),
 		("testFunctionBS",testFunctionBS),
@@ -166,14 +141,11 @@ final class MonoidTests: XCTestCase {
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testOptional",testOptional),
 		("testOptionalBS",testOptionalBS),
 		("testOptionalBSF",testOptionalBSF),
 		("testOptionalCM",testOptionalCM),
 		("testOptionalCMF",testOptionalCMF),
-		("testOptionalEq",testOptionalEq),
-		("testOptionalEqF",testOptionalEqF),
-		("testOptionalM",testOptionalM),
-		("testOptionalMF",testOptionalMF),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
 		("testString",testString),

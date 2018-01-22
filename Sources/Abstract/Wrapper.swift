@@ -41,14 +41,14 @@ If the `WrappedType` element is `Equatable` or `EquatableInContext`, we can defi
 */
 
 extension Wrapper where WrappedType: Equatable {
-	public static func == (left: Self, right: Self) -> Bool {
-		return left.unwrap == right.unwrap
+	public static func == (lhs: Self, rhs: Self) -> Bool {
+		return lhs.unwrap == rhs.unwrap
 	}
 }
 
 extension Wrapper where WrappedType: EquatableInContext {
-	public static func == (left: Self, right: Self) -> (WrappedType.Context) -> Bool {
-		return left.unwrap == right.unwrap
+	public static func == (lhs: Self, rhs: Self) -> (WrappedType.Context) -> Bool {
+		return lhs.unwrap == rhs.unwrap
 	}
 }
 
@@ -95,3 +95,24 @@ extension Wrapper where WrappedType: Monoid {
 Some types in the library exist also in the `F` mode (like `OptionalSF`): these types will wrap a function type, thus they'll be considered `EquatableInContext`.
 */
 
+public struct Function<A,B>: Wrapper {
+	public typealias WrappedType = (A) -> B
+
+	public let unwrap: (A) -> B
+
+	public init(_ value: @escaping (A) -> B) {
+		self.unwrap = value
+	}
+
+	public var call: (A) -> B {
+		return unwrap
+	}
+}
+
+extension Function: EquatableInContext where B: Equatable {
+	public typealias Context = A
+
+	public static func == (left: Function, right: Function) -> (Context) -> Bool {
+		return { left.call($0) == right.call($0) }
+	}
+}
