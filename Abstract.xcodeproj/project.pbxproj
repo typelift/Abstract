@@ -68,13 +68,6 @@
 		0950FF841F094AA100513DF7 /* Comparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C931EED72F3007AB12A /* Comparison.swift */; };
 		0950FF851F094AA100513DF7 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83C911EED6E33007AB12A /* Predicate.swift */; };
 		0950FF861F094AB500513DF7 /* HomomorphismTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38943A681EEC25AE00F587AD /* HomomorphismTests.swift */; };
-		0951F23B1F095ACF00EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
-		0951F23C1F095AD200EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
-		0951F23D1F095AD300EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
-		0951F23E1F095AD400EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
-		0951F23F1F095AD400EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
-		0951F2401F095AD500EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
-		0951F2411F095AD600EA362C /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0951F23A1F095ACF00EA362C /* Operators.swift */; };
 		0951F2481F09690C00EA362C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2421F09690200EA362C /* SwiftCheck.framework */; };
 		0951F24E1F096C3A00EA362C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2431F09690200EA362C /* SwiftCheck.framework */; };
 		380A4B131F1B726E002D70E0 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2431F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -96,6 +89,10 @@
 		380A4B311F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */; };
 		380A4B321F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */; };
 		380A4B331F1BF83B002D70E0 /* SemiringTests.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */; };
+		3833AC7420161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
+		3833AC7520161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
+		3833AC7620161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
+		3833AC7720161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
 		38A14E4F1F2A2D9C00A2900C /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0950FF011EFC5C7900513DF7 /* Abstract.framework */; };
 		38A14E501F2A2DAB00A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2421F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38A14E521F2A2DC300A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -166,7 +163,6 @@
 		0950FF461F094A0100513DF7 /* Abstract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0950FF611F094A6600513DF7 /* Abstract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Abstract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0950FF691F094A6600513DF7 /* AbstractTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AbstractTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0951F23A1F095ACF00EA362C /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = Carthage/Checkouts/Operadics/Sources/Operators.swift; sourceTree = SOURCE_ROOT; };
 		0951F2421F09690200EA362C /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/iOS/SwiftCheck.framework; sourceTree = "<group>"; };
 		0951F2431F09690200EA362C /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/Mac/SwiftCheck.framework; sourceTree = "<group>"; };
 		0951F2441F09690200EA362C /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/tvOS/SwiftCheck.framework; sourceTree = "<group>"; };
@@ -177,6 +173,7 @@
 		380A4B241F1BF5AC002D70E0 /* CommutativeMonoidTests.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommutativeMonoidTests.generated.swift; sourceTree = "<group>"; };
 		380A4B291F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundedSemilatticeTests.generated.swift; sourceTree = "<group>"; };
 		380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemiringTests.generated.swift; sourceTree = "<group>"; };
+		3833AC7320161FD600CE907E /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = Carthage/Checkouts/Operadics/Sources/Operadics/Operators.swift; sourceTree = SOURCE_ROOT; };
 		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		3853BF9F1EF1294400791099 /* Semiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		38757E101F4D85AB0059AD71 /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
@@ -328,7 +325,7 @@
 		38D737BC1EE9A711000BAF0C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0951F23A1F095ACF00EA362C /* Operators.swift */,
+				3833AC7320161FD600CE907E /* Operators.swift */,
 				09F9FD0D1EEE5C5D002342E5 /* Abstract */,
 			);
 			path = Sources;
@@ -666,7 +663,7 @@
 				0950FEF51EFC5C7900513DF7 /* Homomorphism.swift in Sources */,
 				0950FEF61EFC5C7900513DF7 /* Collections.swift in Sources */,
 				0950FEF71EFC5C7900513DF7 /* Semigroup.swift in Sources */,
-				0951F23C1F095AD200EA362C /* Operators.swift in Sources */,
+				3833AC7520161FD600CE907E /* Operators.swift in Sources */,
 				0950FEF81EFC5C7900513DF7 /* CommutativeMonoid.swift in Sources */,
 				0950FEF91EFC5C7900513DF7 /* Monoid.swift in Sources */,
 				0950FEFA1EFC5C7900513DF7 /* Semiring.swift in Sources */,
@@ -685,7 +682,6 @@
 				380A4B161F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				380A4B261F1BF5BE002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
 				0950FF071EFC5C8100513DF7 /* HomomorphismTests.swift in Sources */,
-				0951F2401F095AD500EA362C /* Operators.swift in Sources */,
 				380A4B2B1F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,7 +701,7 @@
 				0950FF391F09488B00513DF7 /* Semigroup.swift in Sources */,
 				0950FF3A1F09488B00513DF7 /* Semiring.swift in Sources */,
 				0950FF3B1F09488B00513DF7 /* Wrapper.swift in Sources */,
-				0951F23D1F095AD300EA362C /* Operators.swift in Sources */,
+				3833AC7620161FD600CE907E /* Operators.swift in Sources */,
 				0950FF3C1F09488B00513DF7 /* Collections.swift in Sources */,
 				0950FF3D1F09488B00513DF7 /* Comparison.swift in Sources */,
 				0950FF3E1F09488B00513DF7 /* Predicate.swift in Sources */,
@@ -724,7 +720,6 @@
 				380A4B171F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				380A4B271F1BF5BF002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
 				0950FF3F1F0948D000513DF7 /* HomomorphismTests.swift in Sources */,
-				0951F23E1F095AD400EA362C /* Operators.swift in Sources */,
 				380A4B2C1F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -744,7 +739,7 @@
 				0950FF561F094A2C00513DF7 /* Semigroup.swift in Sources */,
 				0950FF571F094A2C00513DF7 /* Semiring.swift in Sources */,
 				0950FF581F094A2C00513DF7 /* Wrapper.swift in Sources */,
-				0951F23F1F095AD400EA362C /* Operators.swift in Sources */,
+				3833AC7720161FD600CE907E /* Operators.swift in Sources */,
 				0950FF591F094A2C00513DF7 /* Collections.swift in Sources */,
 				0950FF5A1F094A2C00513DF7 /* Comparison.swift in Sources */,
 				0950FF5B1F094A2C00513DF7 /* Predicate.swift in Sources */,
@@ -766,7 +761,7 @@
 				0950FF801F094AA100513DF7 /* Semigroup.swift in Sources */,
 				0950FF811F094AA100513DF7 /* Semiring.swift in Sources */,
 				0950FF821F094AA100513DF7 /* Wrapper.swift in Sources */,
-				0951F23B1F095ACF00EA362C /* Operators.swift in Sources */,
+				3833AC7420161FD600CE907E /* Operators.swift in Sources */,
 				0950FF831F094AA100513DF7 /* Collections.swift in Sources */,
 				0950FF841F094AA100513DF7 /* Comparison.swift in Sources */,
 				0950FF851F094AA100513DF7 /* Predicate.swift in Sources */,
@@ -785,7 +780,6 @@
 				380A4B151F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				380A4B251F1BF5BD002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
 				0950FF861F094AB500513DF7 /* HomomorphismTests.swift in Sources */,
-				0951F2411F095AD600EA362C /* Operators.swift in Sources */,
 				380A4B2A1F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
