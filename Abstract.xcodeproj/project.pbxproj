@@ -165,6 +165,10 @@
 		381257492080935A00CD625D /* FreeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381257472080935A00CD625D /* FreeMonoid.swift */; };
 		3812574A2080935A00CD625D /* FreeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381257472080935A00CD625D /* FreeMonoid.swift */; };
 		3812574B2080935A00CD625D /* FreeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381257472080935A00CD625D /* FreeMonoid.swift */; };
+		3812574D2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
+		3812574E2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
+		3812574F2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
+		381257502080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
 		3833AC7420161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
 		3833AC7520161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
 		3833AC7620161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
@@ -272,6 +276,7 @@
 		3812573C20808ECD00CD625D /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		3812574120808EE200CD625D /* Tropical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tropical.swift; sourceTree = "<group>"; };
 		381257472080935A00CD625D /* FreeMonoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeMonoid.swift; sourceTree = "<group>"; };
+		3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCommutativeMonoid.swift; sourceTree = "<group>"; };
 		3833AC7320161FD600CE907E /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = Carthage/Checkouts/Operadics/Sources/Operadics/Operators.swift; sourceTree = SOURCE_ROOT; };
 		3833AC7920163E5F00CE907E /* WrapperEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperEquatable.generated.swift; sourceTree = "<group>"; };
 		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
@@ -414,6 +419,7 @@
 			children = (
 				381256EB20807B3000CD625D /* FreeSemigroup.swift */,
 				381257472080935A00CD625D /* FreeMonoid.swift */,
+				3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */,
 			);
 			path = Free;
 			sourceTree = "<group>";
@@ -828,6 +834,7 @@
 				0950FEF11EFC5C7900513DF7 /* Isomorphism.swift in Sources */,
 				0950FEF21EFC5C7900513DF7 /* Magma.swift in Sources */,
 				0950FEF31EFC5C7900513DF7 /* Wrapper.swift in Sources */,
+				3812574E2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257242080837600CD625D /* Ordering.swift in Sources */,
 				381257492080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F720807C3500CD625D /* Multiply.swift in Sources */,
@@ -886,6 +893,7 @@
 				0950FF351F09488B00513DF7 /* Isomorphism.swift in Sources */,
 				0950FF361F09488B00513DF7 /* Law.swift in Sources */,
 				0950FF371F09488B00513DF7 /* Magma.swift in Sources */,
+				3812574F2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257252080837600CD625D /* Ordering.swift in Sources */,
 				3812574A2080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F820807C3500CD625D /* Multiply.swift in Sources */,
@@ -944,6 +952,7 @@
 				0950FF521F094A2C00513DF7 /* Isomorphism.swift in Sources */,
 				0950FF531F094A2C00513DF7 /* Law.swift in Sources */,
 				0950FF541F094A2C00513DF7 /* Magma.swift in Sources */,
+				381257502080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257262080837600CD625D /* Ordering.swift in Sources */,
 				3812574B2080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F920807C3500CD625D /* Multiply.swift in Sources */,
@@ -986,6 +995,7 @@
 				0950FF7C1F094AA100513DF7 /* Isomorphism.swift in Sources */,
 				0950FF7D1F094AA100513DF7 /* Law.swift in Sources */,
 				0950FF7E1F094AA100513DF7 /* Magma.swift in Sources */,
+				3812574D2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257232080837600CD625D /* Ordering.swift in Sources */,
 				381257482080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F620807C3500CD625D /* Multiply.swift in Sources */,

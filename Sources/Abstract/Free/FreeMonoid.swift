@@ -4,19 +4,20 @@ import Operadics
 
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
 // sourcery: arbitrary
-struct FreeMonoid<A>: Wrapper, Monoid {
-	typealias WrappedType = Array<A>
+// sourcery: constrainedArbitraryParameter = "A"
+public struct FreeMonoid<A>: Wrapper, Monoid {
+	public typealias WrappedType = Array<A>
 
-	let unwrap: Array<A>
-	init(_ value: Array<A>) {
+	public let unwrap: Array<A>
+	public init(_ value: Array<A>) {
 		self.unwrap = value
 	}
 
-	static func <> (lhs: FreeMonoid<A>, rhs: FreeMonoid<A>) -> FreeMonoid<A> {
+	public static func <> (lhs: FreeMonoid<A>, rhs: FreeMonoid<A>) -> FreeMonoid<A> {
 		return FreeMonoid(lhs.unwrap + rhs.unwrap)
 	}
 
-	static var empty: FreeMonoid {
+	public static var empty: FreeMonoid {
 		return FreeMonoid([])
 	}
 }

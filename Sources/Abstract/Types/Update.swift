@@ -21,6 +21,12 @@ public struct Update<A>: Wrapper {
 	}
 }
 
+extension Update: Equatable where A: Equatable {}
+
+extension Update: EquatableInContext where A: EquatableInContext {
+	public typealias Context = A.Context
+}
+
 extension Update: Semigroup {
 	public static func <> (lhs: Update, rhs: Update) -> Update {
 		return Update(rhs.unwrap ?? lhs.unwrap)

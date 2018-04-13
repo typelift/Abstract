@@ -60,21 +60,15 @@ import SwiftCheck
 {% for type in types.all|!enum|annotated:"arbitrary" %}
 
 {% if type.isGeneric %}
-struct {{ type.name }}Of<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
-    let get: {{ type.name }}<T>
-    init(_ get: {{ type.name }}<T>) {
-        self.get = get
-    }
-
-    public static var arbitrary: Gen<{{ type.name }}Of<T>> {
-        return Gen<{{ type.name }}<T>>
-            .compose {
-                {{ type.name }}<T>.init(
-                {% call iterateVariables type.storedVariables %}
-                )
-            }
-            .map({{ type.name }}Of<T>.init)
-    }
+extension {{ type.name }}: Arbitrary where {{ type.annotations.constrainedArbitraryParameter }}: Arbitrary {
+	public static var arbitrary: Gen<{{ type.name }}> {
+		return Gen<{{ type.name }}>
+			.compose {
+				{{ type.name }}.init(
+					{% call iterateVariables type.storedVariables %}
+				)
+		}
+	}
 }
 {% else %}
 extension {{ type.name }}: Arbitrary {
@@ -94,17 +88,12 @@ extension {{ type.name }}: Arbitrary {
 {% for type in types.enums|annotated:"arbitrary" %}
 
 {% if type.isGeneric %}
-struct {{ type.name }}Of<T>: Arbitrary where T: Arbitrary{% if type.annotations.arbitraryGenericParameterProtocols %} & {{ type.annotations.arbitraryGenericParameterProtocols }}{% endif %}{% if type.annotations.additionalGenericParameterSubtypeRequirements %}, {% for annotation in type.annotations.additionalGenericParameterSubtypeRequirements %} T.{{ annotation }}{% if not forloop.last %}, {% endif %}{% endfor %}{% elif type.annotations.additionalGenericParameterSubtypeRequirement %}, T.{{ type.annotations.additionalGenericParameterSubtypeRequirement }}{% endif %} {
-    let get: {{ type.name }}<T>
-    init(_ get: {{ type.name }}<T>) {
-        self.get = get
-    }
-
-    public static var arbitrary: Gen<{{ type.name }}Of<T>> {
-        return Gen<{{ type.name }}<T>>.one(of: [
-        {% call iterateCases type.cases type.name "<T>" %}
-        ]).map({{ type.name }}Of<T>.init)
-    }
+extension {{ type.name }}: Arbitrary where {{ type.annotations.constrainedArbitraryParameter }}: Arbitrary {
+	public static var arbitrary: Gen<{{ type.name}}> {
+		return Gen<{{ type.name}}>.one(of: [
+			{% call iterateCases type.cases type.name "" %}
+		])
+	}
 }
 {% else %}
 extension {{ type.name }}: Arbitrary {

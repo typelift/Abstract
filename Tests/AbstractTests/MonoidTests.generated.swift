@@ -32,33 +32,21 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
-	func testFirstM() {
-		property("FirstM is a Monoid") <- forAll { (a: FirstMOf<TestStructure>) in
-			Law<FirstM<TestStructure>>.isNeutralToEmpty(a.get)
+	func testFreeCommutativeMonoid() {
+		property("FreeCommutativeMonoid is a Monoid") <- forAll { (a: FreeCommutativeMonoidOf<TestStructure>) in
+			Law<FreeCommutativeMonoid<TestStructure>>.isNeutralToEmpty(a.get)
 		}
 	}
 
-	func testFunctionBS() {
-		property("FunctionBS is a Monoid") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionBS<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
+	func testFreeMonoid() {
+		property("FreeMonoid is a Monoid") <- forAll { (a: FreeMonoidOf<TestStructure>) in
+			Law<FreeMonoid<TestStructure>>.isNeutralToEmpty(a.get)
 		}
 	}
 
-	func testFunctionCM() {
-		property("FunctionCM is a Monoid") <- forAll { (a: FunctionCMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionCM<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
-		}
-	}
-
-	func testFunctionM() {
-		property("FunctionM is a Monoid") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionM<Int,TestStructure>>.isNeutralToEmpty(a.get)(context)
-		}
-	}
-
-	func testLastM() {
-		property("LastM is a Monoid") <- forAll { (a: LastMOf<TestStructure>) in
-			Law<LastM<TestStructure>>.isNeutralToEmpty(a.get)
+	func testFunction() {
+		property("Function is a Monoid") <- forAll { (a: FunctionOf<Int,TestSemiring>, context: Int) in
+			LawInContext<Function<Int,TestSemiring>>.isNeutralToEmpty(a.get)(context)
 		}
 	}
 
@@ -86,30 +74,6 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
-	func testOptionalBS() {
-		property("OptionalBS is a Monoid") <- forAll { (a: OptionalBSOf<TestStructure>) in
-			Law<OptionalBS<TestStructure>>.isNeutralToEmpty(a.get)
-		}
-	}
-
-	func testOptionalBSF() {
-		property("OptionalBSF is a Monoid") <- forAll { (a: OptionalBSFOf<TestFunction>, context: String) in
-			LawInContext<OptionalBSF<TestFunction>>.isNeutralToEmpty(a.get)(context)
-		}
-	}
-
-	func testOptionalCM() {
-		property("OptionalCM is a Monoid") <- forAll { (a: OptionalCMOf<TestStructure>) in
-			Law<OptionalCM<TestStructure>>.isNeutralToEmpty(a.get)
-		}
-	}
-
-	func testOptionalCMF() {
-		property("OptionalCMF is a Monoid") <- forAll { (a: OptionalCMFOf<TestFunction>, context: String) in
-			LawInContext<OptionalCMF<TestFunction>>.isNeutralToEmpty(a.get)(context)
-		}
-	}
-
 	func testOr() {
 		property("Or is a Monoid") <- forAll { (a: Or) in
 			Law<Or>.isNeutralToEmpty(a)
@@ -128,26 +92,27 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testUpdate() {
+		property("Update is a Monoid") <- forAll { (a: UpdateOf<>) in
+			Law<Update<>>.isNeutralToEmpty(a.get)
+		}
+	}
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
-		("testFirstM",testFirstM),
-		("testFunctionBS",testFunctionBS),
-		("testFunctionCM",testFunctionCM),
-		("testFunctionM",testFunctionM),
-		("testLastM",testLastM),
+		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
+		("testFreeMonoid",testFreeMonoid),
+		("testFunction",testFunction),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
 		("testOptional",testOptional),
-		("testOptionalBS",testOptionalBS),
-		("testOptionalBSF",testOptionalBSF),
-		("testOptionalCM",testOptionalCM),
-		("testOptionalCMF",testOptionalCMF),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
 		("testString",testString),
+		("testUpdate",testUpdate),
 	]
 }

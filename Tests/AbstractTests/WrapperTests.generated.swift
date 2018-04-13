@@ -32,9 +32,15 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
-	func testFirstM() {
-		property("FirstM is a well-behaved Wrapper") <- forAll { (a: FirstMOf<TestStructure>) in
-			Law<FirstM<TestStructure>>.isWellBehavedWrapper(a.get)
+	func testFreeCommutativeMonoid() {
+		property("FreeCommutativeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeCommutativeMonoidOf<TestStructure>) in
+			Law<FreeCommutativeMonoid<TestStructure>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
+	func testFreeMonoid() {
+		property("FreeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeMonoidOf<TestStructure>) in
+			Law<FreeMonoid<TestStructure>>.isWellBehavedWrapper(a.get)
 		}
 	}
 
@@ -45,44 +51,14 @@ final class WrapperTests: XCTestCase {
 	}
 
 	func testFunction() {
-		property("Function is a well-behaved Wrapper") <- forAll { (a: FunctionOf<Int,TestStructure>, context: Int) in
-			LawInContext<Function<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-	}
-
-	func testFunctionBS() {
-		property("FunctionBS is a well-behaved Wrapper") <- forAll { (a: FunctionBSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionBS<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-	}
-
-	func testFunctionCM() {
-		property("FunctionCM is a well-behaved Wrapper") <- forAll { (a: FunctionCMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionCM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-	}
-
-	func testFunctionM() {
-		property("FunctionM is a well-behaved Wrapper") <- forAll { (a: FunctionMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionM<Int,TestStructure>>.isWellBehavedWrapper(a.get)(context)
-		}
-	}
-
-	func testFunctionSR() {
-		property("FunctionSR is a well-behaved Wrapper") <- forAll { (a: FunctionSROf<Int,TestSemiring>, context: Int) in
-			LawInContext<FunctionSR<Int,TestSemiring>>.isWellBehavedWrapper(a.get)(context)
+		property("Function is a well-behaved Wrapper") <- forAll { (a: FunctionOf<Int,TestSemiring>, context: Int) in
+			LawInContext<Function<Int,TestSemiring>>.isWellBehavedWrapper(a.get)(context)
 		}
 	}
 
 	func testLast() {
 		property("Last is a well-behaved Wrapper") <- forAll { (a: LastOf<Int>) in
 			Law<Last<Int>>.isWellBehavedWrapper(a.get)
-		}
-	}
-
-	func testLastM() {
-		property("LastM is a well-behaved Wrapper") <- forAll { (a: LastMOf<TestStructure>) in
-			Law<LastM<TestStructure>>.isWellBehavedWrapper(a.get)
 		}
 	}
 
@@ -104,30 +80,6 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
-	func testOptionalBS() {
-		property("OptionalBS is a well-behaved Wrapper") <- forAll { (a: OptionalBSOf<TestStructure>) in
-			Law<OptionalBS<TestStructure>>.isWellBehavedWrapper(a.get)
-		}
-	}
-
-	func testOptionalBSF() {
-		property("OptionalBSF is a well-behaved Wrapper") <- forAll { (a: OptionalBSFOf<TestFunction>, context: String) in
-			LawInContext<OptionalBSF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
-		}
-	}
-
-	func testOptionalCM() {
-		property("OptionalCM is a well-behaved Wrapper") <- forAll { (a: OptionalCMOf<TestStructure>) in
-			Law<OptionalCM<TestStructure>>.isWellBehavedWrapper(a.get)
-		}
-	}
-
-	func testOptionalCMF() {
-		property("OptionalCMF is a well-behaved Wrapper") <- forAll { (a: OptionalCMFOf<TestFunction>, context: String) in
-			LawInContext<OptionalCMF<TestFunction>>.isWellBehavedWrapper(a.get)(context)
-		}
-	}
-
 	func testOr() {
 		property("Or is a well-behaved Wrapper") <- forAll { (a: Or) in
 			Law<Or>.isWellBehavedWrapper(a)
@@ -140,28 +92,27 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
+	func testUpdate() {
+		property("Update is a well-behaved Wrapper") <- forAll { (a: UpdateOf<>) in
+			Law<Update<>>.isWellBehavedWrapper(a.get)
+		}
+	}
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFirstM",testFirstM),
+		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
+		("testFreeMonoid",testFreeMonoid),
 		("testFreeSemigroup",testFreeSemigroup),
 		("testFunction",testFunction),
-		("testFunctionBS",testFunctionBS),
-		("testFunctionCM",testFunctionCM),
-		("testFunctionM",testFunctionM),
-		("testFunctionSR",testFunctionSR),
 		("testLast",testLast),
-		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
-		("testOptionalBS",testOptionalBS),
-		("testOptionalBSF",testOptionalBSF),
-		("testOptionalCM",testOptionalCM),
-		("testOptionalCMF",testOptionalCMF),
 		("testOr",testOr),
 		("testTropical",testTropical),
+		("testUpdate",testUpdate),
 	]
 }

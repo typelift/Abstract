@@ -20,15 +20,15 @@ final class CommutativeMonoidTests: XCTestCase {
 		}
 	}
 
-	func testFunctionBS() {
-		property("FunctionBS is a CommutativeMonoid") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionBS<Int,TestStructure>>.isCommutative(a.get,b.get)(context)
+	func testFreeCommutativeMonoid() {
+		property("FreeCommutativeMonoid is a CommutativeMonoid") <- forAll { (a: FreeCommutativeMonoidOf<TestStructure>, b: FreeCommutativeMonoidOf<TestStructure>) in
+			Law<FreeCommutativeMonoid<TestStructure>>.isCommutative(a.get,b.get)
 		}
 	}
 
-	func testFunctionCM() {
-		property("FunctionCM is a CommutativeMonoid") <- forAll { (a: FunctionCMOf<Int,TestStructure>, b: FunctionCMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionCM<Int,TestStructure>>.isCommutative(a.get,b.get)(context)
+	func testFunction() {
+		property("Function is a CommutativeMonoid") <- forAll { (a: FunctionOf<Int,TestSemiring>, b: FunctionOf<Int,TestSemiring>, context: Int) in
+			LawInContext<Function<Int,TestSemiring>>.isCommutative(a.get,b.get)(context)
 		}
 	}
 
@@ -50,30 +50,6 @@ final class CommutativeMonoidTests: XCTestCase {
 		}
 	}
 
-	func testOptionalBS() {
-		property("OptionalBS is a CommutativeMonoid") <- forAll { (a: OptionalBSOf<TestStructure>, b: OptionalBSOf<TestStructure>) in
-			Law<OptionalBS<TestStructure>>.isCommutative(a.get,b.get)
-		}
-	}
-
-	func testOptionalBSF() {
-		property("OptionalBSF is a CommutativeMonoid") <- forAll { (a: OptionalBSFOf<TestFunction>, b: OptionalBSFOf<TestFunction>, context: String) in
-			LawInContext<OptionalBSF<TestFunction>>.isCommutative(a.get,b.get)(context)
-		}
-	}
-
-	func testOptionalCM() {
-		property("OptionalCM is a CommutativeMonoid") <- forAll { (a: OptionalCMOf<TestStructure>, b: OptionalCMOf<TestStructure>) in
-			Law<OptionalCM<TestStructure>>.isCommutative(a.get,b.get)
-		}
-	}
-
-	func testOptionalCMF() {
-		property("OptionalCMF is a CommutativeMonoid") <- forAll { (a: OptionalCMFOf<TestFunction>, b: OptionalCMFOf<TestFunction>, context: String) in
-			LawInContext<OptionalCMF<TestFunction>>.isCommutative(a.get,b.get)(context)
-		}
-	}
-
 	func testOr() {
 		property("Or is a CommutativeMonoid") <- forAll { (a: Or, b: Or) in
 			Law<Or>.isCommutative(a,b)
@@ -83,15 +59,11 @@ final class CommutativeMonoidTests: XCTestCase {
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
-		("testFunctionBS",testFunctionBS),
-		("testFunctionCM",testFunctionCM),
+		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
+		("testFunction",testFunction),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
-		("testOptionalBS",testOptionalBS),
-		("testOptionalBSF",testOptionalBSF),
-		("testOptionalCM",testOptionalCM),
-		("testOptionalCMF",testOptionalCMF),
 		("testOr",testOr),
 	]
 }

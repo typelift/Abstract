@@ -38,9 +38,15 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
-	func testFirstM() {
-		property("FirstM is a Semigroup") <- forAll { (a: FirstMOf<TestStructure>, b: FirstMOf<TestStructure>, c: FirstMOf<TestStructure>) in
-			Law<FirstM<TestStructure>>.isAssociative(a.get,b.get,c.get)
+	func testFreeCommutativeMonoid() {
+		property("FreeCommutativeMonoid is a Semigroup") <- forAll { (a: FreeCommutativeMonoidOf<TestStructure>, b: FreeCommutativeMonoidOf<TestStructure>, c: FreeCommutativeMonoidOf<TestStructure>) in
+			Law<FreeCommutativeMonoid<TestStructure>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
+	func testFreeMonoid() {
+		property("FreeMonoid is a Semigroup") <- forAll { (a: FreeMonoidOf<TestStructure>, b: FreeMonoidOf<TestStructure>, c: FreeMonoidOf<TestStructure>) in
+			Law<FreeMonoid<TestStructure>>.isAssociative(a.get,b.get,c.get)
 		}
 	}
 
@@ -51,38 +57,14 @@ final class SemigroupTests: XCTestCase {
 	}
 
 	func testFunction() {
-		property("Function is a Semigroup") <- forAll { (a: FunctionOf<Int,TestStructure>, b: FunctionOf<Int,TestStructure>, c: FunctionOf<Int,TestStructure>, context: Int) in
-			LawInContext<Function<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
-		}
-	}
-
-	func testFunctionBS() {
-		property("FunctionBS is a Semigroup") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, c: FunctionBSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionBS<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
-		}
-	}
-
-	func testFunctionCM() {
-		property("FunctionCM is a Semigroup") <- forAll { (a: FunctionCMOf<Int,TestStructure>, b: FunctionCMOf<Int,TestStructure>, c: FunctionCMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionCM<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
-		}
-	}
-
-	func testFunctionM() {
-		property("FunctionM is a Semigroup") <- forAll { (a: FunctionMOf<Int,TestStructure>, b: FunctionMOf<Int,TestStructure>, c: FunctionMOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionM<Int,TestStructure>>.isAssociative(a.get,b.get,c.get)(context)
+		property("Function is a Semigroup") <- forAll { (a: FunctionOf<Int,TestSemiring>, b: FunctionOf<Int,TestSemiring>, c: FunctionOf<Int,TestSemiring>, context: Int) in
+			LawInContext<Function<Int,TestSemiring>>.isAssociative(a.get,b.get,c.get)(context)
 		}
 	}
 
 	func testLast() {
 		property("Last is a Semigroup") <- forAll { (a: LastOf<Int>, b: LastOf<Int>, c: LastOf<Int>) in
 			Law<Last<Int>>.isAssociative(a.get,b.get,c.get)
-		}
-	}
-
-	func testLastM() {
-		property("LastM is a Semigroup") <- forAll { (a: LastMOf<TestStructure>, b: LastMOf<TestStructure>, c: LastMOf<TestStructure>) in
-			Law<LastM<TestStructure>>.isAssociative(a.get,b.get,c.get)
 		}
 	}
 
@@ -110,30 +92,6 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
-	func testOptionalBS() {
-		property("OptionalBS is a Semigroup") <- forAll { (a: OptionalBSOf<TestStructure>, b: OptionalBSOf<TestStructure>, c: OptionalBSOf<TestStructure>) in
-			Law<OptionalBS<TestStructure>>.isAssociative(a.get,b.get,c.get)
-		}
-	}
-
-	func testOptionalBSF() {
-		property("OptionalBSF is a Semigroup") <- forAll { (a: OptionalBSFOf<TestFunction>, b: OptionalBSFOf<TestFunction>, c: OptionalBSFOf<TestFunction>, context: String) in
-			LawInContext<OptionalBSF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
-		}
-	}
-
-	func testOptionalCM() {
-		property("OptionalCM is a Semigroup") <- forAll { (a: OptionalCMOf<TestStructure>, b: OptionalCMOf<TestStructure>, c: OptionalCMOf<TestStructure>) in
-			Law<OptionalCM<TestStructure>>.isAssociative(a.get,b.get,c.get)
-		}
-	}
-
-	func testOptionalCMF() {
-		property("OptionalCMF is a Semigroup") <- forAll { (a: OptionalCMFOf<TestFunction>, b: OptionalCMFOf<TestFunction>, c: OptionalCMFOf<TestFunction>, context: String) in
-			LawInContext<OptionalCMF<TestFunction>>.isAssociative(a.get,b.get,c.get)(context)
-		}
-	}
-
 	func testOr() {
 		property("Or is a Semigroup") <- forAll { (a: Or, b: Or, c: Or) in
 			Law<Or>.isAssociative(a,b,c)
@@ -152,30 +110,30 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testUpdate() {
+		property("Update is a Semigroup") <- forAll { (a: UpdateOf<>, b: UpdateOf<>, c: UpdateOf<>) in
+			Law<Update<>>.isAssociative(a.get,b.get,c.get)
+		}
+	}
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFirstM",testFirstM),
+		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
+		("testFreeMonoid",testFreeMonoid),
 		("testFreeSemigroup",testFreeSemigroup),
 		("testFunction",testFunction),
-		("testFunctionBS",testFunctionBS),
-		("testFunctionCM",testFunctionCM),
-		("testFunctionM",testFunctionM),
 		("testLast",testLast),
-		("testLastM",testLastM),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
 		("testOptional",testOptional),
-		("testOptionalBS",testOptionalBS),
-		("testOptionalBSF",testOptionalBSF),
-		("testOptionalCM",testOptionalCM),
-		("testOptionalCMF",testOptionalCMF),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
 		("testString",testString),
+		("testUpdate",testUpdate),
 	]
 }

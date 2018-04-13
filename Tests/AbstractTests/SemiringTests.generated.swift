@@ -18,13 +18,13 @@ final class SemiringTests: XCTestCase {
 		}
 	}
 
-	func testFunctionSR() {
-		property("FunctionSR is a Semiring: Distributive") <- forAll { (a: FunctionSROf<Int,TestSemiring>, b: FunctionSROf<Int,TestSemiring>, c: FunctionSROf<Int,TestSemiring>, context: Int) in
-			LawInContext<FunctionSR<Int,TestSemiring>>.multiplicationIsDistributiveOverAddition(a.get,b.get,c.get)(context)
+	func testFunction() {
+		property("Function is a Semiring: Distributive") <- forAll { (a: FunctionOf<Int,TestSemiring>, b: FunctionOf<Int,TestSemiring>, c: FunctionOf<Int,TestSemiring>, context: Int) in
+			LawInContext<Function<Int,TestSemiring>>.multiplicationIsDistributiveOverAddition(a.get,b.get,c.get)(context)
 		}
 
-		property("FunctionSR is a Semiring: Annihilation") <- forAll { (a: FunctionSROf<Int,TestSemiring>, context: Int) in
-			LawInContext<FunctionSR<Int,TestSemiring>>.zeroAnnihiliatesTheMultiplicative(a.get)(context)
+		property("Function is a Semiring: Annihilation") <- forAll { (a: FunctionOf<Int,TestSemiring>, context: Int) in
+			LawInContext<Function<Int,TestSemiring>>.zeroAnnihiliatesTheMultiplicative(a.get)(context)
 		}
 	}
 
@@ -40,7 +40,7 @@ final class SemiringTests: XCTestCase {
 
 	static var allTests = [
 		("testBool",testBool),
-		("testFunctionSR",testFunctionSR),
+		("testFunction",testFunction),
 		("testTropical",testTropical),
 	]
 }
