@@ -14,12 +14,6 @@ extension First: EquatableInContext where WrappedType: EquatableInContext {
 	public typealias Context = WrappedType.Context
 }
 
-extension FreeSemigroup: Equatable where WrappedType: Equatable {}
-
-extension FreeSemigroup: EquatableInContext where WrappedType: EquatableInContext {
-	public typealias Context = WrappedType.Context
-}
-
 extension Last: Equatable where WrappedType: Equatable {}
 
 extension Last: EquatableInContext where WrappedType: EquatableInContext {

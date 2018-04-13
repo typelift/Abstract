@@ -6,7 +6,7 @@ A `Comparison` is a function from any tuple of equal types that are `Comparable`
 Because `Ordering` is a `Monoid`, we can express a comparison with a typealias of `FunctionM`, thus obtaining all the monoid properties.
 */
 
-public typealias Comparison<A> = FunctionM<(A,A),Ordering>
+public typealias Comparison<A> = Function<(A,A),Ordering>
 
 extension Comparable {
 	public static var comparison: Comparison<Self> {

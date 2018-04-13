@@ -33,26 +33,3 @@ extension LawInContext where Element: Magma {
 		return transform(a <> b) == (transform(a) <> transform(b))
 	}
 }
-
-//: ------
-
-extension Ordering {
-	public var reversed: Ordering {
-		switch self {
-		case .lowerThan:
-			return .greaterThan
-		case .equalTo:
-			return .equalTo
-		case .greaterThan:
-			return .lowerThan
-		}
-	}
-}
-
-//: ------
-
-extension FunctionM where M == Ordering {
-	public var reversed: FunctionM {
-		return FunctionM { self.call($0).reversed }
-	}
-}

@@ -80,39 +80,3 @@ public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper
 			.reduce(true) { $0 && $1 }
 	}
 }
-
-/*:
-If the `WrappedType` element is `Monoid`, we can define the static `empty` function for a `Wrapper` (unfortunately, the `Monoid` conformance must be declared explicitly for every wrapper).
-*/
-
-extension Wrapper where WrappedType: Monoid {
-	public static var empty: Self {
-		return Self.init(WrappedType.empty)
-	}
-}
-
-/*:
-Some types in the library exist also in the `F` mode (like `OptionalSF`): these types will wrap a function type, thus they'll be considered `EquatableInContext`.
-*/
-
-public struct Function<A,B>: Wrapper {
-	public typealias WrappedType = (A) -> B
-
-	public let unwrap: (A) -> B
-
-	public init(_ value: @escaping (A) -> B) {
-		self.unwrap = value
-	}
-
-	public var call: (A) -> B {
-		return unwrap
-	}
-}
-
-extension Function: EquatableInContext where B: Equatable {
-	public typealias Context = A
-
-	public static func == (left: Function, right: Function) -> (Context) -> Bool {
-		return { left.call($0) == right.call($0) }
-	}
-}
