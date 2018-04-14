@@ -1,11 +1,8 @@
-
 #if SWIFT_PACKAGE
 	import Operadics
 #endif
 
-// sourcery: fixedTypesForPropertyBasedTests = "TestStructure"
-// sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
 extension Optional: Monoid {
 	public static func <> (lhs: Optional, rhs: Optional) -> Optional {
 		return lhs ?? rhs

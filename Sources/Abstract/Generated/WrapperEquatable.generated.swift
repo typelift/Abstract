@@ -37,3 +37,4 @@ extension Multiply: Equatable where WrappedType: Equatable {}
 extension Multiply: EquatableInContext where WrappedType: EquatableInContext {
 	public typealias Context = WrappedType.Context
 }
+

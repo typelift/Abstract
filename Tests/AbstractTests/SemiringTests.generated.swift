@@ -18,29 +18,29 @@ final class SemiringTests: XCTestCase {
 		}
 	}
 
-	func testFunction() {
-		property("Function is a Semiring: Distributive") <- forAll { (a: FunctionOf<Int,TestSemiring>, b: FunctionOf<Int,TestSemiring>, c: FunctionOf<Int,TestSemiring>, context: Int) in
-			LawInContext<Function<Int,TestSemiring>>.multiplicationIsDistributiveOverAddition(a.get,b.get,c.get)(context)
+	func testFreeSemiring() {
+		property("FreeSemiring is a Semiring: Distributive") <- forAll { (a: FreeSemiring<Int>, b: FreeSemiring<Int>, c: FreeSemiring<Int>) in
+			Law<FreeSemiring<Int>>.multiplicationIsDistributiveOverAddition(a,b,c)
 		}
 
-		property("Function is a Semiring: Annihilation") <- forAll { (a: FunctionOf<Int,TestSemiring>, context: Int) in
-			LawInContext<Function<Int,TestSemiring>>.zeroAnnihiliatesTheMultiplicative(a.get)(context)
+		property("FreeSemiring is a Semiring: Annihilation") <- forAll { (a: FreeSemiring<Int>) in
+			Law<FreeSemiring<Int>>.zeroAnnihiliatesTheMultiplicative(a)
 		}
 	}
 
 	func testTropical() {
-		property("Tropical is a Semiring: Distributive") <- forAll { (a: TropicalOf<Int>, b: TropicalOf<Int>, c: TropicalOf<Int>) in
-			Law<Tropical<Int>>.multiplicationIsDistributiveOverAddition(a.get,b.get,c.get)
+		property("Tropical is a Semiring: Distributive") <- forAll { (a: Tropical<Int>, b: Tropical<Int>, c: Tropical<Int>) in
+			Law<Tropical<Int>>.multiplicationIsDistributiveOverAddition(a,b,c)
 		}
 
-		property("Tropical is a Semiring: Annihilation") <- forAll { (a: TropicalOf<Int>) in
-			Law<Tropical<Int>>.zeroAnnihiliatesTheMultiplicative(a.get)
+		property("Tropical is a Semiring: Annihilation") <- forAll { (a: Tropical<Int>) in
+			Law<Tropical<Int>>.zeroAnnihiliatesTheMultiplicative(a)
 		}
 	}
 
 	static var allTests = [
 		("testBool",testBool),
-		("testFunction",testFunction),
+		("testFreeSemiring",testFreeSemiring),
 		("testTropical",testTropical),
 	]
 }

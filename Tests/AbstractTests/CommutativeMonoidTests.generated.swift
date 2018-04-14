@@ -9,8 +9,8 @@ import SwiftCheck
 final class CommutativeMonoidTests: XCTestCase {
 
 	func testAdd() {
-		property("Add is a CommutativeMonoid") <- forAll { (a: AddOf<Int>, b: AddOf<Int>) in
-			Law<Add<Int>>.isCommutative(a.get,b.get)
+		property("Add is a CommutativeMonoid") <- forAll { (a: Add<Int>, b: Add<Int>) in
+			Law<Add<Int>>.isCommutative(a,b)
 		}
 	}
 
@@ -21,32 +21,26 @@ final class CommutativeMonoidTests: XCTestCase {
 	}
 
 	func testFreeCommutativeMonoid() {
-		property("FreeCommutativeMonoid is a CommutativeMonoid") <- forAll { (a: FreeCommutativeMonoidOf<TestStructure>, b: FreeCommutativeMonoidOf<TestStructure>) in
-			Law<FreeCommutativeMonoid<TestStructure>>.isCommutative(a.get,b.get)
-		}
-	}
-
-	func testFunction() {
-		property("Function is a CommutativeMonoid") <- forAll { (a: FunctionOf<Int,TestSemiring>, b: FunctionOf<Int,TestSemiring>, context: Int) in
-			LawInContext<Function<Int,TestSemiring>>.isCommutative(a.get,b.get)(context)
+		property("FreeCommutativeMonoid is a CommutativeMonoid") <- forAll { (a: FreeCommutativeMonoid<Int>, b: FreeCommutativeMonoid<Int>) in
+			Law<FreeCommutativeMonoid<Int>>.isCommutative(a,b)
 		}
 	}
 
 	func testMax() {
-		property("Max is a CommutativeMonoid") <- forAll { (a: MaxOf<Int>, b: MaxOf<Int>) in
-			Law<Max<Int>>.isCommutative(a.get,b.get)
+		property("Max is a CommutativeMonoid") <- forAll { (a: Max<Int>, b: Max<Int>) in
+			Law<Max<Int>>.isCommutative(a,b)
 		}
 	}
 
 	func testMin() {
-		property("Min is a CommutativeMonoid") <- forAll { (a: MinOf<Int>, b: MinOf<Int>) in
-			Law<Min<Int>>.isCommutative(a.get,b.get)
+		property("Min is a CommutativeMonoid") <- forAll { (a: Min<Int>, b: Min<Int>) in
+			Law<Min<Int>>.isCommutative(a,b)
 		}
 	}
 
 	func testMultiply() {
-		property("Multiply is a CommutativeMonoid") <- forAll { (a: MultiplyOf<Int>, b: MultiplyOf<Int>) in
-			Law<Multiply<Int>>.isCommutative(a.get,b.get)
+		property("Multiply is a CommutativeMonoid") <- forAll { (a: Multiply<Int>, b: Multiply<Int>) in
+			Law<Multiply<Int>>.isCommutative(a,b)
 		}
 	}
 
@@ -60,7 +54,6 @@ final class CommutativeMonoidTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
-		("testFunction",testFunction),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),

@@ -9,8 +9,8 @@ import SwiftCheck
 final class WrapperTests: XCTestCase {
 
 	func testAdd() {
-		property("Add is a well-behaved Wrapper") <- forAll { (a: AddOf<Int>) in
-			Law<Add<Int>>.isWellBehavedWrapper(a.get)
+		property("Add is a well-behaved Wrapper") <- forAll { (a: Add<Int>) in
+			Law<Add<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
@@ -21,62 +21,62 @@ final class WrapperTests: XCTestCase {
 	}
 
 	func testEndofunction() {
-		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: EndofunctionOf<Int>, context: Int) in
-			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a.get)(context)
+		property("Endofunction is a well-behaved Wrapper") <- forAll { (a: Endofunction<Int>, context: Int) in
+			LawInContext<Endofunction<Int>>.isWellBehavedWrapper(a)(context)
 		}
 	}
 
 	func testFirst() {
-		property("First is a well-behaved Wrapper") <- forAll { (a: FirstOf<Int>) in
-			Law<First<Int>>.isWellBehavedWrapper(a.get)
+		property("First is a well-behaved Wrapper") <- forAll { (a: First<Int>) in
+			Law<First<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testFreeCommutativeMonoid() {
-		property("FreeCommutativeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeCommutativeMonoidOf<TestStructure>) in
-			Law<FreeCommutativeMonoid<TestStructure>>.isWellBehavedWrapper(a.get)
+		property("FreeCommutativeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeCommutativeMonoid<Int>) in
+			Law<FreeCommutativeMonoid<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testFreeMonoid() {
-		property("FreeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeMonoidOf<TestStructure>) in
-			Law<FreeMonoid<TestStructure>>.isWellBehavedWrapper(a.get)
+		property("FreeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeMonoid<Int>) in
+			Law<FreeMonoid<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testFreeSemigroup() {
-		property("FreeSemigroup is a well-behaved Wrapper") <- forAll { (a: FreeSemigroupOf<TestStructure>) in
-			Law<FreeSemigroup<TestStructure>>.isWellBehavedWrapper(a.get)
+		property("FreeSemigroup is a well-behaved Wrapper") <- forAll { (a: FreeSemigroup<Int>) in
+			Law<FreeSemigroup<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
-	func testFunction() {
-		property("Function is a well-behaved Wrapper") <- forAll { (a: FunctionOf<Int,TestSemiring>, context: Int) in
-			LawInContext<Function<Int,TestSemiring>>.isWellBehavedWrapper(a.get)(context)
+	func testFreeSemiring() {
+		property("FreeSemiring is a well-behaved Wrapper") <- forAll { (a: FreeSemiring<Int>) in
+			Law<FreeSemiring<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testLast() {
-		property("Last is a well-behaved Wrapper") <- forAll { (a: LastOf<Int>) in
-			Law<Last<Int>>.isWellBehavedWrapper(a.get)
+		property("Last is a well-behaved Wrapper") <- forAll { (a: Last<Int>) in
+			Law<Last<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testMax() {
-		property("Max is a well-behaved Wrapper") <- forAll { (a: MaxOf<Int>) in
-			Law<Max<Int>>.isWellBehavedWrapper(a.get)
+		property("Max is a well-behaved Wrapper") <- forAll { (a: Max<Int>) in
+			Law<Max<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testMin() {
-		property("Min is a well-behaved Wrapper") <- forAll { (a: MinOf<Int>) in
-			Law<Min<Int>>.isWellBehavedWrapper(a.get)
+		property("Min is a well-behaved Wrapper") <- forAll { (a: Min<Int>) in
+			Law<Min<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testMultiply() {
-		property("Multiply is a well-behaved Wrapper") <- forAll { (a: MultiplyOf<Int>) in
-			Law<Multiply<Int>>.isWellBehavedWrapper(a.get)
+		property("Multiply is a well-behaved Wrapper") <- forAll { (a: Multiply<Int>) in
+			Law<Multiply<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
@@ -87,14 +87,14 @@ final class WrapperTests: XCTestCase {
 	}
 
 	func testTropical() {
-		property("Tropical is a well-behaved Wrapper") <- forAll { (a: TropicalOf<Int>) in
-			Law<Tropical<Int>>.isWellBehavedWrapper(a.get)
+		property("Tropical is a well-behaved Wrapper") <- forAll { (a: Tropical<Int>) in
+			Law<Tropical<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
 	func testUpdate() {
-		property("Update is a well-behaved Wrapper") <- forAll { (a: UpdateOf<>) in
-			Law<Update<>>.isWellBehavedWrapper(a.get)
+		property("Update is a well-behaved Wrapper") <- forAll { (a: Update<Int>) in
+			Law<Update<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
@@ -106,7 +106,7 @@ final class WrapperTests: XCTestCase {
 		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testFreeMonoid",testFreeMonoid),
 		("testFreeSemigroup",testFreeSemigroup),
-		("testFunction",testFunction),
+		("testFreeSemiring",testFreeSemiring),
 		("testLast",testLast),
 		("testMax",testMax),
 		("testMin",testMin),

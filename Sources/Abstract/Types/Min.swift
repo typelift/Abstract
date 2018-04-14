@@ -13,6 +13,7 @@
 // sourcery: wrapperEquatable
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
+// sourcery: constrainedArbitraryParameter = "A"
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToTop"
 public struct Min<A>: Wrapper where A: ComparableToTop {
 	public typealias WrappedType = A

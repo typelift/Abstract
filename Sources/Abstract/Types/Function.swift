@@ -10,6 +10,12 @@
 	import Operadics
 #endif
 
+// sourcery: ignore = "Wrapper"
+// sourcery: ignore = "Semigroup"
+// sourcery: ignore = "Monoid"
+// sourcery: ignore = "CommutativeMonoid"
+// sourcery: ignore = "BoundedSemilattice"
+// sourcery: ignore = "Semiring"
 public struct Function<A,B>: Wrapper {
 	public typealias WrappedType = (A) -> B
 
@@ -45,40 +51,18 @@ extension Function: Magma where B: Magma {
 	}
 }
 
-// sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
-// sourcery: requiredContextForPropertyBasedTests = "Int"
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "Semigroup & Equatable"
 extension Function: Semigroup where B: Semigroup {}
 
-// sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
-// sourcery: requiredContextForPropertyBasedTests = "Int"
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "Monoid & Equatable"
 extension Function: Monoid where B: Monoid {
 	public static var empty: Function {
 		return Function { _ in B.empty }
 	}
 }
 
-// sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
-// sourcery: requiredContextForPropertyBasedTests = "Int"
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "CommutativeMonoid & Equatable"
 extension Function: CommutativeMonoid where B: CommutativeMonoid {}
 
-// sourcery: fixedTypesForPropertyBasedTests = "Int,TestStructure"
-// sourcery: requiredContextForPropertyBasedTests = "Int"
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "BoundedSemilattice & Equatable"
 extension Function: BoundedSemilattice where B: BoundedSemilattice {}
 
-// sourcery: fixedTypesForPropertyBasedTests = "Int,TestSemiring"
-// sourcery: requiredContextForPropertyBasedTests = "Int"
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "Semiring & Equatable"
-// sourcery: additionalGenericParameterSubtypeRequirements = "Additive: Equatable"
-// sourcery: additionalGenericParameterSubtypeRequirements = "Multiplicative: Equatable"
 extension Function: Semiring where B: Semiring {
 	public typealias Additive = Function<A,B.Additive>
 

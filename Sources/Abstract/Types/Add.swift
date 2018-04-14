@@ -1,11 +1,3 @@
-//
-//  Add.swift
-//  Abstract
-//
-//  Created by Elviro Rocca on 13/04/18.
-//  Copyright © 2018 TypeLift. All rights reserved.
-//
-
 #if SWIFT_PACKAGE
 	import Operadics
 #endif
@@ -13,7 +5,8 @@
 // sourcery: wrapperEquatable
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "Addable & Equatable"
+// sourcery: constrainedArbitraryParameter = "A"
+// sourcery: arbitraryGenericParameterProtocols = "Addable"
 public struct Add<A>: Wrapper where A: Addable {
 	public typealias WrappedType = A
 

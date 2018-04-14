@@ -5,12 +5,12 @@ import SwiftCheck
 {% set protocolName %}Monoid{% endset %}
 
 final class {{ protocolName }}Tests: XCTestCase {
-{% for type in types.implementing.Monoid where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
+{% for type in types.implementing.Monoid where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
 
 	func test{{ type.name }}() {
-{% if type.isGeneric %}
-		property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}Of<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
-			Law{% if type.annotations.requiredContextForPropertyBasedTests %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>>.isNeutralToEmpty(a.get){% if type.annotations.requiredContextForPropertyBasedTests %}(context){% else %}{% endif %}
+{% if type.isGeneric or type.name == "Array" or type.name == "Optional" %}
+		property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
+			Law{% if type.annotations.requiredContextForPropertyBasedTests %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>>.isNeutralToEmpty(a){% if type.annotations.requiredContextForPropertyBasedTests %}(context){% else %}{% endif %}
 		}
 {% else %}
 		property("{{ type.name }} is a {{ protocolName }}") <- forAll { (a: {{ type.name }}) in
@@ -21,7 +21,7 @@ final class {{ protocolName }}Tests: XCTestCase {
 {% endfor %}
 
 	static var allTests = [
-{% for type in types.implementing.Monoid where not type.annotations.ignore == protocolName and not type.kind == "protocol" %}
+{% for type in types.implementing.Monoid where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
 		("test{{ type.name }}",test{{ type.name }}),
 {% endfor %}
 	]

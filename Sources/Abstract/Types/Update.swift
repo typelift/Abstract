@@ -1,16 +1,10 @@
-//
-//  Update.swift
-//  Abstract
-//
-//  Created by Elviro Rocca on 13/04/18.
-//  Copyright © 2018 TypeLift. All rights reserved.
-//
-
 #if SWIFT_PACKAGE
 	import Operadics
 #endif
 
-//sourcery: wrapperEquatable
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
+// sourcery: arbitrary
+// sourcery: constrainedArbitraryParameter = "A"
 public struct Update<A>: Wrapper {
 	public typealias WrappedType = Optional<A>
 

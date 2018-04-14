@@ -7,7 +7,7 @@ import SwiftCheck
 
 // MARK: - Arbitrary for structs and classes
 
-extension Add: Arbitrary where : Arbitrary {
+extension Add: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<Add> {
 		return Gen<Add>
 			.compose {
@@ -29,17 +29,7 @@ extension And: Arbitrary {
     }
 }
 
-extension Array: Arbitrary {
-    public static var arbitrary: Gen<Array> {
-        return Gen<Array>
-            .compose {
-                Array.init(
-                )
-        }
-    }
-}
-
-extension First: Arbitrary where : Arbitrary {
+extension First: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<First> {
 		return Gen<First>
 			.compose {
@@ -50,40 +40,7 @@ extension First: Arbitrary where : Arbitrary {
 	}
 }
 
-extension FreeCommutativeMonoid: Arbitrary where A: Arbitrary {
-	public static var arbitrary: Gen<FreeCommutativeMonoid> {
-		return Gen<FreeCommutativeMonoid>
-			.compose {
-				FreeCommutativeMonoid.init(
-                    unwrap: $0.generate(using: ArrayOf<A>.arbitrary.map { $0.getArray })
-				)
-		}
-	}
-}
-
-extension FreeMonoid: Arbitrary where : Arbitrary {
-	public static var arbitrary: Gen<FreeMonoid> {
-		return Gen<FreeMonoid>
-			.compose {
-				FreeMonoid.init(
-                    unwrap: $0.generate(using: ArrayOf<A>.arbitrary.map { $0.getArray })
-				)
-		}
-	}
-}
-
-extension FreeSemigroup: Arbitrary where : Arbitrary {
-	public static var arbitrary: Gen<FreeSemigroup> {
-		return Gen<FreeSemigroup>
-			.compose {
-				FreeSemigroup.init(
-                    unwrap: $0.generate(using: ArrayOf<A>.arbitrary.map { $0.getArray })
-				)
-		}
-	}
-}
-
-extension Last: Arbitrary where : Arbitrary {
+extension Last: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<Last> {
 		return Gen<Last>
 			.compose {
@@ -94,7 +51,7 @@ extension Last: Arbitrary where : Arbitrary {
 	}
 }
 
-extension Max: Arbitrary where : Arbitrary {
+extension Max: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<Max> {
 		return Gen<Max>
 			.compose {
@@ -105,7 +62,7 @@ extension Max: Arbitrary where : Arbitrary {
 	}
 }
 
-extension Min: Arbitrary where : Arbitrary {
+extension Min: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<Min> {
 		return Gen<Min>
 			.compose {
@@ -116,7 +73,7 @@ extension Min: Arbitrary where : Arbitrary {
 	}
 }
 
-extension Multiply: Arbitrary where : Arbitrary {
+extension Multiply: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<Multiply> {
 		return Gen<Multiply>
 			.compose {
@@ -125,16 +82,6 @@ extension Multiply: Arbitrary where : Arbitrary {
 				)
 		}
 	}
-}
-
-extension Optional: Arbitrary {
-    public static var arbitrary: Gen<Optional> {
-        return Gen<Optional>
-            .compose {
-                Optional.init(
-                )
-        }
-    }
 }
 
 extension Or: Arbitrary {
@@ -148,11 +95,22 @@ extension Or: Arbitrary {
     }
 }
 
-extension Tropical: Arbitrary where : Arbitrary {
+extension Tropical: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<Tropical> {
 		return Gen<Tropical>
 			.compose {
 				Tropical.init(
+                    unwrap: $0.generate()
+				)
+		}
+	}
+}
+
+extension Update: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<Update> {
+		return Gen<Update>
+			.compose {
+				Update.init(
                     unwrap: $0.generate()
 				)
 		}
@@ -169,17 +127,4 @@ extension Ordering: Arbitrary {
             Gen.pure(Ordering.greaterThan)
         ])
     }
-}
-
-// MARK: - Arbitrary for function wrappers
-
-struct FunctionOf<S,T>: Arbitrary where S: CoArbitrary & Hashable, T: Arbitrary & Semiring & Equatable,  T.Multiplicative: Equatable,  T.Additive: Equatable {
-	let get: Function<S,T>
-	init(_ value: @escaping (S) -> T) {
-		self.get = Function.init(value)
-	}
-
-	public static var arbitrary: Gen<FunctionOf<S,T>> {
-		return ArrowOf<S,T>.arbitrary.map { $0.getArrow }.map(FunctionOf<S,T>.init)
-	}
 }

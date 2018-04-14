@@ -13,6 +13,7 @@
 // sourcery: wrapperEquatable
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
 // sourcery: arbitrary
+// sourcery: constrainedArbitraryParameter = "A"
 // sourcery: arbitraryGenericParameterProtocols = "Multipliable"
 public struct Multiply<A>: Wrapper where A: Multipliable {
 	public typealias WrappedType = A
