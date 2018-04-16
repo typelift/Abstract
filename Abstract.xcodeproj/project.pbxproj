@@ -165,10 +165,6 @@
 		381257492080935A00CD625D /* FreeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381257472080935A00CD625D /* FreeMonoid.swift */; };
 		3812574A2080935A00CD625D /* FreeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381257472080935A00CD625D /* FreeMonoid.swift */; };
 		3812574B2080935A00CD625D /* FreeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381257472080935A00CD625D /* FreeMonoid.swift */; };
-		3812574D2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
-		3812574E2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
-		3812574F2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
-		381257502080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */; };
 		3833AC7420161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
 		3833AC7520161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
 		3833AC7620161FD600CE907E /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3833AC7320161FD600CE907E /* Operators.swift */; };
@@ -181,10 +177,6 @@
 		38A14E501F2A2DAB00A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2421F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38A14E521F2A2DC300A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38A14E531F2A2DCB00A2900C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; };
-		38DFE65F208260B800489BDF /* FreeSemiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFE65E208260B800489BDF /* FreeSemiring.swift */; };
-		38DFE660208260B800489BDF /* FreeSemiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFE65E208260B800489BDF /* FreeSemiring.swift */; };
-		38DFE661208260B800489BDF /* FreeSemiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFE65E208260B800489BDF /* FreeSemiring.swift */; };
-		38DFE662208260B800489BDF /* FreeSemiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFE65E208260B800489BDF /* FreeSemiring.swift */; };
 		38DFE66420826CBB00489BDF /* FunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFE66320826CBB00489BDF /* FunctionTests.swift */; };
 		38DFE66520826CBB00489BDF /* FunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFE66320826CBB00489BDF /* FunctionTests.swift */; };
 		38DFE66620826CBB00489BDF /* FunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DFE66320826CBB00489BDF /* FunctionTests.swift */; };
@@ -283,7 +275,6 @@
 		3812573C20808ECD00CD625D /* Bool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 		3812574120808EE200CD625D /* Tropical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tropical.swift; sourceTree = "<group>"; };
 		381257472080935A00CD625D /* FreeMonoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeMonoid.swift; sourceTree = "<group>"; };
-		3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeCommutativeMonoid.swift; sourceTree = "<group>"; };
 		3833AC7320161FD600CE907E /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = Carthage/Checkouts/Operadics/Sources/Operadics/Operators.swift; sourceTree = SOURCE_ROOT; };
 		3833AC7920163E5F00CE907E /* WrapperEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperEquatable.generated.swift; sourceTree = "<group>"; };
 		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
@@ -309,7 +300,6 @@
 		38D737E11EE9A761000BAF0C /* InfoTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoTests.plist; sourceTree = "<group>"; };
 		38D737E91EE9B86F000BAF0C /* Semigroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semigroup.swift; sourceTree = "<group>"; };
 		38D737EB1EE9B95C000BAF0C /* Law.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Law.swift; sourceTree = "<group>"; };
-		38DFE65E208260B800489BDF /* FreeSemiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeSemiring.swift; sourceTree = "<group>"; };
 		38DFE66320826CBB00489BDF /* FunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FunctionTests.swift; path = Tests/AbstractTests/FunctionTests.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -428,8 +418,6 @@
 			children = (
 				381256EB20807B3000CD625D /* FreeSemigroup.swift */,
 				381257472080935A00CD625D /* FreeMonoid.swift */,
-				3812574C2080952B00CD625D /* FreeCommutativeMonoid.swift */,
-				38DFE65E208260B800489BDF /* FreeSemiring.swift */,
 			);
 			path = Free;
 			sourceTree = "<group>";
@@ -845,7 +833,6 @@
 				0950FEF11EFC5C7900513DF7 /* Isomorphism.swift in Sources */,
 				0950FEF21EFC5C7900513DF7 /* Magma.swift in Sources */,
 				0950FEF31EFC5C7900513DF7 /* Wrapper.swift in Sources */,
-				3812574E2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257242080837600CD625D /* Ordering.swift in Sources */,
 				381257492080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F720807C3500CD625D /* Multiply.swift in Sources */,
@@ -856,7 +843,6 @@
 				3812570120807E1F00CD625D /* Min.swift in Sources */,
 				0950FEF41EFC5C7900513DF7 /* BoundedSemilattice.swift in Sources */,
 				381256FC20807D7B00CD625D /* Max.swift in Sources */,
-				38DFE660208260B800489BDF /* FreeSemiring.swift in Sources */,
 				3812570B20807F2600CD625D /* Or.swift in Sources */,
 				3812571020807FB500CD625D /* First.swift in Sources */,
 				381256F220807B8500CD625D /* Add.swift in Sources */,
@@ -906,7 +892,6 @@
 				0950FF351F09488B00513DF7 /* Isomorphism.swift in Sources */,
 				0950FF361F09488B00513DF7 /* Law.swift in Sources */,
 				0950FF371F09488B00513DF7 /* Magma.swift in Sources */,
-				3812574F2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257252080837600CD625D /* Ordering.swift in Sources */,
 				3812574A2080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F820807C3500CD625D /* Multiply.swift in Sources */,
@@ -917,7 +902,6 @@
 				3812570220807E1F00CD625D /* Min.swift in Sources */,
 				0950FF381F09488B00513DF7 /* Monoid.swift in Sources */,
 				381256FD20807D7B00CD625D /* Max.swift in Sources */,
-				38DFE661208260B800489BDF /* FreeSemiring.swift in Sources */,
 				3812570C20807F2600CD625D /* Or.swift in Sources */,
 				3812571120807FB500CD625D /* First.swift in Sources */,
 				381256F320807B8500CD625D /* Add.swift in Sources */,
@@ -967,7 +951,6 @@
 				0950FF521F094A2C00513DF7 /* Isomorphism.swift in Sources */,
 				0950FF531F094A2C00513DF7 /* Law.swift in Sources */,
 				0950FF541F094A2C00513DF7 /* Magma.swift in Sources */,
-				381257502080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257262080837600CD625D /* Ordering.swift in Sources */,
 				3812574B2080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F920807C3500CD625D /* Multiply.swift in Sources */,
@@ -978,7 +961,6 @@
 				3812570320807E1F00CD625D /* Min.swift in Sources */,
 				0950FF551F094A2C00513DF7 /* Monoid.swift in Sources */,
 				381256FE20807D7B00CD625D /* Max.swift in Sources */,
-				38DFE662208260B800489BDF /* FreeSemiring.swift in Sources */,
 				3812570D20807F2600CD625D /* Or.swift in Sources */,
 				3812571220807FB500CD625D /* First.swift in Sources */,
 				381256F420807B8500CD625D /* Add.swift in Sources */,
@@ -1011,7 +993,6 @@
 				0950FF7C1F094AA100513DF7 /* Isomorphism.swift in Sources */,
 				0950FF7D1F094AA100513DF7 /* Law.swift in Sources */,
 				0950FF7E1F094AA100513DF7 /* Magma.swift in Sources */,
-				3812574D2080952B00CD625D /* FreeCommutativeMonoid.swift in Sources */,
 				381257232080837600CD625D /* Ordering.swift in Sources */,
 				381257482080935A00CD625D /* FreeMonoid.swift in Sources */,
 				381256F620807C3500CD625D /* Multiply.swift in Sources */,
@@ -1022,7 +1003,6 @@
 				3812570020807E1F00CD625D /* Min.swift in Sources */,
 				0950FF7F1F094AA100513DF7 /* Monoid.swift in Sources */,
 				381256FB20807D7B00CD625D /* Max.swift in Sources */,
-				38DFE65F208260B800489BDF /* FreeSemiring.swift in Sources */,
 				3812570A20807F2600CD625D /* Or.swift in Sources */,
 				3812570F20807FB500CD625D /* First.swift in Sources */,
 				381256F120807B8500CD625D /* Add.swift in Sources */,

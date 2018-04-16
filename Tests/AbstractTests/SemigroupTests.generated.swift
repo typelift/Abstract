@@ -38,12 +38,6 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
-	func testFreeCommutativeMonoid() {
-		property("FreeCommutativeMonoid is a Semigroup") <- forAll { (a: FreeCommutativeMonoid<Int>, b: FreeCommutativeMonoid<Int>, c: FreeCommutativeMonoid<Int>) in
-			Law<FreeCommutativeMonoid<Int>>.isAssociative(a,b,c)
-		}
-	}
-
 	func testFreeMonoid() {
 		property("FreeMonoid is a Semigroup") <- forAll { (a: FreeMonoid<Int>, b: FreeMonoid<Int>, c: FreeMonoid<Int>) in
 			Law<FreeMonoid<Int>>.isAssociative(a,b,c)
@@ -116,7 +110,6 @@ final class SemigroupTests: XCTestCase {
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testFreeMonoid",testFreeMonoid),
 		("testFreeSemigroup",testFreeSemigroup),
 		("testLast",testLast),

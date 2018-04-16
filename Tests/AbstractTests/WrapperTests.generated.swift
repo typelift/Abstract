@@ -32,27 +32,9 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
-	func testFreeCommutativeMonoid() {
-		property("FreeCommutativeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeCommutativeMonoid<Int>) in
-			Law<FreeCommutativeMonoid<Int>>.isWellBehavedWrapper(a)
-		}
-	}
-
 	func testFreeMonoid() {
 		property("FreeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeMonoid<Int>) in
 			Law<FreeMonoid<Int>>.isWellBehavedWrapper(a)
-		}
-	}
-
-	func testFreeSemigroup() {
-		property("FreeSemigroup is a well-behaved Wrapper") <- forAll { (a: FreeSemigroup<Int>) in
-			Law<FreeSemigroup<Int>>.isWellBehavedWrapper(a)
-		}
-	}
-
-	func testFreeSemiring() {
-		property("FreeSemiring is a well-behaved Wrapper") <- forAll { (a: FreeSemiring<Int>) in
-			Law<FreeSemiring<Int>>.isWellBehavedWrapper(a)
 		}
 	}
 
@@ -103,10 +85,7 @@ final class WrapperTests: XCTestCase {
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testFreeMonoid",testFreeMonoid),
-		("testFreeSemigroup",testFreeSemigroup),
-		("testFreeSemiring",testFreeSemiring),
 		("testLast",testLast),
 		("testMax",testMax),
 		("testMin",testMin),

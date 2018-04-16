@@ -32,12 +32,6 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
-	func testFreeCommutativeMonoid() {
-		property("FreeCommutativeMonoid is a Monoid") <- forAll { (a: FreeCommutativeMonoid<Int>) in
-			Law<FreeCommutativeMonoid<Int>>.isNeutralToEmpty(a)
-		}
-	}
-
 	func testFreeMonoid() {
 		property("FreeMonoid is a Monoid") <- forAll { (a: FreeMonoid<Int>) in
 			Law<FreeMonoid<Int>>.isNeutralToEmpty(a)
@@ -97,7 +91,6 @@ final class MonoidTests: XCTestCase {
 		("testAnd",testAnd),
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
-		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testFreeMonoid",testFreeMonoid),
 		("testMax",testMax),
 		("testMin",testMin),

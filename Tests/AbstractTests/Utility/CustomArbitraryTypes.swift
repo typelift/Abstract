@@ -129,17 +129,6 @@ extension Function: Arbitrary where A: CoArbitrary & Hashable, B: Arbitrary {
 	}
 }
 
-extension FreeCommutativeMonoid: Arbitrary where A: Arbitrary {
-	public static var arbitrary: Gen<FreeCommutativeMonoid> {
-		return Gen<FreeCommutativeMonoid>
-			.compose {
-				FreeCommutativeMonoid.init(
-					unwrap: $0.generate(using: Array<A>.arbitrary)
-				)
-		}
-	}
-}
-
 extension FreeMonoid: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<FreeMonoid> {
 		return Gen<FreeMonoid>
@@ -153,22 +142,6 @@ extension FreeMonoid: Arbitrary where A: Arbitrary {
 
 extension FreeSemigroup: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<FreeSemigroup> {
-		return Gen<FreeSemigroup>
-			.compose {
-				FreeSemigroup.init(
-					unwrap: $0.generate(using: Array<A>.arbitrary)
-				)
-		}
-	}
-}
-
-extension FreeSemiring: Arbitrary where A: Arbitrary {
-	public static var arbitrary: Gen<FreeSemiring> {
-		return Gen<FreeSemiring>
-			.compose {
-				FreeSemiring.init(
-					unwrap: $0.generate(using: Array<A>.arbitrary)
-				)
-		}
+		return A.arbitrary.map(FreeSemigroup.init)
 	}
 }

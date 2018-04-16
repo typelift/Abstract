@@ -3,25 +3,31 @@
 #endif
 
 // sourcery: fixedTypesForPropertyBasedTests = "Int"
-public struct FreeSemigroup<A>: Wrapper, Semigroup {
-	public typealias WrappedType = Array<A>
-
+public struct FreeSemigroup<A>: Semigroup {
 	public let unwrap: Array<A>
-	public init(_ value: Array<A>) {
-		self.unwrap = value
+	private init(unwrap: Array<A>) {
+		self.unwrap = unwrap
 	}
 
-	public init(unwrap: Array<A>) {
-		self.init(unwrap)
+	public init(_ value: A) {
+		self.unwrap = [value]
 	}
 
 	public static func <> (lhs: FreeSemigroup, rhs: FreeSemigroup) -> FreeSemigroup {
-		return FreeSemigroup(lhs.unwrap + rhs.unwrap)
+		return FreeSemigroup(unwrap: lhs.unwrap + rhs.unwrap)
 	}
 }
 
-extension FreeSemigroup: Equatable where A: Equatable {}
+extension FreeSemigroup: Equatable where A: Equatable {
+	public static func == (lhs: FreeSemigroup, rhs: FreeSemigroup) -> Bool {
+		return lhs.unwrap == rhs.unwrap
+	}
+}
 
 extension FreeSemigroup: EquatableInContext where A: EquatableInContext {
 	public typealias Context = A.Context
+
+	public static func == (lhs: FreeSemigroup, rhs: FreeSemigroup) -> (Context) -> Bool {
+		return lhs.unwrap == rhs.unwrap
+	}
 }
