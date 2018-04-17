@@ -1,5 +1,5 @@
 #if SWIFT_PACKAGE
-import Operadics
+	import Operadics
 #endif
 
 // sourcery: fixedTypesForPropertyBasedTests = "Int"

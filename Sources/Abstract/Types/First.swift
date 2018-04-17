@@ -1,4 +1,6 @@
-import Foundation
+#if SWIFT_PACKAGE
+	import Operadics
+#endif
 
 // sourcery: wrapperEquatable
 // sourcery: fixedTypesForPropertyBasedTests = "Int"

@@ -2,8 +2,6 @@ import XCTest
 @testable import Abstract
 import SwiftCheck
 
-// Function tests
-
 final class FunctionTests: XCTestCase {
 	func testWellBehavedWrapped() {
 		property("Function is a well-behaved Wrapper") <- forAll { (a: Function<Int,Int>, context: Int) in
@@ -45,6 +43,12 @@ final class FunctionTests: XCTestCase {
 		}
 	}
 
-
-
+	static var allTests = [
+		("testWellBehavedWrapped",testWellBehavedWrapped),
+		("testSemigroup",testSemigroup),
+		("testMonoid",testMonoid),
+		("testCommutativeMonoid",testCommutativeMonoid),
+		("testBoundedSemilattice",testBoundedSemilattice),
+		("testSemiring",testSemiring),
+	]
 }
