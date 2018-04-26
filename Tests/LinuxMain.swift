@@ -8,6 +8,7 @@ import XCTest
 XCTMain([
 	testCase(BoundedSemilatticeTests.allTests),
 	testCase(CommutativeMonoidTests.allTests),
+	testCase(FunctionTests.allTests),
 	testCase(HomomorphismTests.allTests),
 	testCase(MonoidTests.allTests),
 	testCase(SemigroupTests.allTests),

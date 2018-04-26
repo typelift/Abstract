@@ -14,33 +14,15 @@ final class BoundedSemilatticeTests: XCTestCase {
 		}
 	}
 
-	func testFunctionBS() {
-		property("FunctionBS is a BoundedSemilattice") <- forAll { (a: FunctionBSOf<Int,TestStructure>, b: FunctionBSOf<Int,TestStructure>, context: Int) in
-			LawInContext<FunctionBS<Int,TestStructure>>.isIdempotent(a.get,b.get)(context)
-		}
-	}
-
 	func testMax() {
-		property("Max is a BoundedSemilattice") <- forAll { (a: MaxOf<Int>, b: MaxOf<Int>) in
-			Law<Max<Int>>.isIdempotent(a.get,b.get)
+		property("Max is a BoundedSemilattice") <- forAll { (a: Max<Int>, b: Max<Int>) in
+			Law<Max<Int>>.isIdempotent(a,b)
 		}
 	}
 
 	func testMin() {
-		property("Min is a BoundedSemilattice") <- forAll { (a: MinOf<Int>, b: MinOf<Int>) in
-			Law<Min<Int>>.isIdempotent(a.get,b.get)
-		}
-	}
-
-	func testOptionalBS() {
-		property("OptionalBS is a BoundedSemilattice") <- forAll { (a: OptionalBSOf<TestStructure>, b: OptionalBSOf<TestStructure>) in
-			Law<OptionalBS<TestStructure>>.isIdempotent(a.get,b.get)
-		}
-	}
-
-	func testOptionalBSF() {
-		property("OptionalBSF is a BoundedSemilattice") <- forAll { (a: OptionalBSFOf<TestFunction>, b: OptionalBSFOf<TestFunction>, context: String) in
-			LawInContext<OptionalBSF<TestFunction>>.isIdempotent(a.get,b.get)(context)
+		property("Min is a BoundedSemilattice") <- forAll { (a: Min<Int>, b: Min<Int>) in
+			Law<Min<Int>>.isIdempotent(a,b)
 		}
 	}
 
@@ -52,11 +34,8 @@ final class BoundedSemilatticeTests: XCTestCase {
 
 	static var allTests = [
 		("testAnd",testAnd),
-		("testFunctionBS",testFunctionBS),
 		("testMax",testMax),
 		("testMin",testMin),
-		("testOptionalBS",testOptionalBS),
-		("testOptionalBSF",testOptionalBSF),
 		("testOr",testOr),
 	]
 }

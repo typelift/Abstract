@@ -15,7 +15,7 @@ extension Sequence where Iterator.Element: Magma {
 }
 
 extension Sequence where Iterator.Element: Monoid {
-	public var concatenated: Iterator.Element {
+	public func concatenated() -> Iterator.Element {
 		return concatenatedWith(initial: Iterator.Element.empty)
 	}
 }

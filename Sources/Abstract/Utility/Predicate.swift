@@ -8,7 +8,7 @@ Because `And` and `Or` are `BoundedSemilattice`, we can express a predicate with
 A full `Predicate` returns a `Bool`, that is a `Semiring`, so we can get a `Semiring` predicate with a typealias of `FunctionSR`.
 */
 
-public typealias PredicateAnd<A> = FunctionBS<A,And>
+public typealias PredicateAnd<A> = Function<A,And>
 
 extension Sequence {
 	public func filtered(by predicate: PredicateAnd<Iterator.Element>) -> [Iterator.Element] {
@@ -16,7 +16,7 @@ extension Sequence {
 	}
 }
 
-public typealias PredicateOr<A> = FunctionBS<A,Or>
+public typealias PredicateOr<A> = Function<A,Or>
 
 extension Sequence {
 	public func filtered(by predicate: PredicateOr<Iterator.Element>) -> [Iterator.Element] {
@@ -24,7 +24,7 @@ extension Sequence {
 	}
 }
 
-public typealias Predicate<A> = FunctionSR<A,Bool>
+public typealias Predicate<A> = Function<A,Bool>
 
 extension Sequence {
 	public func filtered(by predicate: Predicate<Iterator.Element>) -> [Iterator.Element] {

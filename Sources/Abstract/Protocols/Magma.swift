@@ -17,5 +17,5 @@ So let's keep it on word (for now).
 #endif
 
 public protocol Magma {
-	static func <> (left: Self, right: Self) -> Self
+	static func <> (lhs: Self, rhs: Self) -> Self
 }

@@ -31,15 +31,15 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 
 struct TestFunction: Arbitrary, BoundedSemilattice, EquatableInContext {
 	typealias Context = String
-	let get: FunctionBS<String,Max<Int>>
+	let get: Function<String,Max<Int>>
 
 	init(_ value: @escaping (String) -> Max<Int>) {
-		self.get = FunctionBS.init(value)
+		self.get = Function.init(value)
 	}
 
 	static var arbitrary: Gen<TestFunction> {
-		return ArrowOf<String,MaxOf<Int>>.arbitrary
-			.map { f in { f.getArrow($0).get } }
+		return ArrowOf<String,Max<Int>>.arbitrary
+			.map { f in { f.getArrow($0) } }
 			.map(TestFunction.init)
 	}
 
@@ -117,14 +117,31 @@ struct TestProduct: CoArbitrary, Hashable, Arbitrary, Wrapper {
 	}
 }
 
-struct EndofunctionOf<A: Arbitrary & CoArbitrary & Hashable>: Arbitrary {
-	let get: Endofunction<A>
-	
-	init(_ value: @escaping (A) -> A) {
-		self.get = Endofunction.init(value)
+extension Endofunction: Arbitrary where A: Arbitrary & CoArbitrary & Hashable {
+	public static var arbitrary: Gen<Endofunction<A>> {
+		return ArrowOf<A,A>.arbitrary.map { Endofunction($0.getArrow) }
 	}
-	
-	static var arbitrary: Gen<EndofunctionOf<A>> {
-		return ArrowOf<A,A>.arbitrary.map { $0.getArrow }.map(EndofunctionOf<A>.init)
+}
+
+extension Function: Arbitrary where A: CoArbitrary & Hashable, B: Arbitrary {
+	public static var arbitrary: Gen<Function<A, B>> {
+		return ArrowOf<A,B>.arbitrary.map { Function($0.getArrow) }
+	}
+}
+
+extension FreeMonoid: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<FreeMonoid> {
+		return Gen<FreeMonoid>
+			.compose {
+				FreeMonoid.init(
+					unwrap: $0.generate(using: Array<A>.arbitrary)
+				)
+		}
+	}
+}
+
+extension FreeSemigroup: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<FreeSemigroup> {
+		return A.arbitrary.map(FreeSemigroup.init)
 	}
 }

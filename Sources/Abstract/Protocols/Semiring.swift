@@ -13,6 +13,7 @@ In addition to the basic requirements for the underlying types (Commutative Mono
 - the `zero` element must "annihilate" an instance if applied with the multiplication operation, both left and right:
 	- zero <>* a = a <>* zero = zero
 */
+
 #if SWIFT_PACKAGE
     import Operadics
 #endif
@@ -109,76 +110,3 @@ extension Semiring where Self: Wrapper, Multiplicative: Wrapper, Self.WrappedTyp
 /*:
 Now we can define some semirings just by defining the associated types.
 */
-
-//: ------
-
-extension Bool: Semiring {
-	public typealias Additive = And
-	public typealias Multiplicative = Or
-}
-
-//: ------
-
-// sourcery: fixedTypesForPropertyBasedTests = "Int,TestSemiring"
-// sourcery: requiredContextForPropertyBasedTests = "Int"
-// sourcery: arbitraryFunction
-// sourcery: arbitraryGenericParameterProtocols = "Semiring & Equatable"
-// sourcery: additionalGenericParameterSubtypeRequirements = "Additive: Equatable"
-// sourcery: additionalGenericParameterSubtypeRequirements = "Multiplicative: Equatable"
-public struct FunctionSR<A,SR: Semiring & Equatable>: Wrapper, Semiring, EquatableInContext where SR.Additive: Equatable, SR.Multiplicative: Equatable {
-	public typealias WrappedType = (A) -> SR
-	public typealias Additive = FunctionCM<A,SR.Additive>
-	public typealias Multiplicative = FunctionM<A,SR.Multiplicative>
-	public typealias Context = A
-
-	public let unwrap: (A) -> SR
-
-	public init(_ value: @escaping (A) -> SR) {
-		self.unwrap = value
-	}
-
-	public var call: (A) -> SR {
-		return unwrap
-	}
-
-	public static func <>+ (left: FunctionSR, right: FunctionSR) -> FunctionSR {
-		return .init { left.call($0) <>+ right.call($0) }
-	}
-
-	public static func <>* (left: FunctionSR, right: FunctionSR) -> FunctionSR {
-		return .init { left.call($0) <>* right.call($0) }
-	}
-
-	public static var zero: FunctionSR<A, SR> {
-		return .init { _ in SR.zero }
-	}
-
-	public static var one: FunctionSR<A, SR> {
-		return .init { _ in SR.one }
-	}
-
-	public static func == (left: FunctionSR, right: FunctionSR) -> (A) -> Bool {
-		return { left.call($0) == right.call($0) }
-	}
-}
-
-//:------
-
-/*:
-A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring is called tropical to honor the Brazillian mathematician, Imre Simon, who founded tropical mathematics.
- */
-
-// sourcery: fixedTypesForPropertyBasedTests = "Int"
-// sourcery: arbitrary
-// sourcery: arbitraryGenericParameterProtocols = "ComparableToTop & Addable"
-public struct Tropical<A: ComparableToTop & Addable & Equatable>: Wrapper, Semiring, Equatable {
-    public typealias WrappedType = A
-    public typealias Additive = Min<A>
-    public typealias Multiplicative = Add<A>
-    
-    public let unwrap: A
-    
-    public init(_ value: A) {
-        self.unwrap = value
-    }
-}

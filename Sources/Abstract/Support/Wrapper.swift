@@ -41,14 +41,14 @@ If the `WrappedType` element is `Equatable` or `EquatableInContext`, we can defi
 */
 
 extension Wrapper where WrappedType: Equatable {
-	public static func == (left: Self, right: Self) -> Bool {
-		return left.unwrap == right.unwrap
+	public static func == (lhs: Self, rhs: Self) -> Bool {
+		return lhs.unwrap == rhs.unwrap
 	}
 }
 
 extension Wrapper where WrappedType: EquatableInContext {
-	public static func == (left: Self, right: Self) -> (WrappedType.Context) -> Bool {
-		return left.unwrap == right.unwrap
+	public static func == (lhs: Self, rhs: Self) -> (WrappedType.Context) -> Bool {
+		return lhs.unwrap == rhs.unwrap
 	}
 }
 
@@ -80,18 +80,3 @@ public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper
 			.reduce(true) { $0 && $1 }
 	}
 }
-
-/*:
-If the `WrappedType` element is `Monoid`, we can define the static `empty` function for a `Wrapper` (unfortunately, the `Monoid` conformance must be declared explicitly for every wrapper).
-*/
-
-extension Wrapper where WrappedType: Monoid {
-	public static var empty: Self {
-		return Self.init(WrappedType.empty)
-	}
-}
-
-/*:
-Some types in the library exist also in the `F` mode (like `OptionalSF`): these types will wrap a function type, thus they'll be considered `EquatableInContext`.
-*/
-

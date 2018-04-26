@@ -2,7 +2,12 @@
 
 echo "Checking for Sourcery..."
 
-if [ -f "Sourcery/sourcery" ]; then
+if [ -f "Sourcery/sourcery" ]
+then
+	echo "Generating source files: Sources/Abstract + Templates/Sources -> Sources/Abstract/Generated"
+
+	./Sourcery/sourcery --sources Sources/Abstract --templates Templates/Sources --output Sources/Abstract/Generated
+  
 	echo "Generating test files: Sources/Abstract + Templates/Tests -> Tests/AbstractTests"
 
 	./Sourcery/sourcery --sources Sources/Abstract --templates Templates/Tests --output Tests/AbstractTests
@@ -24,7 +29,6 @@ if [ -f "Sourcery/sourcery" ]; then
 	echo "Generating utility files for tests: Sources/Abstract + Templates/Other -> Tests/AbstractTests/Utility"
 
 	./Sourcery/sourcery --sources Sources/Abstract --templates Templates/Other --output Tests/AbstractTests/Utility
-
 else
 	echo "Sourcery is not installed, ignoring."
 fi
