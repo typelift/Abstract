@@ -20,6 +20,18 @@ final class CommutativeMonoidTests: XCTestCase {
 		}
 	}
 
+	func testFreeBoundedSemilattice() {
+		property("FreeBoundedSemilattice is a CommutativeMonoid") <- forAll { (a: FreeBoundedSemilattice<Int>, b: FreeBoundedSemilattice<Int>) in
+			Law<FreeBoundedSemilattice<Int>>.isCommutative(a,b)
+		}
+	}
+
+	func testFreeCommutativeMonoid() {
+		property("FreeCommutativeMonoid is a CommutativeMonoid") <- forAll { (a: FreeCommutativeMonoid<Int>, b: FreeCommutativeMonoid<Int>) in
+			Law<FreeCommutativeMonoid<Int>>.isCommutative(a,b)
+		}
+	}
+
 	func testMax() {
 		property("Max is a CommutativeMonoid") <- forAll { (a: Max<Int>, b: Max<Int>) in
 			Law<Max<Int>>.isCommutative(a,b)
@@ -47,6 +59,8 @@ final class CommutativeMonoidTests: XCTestCase {
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
+		("testFreeBoundedSemilattice",testFreeBoundedSemilattice),
+		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),

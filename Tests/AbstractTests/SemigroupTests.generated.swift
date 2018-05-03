@@ -38,15 +38,15 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
-	func testFreeMonoid() {
-		property("FreeMonoid is a Semigroup") <- forAll { (a: FreeMonoid<Int>, b: FreeMonoid<Int>, c: FreeMonoid<Int>) in
-			Law<FreeMonoid<Int>>.isAssociative(a,b,c)
+	func testFreeBoundedSemilattice() {
+		property("FreeBoundedSemilattice is a Semigroup") <- forAll { (a: FreeBoundedSemilattice<Int>, b: FreeBoundedSemilattice<Int>, c: FreeBoundedSemilattice<Int>) in
+			Law<FreeBoundedSemilattice<Int>>.isAssociative(a,b,c)
 		}
 	}
 
-	func testFreeSemigroup() {
-		property("FreeSemigroup is a Semigroup") <- forAll { (a: FreeSemigroup<Int>, b: FreeSemigroup<Int>, c: FreeSemigroup<Int>) in
-			Law<FreeSemigroup<Int>>.isAssociative(a,b,c)
+	func testFreeCommutativeMonoid() {
+		property("FreeCommutativeMonoid is a Semigroup") <- forAll { (a: FreeCommutativeMonoid<Int>, b: FreeCommutativeMonoid<Int>, c: FreeCommutativeMonoid<Int>) in
+			Law<FreeCommutativeMonoid<Int>>.isAssociative(a,b,c)
 		}
 	}
 
@@ -71,6 +71,12 @@ final class SemigroupTests: XCTestCase {
 	func testMultiply() {
 		property("Multiply is a Semigroup") <- forAll { (a: Multiply<Int>, b: Multiply<Int>, c: Multiply<Int>) in
 			Law<Multiply<Int>>.isAssociative(a,b,c)
+		}
+	}
+
+	func testNonEmptyArray() {
+		property("NonEmptyArray is a Semigroup") <- forAll { (a: NonEmptyArray<Int>, b: NonEmptyArray<Int>, c: NonEmptyArray<Int>) in
+			Law<NonEmptyArray<Int>>.isAssociative(a,b,c)
 		}
 	}
 
@@ -110,12 +116,13 @@ final class SemigroupTests: XCTestCase {
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFreeMonoid",testFreeMonoid),
-		("testFreeSemigroup",testFreeSemigroup),
+		("testFreeBoundedSemilattice",testFreeBoundedSemilattice),
+		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testLast",testLast),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testNonEmptyArray",testNonEmptyArray),
 		("testOptional",testOptional),
 		("testOr",testOr),
 		("testOrdering",testOrdering),

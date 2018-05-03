@@ -13,7 +13,7 @@ This means that `Wrapper.init` and `Wrapper.unwrap` must be inverse to each othe
 public protocol Wrapper {
 	associatedtype WrappedType
 
-	init(_ value: WrappedType)
+	init(_ unwrap: WrappedType)
 
 	var unwrap: WrappedType { get }
 }

@@ -5,6 +5,13 @@ import SwiftCheck
 	import Operadics
 #endif
 
+extension CheckerArguments {
+	static func with(_ left: Int, _ right: Int, _ size: Int) -> CheckerArguments {
+		return CheckerArguments(
+			replay: .some((StdGen(left,right),size)))
+	}
+}
+
 struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	let get: Max<Int>
 	
@@ -129,19 +136,65 @@ extension Function: Arbitrary where A: CoArbitrary & Hashable, B: Arbitrary {
 	}
 }
 
-extension FreeMonoid: Arbitrary where A: Arbitrary {
-	public static var arbitrary: Gen<FreeMonoid> {
-		return Gen<FreeMonoid>
+extension NonEmptyArray: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<NonEmptyArray<A>> {
+		return Gen.zip(A.arbitrary, Array<A>.arbitrary).map {
+			NonEmptyArray<A>([$0] + $1)!
+		}
+	}
+}
+
+extension Multiset: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<Multiset<A>> {
+		return Gen<Multiset<A>>.compose {
+			Multiset<A>($0.generate(using: Array<A>.arbitrary))
+		}
+	}
+}
+
+//extension FreeMonoid: Arbitrary where A: Arbitrary {
+//	public static var arbitrary: Gen<FreeMonoid> {
+//		return Gen<FreeMonoid>
+//			.compose {
+//				FreeMonoid.init(
+//					unwrap: $0.generate(using: Array<A>.arbitrary)
+//				)
+//		}
+//	}
+//}
+//
+//extension FreeSemigroup: Arbitrary where A: Arbitrary {
+//	public static var arbitrary: Gen<FreeSemigroup> {
+//		return Gen<FreeSemigroup>
+//			.compose {
+//				FreeSemigroup.init(
+//					unwrap: $0.generate(using: NonEmptyArray<A>.arbitrary)
+//				)
+//		}
+//	}
+//}
+
+extension FreeCommutativeMonoid: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<FreeCommutativeMonoid> {
+		return Gen<FreeCommutativeMonoid>
 			.compose {
-				FreeMonoid.init(
-					unwrap: $0.generate(using: Array<A>.arbitrary)
+				FreeCommutativeMonoid.init(
+					unwrap: $0.generate(using: Multiset<A>.arbitrary)
 				)
 		}
 	}
 }
 
-extension FreeSemigroup: Arbitrary where A: Arbitrary {
-	public static var arbitrary: Gen<FreeSemigroup> {
-		return A.arbitrary.map(FreeSemigroup.init)
+extension FreeBoundedSemilattice: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<FreeBoundedSemilattice> {
+		return Gen<FreeBoundedSemilattice>
+			.compose {
+				FreeBoundedSemilattice.init(
+					unwrap: $0.generate(using: Multiset<A>.arbitrary)
+				)
+		}
 	}
 }
+
+
+
