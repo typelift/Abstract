@@ -152,28 +152,6 @@ extension Multiset: Arbitrary where A: Arbitrary {
 	}
 }
 
-//extension FreeMonoid: Arbitrary where A: Arbitrary {
-//	public static var arbitrary: Gen<FreeMonoid> {
-//		return Gen<FreeMonoid>
-//			.compose {
-//				FreeMonoid.init(
-//					unwrap: $0.generate(using: Array<A>.arbitrary)
-//				)
-//		}
-//	}
-//}
-//
-//extension FreeSemigroup: Arbitrary where A: Arbitrary {
-//	public static var arbitrary: Gen<FreeSemigroup> {
-//		return Gen<FreeSemigroup>
-//			.compose {
-//				FreeSemigroup.init(
-//					unwrap: $0.generate(using: NonEmptyArray<A>.arbitrary)
-//				)
-//		}
-//	}
-//}
-
 extension FreeCommutativeMonoid: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<FreeCommutativeMonoid> {
 		return Gen<FreeCommutativeMonoid>
@@ -195,6 +173,3 @@ extension FreeBoundedSemilattice: Arbitrary where A: Arbitrary {
 		}
 	}
 }
-
-
-

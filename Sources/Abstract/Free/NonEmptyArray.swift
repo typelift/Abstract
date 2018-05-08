@@ -31,24 +31,6 @@ extension NonEmptyArray: Semigroup {
 
 public typealias FreeSemigroup<A> = NonEmptyArray<A>
 
-extension NonEmptyArray: Collection {
-	public var startIndex: Int {
-		return unwrap.startIndex
-	}
-
-	public var endIndex: Int {
-		return unwrap.endIndex
-	}
-
-	public func index(after i: Int) -> Int {
-		return unwrap.index(after: i)
-	}
-
-	public subscript(position: Int) -> A {
-		return unwrap[position]
-	}
-}
-
 extension NonEmptyArray: Equatable where A: Equatable {
 	public static func == (lhs: NonEmptyArray<A>, rhs: NonEmptyArray<A>) -> Bool {
 		return lhs.firstElement == rhs.firstElement
@@ -68,4 +50,34 @@ extension NonEmptyArray: EquatableInContext where A: EquatableInContext {
 				== nil
 		}
 	}
+}
+
+//MARK: - Conformance to Collection protocols
+
+extension NonEmptyArray: Collection {
+	public var startIndex: Int {
+		return unwrap.startIndex
+	}
+
+	public var endIndex: Int {
+		return unwrap.endIndex
+	}
+
+	public func index(after i: Int) -> Int {
+		return unwrap.index(after: i)
+	}
+
+	public subscript(position: Int) -> A {
+		return unwrap[position]
+	}
+}
+
+extension NonEmptyArray: BidirectionalCollection {
+	public func index(before i: Int) -> Int {
+		return unwrap.index(before: i)
+	}
+}
+
+extension NonEmptyArray: RandomAccessCollection {
+	/// No other implementation is needed, beacuse Index (Int) is already Strideable
 }

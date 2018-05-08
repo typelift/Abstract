@@ -1,3 +1,7 @@
+#if SWIFT_PACKAGE
+	import Operadics
+#endif
+
 public struct Multiset<A>: Equatable where A: Hashable {
 	private var storage: [A : Int] = [:]
 	public private(set) var count = 0
@@ -27,7 +31,7 @@ public struct Multiset<A>: Equatable where A: Hashable {
 		}
 	}
 
-	public mutating func removeAllOf(_ item: A) {
+	public mutating func removeAll(_ item: A) {
 		while self.contains(item) {
 			remove(item)
 		}
@@ -54,14 +58,14 @@ public struct Multiset<A>: Equatable where A: Hashable {
 
 	public struct Iterator: IteratorProtocol {
 		private var multiSet: Multiset
-		internal init(_ multiSet: Multiset) {
+		public init(_ multiSet: Multiset) {
 			self.multiSet = multiSet
 		}
 
 		public mutating func next() -> (A,Int)? {
 			guard let anyItem = multiSet.anyItem else { return nil }
 			let count = multiSet.countOf(anyItem)
-			multiSet.removeAllOf(anyItem)
+			multiSet.removeAll(anyItem)
 			return (anyItem,count)
 		}
 	}
@@ -79,7 +83,8 @@ extension Multiset: Sequence {
 	}
 }
 
-/// Algebra
+//MARK: - Algebra
+
 public extension Multiset {
 	func disjointUnion(_ other: Multiset) -> Multiset {
 		var m_self = self
@@ -141,13 +146,3 @@ public extension Multiset {
 		return other.intersection(self) == other
 	}
 }
-
-//extension Multiset: EquatableInContext where A: EquatableInContext {
-//	public typealias Context = A.Context
-//
-//	public static func == (left: Multiset<A>, right: Multiset<A>) -> (A.Context) -> Bool {
-//		return { context in
-//
-//		}
-//	}
-//}
