@@ -153,10 +153,16 @@ public extension Multiset {
 	}
 
 	func isSubset(_ other: Multiset) -> Bool {
-		return self.intersection(other) == self
+		for (element,count) in self where other.countOf(element) < count {
+			return false
+		}
+		return true
 	}
 
 	func isSuperset(_ other: Multiset) -> Bool {
-		return other.intersection(self) == other
+		for (element,count) in other where self.countOf(element) < count {
+			return false
+		}
+		return true
 	}
 }

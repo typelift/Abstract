@@ -11,6 +11,7 @@ XCTMain([
 	testCase(FunctionTests.allTests),
 	testCase(HomomorphismTests.allTests),
 	testCase(MonoidTests.allTests),
+	testCase(MultisetTests.allTests),
 	testCase(NonEmptyArrayTests.allTests),
 	testCase(SemigroupTests.allTests),
 	testCase(SemiringTests.allTests),

@@ -180,6 +180,9 @@
 		384F12EF20A1A002007CF638 /* NonEmptyArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F12EE20A1A002007CF638 /* NonEmptyArrayTests.swift */; };
 		384F12F020A1A002007CF638 /* NonEmptyArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F12EE20A1A002007CF638 /* NonEmptyArrayTests.swift */; };
 		384F12F120A1A002007CF638 /* NonEmptyArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F12EE20A1A002007CF638 /* NonEmptyArrayTests.swift */; };
+		384F12F720A1A5D3007CF638 /* MultisetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F12F620A1A5D3007CF638 /* MultisetTests.swift */; };
+		384F12F820A1A5D3007CF638 /* MultisetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F12F620A1A5D3007CF638 /* MultisetTests.swift */; };
+		384F12F920A1A5D3007CF638 /* MultisetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384F12F620A1A5D3007CF638 /* MultisetTests.swift */; };
 		38A14E4F1F2A2D9C00A2900C /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0950FF011EFC5C7900513DF7 /* Abstract.framework */; };
 		38A14E501F2A2DAB00A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2421F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38A14E521F2A2DC300A2900C /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0951F2441F09690200EA362C /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -286,6 +289,7 @@
 		3833AC7920163E5F00CE907E /* WrapperEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperEquatable.generated.swift; sourceTree = "<group>"; };
 		384F12E520A19A3D007CF638 /* Set+FreeBoundedSemilattice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+FreeBoundedSemilattice.swift"; sourceTree = "<group>"; };
 		384F12EE20A1A002007CF638 /* NonEmptyArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyArrayTests.swift; sourceTree = "<group>"; };
+		384F12F620A1A5D3007CF638 /* MultisetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultisetTests.swift; sourceTree = "<group>"; };
 		3853BF9D1EF11D7400791099 /* Wrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
 		3853BF9F1EF1294400791099 /* Semiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		38757E101F4D85AB0059AD71 /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
@@ -525,16 +529,17 @@
 		38D737BF1EE9A711000BAF0C /* AbstractTests */ = {
 			isa = PBXGroup;
 			children = (
-				387A1DBE1F7909A000928A8C /* Utility */,
 				380A4B291F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift */,
-				38DFE66320826CBB00489BDF /* FunctionTests.swift */,
 				380A4B241F1BF5AC002D70E0 /* CommutativeMonoidTests.generated.swift */,
+				38DFE66320826CBB00489BDF /* FunctionTests.swift */,
 				38943A681EEC25AE00F587AD /* HomomorphismTests.swift */,
 				380A4B1F1F1BE383002D70E0 /* MonoidTests.generated.swift */,
+				384F12F620A1A5D3007CF638 /* MultisetTests.swift */,
+				384F12EE20A1A002007CF638 /* NonEmptyArrayTests.swift */,
 				380A4B141F1B7336002D70E0 /* SemigroupTests.generated.swift */,
 				380A4B301F1BF83B002D70E0 /* SemiringTests.generated.swift */,
 				380A4B191F1B775F002D70E0 /* WrapperTests.generated.swift */,
-				384F12EE20A1A002007CF638 /* NonEmptyArrayTests.swift */,
+				387A1DBE1F7909A000928A8C /* Utility */,
 			);
 			path = AbstractTests;
 			sourceTree = "<group>";
@@ -870,6 +875,7 @@
 				384F12F020A1A002007CF638 /* NonEmptyArrayTests.swift in Sources */,
 				380A4B161F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				38DFE66520826CBB00489BDF /* FunctionTests.swift in Sources */,
+				384F12F820A1A5D3007CF638 /* MultisetTests.swift in Sources */,
 				380A4B261F1BF5BE002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
 				0950FF071EFC5C8100513DF7 /* HomomorphismTests.swift in Sources */,
 				380A4B2B1F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift in Sources */,
@@ -931,6 +937,7 @@
 				384F12F120A1A002007CF638 /* NonEmptyArrayTests.swift in Sources */,
 				380A4B171F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				38DFE66620826CBB00489BDF /* FunctionTests.swift in Sources */,
+				384F12F920A1A5D3007CF638 /* MultisetTests.swift in Sources */,
 				380A4B271F1BF5BF002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
 				0950FF3F1F0948D000513DF7 /* HomomorphismTests.swift in Sources */,
 				380A4B2C1F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift in Sources */,
@@ -1035,6 +1042,7 @@
 				384F12EF20A1A002007CF638 /* NonEmptyArrayTests.swift in Sources */,
 				380A4B151F1B7336002D70E0 /* SemigroupTests.generated.swift in Sources */,
 				38DFE66420826CBB00489BDF /* FunctionTests.swift in Sources */,
+				384F12F720A1A5D3007CF638 /* MultisetTests.swift in Sources */,
 				380A4B251F1BF5BD002D70E0 /* CommutativeMonoidTests.generated.swift in Sources */,
 				0950FF861F094AB500513DF7 /* HomomorphismTests.swift in Sources */,
 				380A4B2A1F1BF66B002D70E0 /* BoundedSemilatticeTests.generated.swift in Sources */,
