@@ -32,18 +32,6 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
-	func testFreeBoundedSemilattice() {
-		property("FreeBoundedSemilattice is a Monoid") <- forAll { (a: FreeBoundedSemilattice<Int>) in
-			Law<FreeBoundedSemilattice<Int>>.isNeutralToEmpty(a)
-		}
-	}
-
-	func testFreeCommutativeMonoid() {
-		property("FreeCommutativeMonoid is a Monoid") <- forAll { (a: FreeCommutativeMonoid<Int>) in
-			Law<FreeCommutativeMonoid<Int>>.isNeutralToEmpty(a)
-		}
-	}
-
 	func testMax() {
 		property("Max is a Monoid") <- forAll { (a: Max<Int>) in
 			Law<Max<Int>>.isNeutralToEmpty(a)
@@ -59,6 +47,12 @@ final class MonoidTests: XCTestCase {
 	func testMultiply() {
 		property("Multiply is a Monoid") <- forAll { (a: Multiply<Int>) in
 			Law<Multiply<Int>>.isNeutralToEmpty(a)
+		}
+	}
+
+	func testMultiset() {
+		property("Multiset is a Monoid") <- forAll { (a: Multiset<Int>) in
+			Law<Multiset<Int>>.isNeutralToEmpty(a)
 		}
 	}
 
@@ -80,6 +74,12 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testSet() {
+		property("Set is a Monoid") <- forAll { (a: Set<Int>) in
+			Law<Set<Int>>.isNeutralToEmpty(a)
+		}
+	}
+
 	func testString() {
 		property("String is a Monoid") <- forAll { (a: String) in
 			Law<String>.isNeutralToEmpty(a)
@@ -97,14 +97,14 @@ final class MonoidTests: XCTestCase {
 		("testAnd",testAnd),
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
-		("testFreeBoundedSemilattice",testFreeBoundedSemilattice),
-		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testMultiset",testMultiset),
 		("testOptional",testOptional),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),
 	]

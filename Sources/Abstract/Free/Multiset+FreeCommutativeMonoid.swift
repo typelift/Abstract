@@ -83,6 +83,20 @@ extension Multiset: Sequence {
 	}
 }
 
+// sourcery: fixedTypesForPropertyBasedTests = "Int"
+extension Multiset: CommutativeMonoid {
+	public static var empty: Multiset {
+		return []
+	}
+
+	public static func <> (left: Multiset, right: Multiset) -> Multiset {
+		return left.disjointUnion(right)
+	}
+}
+
+public typealias FreeCommutativeMonoid<A> = Multiset<A> where A: Hashable
+
+
 //MARK: - Algebra
 
 public extension Multiset {

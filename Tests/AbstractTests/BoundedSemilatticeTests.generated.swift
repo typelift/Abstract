@@ -14,12 +14,6 @@ final class BoundedSemilatticeTests: XCTestCase {
 		}
 	}
 
-	func testFreeBoundedSemilattice() {
-		property("FreeBoundedSemilattice is a BoundedSemilattice") <- forAll { (a: FreeBoundedSemilattice<Int>, b: FreeBoundedSemilattice<Int>) in
-			Law<FreeBoundedSemilattice<Int>>.isIdempotent(a,b)
-		}
-	}
-
 	func testMax() {
 		property("Max is a BoundedSemilattice") <- forAll { (a: Max<Int>, b: Max<Int>) in
 			Law<Max<Int>>.isIdempotent(a,b)
@@ -38,11 +32,17 @@ final class BoundedSemilatticeTests: XCTestCase {
 		}
 	}
 
+	func testSet() {
+		property("Set is a BoundedSemilattice") <- forAll { (a: Set<Int>, b: Set<Int>) in
+			Law<Set<Int>>.isIdempotent(a,b)
+		}
+	}
+
 	static var allTests = [
 		("testAnd",testAnd),
-		("testFreeBoundedSemilattice",testFreeBoundedSemilattice),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testOr",testOr),
+		("testSet",testSet),
 	]
 }

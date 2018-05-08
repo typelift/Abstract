@@ -38,18 +38,6 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
-	func testFreeBoundedSemilattice() {
-		property("FreeBoundedSemilattice is a Semigroup") <- forAll { (a: FreeBoundedSemilattice<Int>, b: FreeBoundedSemilattice<Int>, c: FreeBoundedSemilattice<Int>) in
-			Law<FreeBoundedSemilattice<Int>>.isAssociative(a,b,c)
-		}
-	}
-
-	func testFreeCommutativeMonoid() {
-		property("FreeCommutativeMonoid is a Semigroup") <- forAll { (a: FreeCommutativeMonoid<Int>, b: FreeCommutativeMonoid<Int>, c: FreeCommutativeMonoid<Int>) in
-			Law<FreeCommutativeMonoid<Int>>.isAssociative(a,b,c)
-		}
-	}
-
 	func testLast() {
 		property("Last is a Semigroup") <- forAll { (a: Last<Int>, b: Last<Int>, c: Last<Int>) in
 			Law<Last<Int>>.isAssociative(a,b,c)
@@ -71,6 +59,12 @@ final class SemigroupTests: XCTestCase {
 	func testMultiply() {
 		property("Multiply is a Semigroup") <- forAll { (a: Multiply<Int>, b: Multiply<Int>, c: Multiply<Int>) in
 			Law<Multiply<Int>>.isAssociative(a,b,c)
+		}
+	}
+
+	func testMultiset() {
+		property("Multiset is a Semigroup") <- forAll { (a: Multiset<Int>, b: Multiset<Int>, c: Multiset<Int>) in
+			Law<Multiset<Int>>.isAssociative(a,b,c)
 		}
 	}
 
@@ -98,6 +92,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testSet() {
+		property("Set is a Semigroup") <- forAll { (a: Set<Int>, b: Set<Int>, c: Set<Int>) in
+			Law<Set<Int>>.isAssociative(a,b,c)
+		}
+	}
+
 	func testString() {
 		property("String is a Semigroup") <- forAll { (a: String, b: String, c: String) in
 			Law<String>.isAssociative(a,b,c)
@@ -116,16 +116,16 @@ final class SemigroupTests: XCTestCase {
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFreeBoundedSemilattice",testFreeBoundedSemilattice),
-		("testFreeCommutativeMonoid",testFreeCommutativeMonoid),
 		("testLast",testLast),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testMultiset",testMultiset),
 		("testNonEmptyArray",testNonEmptyArray),
 		("testOptional",testOptional),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),
 	]
