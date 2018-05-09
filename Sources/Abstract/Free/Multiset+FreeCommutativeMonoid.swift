@@ -37,12 +37,12 @@ public struct Multiset<A>: Equatable where A: Hashable {
 		}
 	}
 
-	public func countOf(_ item: A) -> Int {
+	public func count(of item: A) -> Int {
 		return storage[item] ?? 0
 	}
 
 	public func contains(_ item: A) -> Bool {
-		return countOf(item) > 0
+		return count(of: item) > 0
 	}
 
 	public var anyItem: A? {
@@ -62,9 +62,9 @@ public struct Multiset<A>: Equatable where A: Hashable {
 			self.multiSet = multiSet
 		}
 
-		public mutating func next() -> (A,Int)? {
+		public mutating func next() -> (A, Int)? {
 			guard let anyItem = multiSet.anyItem else { return nil }
-			let count = multiSet.countOf(anyItem)
+            let count = multiSet.count(of: anyItem)
 			multiSet.removeAll(anyItem)
 			return (anyItem,count)
 		}
@@ -96,7 +96,6 @@ extension Multiset: CommutativeMonoid {
 
 public typealias FreeCommutativeMonoid<A> = Multiset<A> where A: Hashable
 
-
 //MARK: - Algebra
 
 public extension Multiset {
@@ -120,7 +119,7 @@ public extension Multiset {
 		var m_new = Multiset()
 
 		for (item, count) in self {
-			let newCount = Swift.max(count, other.countOf(item))
+			let newCount = Swift.max(count, other.count(of: item))
 			if newCount > 0 {
 				(0..<newCount).forEach { _ in
 					m_new.add(item)
@@ -141,7 +140,7 @@ public extension Multiset {
 		var m_new = Multiset()
 
 		for (item, count) in self {
-			let newCount = Swift.min(count, other.countOf(item))
+			let newCount = Swift.min(count, other.count(of: item))
 			if newCount > 0 {
 				(0..<newCount).forEach { _ in
 					m_new.add(item)
@@ -153,14 +152,14 @@ public extension Multiset {
 	}
 
 	func isSubset(_ other: Multiset) -> Bool {
-		for (element,count) in self where other.countOf(element) < count {
+		for (element,count) in self where other.count(of: element) < count {
 			return false
 		}
 		return true
 	}
 
 	func isSuperset(_ other: Multiset) -> Bool {
-		for (element,count) in other where self.countOf(element) < count {
+		for (element,count) in other where self.count(of: element) < count {
 			return false
 		}
 		return true
