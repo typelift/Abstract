@@ -8,7 +8,7 @@ A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring 
 // sourcery: arbitrary
 // sourcery: constrainedArbitraryParameter = "A"
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToTop & Addable"
-public struct Tropical<A>: Wrapper, Semiring where A: ComparableToTop & Addable {
+public struct Tropical<A>: Wrapper, AutoSemiring where A: ComparableToTop & Addable {
 	public typealias WrappedType = A
 	public typealias Additive = Min<A>
 	public typealias Multiplicative = Add<A>

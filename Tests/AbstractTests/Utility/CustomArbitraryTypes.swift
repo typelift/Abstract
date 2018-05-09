@@ -5,6 +5,14 @@ import SwiftCheck
 	import Operadics
 #endif
 
+extension Wrapper where WrappedType: Arbitrary {
+    public static var arbitrary: Gen<Self> {
+        return Gen<Self>.compose {
+            Self.init($0.generate(using: WrappedType.arbitrary))
+        }
+    }
+}
+
 extension CheckerArguments {
 	static func with(_ left: Int, _ right: Int, _ size: Int) -> CheckerArguments {
 		return CheckerArguments(
