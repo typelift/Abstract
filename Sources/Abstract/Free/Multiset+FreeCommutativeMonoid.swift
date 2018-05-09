@@ -8,9 +8,9 @@ public struct Multiset<A>: Equatable where A: Hashable {
 
 	public init() {}
 
-	public init <C> (_ collection: C) where C: Collection, C.Element == A {
+	public init <S> (_ sequence: S) where S: Sequence, S.Iterator.Element == A {
 		self.init()
-		for item in collection {
+		for item in sequence {
 			self.add(item)
 		}
 	}
