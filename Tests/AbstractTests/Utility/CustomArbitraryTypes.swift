@@ -159,3 +159,11 @@ extension Multiset: Arbitrary where A: Arbitrary {
 		}
 	}
 }
+
+extension Monoidal: Arbitrary where A: Arbitrary {
+    public static var arbitrary: Gen<Monoidal<A>> {
+        return Gen<Monoidal<A>>.compose {
+            Monoidal<A>($0.generate(using: Set.arbitrary.scale { $0 > 5 ? 5 : $0 }))
+        }
+    }
+}

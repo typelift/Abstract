@@ -20,17 +20,17 @@ extension Sequence where Iterator.Element: Monoid {
 	}
 }
 
-extension Sequence {
-    public static func cartesian <First,Second> (_ first: First, _ second: Second) -> Array<(First.Iterator.Element,Second.Iterator.Element)> where First: Sequence, Second: Sequence, Iterator.Element == (First.Iterator.Element,Second.Iterator.Element) {
-        var cartesianProduct: Array<(First.Iterator.Element,Second.Iterator.Element)> = []
-        cartesianProduct.reserveCapacity(first.underestimatedCount * second.underestimatedCount)
-        
+extension Set {
+    static func cartesianMerge <First,Second> (_ first: Set<First>, _ second: Set<Second>, _ merge: (First,Second) -> Element) -> Set {
+        var cartesianProduct: Array<Element> = []
+        cartesianProduct.reserveCapacity(first.count * second.count)
+
         for firstElement in first {
             for secondElement in second {
-                cartesianProduct.append((firstElement,secondElement))
+                cartesianProduct.append(merge(firstElement,secondElement))
             }
         }
-        
-        return cartesianProduct
+
+        return Set(cartesianProduct)
     }
 }

@@ -103,6 +103,16 @@ final class MonoidTests: XCTestCase {
         }
     }
 
+    func testMonoidal() {
+        property("Monoidal is a Monoid in regard to the Additive operation") <- forAll { (a: Monoidal<String>) in
+            Law<Monoidal<String>>.isNeutralToEmpty(a,.zero,<>+)
+        }
+
+        property("Monoidal is a Monoid in regard to the Multiplicative operation") <- forAll { (a: Monoidal<String>) in
+            Law<Monoidal<String>>.isNeutralToEmpty(a,.one,<>*)
+        }
+    }
+
     func testTropical() {
         property("Tropical is a Monoid in regard to the Additive operation") <- forAll { (a: Tropical<Int>) in
             Law<Tropical<Int>>.isNeutralToEmpty(a,.zero,<>+)
@@ -128,5 +138,8 @@ final class MonoidTests: XCTestCase {
 		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),
+        ("testBool",testBool),
+        ("testMonoidal",testMonoidal),
+        ("testTropical",testTropical),
 	]
 }
