@@ -64,7 +64,7 @@ public struct Multiset<A>: Equatable where A: Hashable {
 
 		public mutating func next() -> (A, Int)? {
 			guard let anyItem = multiSet.anyItem else { return nil }
-            let count = multiSet.count(of: anyItem)
+			let count = multiSet.count(of: anyItem)
 			multiSet.removeAll(anyItem)
 			return (anyItem,count)
 		}
