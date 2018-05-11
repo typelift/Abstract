@@ -37,7 +37,7 @@ extension LawInContext where Element: Wrapper {
 }
 
 /*:
-If the `WrappedType` element is `Equatable` or `EquatableInContext`, we can define the static `==` function for a `Wrapper` (unfortunately, the `Equatable` or `EquatableInContext` conformance must be declared explicitly for every wrapper).
+If the `WrappedType` element is `Equatable` or `EquatableInContext`, we can define the static `==` function for a `Wrapper` (still, the `Equatable` or `EquatableInContext` conformance must be declared explicitly for every wrapper).
 */
 
 extension Wrapper where WrappedType: Equatable {
@@ -78,5 +78,30 @@ public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper
 			.map(==)
 			.map { $0(context) }
 			.reduce(true) { $0 && $1 }
+	}
+}
+
+/*:
+If the `WrappedType` element conforms to `Collection`, we can induce the fundamental methods onto the wrapper (as for `Equatable`, we still need to declare conformance explicitly).
+*/
+
+extension Wrapper where WrappedType: Collection {
+	public typealias Index = WrappedType.Index
+	public typealias Element = WrappedType.Element
+
+	public var startIndex: Index {
+		return unwrap.startIndex
+	}
+
+	public var endIndex: Index {
+		return unwrap.endIndex
+	}
+
+	public func index(after i: Index) -> Index {
+		return unwrap.index(after: i)
+	}
+
+	public subscript(position: Index) -> Element {
+		return unwrap[position]
 	}
 }

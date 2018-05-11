@@ -160,10 +160,13 @@ extension Multiset: Arbitrary where A: Arbitrary {
 	}
 }
 
-extension Monoidal: Arbitrary where A: Arbitrary {
-    public static var arbitrary: Gen<Monoidal<A>> {
-        return Gen<Monoidal<A>>.compose {
-            Monoidal<A>($0.generate(using: Set.arbitrary.scale { $0 > 5 ? 5 : $0 }))
-        }
-    }
+extension SetM: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<SetM<A>> {
+		return Gen<SetM<A>>.compose {
+			SetM<A>($0.generate(
+				using: Set.arbitrary.scale {
+					Swift.min($0,5) /// Without this, tests are too slow
+			}))
+		}
+	}
 }

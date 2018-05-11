@@ -19,18 +19,3 @@ extension Sequence where Iterator.Element: Monoid {
 		return concatenatedWith(initial: Iterator.Element.empty)
 	}
 }
-
-extension Set {
-    static func cartesianMerge <First,Second> (_ first: Set<First>, _ second: Set<Second>, _ merge: (First,Second) -> Element) -> Set {
-        var cartesianProduct: Array<Element> = []
-        cartesianProduct.reserveCapacity(first.count * second.count)
-
-        for firstElement in first {
-            for secondElement in second {
-                cartesianProduct.append(merge(firstElement,secondElement))
-            }
-        }
-
-        return Set(cartesianProduct)
-    }
-}

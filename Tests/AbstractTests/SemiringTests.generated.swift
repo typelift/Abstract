@@ -18,13 +18,13 @@ final class SemiringTests: XCTestCase {
 		}
 	}
 
-	func testMonoidal() {
-		property("Monoidal is a Semiring: Distributive") <- forAll { (a: Monoidal<String>, b: Monoidal<String>, c: Monoidal<String>) in
-			Law<Monoidal<String>>.multiplicationIsDistributiveOverAddition(a,b,c)
+	func testSetM() {
+		property("SetM is a Semiring: Distributive") <- forAll { (a: SetM<String>, b: SetM<String>, c: SetM<String>) in
+			Law<SetM<String>>.multiplicationIsDistributiveOverAddition(a,b,c)
 		}
 
-		property("Monoidal is a Semiring: Annihilation") <- forAll { (a: Monoidal<String>) in
-			Law<Monoidal<String>>.zeroAnnihiliatesTheMultiplicative(a)
+		property("SetM is a Semiring: Annihilation") <- forAll { (a: SetM<String>) in
+			Law<SetM<String>>.zeroAnnihiliatesTheMultiplicative(a)
 		}
 	}
 
@@ -40,7 +40,7 @@ final class SemiringTests: XCTestCase {
 
 	static var allTests = [
 		("testBool",testBool),
-		("testMonoidal",testMonoidal),
+		("testSetM",testSetM),
 		("testTropical",testTropical),
 	]
 }

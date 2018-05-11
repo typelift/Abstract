@@ -63,9 +63,9 @@ final class CommutativeMonoidTests: XCTestCase {
         }
     }
 
-    func testMonoidal() {
-        property("Monoidal is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: Monoidal<String>, b: Monoidal<String>) in
-            Law<Monoidal<String>>.isCommutative(a,b,<>+)
+    func testSetM() {
+        property("SetM is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: SetM<String>, b: SetM<String>) in
+            Law<SetM<String>>.isCommutative(a,b,<>+)
         }
     }
 
@@ -86,7 +86,7 @@ final class CommutativeMonoidTests: XCTestCase {
 		("testOr",testOr),
 		("testSet",testSet),
         ("testBool",testBool),
-        ("testMonoidal",testMonoidal),
+        ("testSetM",testSetM),
         ("testTropical",testTropical),
 	]
 }

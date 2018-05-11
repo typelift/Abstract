@@ -88,7 +88,7 @@ extension AutoSemiring where Multiplicative: Wrapper, Multiplicative.WrappedType
 }
 
 /*:
-If instead the semiring is a wrapper of `A`, and both `Additive` and `Multiplicative` are wrappers of `A`, we can still derive an abstract implementation for the functions:
+If instead the semiring is a wrapper of `A`, and both `Additive` and `Multiplicative` are wrappers of `A`, we can still derive a generic implementation for the functions:
 */
 
 extension AutoSemiring where Self: Wrapper, Additive: Wrapper, Self.WrappedType == Additive.WrappedType {

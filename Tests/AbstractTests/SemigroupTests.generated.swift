@@ -121,13 +121,13 @@ final class SemigroupTests: XCTestCase {
         }
     }
 
-    func testMonoidal() {
-        property("Monoidal is a Semigroup in regard to the Additive operation") <- forAll { (a: Monoidal<String>, b: Monoidal<String>, c: Monoidal<String>) in
-            Law<Monoidal<String>>.isAssociative(a,b,c,<>+)
+    func testSetM() {
+        property("SetM is a Semigroup in regard to the Additive operation") <- forAll { (a: SetM<String>, b: SetM<String>, c: SetM<String>) in
+            Law<SetM<String>>.isAssociative(a,b,c,<>+)
         }
 
-        property("Monoidal is a Semigroup in regard to the Multiplicative operation") <- forAll { (a: Monoidal<String>, b: Monoidal<String>, c: Monoidal<String>) in
-            Law<Monoidal<String>>.isAssociative(a,b,c,<>*)
+        property("SetM is a Semigroup in regard to the Multiplicative operation") <- forAll { (a: SetM<String>, b: SetM<String>, c: SetM<String>) in
+            Law<SetM<String>>.isAssociative(a,b,c,<>*)
         }
     }
 
@@ -160,7 +160,7 @@ final class SemigroupTests: XCTestCase {
 		("testString",testString),
 		("testUpdate",testUpdate),
         ("testBool",testBool),
-        ("testMonoidal",testMonoidal),
+        ("testSetM",testSetM),
         ("testTropical",testTropical),
 	]
 }
