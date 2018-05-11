@@ -38,18 +38,6 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
-	func testFreeMonoid() {
-		property("FreeMonoid is a Semigroup") <- forAll { (a: FreeMonoid<Int>, b: FreeMonoid<Int>, c: FreeMonoid<Int>) in
-			Law<FreeMonoid<Int>>.isAssociative(a,b,c)
-		}
-	}
-
-	func testFreeSemigroup() {
-		property("FreeSemigroup is a Semigroup") <- forAll { (a: FreeSemigroup<Int>, b: FreeSemigroup<Int>, c: FreeSemigroup<Int>) in
-			Law<FreeSemigroup<Int>>.isAssociative(a,b,c)
-		}
-	}
-
 	func testLast() {
 		property("Last is a Semigroup") <- forAll { (a: Last<Int>, b: Last<Int>, c: Last<Int>) in
 			Law<Last<Int>>.isAssociative(a,b,c)
@@ -74,6 +62,18 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testMultiset() {
+		property("Multiset is a Semigroup") <- forAll { (a: Multiset<Int>, b: Multiset<Int>, c: Multiset<Int>) in
+			Law<Multiset<Int>>.isAssociative(a,b,c)
+		}
+	}
+
+	func testNonEmptyArray() {
+		property("NonEmptyArray is a Semigroup") <- forAll { (a: NonEmptyArray<Int>, b: NonEmptyArray<Int>, c: NonEmptyArray<Int>) in
+			Law<NonEmptyArray<Int>>.isAssociative(a,b,c)
+		}
+	}
+
 	func testOptional() {
 		property("Optional is a Semigroup") <- forAll { (a: Optional<Int>, b: Optional<Int>, c: Optional<Int>) in
 			Law<Optional<Int>>.isAssociative(a,b,c)
@@ -89,6 +89,12 @@ final class SemigroupTests: XCTestCase {
 	func testOrdering() {
 		property("Ordering is a Semigroup") <- forAll { (a: Ordering, b: Ordering, c: Ordering) in
 			Law<Ordering>.isAssociative(a,b,c)
+		}
+	}
+
+	func testSet() {
+		property("Set is a Semigroup") <- forAll { (a: Set<Int>, b: Set<Int>, c: Set<Int>) in
+			Law<Set<Int>>.isAssociative(a,b,c)
 		}
 	}
 
@@ -110,15 +116,16 @@ final class SemigroupTests: XCTestCase {
 		("testArray",testArray),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFreeMonoid",testFreeMonoid),
-		("testFreeSemigroup",testFreeSemigroup),
 		("testLast",testLast),
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testMultiset",testMultiset),
+		("testNonEmptyArray",testNonEmptyArray),
 		("testOptional",testOptional),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),
 	]

@@ -32,12 +32,6 @@ final class WrapperTests: XCTestCase {
 		}
 	}
 
-	func testFreeMonoid() {
-		property("FreeMonoid is a well-behaved Wrapper") <- forAll { (a: FreeMonoid<Int>) in
-			Law<FreeMonoid<Int>>.isWellBehavedWrapper(a)
-		}
-	}
-
 	func testLast() {
 		property("Last is a well-behaved Wrapper") <- forAll { (a: Last<Int>) in
 			Law<Last<Int>>.isWellBehavedWrapper(a)
@@ -85,7 +79,6 @@ final class WrapperTests: XCTestCase {
 		("testAnd",testAnd),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
-		("testFreeMonoid",testFreeMonoid),
 		("testLast",testLast),
 		("testMax",testMax),
 		("testMin",testMin),

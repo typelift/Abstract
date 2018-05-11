@@ -38,9 +38,21 @@ final class CommutativeMonoidTests: XCTestCase {
 		}
 	}
 
+	func testMultiset() {
+		property("Multiset is a CommutativeMonoid") <- forAll { (a: Multiset<Int>, b: Multiset<Int>) in
+			Law<Multiset<Int>>.isCommutative(a,b)
+		}
+	}
+
 	func testOr() {
 		property("Or is a CommutativeMonoid") <- forAll { (a: Or, b: Or) in
 			Law<Or>.isCommutative(a,b)
+		}
+	}
+
+	func testSet() {
+		property("Set is a CommutativeMonoid") <- forAll { (a: Set<Int>, b: Set<Int>) in
+			Law<Set<Int>>.isCommutative(a,b)
 		}
 	}
 
@@ -50,6 +62,8 @@ final class CommutativeMonoidTests: XCTestCase {
 		("testMax",testMax),
 		("testMin",testMin),
 		("testMultiply",testMultiply),
+		("testMultiset",testMultiset),
 		("testOr",testOr),
+		("testSet",testSet),
 	]
 }

@@ -12,3 +12,5 @@ extension Array: Monoid {
 		return left + right
 	}
 }
+
+public typealias FreeMonoid<A> = Array<A>
