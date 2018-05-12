@@ -55,19 +55,23 @@ extension LawInContext where Element: Semiring {
 }
 
 /*:
- `AutoSemiring` is a convience protocol that, other than declaring conformance to `Semiring`, adds 2 associated types, one for `Additive` and one for `Multiplicative`. This is beacuse we can derive the implementation of `Semiring` methods if we can make assertions on the underlying types involved.
+## AutoSemiring_
+
+`AutoSemiring_` protocols are convience protocols that, other than declaring conformance to `Semiring`, adds 2 associated types, one for `Additive` and one for `Multiplicative`. This is beacuse we can derive the implementation of `Semiring` methods if we can make assertions on the underlying types involved.
  */
 
-public protocol AutoSemiring: Semiring {
-    associatedtype Additive: CommutativeMonoid
-    associatedtype Multiplicative: Monoid
-}
-
 /*:
+## AutoSemiringWrapped
+
 If for type `A` both `Additive` and `Multiplicative` are `Wrapper`, and the `WrappedType` type is `A` itself, we can derive the implementation of all the functions like the following:
 */
 
-extension AutoSemiring where Additive: Wrapper, Additive.WrappedType == Self {
+public protocol AutoSemiringWrapped: Semiring {
+	associatedtype Additive: CommutativeMonoid & Wrapper where Additive.WrappedType == Self
+	associatedtype Multiplicative: Monoid & Wrapper where Multiplicative.WrappedType == Self
+}
+
+extension AutoSemiringWrapped {
 	public static func <>+(left: Self, right: Self) -> Self {
 		return (Additive.init(left) <> Additive.init(right)).unwrap
 	}
@@ -75,9 +79,7 @@ extension AutoSemiring where Additive: Wrapper, Additive.WrappedType == Self {
 	public static var zero: Self {
 		return Additive.empty.unwrap
 	}
-}
 
-extension AutoSemiring where Multiplicative: Wrapper, Multiplicative.WrappedType == Self {
 	public static func <>*(left: Self, right: Self) -> Self {
 		return (Multiplicative.init(left) <> Multiplicative.init(right)).unwrap
 	}
@@ -88,10 +90,17 @@ extension AutoSemiring where Multiplicative: Wrapper, Multiplicative.WrappedType
 }
 
 /*:
+## AutoSemiringWrapper
+
 If instead the semiring is a wrapper of `A`, and both `Additive` and `Multiplicative` are wrappers of `A`, we can still derive a generic implementation for the functions:
 */
 
-extension AutoSemiring where Self: Wrapper, Additive: Wrapper, Self.WrappedType == Additive.WrappedType {
+public protocol AutoSemiringWrapper: Semiring, Wrapper {
+	associatedtype Additive: CommutativeMonoid & Wrapper where Additive.WrappedType == Self.WrappedType
+	associatedtype Multiplicative: Monoid & Wrapper where Multiplicative.WrappedType == Self.WrappedType
+}
+
+extension AutoSemiringWrapper {
 	public static func <>+(left: Self, right: Self) -> Self {
 		return Self.init((Additive.init(left.unwrap) <> Additive.init(right.unwrap)).unwrap)
 	}
@@ -99,9 +108,7 @@ extension AutoSemiring where Self: Wrapper, Additive: Wrapper, Self.WrappedType 
 	public static var zero: Self {
 		return Self.init(Additive.empty.unwrap)
 	}
-}
 
-extension AutoSemiring where Self: Wrapper, Multiplicative: Wrapper, Self.WrappedType == Multiplicative.WrappedType {
 	public static func <>*(left: Self, right: Self) -> Self {
 		return Self.init((Multiplicative.init(left.unwrap) <> Multiplicative.init(right.unwrap)).unwrap)
 	}
