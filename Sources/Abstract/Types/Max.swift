@@ -18,8 +18,8 @@ public struct Max<A>: Wrapper where A: ComparableToBottom {
 }
 
 extension Max: Semigroup {
-	public static func <> (left: Max, right: Max) -> Max {
-		return Max(max(left.unwrap, right.unwrap))
+	public static func <> (lhs: Max, rhs: Max) -> Max {
+		return Max(max(lhs.unwrap, rhs.unwrap))
 	}
 }
 

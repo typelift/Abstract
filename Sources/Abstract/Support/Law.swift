@@ -17,7 +17,7 @@ Some types will require a context to verify the laws (for example, functions).
 public protocol EquatableInContext {
 	associatedtype Context
 	
-	static func == (left: Self, right: Self) -> (Context) -> Bool
+	static func == (lhs: Self, rhs: Self) -> (Context) -> Bool
 }
 
 public enum LawInContext<Element: EquatableInContext> {}
@@ -29,8 +29,8 @@ extension Optional: EquatableInContext where Wrapped: EquatableInContext {
 
 	public static func == (lhs: Optional, rhs: Optional) -> (Context) -> Bool {
 		switch (lhs,rhs) {
-		case (.some(let left), .some(let right)):
-			return left == right
+		case (.some(let lhs), .some(let rhs)):
+			return lhs == rhs
 		case (.none,.none):
 			return { _ in true }
 		default:

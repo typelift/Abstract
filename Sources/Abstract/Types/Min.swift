@@ -18,8 +18,8 @@ public struct Min<A>: Wrapper where A: ComparableToTop {
 }
 
 extension Min: Semigroup {
-	public static func <> (left: Min, right: Min) -> Min {
-		return Min(min(left.unwrap, right.unwrap))
+	public static func <> (lhs: Min, rhs: Min) -> Min {
+		return Min(min(lhs.unwrap, rhs.unwrap))
 	}
 }
 

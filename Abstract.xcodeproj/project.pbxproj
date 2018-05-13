@@ -200,6 +200,10 @@
 		38E8CCDD20A2FC40007FB201 /* SetM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CCDB20A2FC40007FB201 /* SetM.swift */; };
 		38E8CCDE20A2FC40007FB201 /* SetM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CCDB20A2FC40007FB201 /* SetM.swift */; };
 		38E8CCDF20A2FC40007FB201 /* SetM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CCDB20A2FC40007FB201 /* SetM.swift */; };
+		38F423C620A875A90078DF03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423C520A875A90078DF03 /* Product.swift */; };
+		38F423C720A875A90078DF03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423C520A875A90078DF03 /* Product.swift */; };
+		38F423C820A875A90078DF03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423C520A875A90078DF03 /* Product.swift */; };
+		38F423C920A875A90078DF03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423C520A875A90078DF03 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +323,7 @@
 		38D737EB1EE9B95C000BAF0C /* Law.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Law.swift; sourceTree = "<group>"; };
 		38DFE66320826CBB00489BDF /* FunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FunctionTests.swift; path = Tests/AbstractTests/FunctionTests.swift; sourceTree = SOURCE_ROOT; };
 		38E8CCDB20A2FC40007FB201 /* SetM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetM.swift; sourceTree = "<group>"; };
+		38F423C520A875A90078DF03 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,12 +410,11 @@
 		381256E820807A9F00CD625D /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				38F423C420A8758A0078DF03 /* Algebraic */,
 				381256F020807B8500CD625D /* Add.swift */,
 				3812570420807E8100CD625D /* And.swift */,
 				3812573C20808ECD00CD625D /* Bool.swift */,
-				381257182080803000CD625D /* EndoFunction.swift */,
 				3812570E20807FB500CD625D /* First.swift */,
-				3812571D2080827B00CD625D /* Function.swift */,
 				3812571320807FF800CD625D /* Last.swift */,
 				381256FA20807D7B00CD625D /* Max.swift */,
 				381256FF20807E1F00CD625D /* Min.swift */,
@@ -570,6 +574,16 @@
 				0950FF691F094A6600513DF7 /* AbstractTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		38F423C420A8758A0078DF03 /* Algebraic */ = {
+			isa = PBXGroup;
+			children = (
+				381257182080803000CD625D /* EndoFunction.swift */,
+				3812571D2080827B00CD625D /* Function.swift */,
+				38F423C520A875A90078DF03 /* Product.swift */,
+			);
+			path = Algebraic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -857,6 +871,7 @@
 				3812570B20807F2600CD625D /* Or.swift in Sources */,
 				3812571020807FB500CD625D /* First.swift in Sources */,
 				381256F220807B8500CD625D /* Add.swift in Sources */,
+				38F423C720A875A90078DF03 /* Product.swift in Sources */,
 				0950FEF51EFC5C7900513DF7 /* Homomorphism.swift in Sources */,
 				382278F22099D01B003E5801 /* Multiset+FreeCommutativeMonoid.swift in Sources */,
 				3812571F2080827B00CD625D /* Function.swift in Sources */,
@@ -920,6 +935,7 @@
 				3812570C20807F2600CD625D /* Or.swift in Sources */,
 				3812571120807FB500CD625D /* First.swift in Sources */,
 				381256F320807B8500CD625D /* Add.swift in Sources */,
+				38F423C820A875A90078DF03 /* Product.swift in Sources */,
 				0950FF391F09488B00513DF7 /* Semigroup.swift in Sources */,
 				382278F32099D01B003E5801 /* Multiset+FreeCommutativeMonoid.swift in Sources */,
 				381257202080827B00CD625D /* Function.swift in Sources */,
@@ -983,6 +999,7 @@
 				3812570D20807F2600CD625D /* Or.swift in Sources */,
 				3812571220807FB500CD625D /* First.swift in Sources */,
 				381256F420807B8500CD625D /* Add.swift in Sources */,
+				38F423C920A875A90078DF03 /* Product.swift in Sources */,
 				0950FF561F094A2C00513DF7 /* Semigroup.swift in Sources */,
 				382278F42099D01B003E5801 /* Multiset+FreeCommutativeMonoid.swift in Sources */,
 				381257212080827B00CD625D /* Function.swift in Sources */,
@@ -1027,6 +1044,7 @@
 				3812570A20807F2600CD625D /* Or.swift in Sources */,
 				3812570F20807FB500CD625D /* First.swift in Sources */,
 				381256F120807B8500CD625D /* Add.swift in Sources */,
+				38F423C620A875A90078DF03 /* Product.swift in Sources */,
 				0950FF801F094AA100513DF7 /* Semigroup.swift in Sources */,
 				382278F12099D01B003E5801 /* Multiset+FreeCommutativeMonoid.swift in Sources */,
 				3812571E2080827B00CD625D /* Function.swift in Sources */,

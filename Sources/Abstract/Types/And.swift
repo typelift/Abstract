@@ -22,8 +22,8 @@ extension And: ExpressibleByBooleanLiteral {
 }
 
 extension And: Semigroup {
-	public static func <> (left: And, right: And) -> And {
-		return And(left.unwrap && right.unwrap)
+	public static func <> (lhs: And, rhs: And) -> And {
+		return And(lhs.unwrap && rhs.unwrap)
 	}
 }
 

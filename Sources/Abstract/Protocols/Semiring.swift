@@ -5,10 +5,10 @@ A Semiring is an algebraic structure consisting of a type with 2 composition ope
 
 Each operation must follow the respective laws in respect to its `empty` value. In addition, 2 more laws that must hold:
 
-- multiplication must "distribute" over addition, both left and right:
+- multiplication must "distribute" over addition, both lhs and rhs:
 	- a <>* (b <>+ c) = (a <>* b) <>+ (a <>* c)
 	- (b <>+ c) <>* a = (b <>* a) <>+ (c <>* a)
-- the `zero` element must "annihilate" an instance if applied with the multiplication operation, both left and right:
+- the `zero` element must "annihilate" an instance if applied with the multiplication operation, both lhs and rhs:
 	- zero <>* a = a <>* zero = zero
 */
 
@@ -20,8 +20,8 @@ infix operator <>+ : AdditionPrecedence
 infix operator <>* : MultiplicationPrecedence
 
 public protocol Semiring {
-	static func <>+(left: Self, right: Self) -> Self
-	static func <>*(left: Self, right: Self) -> Self
+	static func <>+(lhs: Self, rhs: Self) -> Self
+	static func <>*(lhs: Self, rhs: Self) -> Self
 
 	static var zero: Self { get }
 	static var one: Self { get }
@@ -72,16 +72,16 @@ public protocol AutoSemiringWrapped: Semiring {
 }
 
 extension AutoSemiringWrapped {
-	public static func <>+(left: Self, right: Self) -> Self {
-		return (Additive.init(left) <> Additive.init(right)).unwrap
+	public static func <>+(lhs: Self, rhs: Self) -> Self {
+		return (Additive.init(lhs) <> Additive.init(rhs)).unwrap
 	}
 
 	public static var zero: Self {
 		return Additive.empty.unwrap
 	}
 
-	public static func <>*(left: Self, right: Self) -> Self {
-		return (Multiplicative.init(left) <> Multiplicative.init(right)).unwrap
+	public static func <>*(lhs: Self, rhs: Self) -> Self {
+		return (Multiplicative.init(lhs) <> Multiplicative.init(rhs)).unwrap
 	}
 
 	public static var one: Self {
@@ -101,16 +101,16 @@ public protocol AutoSemiringWrapper: Semiring, Wrapper {
 }
 
 extension AutoSemiringWrapper {
-	public static func <>+(left: Self, right: Self) -> Self {
-		return Self.init((Additive.init(left.unwrap) <> Additive.init(right.unwrap)).unwrap)
+	public static func <>+(lhs: Self, rhs: Self) -> Self {
+		return Self.init((Additive.init(lhs.unwrap) <> Additive.init(rhs.unwrap)).unwrap)
 	}
 
 	public static var zero: Self {
 		return Self.init(Additive.empty.unwrap)
 	}
 
-	public static func <>*(left: Self, right: Self) -> Self {
-		return Self.init((Multiplicative.init(left.unwrap) <> Multiplicative.init(right.unwrap)).unwrap)
+	public static func <>*(lhs: Self, rhs: Self) -> Self {
+		return Self.init((Multiplicative.init(lhs.unwrap) <> Multiplicative.init(rhs.unwrap)).unwrap)
 	}
 
 	public static var one: Self {

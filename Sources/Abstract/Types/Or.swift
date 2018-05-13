@@ -22,8 +22,8 @@ extension Or: ExpressibleByBooleanLiteral {
 }
 
 extension Or: Semigroup {
-	public static func <> (left: Or, right: Or) -> Or {
-		return Or(left.unwrap || right.unwrap)
+	public static func <> (lhs: Or, rhs: Or) -> Or {
+		return Or(lhs.unwrap || rhs.unwrap)
 	}
 }
 

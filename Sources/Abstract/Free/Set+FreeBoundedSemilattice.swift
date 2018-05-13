@@ -8,8 +8,8 @@ extension Set: BoundedSemilattice {
 		return []
 	}
 
-	public static func <> (left: Set, right: Set) -> Set {
-		return left.union(right)
+	public static func <> (lhs: Set, rhs: Set) -> Set {
+		return lhs.union(rhs)
 	}
 }
 

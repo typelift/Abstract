@@ -17,7 +17,7 @@ public struct Last<A>: Wrapper {
 }
 
 extension Last: Semigroup {
-	public static func <> (left: Last, right: Last) -> Last {
-		return right
+	public static func <> (lhs: Last, rhs: Last) -> Last {
+		return rhs
 	}
 }

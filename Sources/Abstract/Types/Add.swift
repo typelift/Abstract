@@ -18,8 +18,8 @@ public struct Add<A>: Wrapper where A: Addable {
 }
 
 extension Add: Semigroup {
-	public static func <> (left: Add, right: Add) -> Add {
-		return Add.init(A.add(left.unwrap,right.unwrap))
+	public static func <> (lhs: Add, rhs: Add) -> Add {
+		return Add.init(A.add(lhs.unwrap,rhs.unwrap))
 	}
 }
 

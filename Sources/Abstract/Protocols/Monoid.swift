@@ -3,7 +3,7 @@
 
 A Monoid is a Semigroup with a distinct element that acts as "empty" in respect to the operation.
 
-The empty element (let's called it `e`) has to be neutral to the operation both from left and from right, thus:
+The empty element (let's called it `e`) has to be neutral to the operation both from lhs and from rhs, thus:
 
 a <> e = e <> a = a
 */

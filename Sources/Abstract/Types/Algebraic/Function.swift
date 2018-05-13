@@ -32,14 +32,14 @@ extension Function where B == Ordering {
 extension Function: EquatableInContext where B: Equatable {
 	public typealias Context = A
 
-	public static func == (left: Function, right: Function) -> (Context) -> Bool {
-		return { left.call($0) == right.call($0) }
+	public static func == (lhs: Function, rhs: Function) -> (Context) -> Bool {
+		return { lhs.call($0) == rhs.call($0) }
 	}
 }
 
 extension Function: Magma where B: Magma {
-	public static func <> (left: Function, right: Function) -> Function {
-		return Function { left.call($0) <> right.call($0) }
+	public static func <> (lhs: Function, rhs: Function) -> Function {
+		return Function { lhs.call($0) <> rhs.call($0) }
 	}
 }
 
@@ -56,12 +56,12 @@ extension Function: CommutativeMonoid where B: CommutativeMonoid {}
 extension Function: BoundedSemilattice where B: BoundedSemilattice {}
 
 extension Function: Semiring where B: Semiring {
-	public static func <>+ (left: Function<A, B>, right: Function<A, B>) -> Function<A, B> {
-		return Function { left.call($0) <>+ right.call($0) }
+	public static func <>+ (lhs: Function<A, B>, rhs: Function<A, B>) -> Function<A, B> {
+		return Function { lhs.call($0) <>+ rhs.call($0) }
 	}
 
-	public static func <>* (left: Function<A, B>, right: Function<A, B>) -> Function<A, B> {
-		return Function { left.call($0) <>* right.call($0) }
+	public static func <>* (lhs: Function<A, B>, rhs: Function<A, B>) -> Function<A, B> {
+		return Function { lhs.call($0) <>* rhs.call($0) }
 	}
 
 	public static var zero: Function<A, B> {
