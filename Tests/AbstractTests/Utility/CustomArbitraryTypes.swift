@@ -170,3 +170,14 @@ extension SetM: Arbitrary where A: Arbitrary {
 		}
 	}
 }
+
+extension Product: Arbitrary where A: Arbitrary, B: Arbitrary {
+    public static var arbitrary: Gen<Product<A, B>> {
+        return Gen<Product<A, B>>.compose {
+            Product($0.generate(),$0.generate())
+        }
+    }
+}
+
+
+

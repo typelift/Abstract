@@ -74,6 +74,12 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testProduct() {
+		property("Product is a Monoid") <- forAll { (a: Product<TestStructure,TestStructure>) in
+			Law<Product<TestStructure,TestStructure>>.isNeutralToEmpty(a)
+		}
+	}
+
 	func testSet() {
 		property("Set is a Monoid") <- forAll { (a: Set<Int>) in
 			Law<Set<Int>>.isNeutralToEmpty(a)
@@ -135,6 +141,7 @@ final class MonoidTests: XCTestCase {
 		("testOptional",testOptional),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testProduct",testProduct),
 		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),

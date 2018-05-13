@@ -92,6 +92,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testProduct() {
+		property("Product is a Semigroup") <- forAll { (a: Product<TestStructure,TestStructure>, b: Product<TestStructure,TestStructure>, c: Product<TestStructure,TestStructure>) in
+			Law<Product<TestStructure,TestStructure>>.isAssociative(a,b,c)
+		}
+	}
+
 	func testSet() {
 		property("Set is a Semigroup") <- forAll { (a: Set<Int>, b: Set<Int>, c: Set<Int>) in
 			Law<Set<Int>>.isAssociative(a,b,c)
@@ -156,6 +162,7 @@ final class SemigroupTests: XCTestCase {
 		("testOptional",testOptional),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testProduct",testProduct),
 		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),

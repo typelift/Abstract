@@ -32,6 +32,12 @@ final class BoundedSemilatticeTests: XCTestCase {
 		}
 	}
 
+	func testProduct() {
+		property("Product is a BoundedSemilattice") <- forAll { (a: Product<TestStructure,TestStructure>, b: Product<TestStructure,TestStructure>) in
+			Law<Product<TestStructure,TestStructure>>.isIdempotent(a,b)
+		}
+	}
+
 	func testSet() {
 		property("Set is a BoundedSemilattice") <- forAll { (a: Set<Int>, b: Set<Int>) in
 			Law<Set<Int>>.isIdempotent(a,b)
@@ -43,6 +49,7 @@ final class BoundedSemilatticeTests: XCTestCase {
 		("testMax",testMax),
 		("testMin",testMin),
 		("testOr",testOr),
+		("testProduct",testProduct),
 		("testSet",testSet),
 	]
 }

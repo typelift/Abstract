@@ -20,7 +20,7 @@ final class {{ protocolName }}Tests: XCTestCase {
 	}
 {% endfor %}
 
-{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
+{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:"Semiring" and not type.kind == "protocol" %}
 
     func test{{ type.name }}() {
 {% if type.isGeneric or type.name == "Array" or type.name == "Optional" or type.name == "Set" %}
@@ -47,7 +47,7 @@ final class {{ protocolName }}Tests: XCTestCase {
 {% for type in types.implementing.Semigroup where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
 		("test{{ type.name }}",test{{ type.name }}),
 {% endfor %}
-{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
+{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:"Semiring" and not type.kind == "protocol" %}
         ("test{{ type.name }}",test{{ type.name }}),
 {% endfor %}
 	]

@@ -3,6 +3,7 @@
 #endif
 
 // sourcery: fixedTypesForPropertyBasedTests = "TestStructure,TestStructure"
+// sourcery: ignore = "Semiring"
 public struct Product<A,B> {
     public let first: A
     public let second: B
