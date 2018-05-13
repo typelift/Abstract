@@ -127,6 +127,16 @@ final class SemigroupTests: XCTestCase {
         }
     }
 
+    func testIntSemiring() {
+        property("Int is a Semigroup in regard to the Additive operation") <- forAll { (a: Int, b: Int, c: Int) in
+            Law<Int>.isAssociative(a,b,c,<>+)
+        }
+
+        property("Int is a Semigroup in regard to the Multiplicative operation") <- forAll { (a: Int, b: Int, c: Int) in
+            Law<Int>.isAssociative(a,b,c,<>*)
+        }
+    }
+
     func testSetMSemiring() {
         property("SetM is a Semigroup in regard to the Additive operation") <- forAll { (a: SetM<String>, b: SetM<String>, c: SetM<String>) in
             Law<SetM<String>>.isAssociative(a,b,c,<>+)
@@ -167,6 +177,7 @@ final class SemigroupTests: XCTestCase {
 		("testString",testString),
 		("testUpdate",testUpdate),
         ("testBoolSemiring",testBoolSemiring),
+        ("testIntSemiring",testIntSemiring),
         ("testSetMSemiring",testSetMSemiring),
         ("testTropicalSemiring",testTropicalSemiring),
 	]
