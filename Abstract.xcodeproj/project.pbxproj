@@ -208,6 +208,10 @@
 		38F423D120A888C30078DF03 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423CF20A888C30078DF03 /* Coproduct.swift */; };
 		38F423D220A888C30078DF03 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423CF20A888C30078DF03 /* Coproduct.swift */; };
 		38F423D320A888C30078DF03 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423CF20A888C30078DF03 /* Coproduct.swift */; };
+		38F423D520A89D030078DF03 /* Inclusive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423D420A89D030078DF03 /* Inclusive.swift */; };
+		38F423D620A89D030078DF03 /* Inclusive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423D420A89D030078DF03 /* Inclusive.swift */; };
+		38F423D720A89D030078DF03 /* Inclusive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423D420A89D030078DF03 /* Inclusive.swift */; };
+		38F423D820A89D030078DF03 /* Inclusive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423D420A89D030078DF03 /* Inclusive.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,6 +333,7 @@
 		38E8CCDB20A2FC40007FB201 /* SetM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetM.swift; sourceTree = "<group>"; };
 		38F423C520A875A90078DF03 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		38F423CF20A888C30078DF03 /* Coproduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
+		38F423D420A89D030078DF03 /* Inclusive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inclusive.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,6 +593,7 @@
 				3812571D2080827B00CD625D /* Function.swift */,
 				38F423C520A875A90078DF03 /* Product.swift */,
 				38F423CF20A888C30078DF03 /* Coproduct.swift */,
+				38F423D420A89D030078DF03 /* Inclusive.swift */,
 			);
 			path = Algebraic;
 			sourceTree = "<group>";
@@ -863,6 +869,7 @@
 				0950FEEE1EFC5C7900513DF7 /* Predicate.swift in Sources */,
 				0950FEEF1EFC5C7900513DF7 /* Comparison.swift in Sources */,
 				0950FEF01EFC5C7900513DF7 /* Adapters.swift in Sources */,
+				38F423D620A89D030078DF03 /* Inclusive.swift in Sources */,
 				0950FEF11EFC5C7900513DF7 /* Isomorphism.swift in Sources */,
 				0950FEF21EFC5C7900513DF7 /* Magma.swift in Sources */,
 				0950FEF31EFC5C7900513DF7 /* Wrapper.swift in Sources */,
@@ -928,6 +935,7 @@
 				0950FF321F09488B00513DF7 /* BoundedSemilattice.swift in Sources */,
 				0950FF331F09488B00513DF7 /* CommutativeMonoid.swift in Sources */,
 				0950FF341F09488B00513DF7 /* Homomorphism.swift in Sources */,
+				38F423D720A89D030078DF03 /* Inclusive.swift in Sources */,
 				0950FF351F09488B00513DF7 /* Isomorphism.swift in Sources */,
 				0950FF361F09488B00513DF7 /* Law.swift in Sources */,
 				0950FF371F09488B00513DF7 /* Magma.swift in Sources */,
@@ -993,6 +1001,7 @@
 				0950FF4F1F094A2C00513DF7 /* BoundedSemilattice.swift in Sources */,
 				0950FF501F094A2C00513DF7 /* CommutativeMonoid.swift in Sources */,
 				0950FF511F094A2C00513DF7 /* Homomorphism.swift in Sources */,
+				38F423D820A89D030078DF03 /* Inclusive.swift in Sources */,
 				0950FF521F094A2C00513DF7 /* Isomorphism.swift in Sources */,
 				0950FF531F094A2C00513DF7 /* Law.swift in Sources */,
 				0950FF541F094A2C00513DF7 /* Magma.swift in Sources */,
@@ -1039,6 +1048,7 @@
 				0950FF791F094AA100513DF7 /* BoundedSemilattice.swift in Sources */,
 				0950FF7A1F094AA100513DF7 /* CommutativeMonoid.swift in Sources */,
 				0950FF7B1F094AA100513DF7 /* Homomorphism.swift in Sources */,
+				38F423D520A89D030078DF03 /* Inclusive.swift in Sources */,
 				0950FF7C1F094AA100513DF7 /* Isomorphism.swift in Sources */,
 				0950FF7D1F094AA100513DF7 /* Law.swift in Sources */,
 				0950FF7E1F094AA100513DF7 /* Magma.swift in Sources */,

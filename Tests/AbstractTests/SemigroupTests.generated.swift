@@ -44,6 +44,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testInclusive() {
+		property("Inclusive is a Semigroup") <- forAll { (a: Inclusive<TestStructure,TestStructure>, b: Inclusive<TestStructure,TestStructure>, c: Inclusive<TestStructure,TestStructure>) in
+			Law<Inclusive<TestStructure,TestStructure>>.isAssociative(a,b,c)
+		}
+	}
+
 	func testLast() {
 		property("Last is a Semigroup") <- forAll { (a: Last<Int>, b: Last<Int>, c: Last<Int>) in
 			Law<Last<Int>>.isAssociative(a,b,c)
@@ -170,6 +176,7 @@ final class SemigroupTests: XCTestCase {
 		("testCoproduct",testCoproduct),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
+		("testInclusive",testInclusive),
 		("testLast",testLast),
 		("testMax",testMax),
 		("testMin",testMin),

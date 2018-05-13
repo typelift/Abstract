@@ -168,3 +168,13 @@ extension Coproduct: Arbitrary where A: Arbitrary, B: Arbitrary {
         ])
     }
 }
+
+extension Inclusive: Arbitrary where A: Arbitrary, B: Arbitrary {
+    public static var arbitrary: Gen<Inclusive<A, B>> {
+        return Gen.one(of: [
+            A.arbitrary.map(Inclusive.left),
+            Product<A,B>.arbitrary.map { Inclusive.center($0.first, $0.second) },
+            B.arbitrary.map(Inclusive.right)
+            ])
+    }
+}

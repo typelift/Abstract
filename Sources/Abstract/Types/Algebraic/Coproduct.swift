@@ -7,20 +7,20 @@ public enum Coproduct<A,B> {
     case left(A)
     case right(B)
     
-    public func flipped() -> Coproduct<B,A> {
+    public func flip() -> Coproduct<B,A> {
         switch self {
-        case .left(let a):
+        case let .left(a):
             return .right(a)
-        case .right(let b):
+        case let .right(b):
             return .left(b)
         }
     }
     
     public func fold <T> (onLeft: (A) -> T, onRight: (B) -> T) -> T {
         switch self {
-        case .left(let a):
+        case let .left(a):
             return onLeft(a)
-        case .right(let b):
+        case let .right(b):
             return onRight(b)
         }
     }
