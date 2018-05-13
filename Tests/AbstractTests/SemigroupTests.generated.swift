@@ -110,6 +110,37 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+
+    func testBool() {
+        property("Bool is a Semigroup in regard to the Additive operation") <- forAll { (a: Bool, b: Bool, c: Bool) in
+            Law<Bool>.isAssociative(a,b,c,<>+)
+        }
+
+        property("Bool is a Semigroup in regard to the Multiplicative operation") <- forAll { (a: Bool, b: Bool, c: Bool) in
+            Law<Bool>.isAssociative(a,b,c,<>*)
+        }
+    }
+
+    func testSetM() {
+        property("SetM is a Semigroup in regard to the Additive operation") <- forAll { (a: SetM<String>, b: SetM<String>, c: SetM<String>) in
+            Law<SetM<String>>.isAssociative(a,b,c,<>+)
+        }
+
+        property("SetM is a Semigroup in regard to the Multiplicative operation") <- forAll { (a: SetM<String>, b: SetM<String>, c: SetM<String>) in
+            Law<SetM<String>>.isAssociative(a,b,c,<>*)
+        }
+    }
+
+    func testTropical() {
+        property("Tropical is a Semigroup in regard to the Additive operation") <- forAll { (a: Tropical<Int>, b: Tropical<Int>, c: Tropical<Int>) in
+            Law<Tropical<Int>>.isAssociative(a,b,c,<>+)
+        }
+
+        property("Tropical is a Semigroup in regard to the Multiplicative operation") <- forAll { (a: Tropical<Int>, b: Tropical<Int>, c: Tropical<Int>) in
+            Law<Tropical<Int>>.isAssociative(a,b,c,<>*)
+        }
+    }
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
@@ -128,5 +159,8 @@ final class SemigroupTests: XCTestCase {
 		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),
+        ("testBool",testBool),
+        ("testSetM",testSetM),
+        ("testTropical",testTropical),
 	]
 }

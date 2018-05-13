@@ -92,6 +92,37 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+
+    func testBool() {
+        property("Bool is a Monoid in regard to the Additive operation") <- forAll { (a: Bool) in
+            Law<Bool>.isNeutralToEmpty(a,.zero,<>+)
+        }
+
+        property("Bool is a Monoid in regard to the Additive operation") <- forAll { (a: Bool) in
+            Law<Bool>.isNeutralToEmpty(a,.one,<>*)
+        }
+    }
+
+    func testSetM() {
+        property("SetM is a Monoid in regard to the Additive operation") <- forAll { (a: SetM<String>) in
+            Law<SetM<String>>.isNeutralToEmpty(a,.zero,<>+)
+        }
+
+        property("SetM is a Monoid in regard to the Multiplicative operation") <- forAll { (a: SetM<String>) in
+            Law<SetM<String>>.isNeutralToEmpty(a,.one,<>*)
+        }
+    }
+
+    func testTropical() {
+        property("Tropical is a Monoid in regard to the Additive operation") <- forAll { (a: Tropical<Int>) in
+            Law<Tropical<Int>>.isNeutralToEmpty(a,.zero,<>+)
+        }
+
+        property("Tropical is a Monoid in regard to the Multiplicative operation") <- forAll { (a: Tropical<Int>) in
+            Law<Tropical<Int>>.isNeutralToEmpty(a,.one,<>*)
+        }
+    }
+
 	static var allTests = [
 		("testAdd",testAdd),
 		("testAnd",testAnd),
@@ -107,5 +138,8 @@ final class MonoidTests: XCTestCase {
 		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),
+        ("testBool",testBool),
+        ("testSetM",testSetM),
+        ("testTropical",testTropical),
 	]
 }

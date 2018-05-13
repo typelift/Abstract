@@ -12,14 +12,26 @@ a <> b = b <> a
     
 public protocol CommutativeMonoid: Monoid {}
 
+extension Law {
+    public static func isCommutative(_ a: Element, _ b: Element, _ operation: (Element,Element) -> Element) -> Bool {
+        return operation(a,b) == operation(b,a)
+    }
+}
+
 extension Law where Element: CommutativeMonoid {
 	public static func isCommutative(_ a: Element, _ b: Element) -> Bool {
-		return (a <> b) == (b <> a)
+		return isCommutative(a, b, <>)
 	}
+}
+
+extension LawInContext {
+    public static func isCommutative(_ a: Element, _ b: Element, _ operation: (Element,Element) -> Element) -> (Element.Context) -> Bool {
+        return operation(a,b) == operation(b,a)
+    }
 }
 
 extension LawInContext where Element: CommutativeMonoid {
 	public static func isCommutative(_ a: Element, _ b: Element) -> (Element.Context) -> Bool {
-		return (a <> b) == (b <> a)
+		return isCommutative(a, b, <>)
 	}
 }

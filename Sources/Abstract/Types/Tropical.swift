@@ -1,5 +1,3 @@
-import Foundation
-
 /*:
 A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring is called tropical to honor the Brazillian mathematician, Imre Simon, who founded tropical mathematics.
 */
@@ -8,7 +6,7 @@ A Tropical semiring is just a fancy name for a (min, +)-semiring. This semiring 
 // sourcery: arbitrary
 // sourcery: constrainedArbitraryParameter = "A"
 // sourcery: arbitraryGenericParameterProtocols = "ComparableToTop & Addable"
-public struct Tropical<A>: Wrapper, Semiring where A: ComparableToTop & Addable {
+public struct Tropical<A>: Wrapper, AutoSemiringWrapper where A: ComparableToTop & Addable {
 	public typealias WrappedType = A
 	public typealias Additive = Min<A>
 	public typealias Multiplicative = Add<A>

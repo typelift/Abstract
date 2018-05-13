@@ -1,11 +1,9 @@
 /*:
 # Semiring
 
-A Semiring is an algebraic structure consisting of a type with 2 composition operations like the one from Magma, called "Addition" and "Multiplication". They refer to two distinct algebraic strutures, the first (we can call it `Additive`) being a Commutative Monoid, and the second (we can call it `Multiplicative`) being a Monoid.
+A Semiring is an algebraic structure consisting of a type with 2 composition operations like the one from Magma, called "Addition" and "Multiplication". They refer to two distinct algebraic strutures, the first (we can call it `Additive`) being a Commutative Monoid, and the second (we can call it `Multiplicative`) being a Monoid. Semiring "merges" the two structures into one.
 
-We can define a Semiring as a protocol with 2 associated types, each conforming to the required protocol, and two operations, each referring to the underlying representing type. Let's use the `<>+` operator for `Additive` and the `<>*` operator for `Multiplicative`. Let's also call `zero` the `empty` distinguished element for `Additive`, and `one` the `empty` distinguished element for `Multiplicative`.
-
-In addition to the basic requirements for the underlying types (Commutative Monoid and Monoid), there are 2 more laws that must hold:
+Each operation must follow the respective laws in respect to its `empty` value. In addition, 2 more laws that must hold:
 
 - multiplication must "distribute" over addition, both left and right:
 	- a <>* (b <>+ c) = (a <>* b) <>+ (a <>* c)
@@ -22,9 +20,6 @@ infix operator <>+ : AdditionPrecedence
 infix operator <>* : MultiplicationPrecedence
 
 public protocol Semiring {
-	associatedtype Additive: CommutativeMonoid
-	associatedtype Multiplicative: Monoid
-
 	static func <>+(left: Self, right: Self) -> Self
 	static func <>*(left: Self, right: Self) -> Self
 
@@ -60,10 +55,23 @@ extension LawInContext where Element: Semiring {
 }
 
 /*:
-Interestingly, if for type `A` both `Additive` and `Multiplicative` are `Wrapper` and the `WrappedType` type is `A` itself, we can derive the implementation of all the functions:
+## AutoSemiring_
+
+`AutoSemiring_` protocols are convience protocols that, other than declaring conformance to `Semiring`, adds 2 associated types, one for `Additive` and one for `Multiplicative`. This is beacuse we can derive the implementation of `Semiring` methods if we can make assertions on the underlying types involved.
+ */
+
+/*:
+## AutoSemiringWrapped
+
+If for type `A` both `Additive` and `Multiplicative` are `Wrapper`, and the `WrappedType` type is `A` itself, we can derive the implementation of all the functions like the following:
 */
 
-extension Semiring where Additive: Wrapper, Additive.WrappedType == Self {
+public protocol AutoSemiringWrapped: Semiring {
+	associatedtype Additive: CommutativeMonoid & Wrapper where Additive.WrappedType == Self
+	associatedtype Multiplicative: Monoid & Wrapper where Multiplicative.WrappedType == Self
+}
+
+extension AutoSemiringWrapped {
 	public static func <>+(left: Self, right: Self) -> Self {
 		return (Additive.init(left) <> Additive.init(right)).unwrap
 	}
@@ -71,9 +79,7 @@ extension Semiring where Additive: Wrapper, Additive.WrappedType == Self {
 	public static var zero: Self {
 		return Additive.empty.unwrap
 	}
-}
 
-extension Semiring where Multiplicative: Wrapper, Multiplicative.WrappedType == Self {
 	public static func <>*(left: Self, right: Self) -> Self {
 		return (Multiplicative.init(left) <> Multiplicative.init(right)).unwrap
 	}
@@ -84,10 +90,17 @@ extension Semiring where Multiplicative: Wrapper, Multiplicative.WrappedType == 
 }
 
 /*:
-If instead the semiring is a wrapper of `A`, and both its additive and multiplicative are wrappers of `A`, we can still derive an abstract implementation for the functions:
+## AutoSemiringWrapper
+
+If instead the semiring is a wrapper of `A`, and both `Additive` and `Multiplicative` are wrappers of `A`, we can still derive a generic implementation for the functions:
 */
 
-extension Semiring where Self: Wrapper, Additive: Wrapper, Self.WrappedType == Additive.WrappedType {
+public protocol AutoSemiringWrapper: Semiring, Wrapper {
+	associatedtype Additive: CommutativeMonoid & Wrapper where Additive.WrappedType == Self.WrappedType
+	associatedtype Multiplicative: Monoid & Wrapper where Multiplicative.WrappedType == Self.WrappedType
+}
+
+extension AutoSemiringWrapper {
 	public static func <>+(left: Self, right: Self) -> Self {
 		return Self.init((Additive.init(left.unwrap) <> Additive.init(right.unwrap)).unwrap)
 	}
@@ -95,9 +108,7 @@ extension Semiring where Self: Wrapper, Additive: Wrapper, Self.WrappedType == A
 	public static var zero: Self {
 		return Self.init(Additive.empty.unwrap)
 	}
-}
 
-extension Semiring where Self: Wrapper, Multiplicative: Wrapper, Self.WrappedType == Multiplicative.WrappedType {
 	public static func <>*(left: Self, right: Self) -> Self {
 		return Self.init((Multiplicative.init(left.unwrap) <> Multiplicative.init(right.unwrap)).unwrap)
 	}

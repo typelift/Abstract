@@ -56,10 +56,6 @@ extension Function: CommutativeMonoid where B: CommutativeMonoid {}
 extension Function: BoundedSemilattice where B: BoundedSemilattice {}
 
 extension Function: Semiring where B: Semiring {
-	public typealias Additive = Function<A,B.Additive>
-
-	public typealias Multiplicative = Function<A,B.Multiplicative>
-
 	public static func <>+ (left: Function<A, B>, right: Function<A, B>) -> Function<A, B> {
 		return Function { left.call($0) <>+ right.call($0) }
 	}

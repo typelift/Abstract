@@ -12,14 +12,26 @@ To put it simply: (a <> b) <> c = a <> (b <> c)
 
 public protocol Semigroup: Magma {}
 
+extension Law {
+    public static func isAssociative(_ a: Element, _ b: Element, _ c: Element, _ operation: (Element,Element) -> Element) -> Bool {
+        return operation(operation(a,b),c) == operation(a,operation(b,c))
+    }
+}
+
 extension Law where Element: Semigroup {
 	public static func isAssociative(_ a: Element, _ b: Element, _ c: Element) -> Bool {
-		return (a <> b <> c) == (a <> (b <> c))
+		return isAssociative(a, b, c, <>)
 	}
+}
+
+extension LawInContext {
+    public static func isAssociative(_ a: Element, _ b: Element, _ c: Element, _ operation: (Element,Element) -> Element) -> (Element.Context) -> Bool {
+        return operation(operation(a,b),c) == operation(a,operation(b,c))
+    }
 }
 
 extension LawInContext where Element: Semigroup {
 	public static func isAssociative(_ a: Element, _ b: Element, _ c: Element) -> (Element.Context) -> Bool {
-		return (a <> b <> c) == (a <> (b <> c))
+        return isAssociative(a, b, c, <>)
 	}
 }

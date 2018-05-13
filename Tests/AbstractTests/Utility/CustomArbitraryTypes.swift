@@ -5,6 +5,14 @@ import SwiftCheck
 	import Operadics
 #endif
 
+extension Wrapper where WrappedType: Arbitrary {
+    public static var arbitrary: Gen<Self> {
+        return Gen<Self>.compose {
+            Self.init($0.generate(using: WrappedType.arbitrary))
+        }
+    }
+}
+
 extension CheckerArguments {
 	static func with(_ left: Int, _ right: Int, _ size: Int) -> CheckerArguments {
 		return CheckerArguments(
@@ -148,6 +156,17 @@ extension Multiset: Arbitrary where A: Arbitrary {
 	public static var arbitrary: Gen<Multiset<A>> {
 		return Gen<Multiset<A>>.compose {
 			Multiset<A>($0.generate(using: Array<A>.arbitrary))
+		}
+	}
+}
+
+extension SetM: Arbitrary where A: Arbitrary {
+	public static var arbitrary: Gen<SetM<A>> {
+		return Gen<SetM<A>>.compose {
+			SetM<A>($0.generate(
+				using: Set.arbitrary.scale {
+					Swift.min($0,5) /// Without this, tests are too slow
+			}))
 		}
 	}
 }
