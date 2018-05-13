@@ -204,6 +204,10 @@
 		38F423C720A875A90078DF03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423C520A875A90078DF03 /* Product.swift */; };
 		38F423C820A875A90078DF03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423C520A875A90078DF03 /* Product.swift */; };
 		38F423C920A875A90078DF03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423C520A875A90078DF03 /* Product.swift */; };
+		38F423D020A888C30078DF03 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423CF20A888C30078DF03 /* Coproduct.swift */; };
+		38F423D120A888C30078DF03 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423CF20A888C30078DF03 /* Coproduct.swift */; };
+		38F423D220A888C30078DF03 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423CF20A888C30078DF03 /* Coproduct.swift */; };
+		38F423D320A888C30078DF03 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F423CF20A888C30078DF03 /* Coproduct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +328,7 @@
 		38DFE66320826CBB00489BDF /* FunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FunctionTests.swift; path = Tests/AbstractTests/FunctionTests.swift; sourceTree = SOURCE_ROOT; };
 		38E8CCDB20A2FC40007FB201 /* SetM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetM.swift; sourceTree = "<group>"; };
 		38F423C520A875A90078DF03 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		38F423CF20A888C30078DF03 /* Coproduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +419,7 @@
 				381256F020807B8500CD625D /* Add.swift */,
 				3812570420807E8100CD625D /* And.swift */,
 				3812573C20808ECD00CD625D /* Bool.swift */,
+				381257182080803000CD625D /* EndoFunction.swift */,
 				3812570E20807FB500CD625D /* First.swift */,
 				3812571320807FF800CD625D /* Last.swift */,
 				381256FA20807D7B00CD625D /* Max.swift */,
@@ -579,9 +585,9 @@
 		38F423C420A8758A0078DF03 /* Algebraic */ = {
 			isa = PBXGroup;
 			children = (
-				381257182080803000CD625D /* EndoFunction.swift */,
 				3812571D2080827B00CD625D /* Function.swift */,
 				38F423C520A875A90078DF03 /* Product.swift */,
+				38F423CF20A888C30078DF03 /* Coproduct.swift */,
 			);
 			path = Algebraic;
 			sourceTree = "<group>";
@@ -883,6 +889,7 @@
 				3812573E20808ECD00CD625D /* Bool.swift in Sources */,
 				3833AC7B20163E5F00CE907E /* WrapperEquatable.generated.swift in Sources */,
 				0950FEF71EFC5C7900513DF7 /* Semigroup.swift in Sources */,
+				38F423D120A888C30078DF03 /* Coproduct.swift in Sources */,
 				3833AC7520161FD600CE907E /* Operators.swift in Sources */,
 				382278F72099D7CC003E5801 /* NonEmptyArray+FreeSemigroup.swift in Sources */,
 				0950FEF81EFC5C7900513DF7 /* CommutativeMonoid.swift in Sources */,
@@ -947,6 +954,7 @@
 				3812573F20808ECD00CD625D /* Bool.swift in Sources */,
 				3833AC7C20163E5F00CE907E /* WrapperEquatable.generated.swift in Sources */,
 				0950FF3B1F09488B00513DF7 /* Wrapper.swift in Sources */,
+				38F423D220A888C30078DF03 /* Coproduct.swift in Sources */,
 				3833AC7620161FD600CE907E /* Operators.swift in Sources */,
 				382278F82099D7CC003E5801 /* NonEmptyArray+FreeSemigroup.swift in Sources */,
 				0950FF3C1F09488B00513DF7 /* Collections.swift in Sources */,
@@ -1011,6 +1019,7 @@
 				3812574020808ECD00CD625D /* Bool.swift in Sources */,
 				3833AC7D20163E5F00CE907E /* WrapperEquatable.generated.swift in Sources */,
 				0950FF581F094A2C00513DF7 /* Wrapper.swift in Sources */,
+				38F423D320A888C30078DF03 /* Coproduct.swift in Sources */,
 				3833AC7720161FD600CE907E /* Operators.swift in Sources */,
 				382278F92099D7CC003E5801 /* NonEmptyArray+FreeSemigroup.swift in Sources */,
 				0950FF591F094A2C00513DF7 /* Collections.swift in Sources */,
@@ -1056,6 +1065,7 @@
 				3812573D20808ECD00CD625D /* Bool.swift in Sources */,
 				3833AC7A20163E5F00CE907E /* WrapperEquatable.generated.swift in Sources */,
 				0950FF821F094AA100513DF7 /* Wrapper.swift in Sources */,
+				38F423D020A888C30078DF03 /* Coproduct.swift in Sources */,
 				3833AC7420161FD600CE907E /* Operators.swift in Sources */,
 				382278F62099D7CC003E5801 /* NonEmptyArray+FreeSemigroup.swift in Sources */,
 				0950FF831F094AA100513DF7 /* Collections.swift in Sources */,

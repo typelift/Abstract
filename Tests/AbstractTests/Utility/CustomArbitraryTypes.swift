@@ -160,5 +160,11 @@ extension Product: Arbitrary where A: Arbitrary, B: Arbitrary {
     }
 }
 
-
-
+extension Coproduct: Arbitrary where A: Arbitrary, B: Arbitrary {
+    public static var arbitrary: Gen<Coproduct<A, B>> {
+        return Gen.one(of: [
+            A.arbitrary.map(Coproduct.left),
+            B.arbitrary.map(Coproduct.right)
+        ])
+    }
+}
