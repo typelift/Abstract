@@ -109,16 +109,6 @@ final class MonoidTests: XCTestCase {
         }
     }
 
-    func testIntSemiring() {
-        property("Int is a Monoid in regard to the Additive operation") <- forAll { (a: Int) in
-            Law<Int>.isNeutralToEmpty(a,.zero,<>+)
-        }
-
-        property("Int is a Monoid in regard to the Additive operation") <- forAll { (a: Int) in
-            Law<Int>.isNeutralToEmpty(a,.one,<>*)
-        }
-    }
-
     func testProductSemiring() {
         property("Product is a Monoid in regard to the Additive operation") <- forAll { (a: Product<TestStructure,TestStructure>) in
             Law<Product<TestStructure,TestStructure>>.isNeutralToEmpty(a,.zero,<>+)
@@ -166,7 +156,6 @@ final class MonoidTests: XCTestCase {
 		("testString",testString),
 		("testUpdate",testUpdate),
         ("testBoolSemiring",testBoolSemiring),
-        ("testIntSemiring",testIntSemiring),
         ("testProductSemiring",testProductSemiring),
         ("testSetMSemiring",testSetMSemiring),
         ("testTropicalSemiring",testTropicalSemiring),
