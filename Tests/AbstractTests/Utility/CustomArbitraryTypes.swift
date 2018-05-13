@@ -20,7 +20,7 @@ extension CheckerArguments {
 	}
 }
 
-struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
+struct TestStructure: Arbitrary, Equatable, BoundedSemilattice, Semiring {
 	let get: Max<Int>
 	
 	init(_ value: Int) {
@@ -30,7 +30,11 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	static var arbitrary: Gen<TestStructure> {
 		return Int.arbitrary.map(TestStructure.init)
 	}
-	
+
+    static func == (lhs: TestStructure, rhs: TestStructure) -> Bool {
+        return lhs.get == rhs.get
+    }
+
 	static func <> (lhs: TestStructure, rhs: TestStructure) -> TestStructure {
 		return TestStructure((lhs.get <> rhs.get).unwrap)
 	}
@@ -38,10 +42,22 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	static var empty: TestStructure {
 		return TestStructure(Max<Int>.empty.unwrap)
 	}
-	
-	static func == (lhs: TestStructure, rhs: TestStructure) -> Bool {
-		return lhs.get == rhs.get
-	}
+    
+    static func <>+ (lhs: TestStructure, rhs: TestStructure) -> TestStructure {
+        return TestStructure(lhs.get.unwrap + rhs.get.unwrap)
+    }
+    
+    static var zero: TestStructure {
+        return TestStructure(0)
+    }
+    
+    static func <>* (lhs: TestStructure, rhs: TestStructure) -> TestStructure {
+        return TestStructure(lhs.get.unwrap * rhs.get.unwrap)
+    }
+    
+    static var one: TestStructure {
+        return TestStructure(1)
+    }
 }
 
 struct TestFunction: Arbitrary, BoundedSemilattice, EquatableInContext {
@@ -67,41 +83,6 @@ struct TestFunction: Arbitrary, BoundedSemilattice, EquatableInContext {
 	}
 
 	static func == (lhs: TestFunction, rhs: TestFunction) -> (Context) -> Bool {
-		return lhs.get == rhs.get
-	}
-}
-
-struct TestSemiring: Arbitrary, Semiring, Equatable {
-	typealias Additive = Bool.Additive
-	typealias Multiplicative = Bool.Multiplicative
-
-	let get: Bool
-
-	init(_ value: Bool) {
-		self.get = value
-	}
-
-	static var arbitrary: Gen<TestSemiring> {
-		return Bool.arbitrary.map(TestSemiring.init)
-	}
-
-	static func <>+(lhs: TestSemiring, rhs: TestSemiring) -> TestSemiring {
-		return TestSemiring(lhs.get <>+ rhs.get)
-	}
-
-	static func <>*(lhs: TestSemiring, rhs: TestSemiring) -> TestSemiring {
-		return TestSemiring(lhs.get <>* rhs.get)
-	}
-
-	static var zero: TestSemiring {
-		return TestSemiring(Bool.zero)
-	}
-
-	static var one: TestSemiring {
-		return TestSemiring(Bool.one)
-	}
-
-	static func == (lhs: TestSemiring, rhs: TestSemiring) -> Bool {
 		return lhs.get == rhs.get
 	}
 }
