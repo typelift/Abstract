@@ -75,6 +75,12 @@ final class CommutativeMonoidTests: XCTestCase {
         }
     }
 
+    func testProductSemiring() {
+        property("Product is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: Product<TestStructure,TestStructure>, b: Product<TestStructure,TestStructure>) in
+            Law<Product<TestStructure,TestStructure>>.isCommutative(a,b,<>+)
+        }
+    }
+
     func testSetMSemiring() {
         property("SetM is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: SetM<String>, b: SetM<String>) in
             Law<SetM<String>>.isCommutative(a,b,<>+)
@@ -100,6 +106,7 @@ final class CommutativeMonoidTests: XCTestCase {
 		("testSet",testSet),
         ("testBoolSemiring",testBoolSemiring),
         ("testIntSemiring",testIntSemiring),
+        ("testProductSemiring",testProductSemiring),
         ("testSetMSemiring",testSetMSemiring),
         ("testTropicalSemiring",testTropicalSemiring),
 	]
