@@ -420,7 +420,6 @@
 		381256E820807A9F00CD625D /* Types */ = {
 			isa = PBXGroup;
 			children = (
-				38F423C420A8758A0078DF03 /* Algebraic */,
 				381256F020807B8500CD625D /* Add.swift */,
 				3812570420807E8100CD625D /* And.swift */,
 				3812573C20808ECD00CD625D /* Bool.swift */,
@@ -436,6 +435,7 @@
 				38125727208084F900CD625D /* String.swift */,
 				3812574120808EE200CD625D /* Tropical.swift */,
 				38125736208085C400CD625D /* Update.swift */,
+				38F423C420A8758A0078DF03 /* Algebraic */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -590,10 +590,10 @@
 		38F423C420A8758A0078DF03 /* Algebraic */ = {
 			isa = PBXGroup;
 			children = (
-				3812571D2080827B00CD625D /* Function.swift */,
-				38F423C520A875A90078DF03 /* Product.swift */,
 				38F423CF20A888C30078DF03 /* Coproduct.swift */,
+				3812571D2080827B00CD625D /* Function.swift */,
 				38F423D420A89D030078DF03 /* Inclusive.swift */,
+				38F423C520A875A90078DF03 /* Product.swift */,
 			);
 			path = Algebraic;
 			sourceTree = "<group>";

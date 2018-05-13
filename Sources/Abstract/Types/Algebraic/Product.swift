@@ -11,6 +11,14 @@ public struct Product<A,B> {
         self.first = first
         self.second = second
     }
+    
+    public func flip() -> Product<B,A> {
+        return Product<B,A>(second,first)
+    }
+    
+    public func fold <T> (_ onBoth: (A,B) -> T) -> T {
+        return onBoth(first,second)
+    }
 }
 
 extension Product: Equatable where A: Equatable, B: Equatable {
