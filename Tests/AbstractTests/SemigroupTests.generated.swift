@@ -26,6 +26,12 @@ final class SemigroupTests: XCTestCase {
 		}
 	}
 
+	func testCoproduct() {
+		property("Coproduct is a Semigroup") <- forAll { (a: Coproduct<TestStructure,TestStructure>, b: Coproduct<TestStructure,TestStructure>, c: Coproduct<TestStructure,TestStructure>) in
+			Law<Coproduct<TestStructure,TestStructure>>.isAssociative(a,b,c)
+		}
+	}
+
 	func testEndofunction() {
 		property("Endofunction is a Semigroup") <- forAll { (a: Endofunction<Int>, b: Endofunction<Int>, c: Endofunction<Int>, context: Int) in
 			LawInContext<Endofunction<Int>>.isAssociative(a,b,c)(context)
@@ -161,6 +167,7 @@ final class SemigroupTests: XCTestCase {
 		("testAdd",testAdd),
 		("testAnd",testAnd),
 		("testArray",testArray),
+		("testCoproduct",testCoproduct),
 		("testEndofunction",testEndofunction),
 		("testFirst",testFirst),
 		("testLast",testLast),
