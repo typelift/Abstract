@@ -34,12 +34,12 @@ final class FunctionTests: XCTestCase {
 	}
 
 	func testSemiring() {
-		property("Function is a Semiring: Distributive") <- forAll { (a: Function<Int,TestSemiring>, b: Function<Int,TestSemiring>, c: Function<Int,TestSemiring>, context: Int) in
-			LawInContext<Function<Int,TestSemiring>>.multiplicationIsDistributiveOverAddition(a,b,c)(context)
+		property("Function is a Semiring: Distributive") <- forAll { (a: Function<Int,TestStructure>, b: Function<Int,TestStructure>, c: Function<Int,TestStructure>, context: Int) in
+			LawInContext<Function<Int,TestStructure>>.multiplicationIsDistributiveOverAddition(a,b,c)(context)
 		}
 
-		property("Function is a Semiring: Annihilation") <- forAll { (a: Function<Int,TestSemiring>, context: Int) in
-			LawInContext<Function<Int,TestSemiring>>.zeroAnnihiliatesTheMultiplicative(a)(context)
+		property("Function is a Semiring: Annihilation") <- forAll { (a: Function<Int,TestStructure>, context: Int) in
+			LawInContext<Function<Int,TestStructure>>.zeroAnnihiliatesTheMultiplicative(a)(context)
 		}
 	}
 

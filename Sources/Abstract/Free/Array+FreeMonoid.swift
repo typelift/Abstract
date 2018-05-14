@@ -8,8 +8,8 @@ extension Array: Monoid {
 		return []
 	}
 
-	public static func <> (left: Array, right: Array) -> Array {
-		return left + right
+	public static func <> (lhs: Array, rhs: Array) -> Array {
+		return lhs + rhs
 	}
 }
 

@@ -24,14 +24,14 @@ extension Ordering {
 }
 
 extension Ordering: Semigroup {
-	public static func <> (left: Ordering, right: Ordering) -> Ordering {
-		switch (left,right) {
+	public static func <> (lhs: Ordering, rhs: Ordering) -> Ordering {
+		switch (lhs,rhs) {
 		case (.lowerThan,_):
-			return left
+			return lhs
 		case (.equalTo,_):
-			return right
+			return rhs
 		case (.greaterThan,_):
-			return left
+			return lhs
 		}
 	}
 }

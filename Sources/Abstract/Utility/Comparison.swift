@@ -10,10 +10,10 @@ public typealias Comparison<A> = Function<(A,A),Ordering>
 
 extension Comparable {
 	public static var comparison: Comparison<Self> {
-		return .init { (left, right) in
-			if left < right {
+		return .init { (lhs, rhs) in
+			if lhs < rhs {
 				return .lowerThan
-			} else if left > right {
+			} else if lhs > rhs {
 				return .greaterThan
 			} else {
 				return .equalTo

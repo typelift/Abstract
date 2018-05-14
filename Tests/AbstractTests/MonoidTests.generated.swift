@@ -74,6 +74,12 @@ final class MonoidTests: XCTestCase {
 		}
 	}
 
+	func testProduct() {
+		property("Product is a Monoid") <- forAll { (a: Product<TestStructure,TestStructure>) in
+			Law<Product<TestStructure,TestStructure>>.isNeutralToEmpty(a)
+		}
+	}
+
 	func testSet() {
 		property("Set is a Monoid") <- forAll { (a: Set<Int>) in
 			Law<Set<Int>>.isNeutralToEmpty(a)
@@ -93,7 +99,7 @@ final class MonoidTests: XCTestCase {
 	}
 
 
-    func testBool() {
+    func testBoolSemiring() {
         property("Bool is a Monoid in regard to the Additive operation") <- forAll { (a: Bool) in
             Law<Bool>.isNeutralToEmpty(a,.zero,<>+)
         }
@@ -103,7 +109,17 @@ final class MonoidTests: XCTestCase {
         }
     }
 
-    func testSetM() {
+    func testProductSemiring() {
+        property("Product is a Monoid in regard to the Additive operation") <- forAll { (a: Product<TestStructure,TestStructure>) in
+            Law<Product<TestStructure,TestStructure>>.isNeutralToEmpty(a,.zero,<>+)
+        }
+
+        property("Product is a Monoid in regard to the Multiplicative operation") <- forAll { (a: Product<TestStructure,TestStructure>) in
+            Law<Product<TestStructure,TestStructure>>.isNeutralToEmpty(a,.one,<>*)
+        }
+    }
+
+    func testSetMSemiring() {
         property("SetM is a Monoid in regard to the Additive operation") <- forAll { (a: SetM<String>) in
             Law<SetM<String>>.isNeutralToEmpty(a,.zero,<>+)
         }
@@ -113,7 +129,7 @@ final class MonoidTests: XCTestCase {
         }
     }
 
-    func testTropical() {
+    func testTropicalSemiring() {
         property("Tropical is a Monoid in regard to the Additive operation") <- forAll { (a: Tropical<Int>) in
             Law<Tropical<Int>>.isNeutralToEmpty(a,.zero,<>+)
         }
@@ -135,11 +151,13 @@ final class MonoidTests: XCTestCase {
 		("testOptional",testOptional),
 		("testOr",testOr),
 		("testOrdering",testOrdering),
+		("testProduct",testProduct),
 		("testSet",testSet),
 		("testString",testString),
 		("testUpdate",testUpdate),
-        ("testBool",testBool),
-        ("testSetM",testSetM),
-        ("testTropical",testTropical),
+        ("testBoolSemiring",testBoolSemiring),
+        ("testProductSemiring",testProductSemiring),
+        ("testSetMSemiring",testSetMSemiring),
+        ("testTropicalSemiring",testTropicalSemiring),
 	]
 }

@@ -89,8 +89,8 @@ extension Multiset: CommutativeMonoid {
 		return []
 	}
 
-	public static func <> (left: Multiset, right: Multiset) -> Multiset {
-		return left.disjointUnion(right)
+	public static func <> (lhs: Multiset, rhs: Multiset) -> Multiset {
+		return lhs.disjointUnion(rhs)
 	}
 }
 

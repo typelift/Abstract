@@ -7,7 +7,7 @@ Some extensions to the standard library, to make for easier implementations of a
 //: ------
 
 public protocol Addable {
-	static func add (_ left: Self, _ right: Self) -> Self
+	static func add (_ lhs: Self, _ rhs: Self) -> Self
 	static var zero: Self { get }
 }
 
@@ -23,14 +23,14 @@ Note that this special definition of `add` has to be given for any type that is 
 */
 
 extension Int: Addable {
-	public static func add(_ left: Int, _ right: Int) -> Int {
-		switch (left,right) {
+	public static func add(_ lhs: Int, _ rhs: Int) -> Int {
+		switch (lhs,rhs) {
 		case (Int.max,_):
 			return Int.max
 		case (_,Int.max):
 			return Int.max
 		default:
-			return left + right
+			return lhs + rhs
 		}
 	}
 
@@ -38,14 +38,14 @@ extension Int: Addable {
 }
 
 extension UInt: Addable {
-	public static func add(_ left: UInt, _ right: UInt) -> UInt {
-		switch (left,right) {
+	public static func add(_ lhs: UInt, _ rhs: UInt) -> UInt {
+		switch (lhs,rhs) {
 		case (UInt.max,_):
 			return UInt.max
 		case (_,UInt.max):
 			return UInt.max
 		default:
-			return left + right
+			return lhs + rhs
 		}
 	}
 
@@ -53,39 +53,39 @@ extension UInt: Addable {
 }
 
 extension Float: Addable {
-	public static func add(_ left: Float, _ right: Float) -> Float { return left + right }
+	public static func add(_ lhs: Float, _ rhs: Float) -> Float { return lhs + rhs }
 	public static let zero = Float(0)
 }
 
 extension Double: Addable {
-	public static func add(_ left: Double, _ right: Double) -> Double { return left + right }
+	public static func add(_ lhs: Double, _ rhs: Double) -> Double { return lhs + rhs }
 	public static let zero = Double(0)
 }
 
 //: ------
 
 public protocol Multipliable {
-	static func multiply (_ left: Self, _ right: Self) -> Self
+	static func multiply (_ lhs: Self, _ rhs: Self) -> Self
 	static var one: Self { get }
 }
 
 extension Int: Multipliable {
-	public static func multiply(_ left: Int, _ right: Int) -> Int { return left * right }
+	public static func multiply(_ lhs: Int, _ rhs: Int) -> Int { return lhs * rhs }
 	public static let one = Int(1)
 }
 
 extension UInt: Multipliable {
-	public static func multiply(_ left: UInt, _ right: UInt) -> UInt { return left * right }
+	public static func multiply(_ lhs: UInt, _ rhs: UInt) -> UInt { return lhs * rhs }
 	public static let one = UInt(1)
 }
 
 extension Float: Multipliable {
-	public static func multiply(_ left: Float, _ right: Float) -> Float { return left * right }
+	public static func multiply(_ lhs: Float, _ rhs: Float) -> Float { return lhs * rhs }
 	public static let one = Float(1)
 }
 
 extension Double: Multipliable {
-	public static func multiply(_ left: Double, _ right: Double) -> Double { return left * right }
+	public static func multiply(_ lhs: Double, _ rhs: Double) -> Double { return lhs * rhs }
 	public static let one = Double(1)
 }
 

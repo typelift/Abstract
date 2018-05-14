@@ -52,18 +52,18 @@ extension Wrapper where WrappedType: EquatableInContext {
 	}
 }
 
-public func == <T,A> (left: T, right: T) -> Bool where T: Wrapper, T.WrappedType == A?, A: Equatable {
-	return left.unwrap == right.unwrap
+public func == <T,A> (lhs: T, rhs: T) -> Bool where T: Wrapper, T.WrappedType == A?, A: Equatable {
+	return lhs.unwrap == rhs.unwrap
 }
 
-public func == <T,A> (left: T, right: T) -> Bool where T: Wrapper, T.WrappedType == [A], A: Equatable {
-	return left.unwrap == right.unwrap
+public func == <T,A> (lhs: T, rhs: T) -> Bool where T: Wrapper, T.WrappedType == [A], A: Equatable {
+	return lhs.unwrap == rhs.unwrap
 }
 
-public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper, T.WrappedType == A?, A: EquatableInContext {
-	switch (left.unwrap,right.unwrap) {
-	case (.some(let leftUnwrap),.some(let rightUnwrap)):
-		return leftUnwrap == rightUnwrap
+public func == <T,A> (lhs: T, rhs: T) -> (A.Context) -> Bool where T: Wrapper, T.WrappedType == A?, A: EquatableInContext {
+	switch (lhs.unwrap,rhs.unwrap) {
+	case (.some(let lhsUnwrap),.some(let rhsUnwrap)):
+		return lhsUnwrap == rhsUnwrap
 	case (.none,.none):
 		return { _ in true }
 	default:
@@ -71,10 +71,10 @@ public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper
 	}
 }
 
-public func == <T,A> (left: T, right: T) -> (A.Context) -> Bool where T: Wrapper, T.WrappedType == [A], A: EquatableInContext {
+public func == <T,A> (lhs: T, rhs: T) -> (A.Context) -> Bool where T: Wrapper, T.WrappedType == [A], A: EquatableInContext {
 	return { context in
-		guard left.unwrap.count == right.unwrap.count else { return false }
-		return zip(left.unwrap, right.unwrap)
+		guard lhs.unwrap.count == rhs.unwrap.count else { return false }
+		return zip(lhs.unwrap, rhs.unwrap)
 			.map(==)
 			.map { $0(context) }
 			.reduce(true) { $0 && $1 }

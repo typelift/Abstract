@@ -20,9 +20,9 @@ final class {{ protocolName }}Tests: XCTestCase {
 	}
 {% endfor %}
 
-{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
+{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:"Semiring" and not type.kind == "protocol" %}
 
-    func test{{ type.name }}() {
+    func test{{ type.name }}Semiring() {
 {% if type.isGeneric or type.name == "Array" or type.name == "Optional" or type.name == "Set" %}
         property("{{ type.name }} is a {{ protocolName }} in regard to the Additive operation") <- forAll { (a: {{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>, b: {{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>{% if type.annotations.requiredContextForPropertyBasedTests %}, context: {{ type.annotations.requiredContextForPropertyBasedTests }}{% else %}{% endif %}) in
             Law{% if type.annotations.requiredContextForPropertyBasedTests %}InContext{% else %}{% endif %}<{{ type.name }}<{{ type.annotations.fixedTypesForPropertyBasedTests }}>>.isCommutative(a,b,<>+){% if type.annotations.requiredContextForPropertyBasedTests %}(context){% else %}{% endif %}
@@ -40,8 +40,8 @@ final class {{ protocolName }}Tests: XCTestCase {
 {% for type in types.implementing.CommutativeMonoid where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
 		("test{{ type.name }}",test{{ type.name }}),
 {% endfor %}
-{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:protocolName and not type.kind == "protocol" %}
-        ("test{{ type.name }}",test{{ type.name }}),
+{% for type in types.implementing.Semiring where not type.annotations.ignore|contains:"Semiring" and not type.kind == "protocol" %}
+        ("test{{ type.name }}Semiring",test{{ type.name }}Semiring),
 {% endfor %}
 	]
 }

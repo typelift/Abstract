@@ -27,14 +27,14 @@ extension Endofunction {
 extension Endofunction: EquatableInContext where A: Equatable {
 	public typealias Context = A
 
-	public static func == (left: Endofunction, right: Endofunction) -> (Context) -> Bool {
-		return { left.call($0) == right.call($0) }
+	public static func == (lhs: Endofunction, rhs: Endofunction) -> (Context) -> Bool {
+		return { lhs.call($0) == rhs.call($0) }
 	}
 }
 
 extension Endofunction: Semigroup {
-	public static func <> (left: Endofunction, right: Endofunction) -> Endofunction {
-		return Endofunction.init { right.call(left.call($0)) }
+	public static func <> (lhs: Endofunction, rhs: Endofunction) -> Endofunction {
+		return Endofunction.init { rhs.call(lhs.call($0)) }
 	}
 }
 

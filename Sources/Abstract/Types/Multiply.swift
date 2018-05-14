@@ -18,8 +18,8 @@ public struct Multiply<A>: Wrapper where A: Multipliable {
 }
 
 extension Multiply: Semigroup {
-	public static func <> (left: Multiply, right: Multiply) -> Multiply {
-		return Multiply(A.multiply(left.unwrap,right.unwrap))
+	public static func <> (lhs: Multiply, rhs: Multiply) -> Multiply {
+		return Multiply(A.multiply(lhs.unwrap,rhs.unwrap))
 	}
 }
 

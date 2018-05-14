@@ -14,13 +14,13 @@ extension Wrapper where WrappedType: Arbitrary {
 }
 
 extension CheckerArguments {
-	static func with(_ left: Int, _ right: Int, _ size: Int) -> CheckerArguments {
+	static func with(_ lhs: Int, _ rhs: Int, _ size: Int) -> CheckerArguments {
 		return CheckerArguments(
-			replay: .some((StdGen(left,right),size)))
+			replay: .some((StdGen(lhs,rhs),size)))
 	}
 }
 
-struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
+struct TestStructure: Arbitrary, Equatable, BoundedSemilattice, Semiring {
 	let get: Max<Int>
 	
 	init(_ value: Int) {
@@ -30,18 +30,34 @@ struct TestStructure: Arbitrary, BoundedSemilattice, Equatable {
 	static var arbitrary: Gen<TestStructure> {
 		return Int.arbitrary.map(TestStructure.init)
 	}
-	
-	static func <> (left: TestStructure, right: TestStructure) -> TestStructure {
-		return TestStructure((left.get <> right.get).unwrap)
+
+    static func == (lhs: TestStructure, rhs: TestStructure) -> Bool {
+        return lhs.get == rhs.get
+    }
+
+	static func <> (lhs: TestStructure, rhs: TestStructure) -> TestStructure {
+		return TestStructure((lhs.get <> rhs.get).unwrap)
 	}
 	
 	static var empty: TestStructure {
 		return TestStructure(Max<Int>.empty.unwrap)
 	}
-	
-	static func == (left: TestStructure, right: TestStructure) -> Bool {
-		return left.get == right.get
-	}
+    
+    static func <>+ (lhs: TestStructure, rhs: TestStructure) -> TestStructure {
+        return TestStructure(lhs.get.unwrap + rhs.get.unwrap)
+    }
+    
+    static var zero: TestStructure {
+        return TestStructure(0)
+    }
+    
+    static func <>* (lhs: TestStructure, rhs: TestStructure) -> TestStructure {
+        return TestStructure(lhs.get.unwrap * rhs.get.unwrap)
+    }
+    
+    static var one: TestStructure {
+        return TestStructure(1)
+    }
 }
 
 struct TestFunction: Arbitrary, BoundedSemilattice, EquatableInContext {
@@ -58,51 +74,16 @@ struct TestFunction: Arbitrary, BoundedSemilattice, EquatableInContext {
 			.map(TestFunction.init)
 	}
 
-	static func <> (left: TestFunction, right: TestFunction) -> TestFunction {
-		return TestFunction((left.get <> right.get).unwrap)
+	static func <> (lhs: TestFunction, rhs: TestFunction) -> TestFunction {
+		return TestFunction((lhs.get <> rhs.get).unwrap)
 	}
 
 	static var empty: TestFunction {
 		return TestFunction.init { _ in Max<Int>.empty }
 	}
 
-	static func == (left: TestFunction, right: TestFunction) -> (Context) -> Bool {
-		return left.get == right.get
-	}
-}
-
-struct TestSemiring: Arbitrary, Semiring, Equatable {
-	typealias Additive = Bool.Additive
-	typealias Multiplicative = Bool.Multiplicative
-
-	let get: Bool
-
-	init(_ value: Bool) {
-		self.get = value
-	}
-
-	static var arbitrary: Gen<TestSemiring> {
-		return Bool.arbitrary.map(TestSemiring.init)
-	}
-
-	static func <>+(left: TestSemiring, right: TestSemiring) -> TestSemiring {
-		return TestSemiring(left.get <>+ right.get)
-	}
-
-	static func <>*(left: TestSemiring, right: TestSemiring) -> TestSemiring {
-		return TestSemiring(left.get <>* right.get)
-	}
-
-	static var zero: TestSemiring {
-		return TestSemiring(Bool.zero)
-	}
-
-	static var one: TestSemiring {
-		return TestSemiring(Bool.one)
-	}
-
-	static func == (left: TestSemiring, right: TestSemiring) -> Bool {
-		return left.get == right.get
+	static func == (lhs: TestFunction, rhs: TestFunction) -> (Context) -> Bool {
+		return lhs.get == rhs.get
 	}
 }
 
@@ -119,8 +100,8 @@ struct TestProduct: CoArbitrary, Hashable, Arbitrary, Wrapper {
 		return { Int.coarbitrary(x.unwrap.1)(Int.coarbitrary(x.unwrap.0)($0)) }
 	}
 	
-	static func == (left: TestProduct, right: TestProduct) -> Bool {
-		return left.unwrap == right.unwrap
+	static func == (lhs: TestProduct, rhs: TestProduct) -> Bool {
+		return lhs.unwrap == rhs.unwrap
 	}
 	
 	var hashValue: Int {
@@ -169,4 +150,31 @@ extension SetM: Arbitrary where A: Arbitrary {
 			}))
 		}
 	}
+}
+
+extension Product: Arbitrary where A: Arbitrary, B: Arbitrary {
+    public static var arbitrary: Gen<Product<A, B>> {
+        return Gen<Product<A, B>>.compose {
+            Product($0.generate(),$0.generate())
+        }
+    }
+}
+
+extension Coproduct: Arbitrary where A: Arbitrary, B: Arbitrary {
+    public static var arbitrary: Gen<Coproduct<A, B>> {
+        return Gen.one(of: [
+            A.arbitrary.map(Coproduct.left),
+            B.arbitrary.map(Coproduct.right)
+        ])
+    }
+}
+
+extension Inclusive: Arbitrary where A: Arbitrary, B: Arbitrary {
+    public static var arbitrary: Gen<Inclusive<A, B>> {
+        return Gen.one(of: [
+            A.arbitrary.map(Inclusive.left),
+            Product<A,B>.arbitrary.map { $0.fold(Inclusive.center) },
+            B.arbitrary.map(Inclusive.right)
+            ])
+    }
 }

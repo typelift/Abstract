@@ -17,7 +17,7 @@ public struct First<A>: Wrapper {
 }
 
 extension First: Semigroup {
-	public static func <> (left: First, right: First) -> First {
-		return left
+	public static func <> (lhs: First, rhs: First) -> First {
+		return lhs
 	}
 }

@@ -50,6 +50,12 @@ final class CommutativeMonoidTests: XCTestCase {
 		}
 	}
 
+	func testProduct() {
+		property("Product is a CommutativeMonoid") <- forAll { (a: Product<TestStructure,TestStructure>, b: Product<TestStructure,TestStructure>) in
+			Law<Product<TestStructure,TestStructure>>.isCommutative(a,b)
+		}
+	}
+
 	func testSet() {
 		property("Set is a CommutativeMonoid") <- forAll { (a: Set<Int>, b: Set<Int>) in
 			Law<Set<Int>>.isCommutative(a,b)
@@ -57,19 +63,25 @@ final class CommutativeMonoidTests: XCTestCase {
 	}
 
 
-    func testBool() {
+    func testBoolSemiring() {
         property("Bool is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: Bool, b: Bool) in
             Law<Bool>.isCommutative(a,b,<>+)
         }
     }
 
-    func testSetM() {
+    func testProductSemiring() {
+        property("Product is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: Product<TestStructure,TestStructure>, b: Product<TestStructure,TestStructure>) in
+            Law<Product<TestStructure,TestStructure>>.isCommutative(a,b,<>+)
+        }
+    }
+
+    func testSetMSemiring() {
         property("SetM is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: SetM<String>, b: SetM<String>) in
             Law<SetM<String>>.isCommutative(a,b,<>+)
         }
     }
 
-    func testTropical() {
+    func testTropicalSemiring() {
         property("Tropical is a CommutativeMonoid in regard to the Additive operation") <- forAll { (a: Tropical<Int>, b: Tropical<Int>) in
             Law<Tropical<Int>>.isCommutative(a,b,<>+)
         }
@@ -84,9 +96,11 @@ final class CommutativeMonoidTests: XCTestCase {
 		("testMultiply",testMultiply),
 		("testMultiset",testMultiset),
 		("testOr",testOr),
+		("testProduct",testProduct),
 		("testSet",testSet),
-        ("testBool",testBool),
-        ("testSetM",testSetM),
-        ("testTropical",testTropical),
+        ("testBoolSemiring",testBoolSemiring),
+        ("testProductSemiring",testProductSemiring),
+        ("testSetMSemiring",testSetMSemiring),
+        ("testTropicalSemiring",testTropicalSemiring),
 	]
 }

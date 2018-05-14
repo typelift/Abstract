@@ -114,9 +114,9 @@ struct Average {
         self.weight = weight
     }
     
-    static func <> (left: Average, right: Average) -> Average {
-        let sum = left.value*Double(left.weight) + right.value*Double(right.weight)
-        let count = left.weight + right.weight
+    static func <> (lhs: Average, rhs: Average) -> Average {
+        let sum = lhs.value*Double(lhs.weight) + rhs.value*Double(rhs.weight)
+        let count = lhs.weight + rhs.weight
         return Average.init(sum/Double(count), weight: count)
     }
 }
@@ -158,13 +158,13 @@ This looks cool but boring: thanks to the fact that each of our types composes w
 
 ```swift
 extension UserSession {
-    static func <> (left: UserSession, right: UserSession) -> UserSession {
+    static func <> (lhs: UserSession, rhs: UserSession) -> UserSession {
         return UserSession.init(
-            lastInteractionDate: left.lastInteractionDate <> right.lastInteractionDate,
-            totalCookiesRequested: left.totalCookiesRequested <> right.totalCookiesRequested,
-            maxCookiesPerRequest: left.maxCookiesPerRequest <> right.maxCookiesPerRequest,
-            averageCookiesPerRequest: left.averageCookiesPerRequest <> right.averageCookiesPerRequest,
-            alwaysSatisfied: left.alwaysSatisfied <> right.alwaysSatisfied)
+            lastInteractionDate: lhs.lastInteractionDate <> rhs.lastInteractionDate,
+            totalCookiesRequested: lhs.totalCookiesRequested <> rhs.totalCookiesRequested,
+            maxCookiesPerRequest: lhs.maxCookiesPerRequest <> rhs.maxCookiesPerRequest,
+            averageCookiesPerRequest: lhs.averageCookiesPerRequest <> rhs.averageCookiesPerRequest,
+            alwaysSatisfied: lhs.alwaysSatisfied <> rhs.alwaysSatisfied)
     }
 }
 ```
