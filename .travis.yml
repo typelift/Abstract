@@ -8,13 +8,7 @@ matrix:
       osx_image: xcode9.3
       before_install:
         - git submodule update --init --recursive
-      script:
         - carthage build --no-skip-current
-    - os: osx
-      language: objective-c
-      osx_image: xcode9.3
-      before_install:
-        - git submodule update --init --recursive
       script:
         - set -o pipefail
         - xcodebuild test -scheme Abstract | xcpretty -c
