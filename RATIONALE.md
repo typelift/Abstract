@@ -77,7 +77,7 @@ How can we be sure that a certain type is a *proper* `BoundedSemilattice`? In fa
 
 One of the main points of the `Abstract` library is providing the user with simple means to test concrete types against the laws that the type must respect.
 
-The `Law` and `LawInContext` namespaces provide some functions for types for which the `<>` operation is supposed to respect some laws; these functions require that the tested type is `Equatable` because the `==` operation is used to check if the equations that express the law evaluate into `true` or `false`. Because at the present moment there's no possibility of conditional conformance to the `Equatable` protocol in Swift's type system, all the concrete types in `Abstract` are made to conform either to `Equatable` or `EquatableInContext` (the latter is used for types that wrap functions). When conditional conformance [will be implemented](https://github.com/apple/swift-evolution/blob/master/proposals/0143-conditional-conformances.md) into Swift, there will be a `Equatable` implementation for the various types only under certain assumptions.
+The `Law` and `LawInContext` namespaces provide some functions for types for which the `<>` operation is supposed to respect some laws; these functions require that the tested type is `Equatable` because the `==` operation is used to check if the equations that express the law evaluate into `true` or `false`. 
 
 ------
 

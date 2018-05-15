@@ -276,6 +276,8 @@
 		0951F2431F09690200EA362C /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/Mac/SwiftCheck.framework; sourceTree = "<group>"; };
 		0951F2441F09690200EA362C /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/tvOS/SwiftCheck.framework; sourceTree = "<group>"; };
 		09F9FD0E1EEE5CE8002342E5 /* Homomorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homomorphism.swift; sourceTree = "<group>"; };
+		3806599920AAB6360085187D /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		3806599A20AAB6530085187D /* RATIONALE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = RATIONALE.md; sourceTree = "<group>"; };
 		380A4B141F1B7336002D70E0 /* SemigroupTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemigroupTests.generated.swift; sourceTree = "<group>"; };
 		380A4B191F1B775F002D70E0 /* WrapperTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapperTests.generated.swift; sourceTree = "<group>"; };
 		380A4B1F1F1BE383002D70E0 /* MonoidTests.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidTests.generated.swift; sourceTree = "<group>"; };
@@ -526,10 +528,12 @@
 			children = (
 				38757E101F4D85AB0059AD71 /* Templates */,
 				38D737DF1EE9A745000BAF0C /* Abstract.h */,
+				3806599A20AAB6530085187D /* RATIONALE.md */,
 				38B83C9D1EED8D11007AB12A /* README.md */,
 				38D737E01EE9A745000BAF0C /* Info.plist */,
 				38D737E11EE9A761000BAF0C /* InfoTests.plist */,
 				38D737BB1EE9A711000BAF0C /* Package.swift */,
+				3806599920AAB6360085187D /* .travis.yml */,
 				38943A6A1EEC287000F587AD /* Frameworks */,
 				38D737C81EE9A729000BAF0C /* Products */,
 				38D737BC1EE9A711000BAF0C /* Sources */,

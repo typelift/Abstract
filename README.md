@@ -237,10 +237,10 @@ Notice that we could call `.reduce(.empty, <>)` on **any** collection were the e
 - can be composed with `<>`;
 - have an empty element;
 
-Thus, if we were able to represent these two properties in an abstract way, we could simply define a `.concatenated` method for these kinds of collections:
+Thus, if we were able to represent these two properties in an abstract way, we could simply define a `.concatenated()` method for these kinds of collections:
 
 ```swift
-let finalSession = sessions.concatenated
+let finalSession = sessions.concatenated()
 ```
 
 A type (actually a set, but in programming we really just care about types) *equipped* with a composition operation that is *closed* (i.e. non-crashing) and *associative*, and an `.empty` value that is neutral to the composition, is usually called a `Monoid`: all the types defined in this example are monoids, and the Swift type system is strong enough to generically define  the interface of a monoid with a `protocol`. Most of the types and methods used in this example are already defined in `Abstract`, and to read more about monoids you can refer to the [Monoid.swift](Sources/Abstract/Monoid.swift) source file.
@@ -260,19 +260,19 @@ Let's call "special divisors" the numbers associated to each word (initially, 3 
 
 The first composition style is simple concatenation; the second one is a little harder to see as some kind of composition, but it actually is the composition where we get only the first value if it exists (even if both exist), otherwise we get the second, and if none exist we get an "empty" value.
 
-The type representing the string concatenation is simply `String`, which naturally forms a monoid over concatenation, where the `.empty` value is just the empty string. For the second type of composition we need a special type, that in `Abstract` is called `FirstM`: in composition, it will give priority to the first value.
+The type representing the string concatenation is simply `String`, which naturally forms a monoid over concatenation, where the `.empty` value is just the empty string.
 
 About the simple string concatenation, we'd like to define a function that *associates* a *word* to a special divisor: the function will take an `Int` and return a `String`, which is going to be "Fizz" or "Buzz". But instead of concatenating words we would actually like to concatenate *functions* that return words: if we're able to compose the return value, we can actually define a *composable function*:
 
 ```swift
-func associate(divisor: Int, to text: String) -> FunctionM<Int,String> {
-    return FunctionM.init { value in
+func associate(divisor: Int, to text: String) -> Function<Int,String> {
+    return Function.init { value in
         value % divisor == 0 ? text : .empty
     }
 }
 ```
 
-The `FunctionM` type is a *function type* (we get the function back with the `.call` method) that's **also** a monoid, so we can compose and concatenate instances of this function like we'd do for `String` values.
+The `Function` type is a *function type* (we get the function back with the `.call` method) that's **also** a monoid, so we can compose and concatenate instances of this function like we'd do for `String` values.
 
 We can easily define our `fizz` and `buzz` associations:
 
@@ -284,14 +284,19 @@ let buzz = associate(divisor: 5, to: "Buzz")
 Now we can easily generate a function that will transform a number in a word, properly concatenated (like "FizzBuzz" for the number 15), or an empty string if the number has no special divisor.
 
 ```swift
-let transform = [fizz, buzz].concatenated.call
+let transform = [fizz, buzz].concatenated().call
 ```
 
-Finally, we need a second kind of composition: the one in which the first value is selected if it's not `.empty`. The `FirstM` type has exactly this semantics. We can define a `getWord` function that will use `FirstM` to select a value in a composition:
+ For the second type of composition, Swift already provides a type with the correct semantics; we need to give priority to the *first* element, but only if it's not `.empty`, otherwise we yield the second value (`.empty` or not): that's exactly the composition semantics of `Optional`, where `.empty` is `.none` (or `nil`) and the composition operation is represented by the `??` operator. `Abstract` extends `Optional` with the `Monoid` protocol, adding the `.empty` instance and the `<>` operator.  We can define a `getWord` function that will use `Optional<String>` to select a value in a composition:
 
 ```swift
-func getWord<T>(for value: T, with association: @escaping (T) -> String) -> FirstM<String> {
-    return FirstM(association(value)) <> FirstM("\(value)")
+func getWord<T>(for value: T, with association: @escaping (T) -> String) -> String {
+	let optionalAssociated = Optional(association(value))
+		.flatMap { $0 == .empty ? Optional.empty : Optional($0) }
+
+	let optionalValue = Optional("\(value)")
+
+	return (optionalAssociated <> optionalValue) ?? ""
 }
 ```
 
@@ -302,7 +307,7 @@ let result = (1...100)
     .map { value in
         getWord(for: value, with: transform).unwrap <> "\n"
     }
-    .concatenated
+    .concatenated()
 
 print(result)
 ```
@@ -311,7 +316,7 @@ Now that we've separated the two kinds of composition that are taking place here
 
 ```swift
 let bazz = associate(divisor: 4, to: "Bazz")
-let transform = [fizz, buzz, bazz].concatenated.call
+let transform = [fizz, buzz, bazz].concatenated().call
 ``` 
 
 This code will add the word "Bazz" to the mix, for all numbers divisible by 4. Notice that in our example, for the number 60 the word "FizzBuzzBazz" will be printed: the order matters here, and we get "Bazz" at the end because we composed our transformation like `[fizz, buzz, bazz]`.
