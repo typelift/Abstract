@@ -1,6 +1,6 @@
 # Abstract
 
-A take on abstract algebraic structures, in Swift.
+A take on abstract algebraic structures, in Swift. 
 
 ------
 
