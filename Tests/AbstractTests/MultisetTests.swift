@@ -7,7 +7,7 @@ final class MultisetTests: XCTestCase {
 	func testAlgebraSubsetSuperset() {
 		property("A multiset with a sample of elements from another is subset of another") <- forAll { (a: Multiset<Int>) in
 			var sample = Multiset<Int>()
-			let maxCount = arc4random_uniform(UInt32(a.count))
+			let maxCount = Gen.fromElements(in: 0...a.count).generate
 
 			for item in a.allItems where sample.count < maxCount {
 				sample.add(item)
