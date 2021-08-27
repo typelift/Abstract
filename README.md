@@ -4,6 +4,10 @@ A take on abstract algebraic structures, in Swift.
 
 ------
 
+__Please note:__ this is deprecated and no longer maintained. I'm working on a new take on abstract algebra in Swift with [swift-abstract](https://github.com/broomburgo/swift-abstract).
+
+------
+
 `Abstract` is a Swift library that defines protocols for common [abstract algebraic structures](https://en.wikipedia.org/wiki/Abstract_algebra), along with some concrete implementations for Swift datatypes.
 
 The library also provides tools to test the concrete types for the axioms required by each algebraic structure: tests can then be performed by property-based testing libraries like [SwiftCheck](https://github.com/typelift/SwiftCheck).
